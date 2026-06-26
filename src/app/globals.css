@@ -1,5 +1,32 @@
 @import "tailwindcss";
 
+/* ===========================================================================
+   EPM design system tokens (extracted from Figma "Website" — EPM screen)
+   Exposed as Tailwind v4 theme tokens so utilities like `bg-navy`,
+   `text-azure`, `font-display`, `font-mono` are generated automatically.
+   =========================================================================== */
+@theme {
+  /* Brand / blues */
+  --color-brand: #0451cc; /* primary brand blue            */
+  --color-azure: #1d5bff; /* azure/56 — bright accent blue */
+  --color-azure-bright: #0088ff; /* tab-bar selection / glow      */
+  --color-navy: #0b2a5b; /* azure/20 — deep hero navy     */
+  --color-navy-950: #081f44; /* darker navy for gradients     */
+  --color-ink: #0c1e3a; /* Blue Zodiac — near-black ink  */
+
+  /* Neutrals */
+  --color-mist: #dde4f6; /* grey/92 / Link Water — hairlines, chips */
+  --color-slate-soft: #93a0b4; /* azure/64 / Gull Gray — muted text       */
+  --color-nepal: #8b99bf; /* azure/65 — muted on dark                */
+
+  /* Single site-wide type family: Poppins (loaded by next/font in the root layout).
+     All three tokens collapse to Poppins so `font-display`/`font-body`/`font-mono`
+     utilities render the same family across the whole site. */
+  --font-display: var(--font-poppins), "Poppins", system-ui, sans-serif;
+  --font-body: var(--font-poppins), "Poppins", system-ui, sans-serif;
+  --font-mono: var(--font-poppins), "Poppins", system-ui, sans-serif;
+}
+
 /* Global layout container */
 .container-global {
   width: 100%;
@@ -11,3 +38,26 @@
   padding-right: 24px; /* change this value */
 }
 
+/* EPM page width: the Figma frame content sits in a 1280px column */
+.epm-container {
+  width: 100%;
+  max-width: 1600px;
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+
+/* Eyebrow label used above every EPM section heading */
+.epm-eyebrow {
+  font-family: var(--font-poppins), "Poppins", sans-serif;
+  /* font-size: 0.8125rem; */
+  /* font-weight: 500; */
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+/* Opt-out of the uppercase eyebrow treatment — renders the label in its
+   original (Title) case. Defined after .epm-eyebrow so it wins on source order. */
+.epm-eyebrow-normal {
+  text-transform: none;
+  letter-spacing: 0.02em;
+}

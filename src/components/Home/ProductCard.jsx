@@ -34,7 +34,7 @@ export default function ProductCard({
         duration: 0.35,
         ease: "easeOut",
       }}
-      className={`aspect-square w-full rounded-[40px] border-b-4 border-[#0451CC] bg-white p-8 shadow-lg ${
+      className={`relative aspect-square w-full cursor-pointer rounded-[40px] border-b-4 border-[#0451CC] bg-white p-8 shadow-lg ${
         active ? "z-30 shadow-2xl" : ""
       }`}
       style={{
@@ -87,7 +87,8 @@ export default function ProductCard({
 
       <Link
         href={link}
-        className="-600 mt-6 inline-flex text-xl items-center font-medium text-[#0451CC] hover:underline"
+        aria-label={`Explore ${title}`}
+        className="mt-6 inline-flex items-center text-xl font-medium text-[#0451CC] after:absolute after:inset-0 after:rounded-[40px] hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0451CC]"
       >
         Explore {shortName} →
       </Link>
