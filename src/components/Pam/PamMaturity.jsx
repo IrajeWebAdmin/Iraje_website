@@ -6,7 +6,7 @@ export default function PamMaturity() {
   const { eyebrow, heading, body, flow, levels } = pam.maturity;
 
   return (
-    <PamSection center eyebrow={eyebrow} heading={heading} intro={body}>
+    <PamSection center eyebrow={eyebrow} heading={heading} intro={body}  eyebrowClassName="epm-eyebrow-normal">
       <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
         {levels.map((level) => (
           <div

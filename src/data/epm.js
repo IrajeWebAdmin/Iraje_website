@@ -109,7 +109,7 @@ steps: [
   },
   {
     label: "Endpoint compromise",
-    icon: "/icons/endpoint-icon.svg",
+    icon: "/icons/endpoint-compromise.svg",
   },
   {
     label: "Privilege escalation",
@@ -117,15 +117,15 @@ steps: [
   },
   {
     label: "Credential theft",
-    icon: "/icons/credential.svg",
+    icon: "/icons/credential-theft.svg",
   },
   {
     label: "Lateral movement",
-    icon: "/icons/lateral.svg",
+    icon: "/icons/lateral-movement.svg",
   },
   {
     label: "Full takeover",
-    icon: "/icons/takeover.svg",
+    icon: "/icons/full-takeover.svg",
   },
 ],
     blockedIndex: 2,

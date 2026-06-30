@@ -16,7 +16,15 @@ export default function PamCompliance() {
   } = pam.compliance;
 
   return (
-    <PamSection tone="grey" center eyebrow={eyebrow} heading={heading} intro={body}>
+   <PamSection
+        center
+        eyebrow={eyebrow}
+        heading={heading}
+        intro={body}
+        eyebrowClassName="epm-eyebrow-normal"
+        headClassName="max-w-none"
+        headingClassName="whitespace-nowrap"
+      >
       {/* Global standards */}
       <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
         {standards.map((std) => (

@@ -9,12 +9,10 @@ export default function PamChallenge() {
     <PamSection
       center
       eyebrow={eyebrow}
+      eyebrowClassName="epm-eyebrow-normal"
       heading={heading}
       intro={body}
       className="bg-[#BDD1FE]/16!"
-      eyebrowClassName="epm-eyebrow-normal"
-      headingClassName="md:whitespace-nowrap"
-      headClassName="max-w-none"
     >
       <div className="mt-12 grid justify-items-center gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {problems.map((problem) => (
@@ -29,7 +27,7 @@ export default function PamChallenge() {
             <span className="text-base font-medium tracking-[0.14em] text-[#E00000] uppercase">
               {problem.tag}
             </span>
-            <h3 className="mt-4 font-display text-xl font-medium text-ink">
+            <h3 className="mt-4 font-display text-xl font-semibold text-ink">
               {problem.title}
             </h3>
             <p className="mt-3 text-sm leading-relaxed text-slate-soft">

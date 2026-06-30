@@ -84,7 +84,7 @@ export default function ResourceCard({
 
       {/* Title Badge */}
       <div className="relative">
-        <span className="absolute -bottom-6 left-8 z-10  flex h-[48px] min-w-[320px] rounded-l-md rounded-r-full bg-[#1456D9] px-6 py-2 text-sm font-semibold text-white">
+        <span className="absolute -bottom-6 left-8 z-10  flex h-[48px] min-w-[320px] rounded-l-md rounded-r-full bg-[#1456D9] px-6 py-2 text-xl font-semibold text-white">
         {/* <span className="absolute -bottom-6 left-6 z-10 flex h-[48px] min-w-[280px] items-center rounded-full bg-[#1456D9] px-8 text-[22px] font-medium text-white shadow-md"> */}
           {title}
         </span>

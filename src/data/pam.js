@@ -63,7 +63,7 @@ const pam = {
 
   // ---- The challenge ----------------------------------------------------
   challenge: {
-    eyebrow: "The challenge",
+    eyebrow: "The Challenge",
     heading: "Why privileged access keeps CISOs awake at night",
     body:
       "Most major cyberattacks involve compromised privileged credentials. Traditional controls simply weren't built for this threat.",
