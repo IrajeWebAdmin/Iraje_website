@@ -20,7 +20,7 @@ export default function Navbar() {
 
   return (
    
-    <header className="absolute top-0 left-0 z-50 w-full bg-white/60 backdrop-blur-lg">
+    <header className="absolute top-0 left-0 z-50 w-full bg-white backdrop-blur-lg">
       <div className="container-global">
   <nav className="relative flex items-center h-14">
       {/* <nav className="relative flex items-center px-12 py-2"> */}

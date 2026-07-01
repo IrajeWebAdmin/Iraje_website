@@ -18,7 +18,7 @@ export default function AboutWhoWeAre() {
             TOP BLUE SECTION
         ============================ */}
         <div className="rounded-[5rem] bg-brand px-8 pt-16 pb-20 text-white md:px-16 md:pt-20 md:pb-24">
-          <div className="max-w-3xl">
+          <div className="max-w-2xl">
             <p className="epm-eyebrow epm-eyebrow-normal text-white/75">
               {eyebrow}
             </p>
@@ -33,11 +33,10 @@ export default function AboutWhoWeAre() {
               ))}
             </div>
 
-            {/* Image overflows above the blue container's top edge
-            <div className="relative -mt-16 self-start md:-mt-24 lg:-mt-32">
+            {/* <div className="relative -mt-16 self-start md:-mt-24 lg:-mt-32">
               <Image
-                src={image?.src ?? "/images/about/About-Iraje.png"}
-                alt={image?.alt ?? "Team collaborating on Iraje"}
+                src={"/images/about/About-Iraje.png"}
+                alt={"Team collaborating on Iraje"}
                 width={958}
                 height={856}
                 priority
