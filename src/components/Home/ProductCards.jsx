@@ -7,7 +7,7 @@ export default function ProductCards() {
   const [activeCard, setActiveCard] = useState("epm");
   
   return (
-    <section className="relative z-20 -mt-48">
+    <section className="relative z-20 -mt-20 sm:-mt-32 md:-mt-48">
       {/* <div className="mx-auto max-w-7xl px-6 lg:px-12"> */}
       <div className="container-global">
         {/* Cards */}

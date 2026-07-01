@@ -46,11 +46,12 @@ export default function AboutCulture() {
       <div className="mt-10 flex flex-wrap justify-center gap-3">
         {badges.map((b) => (
           <span
-            key={b}
+            key={b.label}
             className="inline-flex items-center gap-2 rounded-full border border-mist bg-white px-5 py-2.5 text-sm font-medium text-ink/80"
           >
-            <span className="h-2 w-2 rounded-full bg-brand" />
-            {b}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={b.icon} alt="" className="h-5 w-5" />
+            {b.label}
           </span>
         ))}
       </div>

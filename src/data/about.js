@@ -60,6 +60,7 @@ const about = {
         body: "Least-privilege enforcement extends to every endpoint — stopping escalation before it starts.",
       },
       {
+
         stage: "Today",
         title: "One identity platform",
         body: "PAM, EPM and IAM converge into a single platform to secure every privileged identity.",
@@ -140,7 +141,12 @@ const about = {
       { title: "Simplicity", body: "Powerful security that's invisible to everyone but the people who need it." },
       { title: "One Team", body: "Engineers, support and field — one team accountable to each other and to you." },
     ],
-    badges: ["Highest trust", "Easy scaling", "Relentless support", "Continuous innovation"],
+    badges: [
+      { label: "Engineering-led", icon: "/icons/Engineering-led.svg" },
+      { label: "Always learning", icon: "/icons/Always-learning.svg" },
+      { label: "Ownership & impact", icon: "/icons/Ownershi- &-impact.svg" },
+      { label: "Customer-facing from day one", icon: "/icons/Customer-facing.svg" },
+    ],
   },
 
   // ---- CTA --------------------------------------------------------------

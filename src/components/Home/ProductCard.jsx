@@ -34,7 +34,7 @@ export default function ProductCard({
         duration: 0.35,
         ease: "easeOut",
       }}
-      className={`relative aspect-square w-full cursor-pointer rounded-[40px] border-b-4 border-[#0451CC] bg-white p-8 shadow-lg ${
+      className={`relative aspect-[10/9] w-full cursor-pointer rounded-[40px] border-b-4 border-[#0451CC] bg-white p-5 shadow-lg sm:aspect-square sm:p-8 ${
         active ? "z-30 shadow-2xl" : ""
       }`}
       style={{

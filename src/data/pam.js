@@ -490,7 +490,7 @@ const pam = {
       { name: "IRDAI", desc: "Insurance" },
       { name: "CERT-In", desc: "Advisory" },
     ],
-    dpdpTitle: "DPDP Act 2023",
+    dpdpTitle: "Mapped to Indian regulators",
     dpdpSections: [
       "Section 7 — least privilege restricts data access to the specified purpose",
       'Section 8(5) — enforces MFA, logging & least privilege as "reasonable security safeguards"',
@@ -509,7 +509,6 @@ const pam = {
     items: [
       "Banks",
       "Financial Services",
-      "Mutual Funds",
       "Insurance",
       "Healthcare",
       "IT / ITES",

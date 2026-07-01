@@ -20,12 +20,13 @@ export default function AboutCustomers() {
     <AboutSection
       eyebrow={eyebrow}
       heading={heading}
+      center
       eyebrowClassName="text-lg"
       headClassName="max-w-none"
       headingClassName="whitespace-nowrap"
     >
-      {/* Body — kept to two lines */}
-      <p className="mt-5 max-w-5xl text-base leading-relaxed text-balance text-slate-soft md:text-lg">
+      {/* Body — kept to two lines, centered under the heading */}
+      <p className="mx-auto mt-5 max-w-5xl text-center text-base leading-relaxed text-balance text-slate-soft md:text-lg">
         {body}
       </p>
 

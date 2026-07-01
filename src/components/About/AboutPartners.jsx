@@ -17,7 +17,7 @@ export default function AboutPartners() {
     about.partners;
 
   return (
-    <AboutSection tone="tint" center eyebrow={eyebrow} heading={heading} intro={body}>
+    <AboutSection tone="tint" eyebrow={eyebrow} heading={heading} intro={body}>
       {/* Partner types */}
       <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {types.map((t, i) => {

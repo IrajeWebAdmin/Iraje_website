@@ -1,3 +1,4 @@
+import Image from "next/image";
 import PamSection from "./PamSection";
 import { FiServer, FiLock, FiTool } from "react-icons/fi";
 import pam from "@/data/pam";
@@ -5,7 +6,7 @@ import pam from "@/data/pam";
 const ICONS = [FiServer, FiLock, FiTool];
 
 export default function PamArchitecture() {
-  const { eyebrow, heading, body, servers, note } = pam.architecture;
+  const { eyebrow, heading, body, servers } = pam.architecture;
 
   return (
     <PamSection tone="tint" eyebrow={eyebrow} heading={heading} intro={body}>
@@ -40,24 +41,15 @@ export default function PamArchitecture() {
           })}
         </div>
 
-        {/* Zero Trust panel */}
-        <div className="flex flex-col justify-center rounded-3xl bg-[linear-gradient(135deg,#022966_0%,#0451CC_100%)] p-9 text-white md:p-12">
-          <span className="inline-flex w-fit items-center gap-2 rounded-full bg-white/15 px-4 py-1.5 text-xs font-semibold tracking-[0.12em] uppercase">
-            Real Zero Trust
-          </span>
-          <p className="mt-6 text-xl leading-relaxed font-medium md:text-2xl">
-            {note}
-          </p>
-          <div className="mt-8 grid grid-cols-2 gap-4 text-sm">
-            <div className="rounded-2xl border border-white/15 bg-white/[0.06] px-5 py-4">
-              <p className="font-semibold">Active-Active</p>
-              <p className="mt-1 text-white/60">across DC &amp; DR</p>
-            </div>
-            <div className="rounded-2xl border border-white/15 bg-white/[0.06] px-5 py-4">
-              <p className="font-semibold">AES-256 Vault</p>
-              <p className="mt-1 text-white/60">credentials encrypted</p>
-            </div>
-          </div>
+        {/* Architecture diagram */}
+        <div className="flex items-center justify-center">
+          <Image
+            src="/images/pam/pam-solution-architecture.png"
+            alt="Iraje PAM solution architecture"
+            width={637}
+            height={538}
+            className="h-auto w-full"
+          />
         </div>
       </div>
     </PamSection>
