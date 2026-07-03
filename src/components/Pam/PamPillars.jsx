@@ -13,19 +13,17 @@ export default function PamPillars() {
             key={pillar.name}
             className="flex flex-col rounded-3xl border border-mist bg-white p-7 text-left"
           >
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <span className="flex h-[41px] w-[41px] shrink-0 items-center justify-center rounded-xl bg-brand text-white">
-                  <FiLock className="h-5 w-5" />
-                </span>
-                <h3 className="font-display text-2xl font-medium text-ink">
-                  {pillar.name}
-                </h3>
-              </div>
-              <span className="rounded-full bg-[#E3E9FF] px-3 py-1 text-[10px] font-semibold tracking-[0.1em] text-brand uppercase">
-                {pillar.team}
+            <div className="flex items-center gap-3">
+              <span className="flex h-[41px] w-[41px] shrink-0 items-center justify-center rounded-xl bg-brand text-white">
+                <FiLock className="h-5 w-5" />
               </span>
+              <h3 className="font-display text-2xl font-medium text-ink">
+                {pillar.name}
+              </h3>
             </div>
+            <span className="mt-3 w-fit rounded-full  px-3 py-1 text-[11px] font-semibold tracking-[0.1em] text-brand uppercase">
+              {pillar.team}
+            </span>
             <div className="mt-6 flex flex-wrap gap-2">
               {pillar.tags.map((tag) => (
                 <span

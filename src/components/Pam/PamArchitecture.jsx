@@ -24,17 +24,17 @@ export default function PamArchitecture() {
                   <Icon className="h-6 w-6" />
                 </span>
                 <div>
-                  <div className="flex items-center gap-3">
-                    <span className="font-mono text-sm font-semibold text-brand">
-                      {server.num}
-                    </span>
-                    <h3 className="font-display text-lg font-semibold text-ink">
-                      {server.name}
-                    </h3>
+                  <span className="inline-flex w-fit items-center justify-center rounded-lg bg-[#EEF3FF] px-2.5 py-1 font-mono text-sm font-semibold text-brand">
+                    {server.num}
+                  </span>
+                  <h3 className="mt-2 font-display text-lg font-semibold text-ink">
+                    {server.name}
+                  </h3>
+                  <div className="mt-2 rounded-2xl bg-[#F6F8FD] p-4">
+                    <p className="text-sm leading-relaxed text-slate-soft">
+                      {server.body}
+                    </p>
                   </div>
-                  <p className="mt-2 text-sm leading-relaxed text-slate-soft">
-                    {server.body}
-                  </p>
                 </div>
               </div>
             );

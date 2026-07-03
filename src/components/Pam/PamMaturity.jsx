@@ -1,6 +1,12 @@
 import PamSection from "./PamSection";
-import { FiCheck } from "react-icons/fi";
 import pam from "@/data/pam";
+
+const levelGradients = [
+  "linear-gradient(270deg, #5869C2 0%, #5C6DC5 50%, #6777CD 100%)",
+  "linear-gradient(270deg, #414EB3 0%, #4957B8 50%, #4F5FBC 100%)",
+  "linear-gradient(270deg, #343FA4 0%, #3944AA 50%, #3C48AE 100%)",
+  "linear-gradient(270deg, #1E2860 0%, #27317C 37.5%, #2F3A99 100%)",
+];
 
 export default function PamMaturity() {
   const { eyebrow, heading, body, flow, levels } = pam.maturity;
@@ -16,24 +22,31 @@ export default function PamMaturity() {
       headingClassName="md:whitespace-nowrap"
     >
       <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-        {levels.map((level) => (
+        {levels.map((level, index) => (
           <div
             key={level.level}
-            className="flex flex-col rounded-3xl border border-mist bg-white p-7 text-left"
+            className="flex flex-col overflow-hidden rounded-3xl border border-mist bg-white text-left shadow-lg shadow-brand/5"
           >
-            <span className="text-xs font-semibold tracking-[0.14em] text-brand uppercase">
-              {level.level}
-            </span>
-            <h3 className="mt-2 font-display text-xl font-semibold text-ink">
-              {level.name}
-            </h3>
-            <ul className="mt-5 space-y-3 border-t border-[#EDF1F9] pt-5">
+            <div
+              style={{
+                background: levelGradients[index % levelGradients.length],
+              }}
+              className="px-7 py-6 text-white"
+            >
+              <span className="text-xs font-semibold tracking-[0.14em] text-white/70 uppercase">
+                {level.level}
+              </span>
+              <h3 className="mt-2 font-display text-xl font-semibold text-white">
+                {level.name}
+              </h3>
+            </div>
+            <ul className="divide-y divide-dotted divide-mist px-7 py-2">
               {level.features.map((feature) => (
                 <li
                   key={feature}
-                  className="flex gap-2.5 text-[13px] leading-snug text-ink/75"
+                  className="flex items-start gap-2.5 py-2.5 text-[13px] leading-snug text-ink/75"
                 >
-                  <FiCheck className="mt-0.5 h-3.5 w-3.5 shrink-0 text-brand" />
+                  <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-brand" />
                   {feature}
                 </li>
               ))}
@@ -42,8 +55,15 @@ export default function PamMaturity() {
         ))}
       </div>
 
-      <p className="mt-10 text-center text-sm font-semibold tracking-[0.22em] text-brand uppercase">
-        {flow}
+      <p className="mt-10 text-center text-base font-medium tracking-[0.22em] uppercase md:text-lg">
+        {flow.split("→").map((part, index, parts) => (
+          <span key={part}>
+            <span style={{ color: "#707070" }}>{part.trim()}</span>
+            {index < parts.length - 1 && (
+              <span className="mx-2 text-brand">→</span>
+            )}
+          </span>
+        ))}
       </p>
     </PamSection>
   );
