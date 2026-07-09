@@ -1,0 +1,30 @@
+// Prisma schema for the Iraje marketing site.
+// Docs: https://pris.ly/d/prisma-schema
+//
+// This model maps to the EXISTING `contact_message` table in the
+// `iraje_website` database. Column types/nullability mirror that table so
+// `npx prisma db push` only ADDS the new `status` column (used for tracking
+// submissions later) and never drops or rewrites existing data.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+/// A single "Contact Us" form submission.
+/// `status` lets submissions be triaged/tracked later (new -> contacted -> closed).
+model Contact {
+  id        Int       @id @default(autoincrement())
+  name      String?   @db.VarChar(100)
+  contactNo String?   @map("contact_no") @db.VarChar(20)
+  email     String?   @db.VarChar(255)
+  message   String?   @db.Text
+  status    String    @default("new") @db.VarChar(20)
+  createdAt DateTime? @default(now()) @map("created_at") @db.Timestamp(0)
+
+  @@map("contact_message")
+}
