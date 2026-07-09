@@ -12,11 +12,13 @@ export default function Testimonials() {
         {/* Heading */}
 
         <div className="text-center">
-          <span className="text-4xl font-medium text-[#0451CC]">
+          <span className="text-[clamp(1.75rem,1.4rem_+_1.6vw,2.25rem)] font-medium text-[#0451CC]">
             Testimonials
           </span>
 
-          <h2 className="mt-4 text-6xl font-semibold">Trusted By Our Clients</h2>
+          <h2 className="mt-4 text-[clamp(2.25rem,1.2rem_+_4vw,3.75rem)] font-semibold">
+            Trusted By Our Clients
+          </h2>
         </div>
 
         {/* Cards */}

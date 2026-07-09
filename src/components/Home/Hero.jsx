@@ -24,14 +24,14 @@ export default function Hero() {
           <div className="max-w-xl">
 
             {/* SEO H1 */}
-            <h1 className="mb-6 text-4xl font-bold leading-tight text-white md:text-5xl lg:text-5xl">
+            <h1 className="mb-6 text-[clamp(2rem,1.2rem_+_3.6vw,3rem)] font-bold leading-tight text-white">
               One platform to secure every identity.
             </h1>
 
-            <p className="mb-8 text-sm leading-relaxed text-gray-200 md:text-base">
+            <p className="mb-8 text-[clamp(0.875rem,0.8rem_+_0.4vw,1rem)] leading-relaxed text-gray-200">
               Iraje brings Privileged Access Management,
               Endpoint Privilege Management and Identity &
-              Access Management together — agentless,
+              Access Management together  agentless,
               Zero Trust and audit-ready from day one.
             </p>
 

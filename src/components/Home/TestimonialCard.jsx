@@ -22,7 +22,7 @@ export default function TestimonialCard({
       </div>
 
       {/* Name */}
-      <h3 className="mt-6 text-2xl font-semibold">
+      <h3 className="mt-6 text-[clamp(1.25rem,1.05rem_+_0.8vw,1.5rem)] font-semibold">
         {name}
       </h3>
 

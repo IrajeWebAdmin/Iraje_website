@@ -16,7 +16,7 @@ export default function Home() {
      <WhyIraje/>
      <IndustryBanner/>
      <TrustCompliance/>
-     <StatsSection/>
+     {/* <StatsSection/> */}
      <ResourceSection/>
      <Testimonials/>
      <CTASection/>

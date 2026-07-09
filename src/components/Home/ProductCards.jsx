@@ -31,7 +31,7 @@ export default function ProductCards() {
         </div>
 
         {/* Section Title */}
-     <h2 className="mt-16 text-center text-4xl font-semibold text-[#0451CC]">
+     <h2 className="mt-16 text-center text-[clamp(1.75rem,1.4rem_+_1.6vw,2.25rem)] font-semibold text-[#0451CC]">
           Our Products
         </h2>
 

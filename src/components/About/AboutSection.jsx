@@ -39,14 +39,14 @@ export default function AboutSection({
             )}
             {heading && (
               <h2
-                className={`mt-4 font-display text-3xl leading-[1.12] font-semibold md:text-[2.6rem] ${headingClassName}`}
+                className={`epm-heading mt-4 font-display leading-[1.12] font-semibold ${headingClassName}`}
               >
                 {heading}
               </h2>
             )}
             {intro && (
               <p
-                className={`mt-5 max-w-3xl text-base leading-relaxed md:text-lg ${
+                className={`epm-body mt-5 max-w-3xl leading-relaxed ${
                   center ? "mx-auto " : ""
                 }${dark ? "text-white/65" : "text-slate-soft"}`}
               >

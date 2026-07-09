@@ -1,8 +1,8 @@
 const products = [
   {
     id: 1,
-    shortName: "PAM",
-    title: "Privileged Access Management",
+    shortName: "Iraje PAM",
+    title: "Privileged Access Manager",
     description:
       "Agentless control over every privileged session — vaulting, SSO, discovery and a hardened Zero Trust OS.",
     icon: "/icons/pam-icon.svg",
@@ -10,8 +10,8 @@ const products = [
   },
   {
     id: 2,
-    shortName: "EPM",
-    title: "Endpoint Privilege Management",
+    shortName: "Iraje EPM",
+    title: "Endpoint Privilege Manager",
     description:
       "Remove standing local admin rights and enforce least privilege on every endpoint without breaking productivity.",
     icon: "/icons/epm-icon.svg",
@@ -19,8 +19,8 @@ const products = [
   },
   {
     id: 3,
-    shortName: "IAM",
-    title: "Identity & Access Management",
+    shortName: "Iraje IAM",
+    title: "Identity & Access Manager",
     description:
       "Full lifecycle identity governance — provisioning, access reviews and certification across your enterprise.",
     icon: "/icons/iam-con.svg",

@@ -45,7 +45,7 @@ export default function PamCompliance() {
             <p className="mt-3 font-display text-base font-semibold text-ink">
               {std.name}
             </p>
-            <p className="mt-1 text-sm text-slate-soft">{std.sub}</p>
+            <p className="mt-1 text-sm  text-slate-soft">{std.sub}</p>
           </div>
         ))}
       </div>

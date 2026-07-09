@@ -46,13 +46,27 @@
   padding-inline: 24px;
 }
 
-/* Eyebrow label used above every EPM section heading */
+/* Eyebrow label used above every EPM section heading.
+   Responsive size → lg (1.125rem) on desktop, fluidly scaling down through
+   tablet/mobile so it never overflows on smaller screens. */
 .epm-eyebrow {
   font-family: var(--font-poppins), "Poppins", sans-serif;
-  /* font-size: 0.8125rem; */
+  font-size: clamp(0.875rem, 0.625rem + 0.65vw, 1.125rem);
   /* font-weight: 500; */
   letter-spacing: 0.18em;
   text-transform: uppercase;
+}
+
+/* Section heading — responsive size → 3xl (1.875rem) on desktop, fluidly
+   scaling down through tablet/mobile. */
+.epm-heading {
+  font-size: clamp(1.5rem, 1.125rem + 1vw, 1.875rem);
+}
+
+/* Section intro / body copy — responsive size → base (1rem) on desktop,
+   fluidly scaling down through tablet/mobile. */
+.epm-body {
+  font-size: clamp(0.875rem, 0.75rem + 0.33vw, 1rem);
 }
 
 /* Opt-out of the uppercase eyebrow treatment — renders the label in its

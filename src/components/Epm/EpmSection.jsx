@@ -33,13 +33,13 @@ export default function EpmSection({
               </p>
             )}
             {heading && (
-              <h2 className="mt-4 font-display text-3xl leading-[1.12] font-semibold md:text-[2.6rem]">
+              <h2 className="epm-heading mt-4 font-display leading-[1.12] font-semibold">
                 {heading}
               </h2>
             )}
             {intro && (
               <p
-                className={`mt-5 text-base leading-relaxed md:text-lg ${
+                className={`epm-body mt-5 leading-relaxed ${
                   dark ? "text-white/65" : "text-slate-soft"
                 }`}
               >

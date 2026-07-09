@@ -13,13 +13,13 @@ export default function WhyIraje() {
         <div className="mb-20 text-center">
           <span className="text-lg font-medium text-blue-600">Why Iraje?</span>
 
-          <h2 className="mx-auto mt-4 max-w-6xl text-[88px] leading-[1.05] font-medium tracking-[-2px] text-black">
+          <h2 className="mx-auto mt-4 max-w-6xl text-[clamp(2.5rem,1rem_+_6vw,5.5rem)] leading-[1.05] font-medium tracking-[-2px] text-black">
             Your Trusted Partner
             <br />
             in Identity Security.
           </h2>
 
-          <p className="mx-auto mt-8 max-w-4xl text-[22px] font-medium leading-relaxed text-[#8E8E93]">
+          <p className="mx-auto mt-8 max-w-4xl text-[clamp(1rem,0.85rem_+_0.8vw,1.375rem)] font-medium leading-relaxed text-[#8E8E93]">
             Designed for enterprises. Aligned with global standards. Trusted for
             Mission-Critical Security.
           </p>

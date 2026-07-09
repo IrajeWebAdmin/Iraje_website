@@ -11,7 +11,7 @@ export default function CTASection() {
           <span className="text-lg font-medium text-white/60">Get Started</span>
 
           {/* Main Heading */}
-          <h2 className="mt-4 text-3xl font-bold text-white md:text-5xl">
+          <h2 className="mt-4 text-[clamp(1.875rem,1.2rem_+_2.6vw,3rem)] font-bold text-white">
             See the Iraje platform in action
           </h2>
 

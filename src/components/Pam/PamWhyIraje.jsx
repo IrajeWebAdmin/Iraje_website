@@ -1,4 +1,4 @@
-import PamSection from "./PamSection";
+  import PamSection from "./PamSection";
 import { FiAward } from "react-icons/fi";
 import pam from "@/data/pam";
 

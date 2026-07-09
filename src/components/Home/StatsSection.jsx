@@ -29,11 +29,13 @@ export default function StatsSection() {
                 delay: index * 0.1,
               }}
             >
-              <h2 className="text-9xl font-semibold text-[#0F5BE8] lg:text-7xl">
+              <h2 className="text-[clamp(3rem,1.5rem_+_5vw,4.5rem)] font-semibold text-[#0F5BE8]">
                 {stat.value}
               </h2>
 
-              <p className="mt-3 text-xl text-gray-500">{stat.label}</p>
+              <p className="mt-3 text-[clamp(1rem,0.9rem_+_0.5vw,1.25rem)] text-gray-500">
+                {stat.label}
+              </p>
             </motion.div>
           ))}
         </div>
