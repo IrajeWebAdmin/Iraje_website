@@ -15,6 +15,7 @@ export default function EpmSection({
   tone = "light",
   center = false,
   eyebrowClassName = "",
+  paddingClassName = "py-20 md:py-28",
   children,
   className = "",
 }) {
@@ -22,7 +23,7 @@ export default function EpmSection({
   return (
     <section
       id={id}
-      className={`${TONES[tone]} py-20 md:py-28 ${className}`}
+      className={`${TONES[tone]} ${paddingClassName} ${className}`}
     >
       <div className="epm-container">
         {(eyebrow || heading || intro) && (

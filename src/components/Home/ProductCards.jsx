@@ -16,7 +16,9 @@ export default function ProductCards() {
      
         <div className="grid grid-cols-3 items-end gap-4 xl:gap-6">
           {products.map((product) => {
-            const key = product.shortName.toLowerCase();
+            // shortName is "Iraje PAM/EPM/IAM" — strip the brand prefix so the
+            // key is just "pam" | "epm" | "iam" and matches the default above.
+            const key = product.shortName.replace(/^Iraje\s+/i, "").toLowerCase();
             return (
               <ProductCard
                 key={product.id}
@@ -36,7 +38,7 @@ export default function ProductCards() {
         </h2>
 
         {/* Divider */}
-       <hr className="mt-16 w-full border-t-[3px] border-[#0451CC]" />
+       <hr className="mt-16 w-full border-t-[1px] border-[#0451CC]/31" />
       </div>
     </section>
   );

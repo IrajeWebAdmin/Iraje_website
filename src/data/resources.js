@@ -15,7 +15,8 @@ const resources = [
     title: "Partner Program",
     description:
       "Register deals, protect your pipeline and track your sales funnel in the Iraje Partner Portal.",
-    buttonText: "Open Partner Portal",
+    buttonText: "Coming Soon",
+    comingSoon: true,
     image: "/images/home/home-patner-program.webp",
     link: "/partners",
   },
@@ -36,7 +37,7 @@ const resources = [
     description:
       "Free training and official certification tracks for PAM, EPM and CyberTantra.",
     buttonText: "Explore Certification",
-    image: "/images/home/home-events.webp",
+    image: "/images/home/home-certification.webp",
     link: "/certification",
   },
 ];

@@ -10,7 +10,7 @@ export default function EpmNavbar() {
   const { links, cta } = epm.nav;
 
   return (
-    <header className="absolute top-0 left-0 z-50 w-full bg-white/60 backdrop-blur-lg">
+    <header className="absolute top-0 left-0 z-50 w-full bg-white backdrop-blur-lg">
       <div className="epm-container">
         <nav className="relative flex h-14 items-center">
           {/* Logo */}

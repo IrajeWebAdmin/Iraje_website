@@ -68,10 +68,10 @@ export default function EpmComparison() {
         {/* Intro */}
         <div className="mx-auto max-w-4xl text-center">
           <SectionLabel>{vs.eyebrow}</SectionLabel>
-          <h2 className="mt-4 font-display text-3xl leading-[1.1] font-bold text-ink md:text-5xl">
+          <h2 className="mt-4 font-display epm-heading leading-[1.1] font-bold text-ink">
             {vs.heading}
           </h2>
-          <p className="mx-auto mt-6 max-w-3xl text-base leading-relaxed text-slate-soft md:text-lg">
+          <p className="mx-auto mt-6 max-w-3xl epm-body leading-relaxed text-slate-soft">
             {vs.body}
           </p>
         </div>

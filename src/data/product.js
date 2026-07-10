@@ -25,6 +25,7 @@ const products = [
       "Full lifecycle identity governance — provisioning, access reviews and certification across your enterprise.",
     icon: "/icons/iam-con.svg",
     link: "/products/iam",
+    comingSoon: true,
   },
 ];
 

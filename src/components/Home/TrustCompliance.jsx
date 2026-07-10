@@ -6,7 +6,7 @@ import compliance from "@/data/compliance";
 
 export default function TrustCompliance() {
   return (
-    <section className="bg-[#BDD1FE29] py-16">
+    <section className="bg-[#BDD1FE29] py-15">
       {/* <div className="mx-auto max-w-7xl px-6"> */}
       <div className="container-global">
 
@@ -17,11 +17,11 @@ export default function TrustCompliance() {
             Trust & Compliance
           </span>
 
-          <h2 className="mt-4 epm-heading font-semibold text-black">
+          <h2 className="mx-auto mt-4 max-w-6xl epm-heading leading-[1.05] font-medium tracking-[-2px] text-black">
             Security you can verify
           </h2>
 
-          <p className="mx-auto mt-10 max-w-4xl text-center epm-body text-[#B8B8B8]">
+          <p className="mx-auto mt-8 max-w-4xl epm-body font-medium leading-relaxed text-[#8E8E93]">
             Iraje security solutions are built to meet the most commonly referenced regulations and frameworks globally. Iraje security solutions emphatically meet compliance requirements and provide mapping to these standards.
           </p>
 
@@ -59,7 +59,7 @@ export default function TrustCompliance() {
               
 
               {/* Title */}
-              <h3 className="mt-6 epm-heading font-semibold text-black">
+              <h3 className="mt-6 text-[clamp(1.25rem,1.05rem_+_0.8vw,1.5rem)] font-semibold text-black">
                 {item.title}
               </h3>
 

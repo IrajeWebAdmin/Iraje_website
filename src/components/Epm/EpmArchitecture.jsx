@@ -22,15 +22,15 @@ export default function EpmArchitecture() {
 
           {/* Right Content */}
           <div>
-            <p className="mb-3 text-[18px] font-medium text-[#0451CC]">
+            <p className="epm-eyebrow epm-eyebrow-normal mb-3 font-medium text-[#0451CC]">
               {eyebrow}
             </p>
 
-            <h2 className="text-[48px] leading-[1.1] font-medium text-black">
+            <h2 className="epm-heading leading-[1.1] font-medium text-black">
               {heading}
             </h2>
 
-            <p className="mt-8 text-[20px] leading-relaxed text-[#737373]">
+            <p className="mt-8 epm-body leading-relaxed text-[#737373]">
               {body}
             </p>
 

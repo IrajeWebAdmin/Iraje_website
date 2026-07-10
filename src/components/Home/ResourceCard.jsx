@@ -64,49 +64,75 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 
+// Emphasize the CyberTantra brand name wherever it appears in the copy,
+// keeping the data layer as plain strings.
+function withBrandHighlight(text) {
+  return text.split(/(CyberTantra)/g).map((part, i) =>
+    part === "CyberTantra" ? (
+      <strong key={i} className="font-semibold text-gray-700">
+        {part}
+      </strong>
+    ) : (
+      part
+    ),
+  );
+}
+
 export default function ResourceCard({
   title,
   description,
   buttonText,
   image,
   link,
+  comingSoon,
 }) {
   return (
     <motion.div
       whileHover={{ y: -10 }}
       transition={{ duration: 0.3 }}
-      className="relative h-full overflow-hidden rounded-[50px] bg-white shadow-lg"
+      className="relative flex h-[489px] w-[424px] max-w-full flex-col rounded-[36px] border border-ink/10 bg-white shadow-lg"
     >
-      {/* Image Area - 60% */}
-      <div className="relative h-[320px] lg:h-[340px]">
+      {/* Image Area — rounds the top corners itself, since the card no longer
+          clips (so the title badge can overhang past the left edge). */}
+      <div className="relative h-[260px] shrink-0 overflow-hidden rounded-t-[36px]">
         <Image src={image} alt={title} fill className="object-cover" />
       </div>
 
       {/* Title Badge */}
-      <div className="relative">
-        <span className="absolute -bottom-6 left-8 z-10  flex h-[48px] min-w-[320px] rounded-l-md rounded-r-full bg-[#1456D9] px-6 py-2 text-xl font-semibold text-white">
-        {/* <span className="absolute -bottom-6 left-6 z-10 flex h-[48px] min-w-[280px] items-center rounded-full bg-[#1456D9] px-8 text-[22px] font-medium text-white shadow-md"> */}
+      <div className="relative shrink-0">
+        <span className="absolute -bottom-6 -left-3 z-10 flex h-8.75 w-58.5 items-center rounded-r-[20px] bg-[#1456D9] px-6 text-lg font-medium text-white">
           {title}
         </span>
       </div>
 
-      {/* Content Area - 40% */}
-      <div className="min-h-[220px] px-8 pt-16 pb-10">
+      {/* Content Area */}
+      <div className="flex flex-1 flex-col px-8 pt-12 pb-8">
         <p className="epm-body leading-relaxed text-gray-500">
-          {description}
+          {withBrandHighlight(description)}
         </p>
 
-        <Link
-          href={link}
-          className="mt-8 inline-flex items-center gap-2 font-semibold text-[#1456D9]"
-        >
-          {buttonText}
-          <span>→</span>
-        </Link>
+        {comingSoon ? (
+          <span
+            aria-disabled="true"
+            className="mt-auto inline-flex cursor-not-allowed items-center gap-2 font-semibold text-gray-400 select-none"
+          >
+            {buttonText}
+          </span>
+        ) : (
+          <Link
+            href={link}
+            className="mt-auto inline-flex items-center gap-2 font-semibold text-[#1456D9]"
+          >
+            {buttonText}
+            <span>→</span>
+          </Link>
+        )}
       </div>
 
-      {/* Bottom Blue Curved Border */}
-      <div className="absolute bottom-0 left-0 h-[12px] w-full rounded-b-[28px] border-b-[6px] border-[#1456D9]" />
+      {/* Bottom blue curved accent — mirrors the card's exact shape
+          (inset-0 + same rounded-[36px]) so the border curves to match the
+          container's corners. Only the bottom edge is drawn. */}
+      <div className="pointer-events-none absolute inset-0 rounded-[36px] border-b-[6px] border-[#1456D9]" />
     </motion.div>
   );
 }

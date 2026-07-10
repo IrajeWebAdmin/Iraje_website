@@ -20,16 +20,16 @@ const epm = {
 
   // ---- Hero -------------------------------------------------------------
   hero: {
-    eyebrow: "Endpoint Privilege Management",
+    eyebrow: "Endpoint Privilege Manager",
     title: "Your first line of defence, right at the endpoint.",
     subtitle:
-      "Iraje EPM enforces least privilege on every endpoint — removing standing local admin rights, rotating local admin passwords hourly, and stopping ransomware before it can start.",
+      "Iraje EPM extends privileged access governance to the endpoint removing standing local-admin rights, elevating only what's needed just-in-time, and recording, transcribing and analysing every privileged action.",
     ctas: [
       { label: "Request a Demo", href: "/contact", primary: true },
       { label: "See How it Works", href: "#how-epm-works", primary: false },
     ],
     card: {
-      eyebrow: "STOPS THE ATTACK BEFORE IT STARTS",
+      eyebrow: "Prevents the attack before it starts",
       pills: [
   {
     text: "Removes permanent local admin rights",
@@ -40,11 +40,11 @@ const epm = {
     icon: "/icons/just-in-time.svg",
   },
   {
-    text: "Application control & allowlisting",
+    text: "Records & transcribes every privileged session",
     icon: "/icons/application-control.svg",
   },
   {
-    text: "Blocks ransomware & privilege escalation",
+    text: "Application control & allowlisting ",
     icon: "/icons/block-ransomware.svg",
   },
 ]
@@ -101,7 +101,7 @@ const epm = {
   killChain: {
     eyebrow: "The ransomware kill chain",
     heading: "How One Click Becomes a Full Environment Takeover",
-    body: "EPM breaks the chain at privilege escalation — the step every attacker depends on.",
+    body: "EPM breaks the chain at privilege escalation, the step every attacker depends on.",
 steps: [
   {
     label: "Phishing email",
@@ -136,12 +136,15 @@ steps: [
   stack: {
     eyebrow: "The missing layer",
     heading: "A mature endpoint stack, with one critical gap",
-    body: "Most enterprise endpoints already run a deep security stack. But almost every layer is built to detect and respond. Very few are built to prevent.",
+    body: [
+      "Most enterprise endpoints already run a deep security stack. But almost every layer is built to detect and respond.",
+      "Very few are built to prevent.",
+    ],
     layers: [
       { name: "LAPS", role: "Local admin password rotation" },
       { name: "DLP", role: "Prevent data leakage" },
       { name: "Encryption", role: "Data Protection" },
-      { name: "Iraje Epm", role: "Prevent Privilege Misuse" },
+      { name: "Iraje EPM", role: "Prevent Privilege Misuse", highlight: true },
       { name: "Application Control", role: "Application Control/Allowing" },
       { name: "NGAV", role: "Signatureless threat detection" },
       { name: "EDR", role: "Detect malware, ransomware, lateral movement" },
@@ -159,8 +162,26 @@ steps: [
       role: "Stops privilege misuse, ransomware & credential theft before detection is even needed",
     },
     note: {
-      heading: "Why detection alone isn't enough",
-      body: "Microsoft LAPS is the most common tool for local admin password rotation — but it only covers Windows endpoints, and only rotates passwords. EDR and XDR are powerful, but they are built to monitor, detect and respond after an attacker is already active. EPM is the preventive control that precedes EDR/XDR — enforcing least privilege so the attack never escalates in the first place.",
+      heading: "Why detection alone isn't enough?",
+      paragraphs: [
+        "Microsoft LAPS is the most common tool for local admin password rotation — but it only covers Windows endpoints, and only rotates passwords. EDR and XDR are powerful, but they are built to monitor, detect and respond after an attacker is already active.",
+        "EPM is the preventive control that precedes EDR/XDR — enforcing least privilege so the attack never escalates in the first place.",
+      ],
+      body: "Microsoft LAPS is the most common tool for local admin password rotation but it only covers Windows endpoints, and only rotates passwords. EDR and XDR are powerful, but they are built to monitor, detect and respond after an attacker is already active. EPM is the preventive control that precedes EDR/XDR  enforcing least privilege so the attack never escalates in the first place.",
+    },
+    // Right-side maturity matrix (2×2). Rendered by EpmStack when present;
+    // its presence also switches the note block to a two-column layout.
+    matrix: {
+      axisY: "Low → High Criticality",
+      axisX: "BASIC → ADVANCED",
+      columns: ["FOUNDATION", "DETECT & RESPOND"],
+      cells: [
+        { lines: ["Firewall", "LAPS"] },
+        { lines: ["Iraje EPM", "EDR XDR MDR"], highlight: true },
+        { lines: ["Antivirus", "Device Management", "Patch Management"] },
+        { lines: ["Endpoint DLP", "Encryption"] },
+      ],
+      caption: "EPM comes before detection — it prevents.",
     },
   },
 
@@ -559,12 +580,12 @@ steps: [
         links: [
           { name: "Partners", href: "/partners" },
           { name: "About", href: "/about" },
-          { name: "Contact", href: "/contact" },
+          { name: "Contact Us", href: "/contact" },
         ],
       },
     ],
     copyright: "© 2026 Iraje Software. All rights reserved.",
-    tag: "Iraje · Identity is the new perimeter.",
+    
   },
 };
 

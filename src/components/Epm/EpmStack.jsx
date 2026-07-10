@@ -6,17 +6,32 @@ export default function EpmStack() {
   const { eyebrow, heading, body, layers, note, matrix } = epm.stack;
 
   return (
-    <EpmSection
-      tone="light"
-      center
-      eyebrow={eyebrow}
-      eyebrowClassName="epm-eyebrow-normal"
-      heading={heading}
-      intro={body}
-    >
+    <EpmSection tone="light" paddingClassName="py-15">
+      {/* Section header — custom classes to match the EpmThreat treatment */}
+      <div className="mx-auto max-w-6xl text-center">
+        <span className="epm-eyebrow epm-eyebrow-normal font-semibold text-blue-600">
+          {eyebrow}
+        </span>
+
+        <h2 className="mx-auto mt-4 max-w-6xl epm-heading leading-[1.05] font-medium tracking-[-2px] text-black lg:whitespace-nowrap">
+          {heading}
+        </h2>
+
+        <p className="mx-auto mt-8 max-w-4xl epm-body font-medium leading-relaxed text-[#8E8E93]">
+          {[].concat(body).map((line, i) => (
+            <span key={i} className="block">
+              {line}
+            </span>
+          ))}
+        </p>
+      </div>
+
       {/* Security-stack layers — every layer detects/responds except the one
-          preventive layer (Iraje EPM), which is highlighted in brand blue. */}
-      <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          preventive layer (Iraje EPM), which is highlighted in brand blue.
+          Column-major fill (grid-flow-col + fixed row count) so the data order
+          runs DOWN each column exactly as designed: col1 = layers 1–5, etc.
+          Rows are auto-height so a two-line role only grows its own row. */}
+      <div className="mt-14 grid grid-cols-1 gap-4 sm:grid-cols-none sm:grid-flow-col sm:auto-cols-fr sm:grid-rows-[repeat(8,auto)] lg:grid-rows-[repeat(5,auto)]">
         {layers.map((layer) => {
           const hl = layer.highlight;
           return (
@@ -30,7 +45,7 @@ export default function EpmStack() {
             >
               <span
                 className={`mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg ${
-                  hl ? "bg-white/15 text-white" : "bg-[#EAF1FF] text-brand"
+                  hl ? "bg-white text-brand" : "bg-[#EAF1FF] text-brand"
                 }`}
               >
                 <BsShieldCheck className="h-4 w-4" />
@@ -54,7 +69,7 @@ export default function EpmStack() {
 
       {/* Why detection alone isn't enough + the BASIC → ADVANCED maturity matrix */}
       <div
-        className={`mt-20 ${matrix ? "grid gap-12 lg:grid-cols-2 lg:items-center" : ""}`}
+        className={`mt-20 ${matrix ? "grid gap-12 lg:grid-cols-[1fr_619px] lg:items-center" : ""}`}
       >
         {/* Left: explanation */}
         <div className="text-left">
@@ -73,15 +88,16 @@ export default function EpmStack() {
 
         {/* Right: maturity matrix (only when matrix data is provided) */}
         {matrix && (
-        <div className="rounded-3xl border border-[#E8ECF4] bg-white p-6 shadow-[0_12px_40px_rgba(2,41,102,0.07)] md:p-8">
-          <div className="flex gap-3">
-            {/* Y axis label (reads bottom → top) */}
-            <span className="flex items-center rotate-180 text-xs font-semibold tracking-wide text-ink [writing-mode:vertical-rl]">
+        <div className="w-full rounded-[38px] border border-[#E8ECF4] bg-white p-6 shadow-[0_12px_40px_rgba(2,41,102,0.07)] md:p-8 lg:flex lg:min-h-131.25 lg:flex-col lg:justify-center">
+          <div className="flex items-start gap-3">
+            {/* Y axis label (reads bottom → top) — height matches the panel
+                (h-91.75) so its centered text aligns with the panel's center. */}
+            <span className="flex h-91.75 items-center rotate-180 text-xs font-semibold tracking-wide text-ink [writing-mode:vertical-rl]">
               {matrix.axisY}
             </span>
 
             <div className="flex-1">
-              <div className="relative rounded-2xl bg-[#F4F8FF] px-5 py-6">
+              <div className="relative h-91.75 w-111 rounded-[38px] bg-[#F4F8FF] px-5 py-6">
                 {/* vertical dashed divider */}
                 <span className="pointer-events-none absolute inset-y-6 left-1/2 -translate-x-1/2 border-l border-dashed border-slate-300" />
 

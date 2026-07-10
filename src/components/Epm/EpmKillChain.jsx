@@ -9,14 +9,22 @@ export default function EpmKillChain() {
     epm.killChain;
 
   return (
-    <EpmSection
-      tone="light"
-      center
-      eyebrow={eyebrow}
-      eyebrowClassName="epm-eyebrow-normal"
-      heading={heading}
-      intro={body}
-    >
+    <EpmSection tone="light" paddingClassName="py-15">
+      {/* Section header — custom classes to match the EpmThreat treatment */}
+      <div className="mx-auto max-w-6xl text-center">
+        <span className="epm-eyebrow epm-eyebrow-normal font-semibold text-blue-600">
+          {eyebrow}
+        </span>
+
+        <h2 className="mx-auto mt-4 max-w-6xl epm-heading leading-[1.05] font-medium tracking-[-2px] text-black lg:whitespace-nowrap">
+          {heading}
+        </h2>
+
+        <p className="mx-auto mt-8 max-w-4xl epm-body  leading-relaxed text-[#8E8E93]">
+          {body}
+        </p>
+      </div>
+
       {/* Circles + arrows are ONE continuous row (items-center), so arrows
           align to the exact vertical center of the circles. The label — and,
           for the blocked step, the "BLOCKED BY EPM" badge — sit absolutely

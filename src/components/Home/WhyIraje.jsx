@@ -6,19 +6,27 @@ import { motion } from "framer-motion";
 
 export default function WhyIraje() {
   return (
-    <section className="bg-[#f8f8f8] py-14">
+    <section className="relative overflow-hidden bg-[#fff] py-15">
+      {/* Decorative overlapping circles (bottom-right, clipped by section edges) */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-16 -bottom-20 z-0 h-105 w-105"
+      >
+        <span className="absolute top-[18%] left-[22%] h-60 w-60 rounded-full bg-[#0451CC]/15" />
+        <span className="absolute top-[28%] right-[1%] h-60 w-60 rounded-full bg-[#0451CC]/15" />
+        <span className="absolute bottom-[1%] right-[1%] h-60 w-60 -translate-x-1/2 rounded-full bg-[#0451CC]/15" />
+      </div>
+
       {/* <div className="mx-auto max-w-7xl px-6"> */}
-      <div className="container-global">
+      <div className="container-global relative z-10">
         {/* Heading */}
         <div className="mb-20 text-center">
-          <span className="epm-eyebrow epm-eyebrow-normal font-medium text-blue-600">
+          <span className="epm-eyebrow epm-eyebrow-normal font-semibold text-blue-600">
             Why Iraje?
           </span>
 
           <h2 className="mx-auto mt-4 max-w-6xl epm-heading leading-[1.05] font-medium tracking-[-2px] text-black">
-            Your Trusted Partner
-            <br />
-            in Identity Security.
+            Your Trusted Partner in Identity Security.
           </h2>
 
           <p className="mx-auto mt-8 max-w-4xl epm-body font-medium leading-relaxed text-[#8E8E93]">
@@ -59,7 +67,7 @@ export default function WhyIraje() {
                   />
                 </div>
 
-                <h3 className="mb-3 epm-heading font-semibold text-black">
+                <h3 className="mb-3 text-xl font-semibold text-black">
                   {item.title}
                 </h3>
 

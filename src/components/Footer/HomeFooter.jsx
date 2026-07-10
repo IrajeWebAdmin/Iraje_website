@@ -13,15 +13,14 @@ export default function HomeFooter() {
           {/* Logo Section */}
           <div>
             <Image
-              src="/images/navbar/company-logo-nav.png"
+              src="/icons/company-logo-footer.svg"
               alt="Iraje Identity Security Logo"
               width={140}
               height={40}
             />
 
             <p className="mt-6 max-w-xs text-sm leading-relaxed text-white/70">
-              One platform to secure every privileged identity —
-              across access, endpoints and identity.
+             One platform to secure  every identity.
             </p>
           </div>
 
@@ -92,9 +91,9 @@ export default function HomeFooter() {
 
         {/* Bottom Footer */}
         <div className="flex flex-col gap-4 text-xs text-white/40 md:flex-row md:justify-between">
-          <p>© 2026 Iraje Software. All rights reserved.</p>
+          <p>© Iraje Software. All rights reserved.</p>
 
-          <p>Iraje · Identity is the new perimeter.</p>
+         
         </div>
 
       </div>

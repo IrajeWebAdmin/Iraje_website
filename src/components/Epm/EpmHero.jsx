@@ -8,8 +8,8 @@ export default function EpmHero() {
 
   return (
     <section className="relative overflow-visible bg-[#022966] text-white">
-      {/* Background: linear gradient #0451cc (0%) -> #022966 (100%) — from Figma */}
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,#0451cc_0%,#022966_100%)]" />
+      {/* Background: linear gradient #0451cc (0.28%) -> #022966 (100%) — from Figma */}
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,#0451cc_0.28%,#022966_100%)]" />
 
       {/* Extra bottom padding on lg leaves blue space for the CapabilityStrip
           (rendered as the next sibling) to straddle the hero/white boundary. */}

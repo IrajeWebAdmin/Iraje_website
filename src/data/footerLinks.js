@@ -9,7 +9,7 @@ const footerLinks = {
       href: "/products/epm",
     },
     {
-      name: "IAM (soon)",
+      name: "IAM (Coming Soon)",
       href: "/products/iam",
     },
   ],
@@ -39,7 +39,7 @@ const footerLinks = {
       href: "/partners",
     },
     {
-      name: "Contact",
+      name: "Contact Us",
       href: "/contact",
     },
   ],

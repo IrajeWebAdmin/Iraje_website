@@ -2,11 +2,11 @@ import Link from "next/link";
 
 export default function CTASection() {
   return (
-    <section className="bg-[#F8F9FC] py-24">
+    <section className="bg-[#F8F9FC] py-15">
       {/* <div className="mx-auto max-w-7xl px-6"> */}
       <div className="container-global">
         <div
-          className="rounded-[24px] bg-gradient-to-r from-[#153A8A] to-[#2563FF] px-8 py-16 text-center shadow-xl md:px-16 ">
+          className="rounded-[24px] bg-[linear-gradient(108.08deg,#0B2A5B_0%,#1D5BFF_100%)] px-8 py-16 text-center shadow-xl md:px-16 ">
           {/* Small Heading */}
           <span className="epm-eyebrow epm-eyebrow-normal font-medium text-white/60">
             Get Started

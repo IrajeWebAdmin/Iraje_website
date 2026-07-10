@@ -18,7 +18,11 @@ export default function Hero() {
       {/* <div className="absolute inset-0 bg-[#1d2548]/70" /> */}
 
       {/* Content */}
-      <div className="relative z-10 flex min-h-[95vh] items-center">
+      {/* pb reserves the space the floating ProductCards overlap into
+          (see ProductCards' -mt-20/-mt-32/-mt-48), so the centered content
+          — and the "Book a Demo" button — always clears the cards on
+          shorter/smaller viewports instead of colliding with the PAM card. */}
+      <div className="relative z-10 flex min-h-[95vh] items-center pb-28 sm:pb-40 md:pb-52">
         {/* <div className="mx-auto w-full max-w-7xl px-6 lg:px-12"> */}
           <div className="container-global">
           <div className="max-w-xl">
@@ -29,10 +33,7 @@ export default function Hero() {
             </h1>
 
             <p className="mb-8 epm-body leading-relaxed text-gray-200">
-              Iraje brings Privileged Access Management,
-              Endpoint Privilege Management and Identity &
-              Access Management together  agentless,
-              Zero Trust and audit-ready from day one.
+              Iraje brings Privileged Access Management [PAM], Endpoint Privilege Management [EPM] and Identity & Access Management [IAM] together with Zero-Trust security architecture & compliance ready from day one. 
             </p>
 
             <Link

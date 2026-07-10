@@ -1,9 +1,25 @@
 const industries = [
   "Banking",
-  "Healthcare",
-  "Government",
-  "Manufacturing",
+  "Financial Services",
   "Insurance",
+  "NBFCs",
+  "Mutual funds",
+  "Fintech",
+  "Government",
+  "Public Sector",
+  "Healthcare",
+  "Pharmaceuticals",
+  "Life sciences",
+  "Manufacturing",
+  "Engineering",
+  "Energy & Utilities",
+  "ITeS — IT services",
+  "Retail & E-commerce",
+  "Logistics & Transportation",
+  "Media & Entertainment",
+  "Services Providers",
+  "Hospitality & Travel",
+  "Data Centres & Cloud Providers",
 ];
 
 export default industries;

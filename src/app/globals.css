@@ -57,10 +57,10 @@
   text-transform: uppercase;
 }
 
-/* Section heading — responsive size → 3xl (1.875rem) on desktop, fluidly
+/* Section heading — responsive size → 5xl (3rem) on desktop, fluidly
    scaling down through tablet/mobile. */
 .epm-heading {
-  font-size: clamp(1.5rem, 1.125rem + 1vw, 1.875rem);
+  font-size: clamp(1.75rem, 1.125rem + 2.5vw, 3rem);
 }
 
 /* Section intro / body copy — responsive size → base (1rem) on desktop,
@@ -74,4 +74,43 @@
 .epm-eyebrow-normal {
   text-transform: none;
   letter-spacing: 0.02em;
+}
+
+/* ===========================================================================
+   Infinite horizontal marquee (IndustryBanner)
+   The track holds two identical copies of the list, so translating it by
+   exactly -50% loops seamlessly. Pause on hover.
+   NOTE: intentionally NOT gated behind prefers-reduced-motion — the marquee
+   is a required part of the design, so it always animates. Hover to pause.
+   =========================================================================== */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 40s linear infinite;
+  will-change: transform;
+}
+
+/* Soft fade at both edges so items appear/disappear instead of hard-clipping. */
+.marquee-mask {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 6%,
+    #000 94%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 6%,
+    #000 94%,
+    transparent
+  );
 }
