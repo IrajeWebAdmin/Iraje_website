@@ -92,7 +92,7 @@ export default function ResourceCard({
 
       {/* Content Area - 40% */}
       <div className="min-h-[220px] px-8 pt-16 pb-10">
-        <p className="text-[15px] leading-relaxed text-gray-500">
+        <p className="epm-body leading-relaxed text-gray-500">
           {description}
         </p>
 

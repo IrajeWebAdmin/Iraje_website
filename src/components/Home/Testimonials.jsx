@@ -12,11 +12,11 @@ export default function Testimonials() {
         {/* Heading */}
 
         <div className="text-center">
-          <span className="text-[clamp(1.75rem,1.4rem_+_1.6vw,2.25rem)] font-medium text-[#0451CC]">
+          <span className="epm-eyebrow epm-eyebrow-normal font-medium text-[#0451CC]">
             Testimonials
           </span>
 
-          <h2 className="mt-4 text-[clamp(2.25rem,1.2rem_+_4vw,3.75rem)] font-semibold">
+          <h2 className="mt-4 epm-heading font-semibold">
             Trusted By Our Clients
           </h2>
         </div>

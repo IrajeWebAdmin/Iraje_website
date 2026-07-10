@@ -8,15 +8,17 @@ export default function CTASection() {
         <div
           className="rounded-[24px] bg-gradient-to-r from-[#153A8A] to-[#2563FF] px-8 py-16 text-center shadow-xl md:px-16 ">
           {/* Small Heading */}
-          <span className="text-lg font-medium text-white/60">Get Started</span>
+          <span className="epm-eyebrow epm-eyebrow-normal font-medium text-white/60">
+            Get Started
+          </span>
 
           {/* Main Heading */}
-          <h2 className="mt-4 text-[clamp(1.875rem,1.2rem_+_2.6vw,3rem)] font-bold text-white">
+          <h2 className="mt-4 epm-heading font-bold text-white">
             See the Iraje platform in action
           </h2>
 
           {/* Description */}
-          <p className="mx-auto mt-6 max-w-2xl text-white/80">
+          <p className="mx-auto mt-6 max-w-2xl epm-body text-white/80">
             Book a personalised demo, or dive into the resources, datasheets and
             case studies to learn more.
           </p>

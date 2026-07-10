@@ -22,7 +22,7 @@ export default function TestimonialCard({
       </div>
 
       {/* Name */}
-      <h3 className="mt-6 text-[clamp(1.25rem,1.05rem_+_0.8vw,1.5rem)] font-semibold">
+      <h3 className="mt-6 epm-heading font-semibold">
         {name}
       </h3>
 
@@ -39,7 +39,7 @@ export default function TestimonialCard({
       </div>
 
       {/* Review */}
-      <p className=" mt-6 leading-relaxed text-gray-500 group-hover:text-gray-200 ">
+      <p className="epm-body mt-6 leading-relaxed text-gray-500 group-hover:text-gray-200 ">
         {review}
       </p>
     </div>

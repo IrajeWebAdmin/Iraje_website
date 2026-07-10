@@ -70,7 +70,7 @@ export default function ProductCard({
           scale: active ? 1.05 : 1,
         }}
         transition={{ duration: 0.3 }}
-        className="mt-3 origin-left text-[clamp(1.5rem,1.1rem_+_1.6vw,1.875rem)] leading-snug font-semibold text-black"
+        className="mt-3 origin-left epm-heading leading-snug font-semibold text-black"
       >
         {title}
       </motion.h3>
@@ -80,7 +80,7 @@ export default function ProductCard({
           scale: active ? 1.02 : 1,
         }}
         transition={{ duration: 0.3 }}
-        className="mt-5 origin-left text-[clamp(0.9375rem,0.85rem_+_0.4vw,1.125rem)] leading-relaxed text-gray-500"
+        className="mt-5 origin-left epm-body leading-relaxed text-gray-500"
       >
         {description}
       </motion.p>

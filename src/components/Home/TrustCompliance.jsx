@@ -13,15 +13,15 @@ export default function TrustCompliance() {
         {/* Header */}
         <div className="mx-auto max-w-6xl text-center">
 
-          <span className="text-[clamp(1.75rem,1.4rem_+_1.6vw,2.25rem)] font-semibold  text-[#0451CC]">
+          <span className="epm-eyebrow epm-eyebrow-normal font-semibold text-[#0451CC]">
             Trust & Compliance
           </span>
 
-          <h2 className="mt-4 text-[clamp(2.25rem,1.2rem_+_4vw,3.75rem)] font-semibold text-black">
+          <h2 className="mt-4 epm-heading font-semibold text-black">
             Security you can verify
           </h2>
 
-          <p className="mx-auto mt-10 max-w-4xl text-center text-[clamp(1.05rem,0.9rem_+_0.85vw,1.5rem)]  text-[#B8B8B8]">
+          <p className="mx-auto mt-10 max-w-4xl text-center epm-body text-[#B8B8B8]">
             Iraje security solutions are built to meet the most commonly referenced regulations and frameworks globally. Iraje security solutions emphatically meet compliance requirements and provide mapping to these standards.
           </p>
 
@@ -59,7 +59,7 @@ export default function TrustCompliance() {
               
 
               {/* Title */}
-              <h3 className="mt-6 text-[clamp(1.25rem,1.05rem_+_0.8vw,1.5rem)] font-semibold text-black">
+              <h3 className="mt-6 epm-heading font-semibold text-black">
                 {item.title}
               </h3>
 

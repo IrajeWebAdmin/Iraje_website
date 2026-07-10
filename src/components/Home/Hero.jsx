@@ -28,7 +28,7 @@ export default function Hero() {
               One platform to secure every identity.
             </h1>
 
-            <p className="mb-8 text-[clamp(0.875rem,0.8rem_+_0.4vw,1rem)] leading-relaxed text-gray-200">
+            <p className="mb-8 epm-body leading-relaxed text-gray-200">
               Iraje brings Privileged Access Management,
               Endpoint Privilege Management and Identity &
               Access Management together  agentless,
@@ -37,7 +37,7 @@ export default function Hero() {
 
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center rounded-xl bg-blue-600 px-8 py-4 text-white font-medium transition-all duration-300 hover:bg-blue-700 hover:scale-105"
+              className="inline-flex items-center justify-center rounded-full bg-white px-10 py-4 text-[#1d2548] font-semibold transition-all duration-300 hover:bg-gray-100 hover:scale-105"
             >
               Book a Demo
             </Link>
