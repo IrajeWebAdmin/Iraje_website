@@ -9,6 +9,7 @@ import EpmPillars from "@/components/Epm/EpmPillars";
 import EpmArchitecture from "@/components/Epm/EpmArchitecture";
 import EpmDifferentiators from "@/components/Epm/EpmDifferentiators";
 import EpmCompliance from "@/components/Epm/EpmCompliance";
+import EpmContactCta from "@/components/Epm/EpmContactCta";
 import CapabilityStrip from "@/components/Epm/CapabilityStrip";
 
 export default function EpmPage() {
@@ -26,6 +27,7 @@ export default function EpmPage() {
       <EpmArchitecture />
       <EpmDifferentiators />
       <EpmCompliance />
+      <EpmContactCta />
     </>
   );
 }

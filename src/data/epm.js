@@ -249,9 +249,9 @@ steps: [
       ],
       [
         "Admin Rights Control",
-        "Full control — remove, rotate, elevate",
-        "Limited / indirect",
-        "Not designed for this",
+        { text: "Full control — remove, rotate, elevate", status: "good" },
+        { text: "Limited / indirect", status: "bad" },
+        { text: "Not designed for this", status: "bad" },
       ],
       [
         "Attack Surface Reduction",
@@ -261,9 +261,9 @@ steps: [
       ],
       [
         "Threat Detection",
-        "Focused on privilege behaviour",
-        "Strong endpoint detection",
-        "Strong cross-domain detection",
+        { text: "Focused on privilege behaviour", status: "bad" },
+        { text: "Strong endpoint detection", status: "good" },
+        { text: "Strong cross-domain detection", status: "good" },
       ],
       [
         "Response Actions",
@@ -314,13 +314,38 @@ steps: [
   glance: {
     eyebrow: "At a glance — across the attack lifecycle",
     columns: ["Stage", "Iraje EPM", "EDR / XDR"],
+    // Each EPM / EDR-XDR cell carries a status → icon: good ✓ / bad ✗ / warn ⚠.
     rows: [
-      ["Admin rights", "Prevents misuse", "No control"],
-      ["Visibility", "Privilege-focused", "Detects activity"],
-      ["Response", "Logs & audit", "Kill & isolate"],
-      ["Ransomware", "Rotated hourly", "Static"],
-      ["Lateral movement", "JIT + recording", "None"],
-      ["Session evidence", "Recording + watermark", "Partial"],
+      [
+        "Threat Detection",
+        { text: "Prevents misuse", status: "good" },
+        { text: "No control", status: "bad" },
+      ],
+      [
+        "Visibility",
+        { text: "Limited", status: "warn" },
+        { text: "Detects", status: "good" },
+      ],
+      [
+        "Response Actions",
+        { text: "Logs & audit", status: "warn" },
+        { text: "Focused on privilege behaviour", status: "good" },
+      ],
+      [
+        "Ransomware Protection",
+        { text: "Rotated hourly", status: "good" },
+        { text: "Static", status: "bad" },
+      ],
+      [
+        "Lateral movement",
+        { text: "JIT + recording", status: "good" },
+        { text: "None", status: "bad" },
+      ],
+      [
+        "AI / Analytics",
+        { text: "Recording + watermark", status: "good" },
+        { text: "Partial", status: "warn" },
+      ],
     ],
   },
 
@@ -329,7 +354,7 @@ steps: [
     eyebrow: "The core problem",
     heading:
       "Too many users and applications running with local admin privileges.",
-    body: "The local administrator password is one of the most critical security elements in any enterprise — it provides full control over the device. Yet endpoints are routinely left vulnerable.",
+    body: "The local administrator password is one of the most critical security elements in any enterprise  it provides full control over the device. Yet endpoints are routinely left vulnerable.",
     reasonsTitle: "Why endpoints get local admin rights",
     risksTitle: "…and the risk it creates",
     reasons: [
@@ -358,7 +383,7 @@ steps: [
       },
       {
         title: "Just-in-Time elevation",
-        body: "Elevates only the task that needs it, for only as long as it's needed, then revokes automatically.",
+        body: "Monitors endpoint processes, files and memory for suspicious activity, then reacts.",
       },
       {
         title: "Controls application elevation",
@@ -390,13 +415,13 @@ steps: [
   // ---- Six pillars (capabilities) ---------------------------------------
   pillars: {
     eyebrow: "Iraje EPM capabilities",
-    heading: "Six pillars of next-gen endpoint privilege management",
+    heading: "Six pillars of next-gen endpoint privilege manager",
     body: "Iraje EPM features are organised across six areas — Manage, Monitor, Control, Discover, Comply and Secure.",
     items: [
       {
         name: "Manage",
         features: [
-          "Local admin password rotation for Windows endpoints — every hour",
+          "Local admin password rotation for Windows endpoints every hour",
           "Just-in-Time (JIT) privilege elevation",
           "Secure privileged access to endpoints with workflow",
           "Manage remote accesses",
@@ -458,7 +483,7 @@ steps: [
   architecture: {
     eyebrow: "Solution architecture",
     heading: "Simple to deploy. Redundant by design.",
-    body: "Iraje EPM has a deliberately simple architecture — just one application server and one vault server. A redundant set of both can be deployed for seamless failover.",
+    body: "Iraje EPM has a deliberately simple architecture  just one application server and one vault server. A redundant set of both can be deployed for seamless failover.",
     nodes: [
       {
         name: "Application Server",
@@ -470,7 +495,7 @@ steps: [
       },
       {
         name: "Tamper-proof Agents",
-        body: "Lightweight agents enforce policy on every endpoint and can't be disabled by local users or malware.",
+        body: "Lightweight agents on Windows, Linux and macOS endpoints  remotely deployable and enforced.",
       },
     ],
   },
@@ -503,8 +528,8 @@ steps: [
       },
       {
         num: "05",
-        title: "Multilingual — available in 12 global languages",
-        body: "A truly global solution supporting 12 languages, empowering organizations to secure endpoints across diverse regions and workforces.",
+        title: "Multilingual — available in 20+ global languages",
+        body: "A truly global solution supporting 20+ languages, empowering organizations to secure endpoints across diverse regions and workforces.",
       },
     ],
   },
@@ -528,28 +553,50 @@ steps: [
       title: "Compliance Mapping — Global",
       columns: [
         "Control Area",
-        "Endpoint Requirement",
+        "Compliance Requirement\n(Endpoint-Focused)",
         "ISO 27001",
         "SOC 2",
         "PCI-DSS",
-        "HIPAA",
         "SOX",
+        "HIPAA",
         "GDPR",
         "NIST",
-        "Evidence",
+        "Audit Evidence",
       ],
       rows: [
-        ["Least Privilege", "Remove permanent local admin rights", "A.5.15", "CC6.1", "Req 7.2", "164.308(a)(4)", "ITGC", "Art.25", "AC-6", "Admin rights report"],
-        ["JIT Elevation", "Temporary admin access with expiry", "A.8.2", "—", "Req 7.2.5", "Addressable", "ITGC", "Art.25", "AC-2", "Elevation logs"],
-        ["Privilege Escalation Control", "Restrict unauthorized elevation", "A.8.7", "—", "Req 5.2", "164.308(a)(5)", "ITGC", "Art.32", "SI-7", "Block logs"],
-        ["Privileged Activity Logging", "Log admin actions", "A.8.15", "—", "Req 10", "164.312(b)", "ITGC", "Art.30", "AU-2", "SIEM logs"],
-        ["Session Monitoring", "Monitor admin sessions", "A.8.15", "—", "Req 10.2", "164.312(b)", "ITGC", "Art.30", "AU-12", "Session logs"],
-        ["SIEM Integration", "Centralized logging & alerting", "A.8.16", "—", "Req 10", "164.312(b)", "ITGC", "Art.33", "SI-4", "SIEM dashboards"],
-        ["Access Reviews", "Periodic admin access review", "A.5.18", "—", "Req 7.2.4", "164.308(a)(4)", "ITGC", "Art.5", "AC-2", "Review reports"],
-        ["MFA for Privileged Access", "MFA for admin login / elevation", "A.5.17", "—", "Req 8.4.2", "164.312(d)", "ITGC", "Art.32", "IA-2", "MFA logs"],
-        ["Command & Script Control", "Restrict PowerShell / CMD usage", "A.8.7", "—", "Req 5.2", "164.308(a)(5)", "ITGC", "Art.32", "CM-7", "Execution logs"],
+        ["Least Privilege", "Remove permanent local admin rights", "A.5.15", "CC6.1", "Req 7.2", "ITGC", "164.308(a)(4)", "Art.25", "AC-6", "Admin rights report"],
+        ["JIT Elevation", "Temporary admin access with expiry", "A.8.2", "Req 7.2.5", "Req 7.2", "ITGC", "Addressable", "Art.25", "AC-2", "Elevation logs"],
+        ["Privilege Escalation Control", "Restrict unauthorized elevation", "A.8.7", "Req 5.2", "Req 7.2", "ITGC", "164.308(a)(5)", "Art.32", "SI-7", "Block logs"],
+        ["Privileged Activity Logging", "Log admin actions", "A.8.15", "Req 10", "Req 7.2", "ITGC", "164.312(b)", "Art.30", "AU-2", "SIEM logs"],
+        ["Session Monitoring", "Monitor admin sessions", "A.8.15", "Req 10.2", "Req 7.2", "ITGC", "164.312(b)", "Art.30", "AU-12", "Session logs"],
+        ["SIEM Integration", "Centralized logging & alerting", "A.8.16", "Req 10", "Req 7.2", "ITGC", "164.312(b)", "Art.33", "SI-4", "SIEM dashboards"],
+        ["Access Reviews", "Periodic admin access review", "A.5.18", "Req 7.2.4", "Req 7.2", "ITGC", "164.308(a)(4)", "Art.5", "AC-2", "Review reports"],
+        ["MFA for Privileged Access", "MFA for admin login/elevation", "A.5.17", "Req 8.4.2", "Req 7.2", "ITGC", "164.312(d)", "Art.32", "IA-2", "MFA logs"],
+        ["Command & Script Control", "Restrict PowerShell/CMD usage", "A.8.7", "Req 5.2", "Req 7.2", "ITGC", "164.308(a)(5)", "Art.32", "CM-7", "Execution logs"],
       ],
     },
+    indianTitle: "Indian regulators",
+    indianBody:
+      "Iraje EPM controls — removing standing admin rights, escalation control, privileged activity logging and central SIEM monitoring — are mapped to the circulars and rules of India's regulators.",
+    indianRegulators: [
+      { name: "RBI", desc: "Cyber Security Framework" },
+      { name: "SEBI", desc: "CSCRF 2024" },
+      { name: "IRDAI", desc: "2023 Cyber Guidelines" },
+      { name: "CERT-In", desc: "Directions" },
+      { name: "DPDP Act", desc: "2023 Data Protection" },
+      { name: "UIDAI", desc: "Aadhaar Data Security" },
+      { name: "MeitY", desc: "Protected System Rules" },
+    ],
+  },
+
+  // ---- Contact / final CTA ----------------------------------------------
+  contact: {
+    eyebrow: "Get in touch",
+    heading: "Make the endpoint your strongest line of defence.",
+    body: "See how Iraje EPM removes standing admin rights, rotates credentials hourly and stops ransomware before it starts.",
+    email: "contact@iraje.com",
+    website: "www.iraje.com",
+    cta: { label: "Request a Demo", href: "/contact" },
   },
 
   // ---- Footer -----------------------------------------------------------

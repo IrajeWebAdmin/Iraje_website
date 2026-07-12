@@ -6,13 +6,19 @@ export default function EpmDifferentiators() {
   const { eyebrow, heading, body, items } = epm.differentiators;
 
   return (
-    <EpmSection
-      center
-      eyebrow={eyebrow}
-      heading={heading}
-      intro={body}
-      eyebrowClassName="epm-eyebrow-normal text-[#0451CC]"
-    >
+    <EpmSection paddingClassName="py-15">
+      <div className="mx-auto max-w-6xl text-center">
+        <span className="epm-eyebrow epm-eyebrow-normal font-semibold text-blue-600">
+          {eyebrow}
+        </span>
+        <h2 className="mx-auto mt-4 max-w-6xl epm-heading leading-[1.05] font-medium tracking-[-2px] text-black">
+          {heading}
+        </h2>
+        <p className="mt-8 epm-body leading-relaxed text-[#8E8E93] lg:whitespace-nowrap">
+          {body}
+        </p>
+      </div>
+
       <div className="mt-14 space-y-6">
         {items.map((item) => (
           <div
@@ -20,7 +26,7 @@ export default function EpmDifferentiators() {
             className="flex min-h-[120px] items-center gap-6 rounded-[20px] border border-[#707070]/20 bg-white px-8 py-6"
           >
             <div className="flex shrink-0 items-center gap-4">
-              <span className="font-display text-4xl leading-none font-bold text-[#0451CC] sm:text-5xl">
+              <span className="font-display text-4xl leading-none font-semibold text-[#0451CC] sm:text-5xl">
                 {item.num}
               </span>
 
@@ -32,7 +38,7 @@ export default function EpmDifferentiators() {
             <div>
               <h3 className="text-ink text-lg font-medium">{item.title}</h3>
 
-              <p className="text-ink/65 mt-1 text-sm leading-relaxed">
+              <p className="text-[#707070] mt-1 text-base leading-relaxed">
                 {item.body}
               </p>
             </div>

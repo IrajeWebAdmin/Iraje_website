@@ -5,7 +5,7 @@ export default function EpmArchitecture() {
   const { eyebrow, heading, body, nodes } = epm.architecture;
 
   return (
-    <section className="bg-[#F5F8FF] py-24">
+    <section className="bg-[#F4F8FF] py-15">
       <div className="epm-container">
         <div className="grid items-center gap-16 lg:grid-cols-[1.15fr_0.85fr]">
           
@@ -22,15 +22,15 @@ export default function EpmArchitecture() {
 
           {/* Right Content */}
           <div>
-            <p className="epm-eyebrow epm-eyebrow-normal mb-3 font-medium text-[#0451CC]">
+            <p className="epm-eyebrow epm-eyebrow-normal font-semibold text-blue-600">
               {eyebrow}
             </p>
 
-            <h2 className="epm-heading leading-[1.1] font-medium text-black">
+            <h2 className="mx-auto mt-4 max-w-6xl epm-heading leading-[1.05] font-medium tracking-[-2px] text-black">
               {heading}
             </h2>
 
-            <p className="mt-8 epm-body leading-relaxed text-[#737373]">
+            <p className="mt-8 epm-body leading-relaxed text-[#8E8E93] ">
               {body}
             </p>
 
@@ -42,11 +42,11 @@ export default function EpmArchitecture() {
                   <div className="h-11 w-11 shrink-0 rounded-lg bg-[#0451CC]" />
 
                   <div>
-                    <h3 className="text-[24px] font-medium text-black">
+                    <h3 className="text-xl font-medium text-black">
                       {node.name}
                     </h3>
 
-                    <p className="mt-2 text-[18px] leading-relaxed text-[#737373]">
+                    <p className="mt-2 text-base leading-relaxed text-[#737373]">
                       {node.body}
                     </p>
                   </div>

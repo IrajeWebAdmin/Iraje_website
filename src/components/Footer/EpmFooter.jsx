@@ -6,7 +6,7 @@ export default function EpmFooter() {
   const { brand, badge, tagline, columns, copyright, tag } = epm.footer;
 
   return (
-    <footer className="bg-navy text-white">
+    <footer className="-mt-px bg-navy text-white">
       <div className="epm-container py-16">
         <div className="grid gap-12 lg:grid-cols-[2fr_1fr_1fr_1fr]">
           {/* Brand */}

@@ -1,5 +1,5 @@
 import EpmSection from "./EpmSection";
-import { FiShield } from "react-icons/fi";
+import { BsShieldCheck } from "react-icons/bs";
 import epm from "@/data/epm";
 
 export default function EpmCompliance() {
@@ -16,26 +16,32 @@ export default function EpmCompliance() {
   } = epm.compliance;
 
   return (
-    <EpmSection
-      tone="tint"
-      center
-      eyebrow={eyebrow}
-      heading={heading}
-      intro={body}
-      className="bg-[#EBEDF3]!"
-    >
+    <EpmSection className="bg-[#EBEDF3]!" paddingClassName="py-15" >
+
+       <div className="mx-auto max-w-6xl text-center">
+        <span className="epm-eyebrow epm-eyebrow-normal font-semibold text-blue-600">
+          {eyebrow}
+        </span>
+        <h2 className="mx-auto mt-4 max-w-6xl epm-heading leading-[1.05] font-medium tracking-[-2px] text-black">
+          {heading}
+        </h2>
+        <p className="mt-8 epm-body leading-relaxed text-[#8E8E93] ">
+          {body}
+        </p>
+      </div>
+
       {/* Global standards */}
-      <h3 className="mt-14 text-center text-sm tracking-[0.12em] text-[#0451CC] uppercase">
+      <h3 className="mt-14 text-center text-xl font-medium tracking-[0.12em] text-[#0451CC] ">
         {standardsTitle}
       </h3>
-      <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-7">
+      <div className="mt-6 flex flex-wrap justify-center gap-4">
         {standards.map((std) => (
           <div
             key={std.name}
-            className="rounded-2xl border border-mist bg-white px-4 py-6 text-center"
+            className="flex h-[145.17px] w-[165.46px] flex-col items-center justify-center rounded-[20.29px] border border-mist bg-white px-4 text-center"
           >
-            <span className="mx-auto flex h-11 w-11 items-center justify-center rounded-xl bg-[#0451CC] text-white">
-              <FiShield className="h-5 w-5" />
+            <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#E4EAFB] text-brand">
+              <BsShieldCheck className="h-5 w-5" stroke="currentColor" strokeWidth={0.5} />
             </span>
             <p className="mt-3 font-display text-sm font-semibold text-ink">
               {std.name}
@@ -47,46 +53,46 @@ export default function EpmCompliance() {
 
       {/* Compliance mapping table */}
       <div className="mt-14">
-        <h3 className="text-center font-display text-xl font-semibold text-[#0451CC]">
+        <h3 className="text-center font-display text-xl font-medium text-[#0451CC]">
           {table.title}
         </h3>
-        <div className="mt-6 overflow-hidden rounded-2xl border border-mist bg-white">
+        <div className="mt-6 overflow-hidden rounded-t-[33.43px] rounded-b-2xl border-[0.88px] border-[#0000004F] bg-white shadow-[0px_3.52px_17.15px_2.64px_#00000040]">
           <div className="overflow-x-auto">
-            <table className="w-full min-w-[1120px] border-collapse font-display text-left text-sm">
+            <table className="w-full border-collapse font-display text-left text-sm">
               <thead>
                 <tr className="bg-[#0451CC] text-white">
-                  <th className="border-r border-white/30 h-[101px] px-4 text-xs font-semibold" />
+                  <th className="border-r-[0.88px] border-[#7070703D] h-25.25 px-4 text-xs font-semibold" />
                   {table.columns.map((col) => (
                     <th
                       key={col}
-                      className="border-r border-white/30 h-[101px] px-4 text-xs font-semibold whitespace-nowrap"
+                      className="border-r-[0.88px] border-[#7070703D] h-25.25 px-4 text-xs font-semibold whitespace-pre-line"
                     >
                       {col}
                     </th>
                   ))}
-                  <th className="h-[101px] px-4 text-center text-xs font-semibold whitespace-nowrap">
+                  <th className="h-25.25 px-4 text-center text-xs font-semibold">
                     Iraje Compliance
                   </th>
                 </tr>
               </thead>
               <tbody>
                 {table.rows.map((row, r) => (
-                  <tr key={row[0]} className={r % 2 ? "bg-[#f3f5fa]" : "bg-white"}>
-                    <td className="border-r border-[#707070] px-4 py-5 align-middle text-xs text-black">
+                  <tr key={row[0]} className={r % 2 ? "bg-[#EBEDF3]" : "bg-white"}>
+                    <td className="border-r-[0.88px] border-[#7070703D] px-4 py-7 align-middle text-xs font-semibold text-black">
                       {r + 1}
                     </td>
                     {row.map((cell, c) => (
                       <td
                         key={c}
-                        className={`border-r border-[#707070] px-4 py-5 align-middle whitespace-nowrap ${
-                          c === 0 ? "font-semibold text-black" : "text-black"
+                        className={`border-r-[0.88px] border-[#7070703D] px-4 py-7 align-middle ${
+                          c === 0 ? "font-semibold text-black" : "font-medium text-black"
                         }`}
                       >
                         {cell}
                       </td>
                     ))}
-                    <td className="px-4 py-5 text-center align-middle">
-                      <span className="inline-flex items-center rounded-full bg-[#E3E9FF] px-3 py-1 text-xs font-semibold text-[#0451CC]">
+                    <td className="px-4 py-7 text-center align-middle">
+                      <span className="inline-flex items-center rounded-full bg-[#E3E9FF] px-3 py-1 text-xs font-medium text-[#0451CC]">
                         Yes
                       </span>
                     </td>
@@ -102,7 +108,7 @@ export default function EpmCompliance() {
       {indianRegulators && (
         <>
       <div className="mt-16 text-center">
-        <h3 className="font-display text-xl font-semibold text-ink">
+        <h3 className="font-display text-xl font-semibold text-[#0451CC]">
           {indianTitle}
         </h3>
         <p className="mx-auto mt-3 max-w-4xl text-sm leading-relaxed text-ink/65 md:text-base">

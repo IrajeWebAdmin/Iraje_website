@@ -17,7 +17,7 @@ export default function EpmStack() {
           {heading}
         </h2>
 
-        <p className="mx-auto mt-8 max-w-4xl epm-body font-medium leading-relaxed text-[#8E8E93]">
+        <p className="mx-auto mt-8 max-w-4xl epm-body  leading-relaxed text-[#8E8E93]">
           {[].concat(body).map((line, i) => (
             <span key={i} className="block">
               {line}

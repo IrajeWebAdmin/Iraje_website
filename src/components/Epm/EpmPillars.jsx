@@ -6,7 +6,20 @@ export default function EpmPillars() {
   const { eyebrow, heading, body, items } = epm.pillars;
 
   return (
-    <EpmSection center eyebrow={eyebrow} heading={heading} intro={body}>
+    <EpmSection paddingClassName="py-15">
+      {/* Section header — global epm-* classes, matching the other sections. */}
+      <div className="mx-auto max-w-6xl text-center">
+        <span className="epm-eyebrow epm-eyebrow-normal font-semibold text-blue-600">
+          {eyebrow}
+        </span>
+        <h2 className="mx-auto mt-4 max-w-6xl epm-heading leading-[1.05] font-medium tracking-[-2px] text-black">
+          {heading}
+        </h2>
+        <p className="mt-8 epm-body leading-relaxed text-[#8E8E93] lg:whitespace-nowrap">
+          {body}
+        </p>
+      </div>
+
       <div className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
         {items.map((pillar) => (
           <div
