@@ -1,27 +1,54 @@
 import PamSection from "./PamSection";
-import { FiStar } from "react-icons/fi";
 import pam from "@/data/pam";
 
+// Bold the highlighted phrases within the note (listed in the data) without
+// altering the copy.
+function highlightNote(text, phrases) {
+  if (!phrases?.length) return text;
+  const escaped = phrases.map((p) => p.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
+  const re = new RegExp(`(${escaped.join("|")})`, "g");
+  return text.split(re).map((part, i) =>
+    phrases.includes(part) ? (
+      <strong key={i} className="font-semibold text-ink">
+        {part}
+      </strong>
+    ) : (
+      part
+    ),
+  );
+}
+
 export default function PamDifferentiators() {
-  const { eyebrow, heading, body, items, note } = pam.differentiators;
+  const { eyebrow, heading, body, items, note, noteHighlights } =
+    pam.differentiators;
 
   return (
-    <PamSection center eyebrow={eyebrow} heading={heading} intro={body}>
+    <PamSection paddingClassName="py-15">
+      {/* Section header — global epm-* classes, matching the other sections. */}
+      <div className="mx-auto max-w-6xl text-center">
+        <span className="epm-eyebrow epm-eyebrow-normal font-semibold text-blue-600">
+          {eyebrow}
+        </span>
+        <h2 className="mx-auto mt-4 max-w-6xl epm-heading leading-[1.05] font-medium tracking-[-2px] text-black">
+          {heading}
+        </h2>
+        <p className="mx-auto mt-8 max-w-3xl epm-body leading-relaxed text-[#8E8E93]">
+          {body}
+        </p>
+      </div>
+
       <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {items.map((item) => (
           <div
             key={item.title}
-            className="flex flex-col rounded-3xl border border-mist bg-white p-7 text-left"
+            className="flex flex-col rounded-3xl border border-mist bg-white p-6 text-left"
           >
-            <div className="flex items-center justify-between">
-              <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#E3E9FF] text-brand">
-                <FiStar className="h-5 w-5" />
-              </span>
-              <span className="rounded-full bg-brand px-3 py-1 text-[10px] font-semibold tracking-[0.08em] text-white uppercase">
-                {item.badge}
-              </span>
-            </div>
-            <h3 className="mt-5 font-display text-base font-semibold text-ink">
+            {/* Empty icon placeholder (matches the Figma design) */}
+            <span className="h-11 w-11 rounded-xl bg-[#E4EAFB]" />
+            <span className="mt-5 text-xs font-semibold text-[#0451CC]">
+              {item.badge}
+            </span>
+            <h3 className="mt-1 font-display text-lg font-semibold text-ink">
               {item.title}
             </h3>
             <p className="mt-2 text-sm leading-relaxed text-slate-soft">
@@ -31,8 +58,8 @@ export default function PamDifferentiators() {
         ))}
       </div>
 
-      <p className="mx-auto mt-10 max-w-4xl rounded-3xl bg-[linear-gradient(120deg,#022966_0%,#1d5bff_100%)] px-8 py-6 text-center text-sm leading-relaxed text-white/90 md:text-base">
-        {note}
+      <p className="mx-auto mt-12 max-w-5xl text-center text-sm leading-relaxed text-slate-soft md:text-base">
+        {highlightNote(note, noteHighlights)}
       </p>
     </PamSection>
   );

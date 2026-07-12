@@ -18,12 +18,13 @@ export default function PamSection({
   eyebrowClassName = "",
   headingClassName = "",
   headClassName = "max-w-3xl",
+  paddingClassName = "py-20 md:py-28",
   children,
   className = "",
 }) {
   const dark = tone === "dark";
   return (
-    <section id={id} className={`${TONES[tone]} py-20 md:py-28 ${className}`}>
+    <section id={id} className={`${TONES[tone]} ${paddingClassName} ${className}`}>
       <div className="container-global">
         {(eyebrow || heading || intro) && (
           <div className={`${headClassName} ${center ? "mx-auto text-center" : ""}`}>

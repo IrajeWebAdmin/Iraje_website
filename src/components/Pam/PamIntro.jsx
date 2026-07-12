@@ -4,22 +4,22 @@ export default function PamIntro() {
   const { eyebrow, heading, body, listTitle, accounts, note } = pam.intro;
 
   return (
-    <section className="text-ink bg-white py-20 md:py-28">
+    <section className="text-ink bg-white py-15 md:py-15">
       <div className="container-global">
         <div className="grid gap-12 lg:grid-cols-2 lg:items-start">
           {/* Left: typography only (no card) */}
           <div>
-            <p className="epm-eyebrow epm-eyebrow-normal text-brand text-2xl font-medium">
+            <p className="epm-eyebrow epm-eyebrow-normal font-semibold text-blue-600">
               {eyebrow}
             </p>
-            <h2 className="font-display mt-4 text-3xl leading-[1.12] font-semibold md:text-[2.6rem]">
+            <h2 className="mt-4 epm-heading leading-[1.05] font-medium tracking-[-2px] text-black">
               {heading}
             </h2>
             <div className="mt-6 space-y-4">
               {body.map((para) => (
                 <p
                   key={para}
-                  className="text-[#707070] text-base leading-relaxed md:text-xl"
+                  className="text-[#707070] text-base leading-relaxed md:text-base"
                 >
                   {para}
                 </p>

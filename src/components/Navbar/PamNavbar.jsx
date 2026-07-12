@@ -11,7 +11,7 @@ export default function PamNavbar() {
   const { links, cta } = pam.nav;
 
   return (
-    <header className="absolute top-0 left-0 z-50 w-full bg-white/60 backdrop-blur-lg">
+    <header className="absolute top-0 left-0 z-50 w-full bg-white backdrop-blur-lg">
       <div className="container-global">
          <nav className="relative flex h-14 items-center">
           {/* Logo */}

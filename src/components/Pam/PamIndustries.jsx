@@ -15,13 +15,20 @@ export default function PamIndustries() {
   });
 
   return (
-    <PamSection
-      center
-      eyebrow={eyebrow}
-      heading={heading}
-      intro={body}
-      eyebrowClassName="epm-eyebrow-normal"
-    >
+    <PamSection  paddingClassName="py-15">
+      {/* Section header — global epm-* classes, matching the other sections. */}
+      <div className="mx-auto max-w-6xl text-center">
+        <span className="epm-eyebrow epm-eyebrow-normal font-semibold text-blue-600">
+          {eyebrow}
+        </span>
+        <h2 className="mx-auto mt-4 max-w-6xl epm-heading leading-[1.05] font-medium tracking-[-2px] text-black">
+          {heading}
+        </h2>
+        <p className="mx-auto mt-8 max-w-3xl epm-body leading-relaxed text-slate-soft">
+          {body}
+        </p>
+      </div>
+
       <div className="relative mt-16">
         {/* Left Arrow */}
         <button

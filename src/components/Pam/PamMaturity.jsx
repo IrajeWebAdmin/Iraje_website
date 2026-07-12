@@ -12,15 +12,20 @@ export default function PamMaturity() {
   const { eyebrow, heading, body, flow, levels } = pam.maturity;
 
   return (
-    <PamSection
-      center
-      eyebrow={eyebrow}
-      heading={heading}
-      intro={body}
-      eyebrowClassName="epm-eyebrow-normal"
-      headClassName="max-w-none"
-      headingClassName="md:whitespace-nowrap"
-    >
+    <PamSection  paddingClassName="py-15">
+      {/* Section header — global epm-* classes, matching the other sections. */}
+      <div className="text-center">
+        <span className="epm-eyebrow epm-eyebrow-normal font-semibold text-blue-600">
+          {eyebrow}
+        </span>
+        <h2 className="mt-4 epm-heading leading-[1.05] font-medium tracking-[-2px] text-black md:whitespace-nowrap">
+          {heading}
+        </h2>
+        <p className="mx-auto mt-8 max-w-3xl epm-body leading-relaxed text-slate-soft">
+          {body}
+        </p>
+      </div>
+
       <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
         {levels.map((level, index) => (
           <div

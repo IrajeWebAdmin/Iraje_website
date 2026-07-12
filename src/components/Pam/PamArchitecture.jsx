@@ -1,53 +1,66 @@
 import Image from "next/image";
 import PamSection from "./PamSection";
-import { FiServer, FiLock, FiTool } from "react-icons/fi";
 import pam from "@/data/pam";
 
-const ICONS = [FiServer, FiLock, FiTool];
-
 export default function PamArchitecture() {
-  const { eyebrow, heading, body, servers } = pam.architecture;
+  const { eyebrow, heading, body, servers, note } = pam.architecture;
+
+  // Bold the leading label of the note (e.g. "Real Zero Trust:") without
+  // altering the copy — split on the first colon.
+  const colon = note.indexOf(":");
+  const noteLabel = colon >= 0 ? note.slice(0, colon + 1) : "";
+  const noteBody = colon >= 0 ? note.slice(colon + 1) : note;
 
   return (
-    <PamSection tone="tint" eyebrow={eyebrow} heading={heading} intro={body}>
-      <div className="mt-12 grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
-        {/* Server tiers */}
-        <div className="flex flex-col gap-5">
-          {servers.map((server, i) => {
-            const Icon = ICONS[i] ?? FiServer;
-            return (
-              <div
-                key={server.name}
-                className="flex gap-5 rounded-3xl bg-white p-7"
-              >
-                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-brand text-white">
-                  <Icon className="h-6 w-6" />
+    <PamSection paddingClassName="py-15">
+      <div className="grid gap-12 lg:grid-cols-[1fr_1.2fr] lg:items-center">
+        {/* Left: header + server tiers + note */}
+        <div>
+          <span className="epm-eyebrow epm-eyebrow-normal font-semibold text-blue-600">
+            {eyebrow}
+          </span>
+          <h2 className="mt-4 epm-heading leading-[1.05] font-medium tracking-[-2px] text-black">
+            {heading}
+          </h2>
+          <p className="mt-6 epm-body leading-relaxed text-slate-soft">
+            {body}
+          </p>
+
+          {/* Server tiers — number badge + title + description */}
+          <div className="mt-10 space-y-6">
+            {servers.map((server) => (
+              <div key={server.name} className="flex gap-4">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md bg-brand text-[15px] font-semibold text-white">
+                  {server.num}
                 </span>
                 <div>
-                  <span className="inline-flex w-fit items-center justify-center rounded-lg bg-[#EEF3FF] px-2.5 py-1 font-mono text-sm font-semibold text-brand">
-                    {server.num}
-                  </span>
-                  <h3 className="mt-2 font-display text-lg font-semibold text-ink">
+                  <h3 className="font-display text-base font-semibold text-ink">
                     {server.name}
                   </h3>
-                  <div className="mt-2 rounded-2xl bg-[#F6F8FD] p-4">
-                    <p className="text-sm leading-relaxed text-slate-soft">
-                      {server.body}
-                    </p>
-                  </div>
+                  <p className="mt-1 text-sm leading-relaxed text-slate-soft">
+                    {server.body}
+                  </p>
                 </div>
               </div>
-            );
-          })}
+            ))}
+          </div>
+
+          {/* Real Zero Trust note */}
+          <div className="mt-8 rounded-2xl bg-[#EAF1FF] px-6 py-5">
+            <p className="text-sm leading-relaxed text-slate-soft">
+              <span className="font-semibold text-ink">{noteLabel}</span>
+              {noteBody}
+            </p>
+          </div>
         </div>
 
-        {/* Architecture diagram */}
+        {/* Right: architecture diagram */}
         <div className="flex items-center justify-center">
           <Image
             src="/images/pam/pam-solution-architecture.png"
             alt="Iraje PAM solution architecture"
-            width={637}
-            height={538}
+            width={1785}
+            height={881}
             className="h-auto w-full"
           />
         </div>

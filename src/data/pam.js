@@ -20,21 +20,22 @@ const pam = {
 
   // ---- Hero -------------------------------------------------------------
   hero: {
-    eyebrow: "Privileged Access Management",
-    title: "Built for the crown jewels.",
+    eyebrow: "Privileged Access Manager",
+    title:
+      "Manage, monitor & control every privileged access in your enterprise.",
     subtitle:
-      "Iraje PAM manages, monitors and controls privileged access across your entire enterprise — turning scattered, ungoverned admin rights into a centralised, monitored and auditable control plane.",
+      "Iraje Privileged Access Manager is a complete PIM/PAM solution that secures the most powerful accounts in your infrastructure across on-premise, cloud and hybrid environments.",
     ctas: [
       { label: "Request a Demo", href: "/contact", primary: true },
-      { label: "See How it Works", href: "#how-pam-works", primary: false },
+      { label: "Explore the Solution", href: "#how-pam-works", primary: false },
     ],
     card: {
       eyebrow: "Built for the crown jewels",
       pills: [
-        "Domain & Root administrators",
-        "Database administrators",
-        "Cloud & service accounts",
-        "Emergency / break-glass accounts",
+        "Seamless integration of assets without any connectors",
+        "Real time PAM Bypass alerts on servers",
+        "Dynamic watermarking",
+        "Advanced Analytics - beyond EUBA",
       ],
     },
   },
@@ -44,9 +45,10 @@ const pam = {
     eyebrow: "Introduction",
     heading: "What is PIM / PAM?",
     body: [
-      "Privileged Identity & Access Management is a cybersecurity framework designed to manage, monitor and control privileged accounts and administrative access across your entire enterprise infrastructure.",
-      "Privileged users — system administrators, DBAs, cloud operators, network engineers and third-party vendors — hold elevated rights to critical business systems and sensitive data. If those accounts are compromised, they become one of the biggest attack vectors for cyber threats, insider attacks, ransomware and data breaches.",
+      "Privileged Identity Management (PIM) and Privileged Access Management (PAM) are security practices used to manage and protect privileged users, their identities, and their access to critical systems and sensitive resources. They help organizations ensure that only authorized users can perform high-level administrative tasks while reducing the risk of unauthorized access",
+       "PIM/PAM combines Identity Management, which verifies users through technologies such as Active Directory (AD) and Multi-Factor Authentication (MFA), Access Management, which controls who can access specific resources and when using role-based and time-based permissions, and Privileged User Management, which governs administrator and superuser accounts through centralized controls like Single Sign-On (SSO). Together, these capabilities strengthen security, improve compliance, and provide better control over privileged access.",
     ],
+
     listTitle: "Privileged accounts include",
     accounts: [
       "Domain Administrators",
@@ -161,7 +163,11 @@ const pam = {
         team: "IT OPERATIONS TEAM",
         tags: [
           "AD Authentication",
+          "Multi-Factor Auth",
+          "3FA",
           "Role Based Access",
+          "Time Based Access",
+          "Just-In-Time",
           "Secure File Transfer",
           "Privilege Elevation",
           "ITSM Integration",
@@ -169,24 +175,27 @@ const pam = {
           "App Integration",
           "DevOps Integration",
           "Secrets Management",
-          "Time Based Access",
-          "Multi-Factor Auth",
-          "Just-In-Time",
         ],
+        highlights: ["3FA", "Just-In-Time"],
       },
       {
         name: "Monitor",
         team: "SECURITY TEAM",
         tags: [
           "Live Session Viewing",
+          "Live Session Termination",
           "Live CXO Cockpit",
+          "Text & Video Logs",
+          "PAM Bypass Block",
           "Command Search in Videos",
           "PAM Bypass Alerts",
           "Command Logs",
           "SIEM Integration",
-          "Text & Video Logs",
-          "Live Session Termination",
+        ],
+        highlights: [
           "PAM Bypass Block",
+          "Command Search in Videos",
+          "PAM Bypass Alerts",
         ],
       },
       {
@@ -194,20 +203,25 @@ const pam = {
         team: "SECURITY TEAM",
         tags: [
           "Windows Restrictions",
+          "SSH Restrictions",
+          "File Transfer Restrictions",
           "Database Restrictions",
+          "Remote Login Alerts",
+          "Password Alerts",
           "Sensitive Device Alerts",
           "Restricted Command Alerts",
           "Dynamic Risk Score Card",
           "Dynamic Watermarking",
-          "Remote Login Alerts",
-          "SSH Restrictions",
-          "File Transfer Restrictions",
-          "Password Alerts",
+        ],
+        highlights: [
+          "Database Restrictions",
+          "Dynamic Risk Score Card",
+          "Dynamic Watermarking",
         ],
       },
       {
         name: "Discover",
-        team: "IT OPERATIONS TEAM",
+        team: "RISK & COMPLIANCE TEAM",
         tags: [
           "Discover Devices — On-Prem & Cloud",
           "Discover Admin Accounts",
@@ -216,31 +230,36 @@ const pam = {
           "Auto-Discover Devices",
           "Auto-Onboard Users & Devices",
         ],
+        highlights: ["Auto-Onboard Users & Devices"],
       },
       {
         name: "Comply",
         team: "RISK & COMPLIANCE TEAM",
         tags: [
           "On-Demand Reports",
-          "Audit & Compliance Reports",
-          "Regulatory Compliance",
-          "Access Recertification",
-          "GRC Reports",
           "Scheduled Reports",
           "Analytical Reports",
+          "Audit & Compliance Reports",
           "Trend Reports",
+          "GRC Reports",
+          "Regulatory Compliance",
+          "Access Recertification",
         ],
+        highlights: ["GRC Reports"],
       },
       {
         name: "Secure",
         team: "MANAGEMENT",
         tags: [
           "Completely Hardened Solution",
-          "No PAM OS Access — Even Super Admin",
-          "Logs & Recordings Cannot Be Deleted",
           "Hourly PAM OS Credential Rotation",
-          "3FA",
+          "No PAM OS Access — Even Super Admin",
           "Security Val Codes",
+          "Logs & Recordings Cannot Be Deleted",
+          "Real Zero Trust Security",
+        ],
+        highlights: [
+          "Hourly PAM OS Credential Rotation",
           "Real Zero Trust Security",
         ],
       },
@@ -335,6 +354,13 @@ const pam = {
     ],
     note:
       "Plus next-gen capabilities — end-to-end SAP integration, iCROUN command restrictions across all device types, iZAC MAC & serial-number endpoint binding, on-demand Script Manager, and shift-based Advanced Time-Based Access.",
+    noteHighlights: [
+      "SAP integration",
+      "iCROUN",
+      "iZAC",
+      "Script Manager",
+      "Advanced Time-Based Access",
+    ],
   },
 
   // ---- Iraje vs the rest (comparison table) -----------------------------
@@ -343,7 +369,7 @@ const pam = {
     heading: "How Iraje PAM compares",
     body:
       "A side-by-side look at where Iraje PAM goes further than a typical competitor's PAM solution.",
-    columns: ["Key feature", "Typical competitor PAM", "Iraje PAM"],
+    columns: ["Key feature", "Typical competitor PAM", "EDR / XDR"],
     rows: [
       [
         "Integration of assets",
@@ -357,7 +383,7 @@ const pam = {
       ],
       [
         "Unauthorized remote access alert",
-        "Not available",
+        "Limited",
         "Alerts on unauthorized access to Windows servers via critical remote protocols",
       ],
       [
@@ -367,12 +393,12 @@ const pam = {
       ],
       [
         "Dynamic watermarking",
-        "Not available",
+        "Limited",
         "Dynamic watermarking on all sessions accessed through PAM",
       ],
       [
         "Command search within videos",
-        "Not available",
+        "Limited",
         "Search commands directly within session recordings",
       ],
       [
@@ -382,12 +408,12 @@ const pam = {
       ],
       [
         "Risk score card",
-        "Not available",
+        "Limited",
         "Dynamic risk score card for focused monitoring",
       ],
       [
         "SAP integration",
-        "Not available",
+        "Limited",
         "End-to-end SAP integration meeting MCA requirements",
       ],
     ],
@@ -395,11 +421,11 @@ const pam = {
 
   // ---- Maturity model ---------------------------------------------------
   maturity: {
-    eyebrow: "Maturity model",
-    heading: "Your journey from Initial to Zero Trust",
+    eyebrow: "P-CMM",
+    heading: "The PAM Capability Maturity Model",
     body:
-      "Iraje PAM grows with your security posture — from first integration through to a fully controlled, Zero Trust privileged-access programme.",
-    flow: "INITIAL → MANAGED → DEFINE → CONTROLLED & ZERO TRUST",
+      "Enterprises often deploy a PAM solution for compliance  without truly adopting or enforcing it. The Iraje P-CMM lets you assess exactly where your implementation stands, and how to mature it with Zero Trust.",
+    flow: "INITIAL → MANAGED → DEFINED → CONTROLLED & ZERO TRUST",
     levels: [
       {
         level: "LEVEL 1",
@@ -489,6 +515,7 @@ const pam = {
       { name: "SEBI", desc: "Securities" },
       { name: "IRDAI", desc: "Insurance" },
       { name: "CERT-In", desc: "Advisory" },
+       { name: "DPDP 2023", },
     ],
     dpdpTitle: "Mapped to Indian regulators",
     dpdpSections: [
@@ -519,6 +546,7 @@ const pam = {
       "Media",
       "Retail",
       "Defence",
+      "Others",
     ],
   },
 

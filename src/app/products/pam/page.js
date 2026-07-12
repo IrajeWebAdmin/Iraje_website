@@ -11,11 +11,14 @@ import PamCompliance from "@/components/Pam/PamCompliance";
 import PamIndustries from "@/components/Pam/PamIndustries";
 import PamWhyIraje from "@/components/Pam/PamWhyIraje";
 import PamContact from "@/components/Pam/PamContact";
+import CapabilityStrip from "@/components/Epm/CapabilityStrip";
+
 
 export default function PamPage() {
   return (
     <>
       <PamHero />
+      <CapabilityStrip/>
       <PamIntro />
       <PamChallenge />
       <PamSolution />

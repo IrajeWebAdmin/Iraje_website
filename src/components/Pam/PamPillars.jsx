@@ -6,7 +6,20 @@ export default function PamPillars() {
   const { eyebrow, heading, body, items } = pam.pillars;
 
   return (
-    <PamSection center eyebrow={eyebrow} heading={heading} intro={body}>
+    <PamSection  paddingClassName="py-15">
+      {/* Section header — global epm-* classes, matching the other sections. */}
+      <div className="mx-auto max-w-6xl text-center">
+        <span className="epm-eyebrow epm-eyebrow-normal font-semibold text-blue-600">
+          {eyebrow}
+        </span>
+        <h2 className="mx-auto mt-4 max-w-6xl epm-heading leading-[1.05] font-medium tracking-[-2px] text-black">
+          {heading}
+        </h2>
+        <p className="mt-8 epm-body leading-relaxed text-[#8E8E93] lg:whitespace-nowrap">
+          {body}
+        </p>
+      </div>
+
       <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {items.map((pillar) => (
           <div
@@ -25,14 +38,21 @@ export default function PamPillars() {
               {pillar.team}
             </span>
             <div className="mt-6 flex flex-wrap gap-2">
-              {pillar.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="rounded-full border border-[#E3E8F4] bg-[#F6F8FD] px-3 py-1.5 text-xs font-medium text-ink/75"
-                >
-                  {tag}
-                </span>
-              ))}
+              {pillar.tags.map((tag) => {
+                const highlighted = pillar.highlights?.includes(tag);
+                return (
+                  <span
+                    key={tag}
+                    className={`rounded-[5px] border px-3 py-1.5 text-xs font-medium ${
+                      highlighted
+                        ? "border-[#C4D6FF] bg-[#EAF1FF] text-brand"
+                        : "border-[#E3E8F4] bg-[#F6F8FD] text-ink/75"
+                    }`}
+                  >
+                    {tag}
+                  </span>
+                );
+              })}
             </div>
           </div>
         ))}
