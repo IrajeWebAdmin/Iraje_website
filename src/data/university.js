@@ -45,6 +45,7 @@ const university = {
       { value: "88%", caption: "have suffered a significant security incident caused by a skills shortage." },
       { value: "~3.4M", caption: "professionals — the scale of the global cyber workforce gap recent studies have tracked." },
     ],
+    source: "Source: ISC2 Cybersecurity Workforce Study (2023–2025).",
   },
 
   // ---- Iraje University intro + two domain cards ------------------------
@@ -59,7 +60,7 @@ const university = {
         body: [
           "Our flagship master course, ",
           "CyberTantra — The Sovereign Key", // accent
-          ": a complete, end-to-end cybersecurity curriculum for every professional, from foundations to advanced and emerging domains.",
+          " a complete, end-to-end cybersecurity curriculum for every professional, from foundations to advanced and emerging domains.",
         ],
         cta: { label: "View curriculum", href: "#master-course" },
       },
@@ -69,7 +70,7 @@ const university = {
         body: [
           "Role-based, hands-on certification tracks across ",
           "Iraje PAM, Iraje EPM and Iraje IAM", // accent
-          " — from fundamentals (101) through advanced administration and operations (201).",
+          "  from fundamentals (101) through advanced administration and operations (201).",
         ],
         cta: { label: "View tracks", href: "#certification" },
       },
@@ -161,7 +162,24 @@ const university = {
         title: "Advanced Administration & Operations",
         summary:
           "Deep-dive deployment, hardening, RBAC, HA/DR and operational governance.",
-        modules: [],
+        modules: [
+          "Iraje PAM Administration Overview",
+          "Detailed Architecture Deep Dive",
+          "Installation & Initial Configuration",
+          "Hardening & Security Configuration",
+          "Active Directory & Identity Integration",
+          "Role Based Access Control (RBAC) Administration",
+          "Device & Asset Onboarding",
+          "Password Vault Administration",
+          "Session Management Administration",
+          "Workflow & Approval Configuration",
+          "Compliance, Audit & Reporting Administration",
+          "Integration with Security Ecosystem",
+          "High Availability (HA) & Disaster Recovery (DR)",
+          "Performance Tuning & Scalability",
+          "Troubleshooting & Operational Support",
+          "Operational Governance & Best Practices",
+        ],
       },
       {
         code: "EPM 101",
@@ -169,7 +187,23 @@ const university = {
         title: "Endpoint Privilege Management Fundamentals",
         summary:
           "Endpoint risks, least privilege, application elevation and Iraje EPM essentials.",
-        modules: [],
+        modules: [
+          "Introduction to Endpoint Security",
+          "What is Endpoint Privilege Management (EPM)?",
+          "Industry Challenges & Endpoint Risks",
+          "Why Organizations Need EPM?",
+          "What is Iraje EPM?",
+          "Iraje EPM Architecture",
+          "Iraje EPM Core Features",
+          "Application Elevation Workflows",
+          "Local Admin Password Security",
+          "Endpoint Threat Prevention Use Cases",
+          "Compliance & Governance",
+          "Iraje EPM Differentiators",
+          "Use Cases & Case Studies",
+          "Hands-On Demo / Lab",
+          "Best Practices & Operational Governance",
+        ],
       },
       {
         code: "EPM 201",
@@ -177,7 +211,27 @@ const university = {
         title: "Advanced Administration & Governance",
         summary:
           "Agent management, privilege elevation policy, application control and HA/DR.",
-        modules: [],
+        modules: [
+          "Iraje EPM Administration Overview",
+          "Iraje EPM Architecture Deep Dive",
+          "Installation & Initial Deployment",
+          "Endpoint Agent Management",
+          "Active Directory & Identity Integration",
+          "Role Based Access Control (RBAC) Administration",
+          "Endpoint Onboarding & Asset Management",
+          "Privilege Elevation Policy Administration",
+          "Least Privilege Enforcement Administration",
+          "Application Control & Governance",
+          "Local Admin Password Governance",
+          "Workflow & Approval Administration",
+          "Endpoint Security Governance",
+          "Monitoring, Logging & Reporting",
+          "Integration with Security Ecosystem",
+          "High Availability (HA) & Disaster Recovery (DR)",
+          "Performance Tuning & Scalability",
+          "Troubleshooting & Operational Support",
+          "Operational Governance & Best Practices",
+        ],
       },
       {
         code: "IAM 101",

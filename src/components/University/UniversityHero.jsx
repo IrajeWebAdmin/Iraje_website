@@ -18,7 +18,7 @@ export default function UniversityHero() {
               {eyebrow}
             </p>
 
-            <h1 className="mt-5 font-display text-4xl font-semibold leading-[1.12] text-ink md:text-[3.4rem]">
+            <h1 className="mt-5 font-display text-4xl font-medium leading-[1.12] text-ink md:text-[3.4rem]">
               {titleLead} <span className="text-brand italic">{titleAccent}</span>{" "}
               {titleTrail}
             </h1>

@@ -1,18 +1,40 @@
 import Link from "next/link";
 import university from "@/data/university";
 
+// Product names the intro body renders in bold black, matching the design.
+const BOLD_TERMS = ["Iraje PAM, Iraje EPM", "Iraje IAM"];
+
+function renderBody(text) {
+  const escaped = BOLD_TERMS.map((t) =>
+    t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"),
+  );
+  return text
+    .split(new RegExp(`(${escaped.join("|")})`))
+    .map((part, i) =>
+      BOLD_TERMS.includes(part) ? (
+        <span key={i} className="font-semibold text-ink">
+          {part}
+        </span>
+      ) : (
+        part
+      ),
+    );
+}
+
 export default function UniversityIntro() {
   const { heading, body, cards } = university.intro;
 
   return (
-    <section className="bg-white py-20 md:py-24">
+    <section className="bg-white py-10">
       <div className="container-global">
         {/* Intro copy */}
-        <div className="mx-auto max-w-3xl text-center">
-          <h2 className="font-display text-3xl font-semibold text-ink md:text-[2.5rem]">
+        <div className="mx-auto max-w-5xl text-center">
+          <h2 className="mx-auto mt-4 max-w-6xl epm-heading leading-[1.05] font-medium tracking-[-2px] text-black ">
             {heading}
           </h2>
-          <p className="mt-5 text-base leading-relaxed text-[#5b6c84]">{body}</p>
+          <p className="mt-5 epm-body leading-relaxed text-[#5b6c84]">
+            {renderBody(body)}
+          </p>
         </div>
 
         {/* Two domain cards */}
@@ -20,9 +42,9 @@ export default function UniversityIntro() {
           {cards.map((card, index) => (
             <article
               key={card.title}
-              className="flex flex-col rounded-[1.25rem] border border-ink/10 p-9 text-white shadow-[0_1px_2px_0_rgba(12,30,58,0.05)] bg-[linear-gradient(118deg,#0451cc_0%,#022966_100%)]"
+              className="flex flex-col rounded-[1.25rem] border border-ink/10 p-9 text-white shadow-[0px_1.04px_2.08px_0px_#0C1E3A0D] bg-[linear-gradient(118deg,#0451cc_0%,#022966_100%)]"
             >
-              <p className="text-[11.5px] font-semibold uppercase tracking-[0.2em] text-white/60">
+              <p className="text-[11.5px] font-medium uppercase tracking-[0.2em] text-white/60">
                 {card.label}
               </p>
               <h3 className="mt-4 font-display text-[1.75rem] font-semibold leading-tight">
@@ -30,7 +52,7 @@ export default function UniversityIntro() {
               </h3>
               <p className="mt-3 text-[15px] leading-7 text-white/90">
                 {card.body[0]}
-                <span className={index === 0 ? "text-[#5cc6e8]" : "text-[#729cf6]"}>
+                <span className={index === 0 ? "text-[#FFCE0C]" : "text-[#FFCE0C]"}>
                   {card.body[1]}
                 </span>
                 {card.body[2]}

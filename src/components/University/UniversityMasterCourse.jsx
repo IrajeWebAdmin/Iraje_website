@@ -3,6 +3,10 @@ import university from "@/data/university";
 export default function UniversityMasterCourse() {
   const { eyebrow, heading, body, parts } = university.masterCourse;
 
+  // "The Sovereign Key" renders as a solid blue highlight inside the heading.
+  const HIGHLIGHT = "The Sovereign Key";
+  const [headBefore, headAfter] = heading.split(HIGHLIGHT);
+
   // Modules are numbered continuously (01…18) across all four parts, so each
   // part's list starts where the previous one ended.
   const startAt = [];
@@ -14,16 +18,22 @@ export default function UniversityMasterCourse() {
   return (
     <section
       id="master-course"
-      className="scroll-mt-24 bg-[#F7FAFF] py-20 md:py-24"
+      className="scroll-mt-24 bg-[#F7FAFF] py-15"
     >
       <div className="container-global">
         {/* Banner */}
         <div className="rounded-[1.375rem] border border-ink/16 bg-white px-6 py-12 text-center shadow-[0_4px_14px_0_rgba(0,0,0,0.09)] md:px-16">
-          <p className="epm-eyebrow epm-eyebrow-normal text-brand">{eyebrow}</p>
-          <h2 className="mx-auto mt-3 max-w-3xl font-display text-3xl font-semibold text-ink md:text-[2.5rem]">
-            {heading}
+          <span className="epm-eyebrow epm-eyebrow-normal font-semibold text-blue-600">
+            {eyebrow}
+          </span>
+          <h2 className="mx-auto mt-4 max-w-4xl epm-heading leading-[1.05] font-medium tracking-[-2px] text-black">
+            {headBefore}
+            <span className="box-decoration-clone rounded-xl px-3 py-1 text-[#0451CC]">
+              {HIGHLIGHT}
+            </span>
+            {headAfter}
           </h2>
-          <p className="mx-auto mt-5 max-w-4xl text-[15px] leading-7 text-[#5b6c84]">
+          <p className="mx-auto mt-6 max-w-4xl epm-body leading-relaxed text-[#5b6c84]">
             {body}
           </p>
         </div>
@@ -33,7 +43,7 @@ export default function UniversityMasterCourse() {
           {parts.map((part, partIndex) => (
             <article
               key={part.label}
-              className="overflow-hidden rounded-[1.125rem] border border-ink/10 bg-white shadow-[0_1px_2px_0_rgba(12,30,58,0.05)]"
+              className="overflow-hidden rounded-[1.125rem] border border-ink/10 bg-white shadow-[0px_4px_14.4px_0px_#00000017]"
             >
               <header className="border-b border-ink/10 px-7 pt-7 pb-5">
                 <p className="epm-eyebrow text-azure text-[11.5px]">{part.label}</p>

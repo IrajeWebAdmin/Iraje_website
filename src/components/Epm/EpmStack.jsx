@@ -89,18 +89,17 @@ export default function EpmStack() {
         {/* Right: maturity matrix (only when matrix data is provided) */}
         {matrix && (
         <div className="w-full rounded-[38px] border border-[#E8ECF4] bg-white p-6 shadow-[0_12px_40px_rgba(2,41,102,0.07)] md:p-8 lg:flex lg:min-h-131.25 lg:flex-col lg:justify-center">
-          <div className="flex items-start gap-3">
+          <div className="flex items-start justify-center gap-3">
             {/* Y axis label (reads bottom → top) — height matches the panel
                 (h-91.75) so its centered text aligns with the panel's center. */}
             <span className="flex h-91.75 items-center rotate-180 text-xs font-semibold tracking-wide text-ink [writing-mode:vertical-rl]">
               {matrix.axisY}
             </span>
 
-            <div className="flex-1">
-              <div className="relative h-91.75 w-111 rounded-[38px] bg-[#F4F8FF] px-5 py-6">
-                {/* vertical dashed divider */}
-                <span className="pointer-events-none absolute inset-y-6 left-1/2 -translate-x-1/2 border-l border-dashed border-slate-300" />
-
+            {/* Panel + axes, sized to the panel so they stay centered together */}
+            <div>
+              {/* Light-blue quadrant panel */}
+              <div className="relative flex h-91.75 w-111 flex-col rounded-[38px] bg-[#F4F8FF] px-5 py-6">
                 {/* column headers */}
                 <div className="grid grid-cols-2 text-center">
                   {matrix.columns.map((c) => (
@@ -113,16 +112,17 @@ export default function EpmStack() {
                   ))}
                 </div>
 
-                {/* 2x2 quadrant cells */}
-                <div className="relative mt-6 grid grid-cols-2">
+                {/* 2×2 quadrant grid — fills the panel; each group is centered
+                    both horizontally and vertically within its quadrant */}
+                <div className="relative mt-6 grid flex-1 grid-cols-2 grid-rows-2">
+                  {/* vertical dashed divider */}
+                  <span className="pointer-events-none absolute inset-y-0 left-1/2 -translate-x-1/2 border-l border-dashed border-slate-300" />
                   {/* horizontal dashed divider */}
                   <span className="pointer-events-none absolute inset-x-0 top-1/2 -translate-y-1/2 border-t border-dashed border-slate-300" />
                   {matrix.cells.map((cell, i) => (
                     <div
                       key={i}
-                      className={`px-3 text-center text-[13px] leading-relaxed text-slate-500 ${
-                        i < 2 ? "pb-10" : "pt-10"
-                      }`}
+                      className="flex flex-col items-center justify-center px-3 text-center text-[13px] leading-relaxed text-slate-500"
                     >
                       {cell.lines.map((line, idx) => (
                         <p
@@ -141,7 +141,7 @@ export default function EpmStack() {
                 </div>
               </div>
 
-              {/* X axis + caption */}
+              {/* X axis + caption — centered under the panel */}
               <p className="mt-5 text-center text-[13px] font-bold tracking-wide text-ink">
                 {matrix.axisX}
               </p>

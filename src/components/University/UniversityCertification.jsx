@@ -9,15 +9,15 @@ export default function UniversityCertification() {
   const [openIndex, setOpenIndex] = useState(0);
 
   return (
-    <section id="certification" className="scroll-mt-24 bg-white py-20 md:py-24">
+    <section id="certification" className="scroll-mt-24 bg-white py-15">
       <div className="container-global">
         {/* Heading */}
         <div className="max-w-3xl">
           <p className="epm-eyebrow epm-eyebrow-normal text-brand">{eyebrow}</p>
-          <h2 className="mt-3 font-display text-3xl font-semibold text-ink md:text-[2.5rem]">
+          <h2 className="mx-auto mt-4 max-w-6xl epm-heading leading-[1.05] font-medium tracking-[-2px] text-black ">
             {heading}
           </h2>
-          <p className="mt-4 text-base leading-relaxed text-[#5b6c84]">{body}</p>
+          <p className="mx-auto mt-6 max-w-4xl epm-body leading-relaxed text-[#5b6c84]">{body}</p>
         </div>
 
         {/* Tab rail */}
@@ -40,12 +40,25 @@ export default function UniversityCertification() {
           ))}
         </div>
 
-        {/* Accordion */}
-        <div className="mt-8 divide-y divide-ink/10 overflow-hidden rounded-2xl border border-ink/10">
+        {/* Accordion — separate cards with a gap between them */}
+        <div className="mt-8 space-y-4">
           {tracks.map((track, index) => {
             const open = openIndex === index;
+            // Solid code-pill colour: blue for PAM, teal for EPM, grey when upcoming.
+            const pillColor = track.upcoming
+              ? "bg-[#8C97AB] text-white"
+              : track.code.startsWith("EPM")
+                ? "bg-[#29A8D8] text-white"
+                : "bg-[#0451CC] text-white";
             return (
-              <div key={track.code} className="bg-white">
+              <div
+                key={track.code}
+                className={[
+                  "overflow-hidden rounded-2xl border shadow-[0px_1px_2px_0px_#0C1E3A0D] transition",
+                  open ? "border-brand" : "border-ink/10",
+                  track.upcoming ? "bg-[#F4F7FF]" : "bg-white",
+                ].join(" ")}
+              >
                 <button
                   type="button"
                   onClick={() => setOpenIndex(open ? -1 : index)}
@@ -53,12 +66,7 @@ export default function UniversityCertification() {
                   className="flex w-full items-center gap-4 px-6 py-5 text-left transition hover:bg-[#F7FAFF]"
                 >
                   <span
-                    className={[
-                      "shrink-0 rounded-md px-2.5 py-1 text-xs font-semibold",
-                      track.upcoming
-                        ? "bg-[#EEF1F6] text-[#5b6c84]"
-                        : "bg-[#E6EDFF] text-brand",
-                    ].join(" ")}
+                    className={`shrink-0 rounded-md px-2.5 py-1 text-xs font-semibold tracking-wide ${pillColor}`}
                   >
                     {track.code}
                   </span>
@@ -67,7 +75,7 @@ export default function UniversityCertification() {
                     <span className="block font-display text-base font-semibold text-ink">
                       {track.title}
                       {track.upcoming && (
-                        <span className="ml-2 align-middle text-[11px] font-semibold uppercase tracking-wider text-[#5b6c84]">
+                        <span className="ml-2 align-middle text-[11px] font-semibold uppercase tracking-wider text-[#0451CC]">
                           · Upcoming
                         </span>
                       )}
@@ -86,13 +94,13 @@ export default function UniversityCertification() {
                 </button>
 
                 {open && (
-                  <div className="px-6 pb-6">
+                  <div className="border-t border-ink/10 px-6 pb-6 pt-4">
                     {track.modules.length > 0 ? (
-                      <ol className="grid gap-x-10 gap-y-1 sm:grid-cols-2">
+                      <ol className="columns-1 gap-x-10 sm:columns-2">
                         {track.modules.map((module, mi) => (
                           <li
                             key={module}
-                            className="flex items-start gap-3 border-b border-dashed border-ink/10 py-2.5 last:border-0"
+                            className="flex break-inside-avoid items-start gap-3 border-b border-dashed border-ink/10 py-2.5"
                           >
                             <span className="mt-px shrink-0 font-display text-xs font-bold text-brand">
                               {String(mi + 1).padStart(2, "0")}

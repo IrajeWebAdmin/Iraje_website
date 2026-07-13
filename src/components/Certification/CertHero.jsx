@@ -1,24 +1,30 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FiArrowRight } from "react-icons/fi";
-import about from "@/data/about";
+import certification from "@/data/certification";
 
-export default function AboutHero() {
-  const { eyebrow, titleLead, titleAccent, body, ctas } = about.hero;
+// Hero for the Certification page. Two-column layout (copy + illustration),
+// mirroring AboutHero so the site keeps a consistent hero rhythm. The navbar
+// sits absolutely over the top of this band, so we pad the top generously.
+export default function CertHero() {
+  const { eyebrow, titleLead, titleAccent, titleTrail, body, ctas } =
+    certification.hero;
 
   return (
-    <section className="bg-white">
+    <section className="relative overflow-hidden bg-linear-to-b from-[#f4f8ff] to-white">
       <div className="container-global pt-32 pb-20 md:pt-40 md:pb-28">
         <div className="grid items-center gap-12 lg:grid-cols-2">
           {/* Copy */}
           <div>
-            <p className="epm-eyebrow epm-eyebrow-normal flex items-center gap-3 font-semibold text-brand">
-              <span className="h-px w-8 bg-brand" />
+            <p className="epm-eyebrow epm-eyebrow-normal font-semibold text-brand">
               {eyebrow}
             </p>
-            <h1 className="mt-5 font-display text-4xl leading-[1.23] font-semibold tracking-normal text-ink md:text-[55px]">
+            <span className="mt-3 block h-px w-12 bg-brand" />
+            <h1 className="mt-5 font-display text-4xl leading-[1.15] font-bold tracking-tight text-ink md:text-[55px]">
               {titleLead}{" "}
               <span className="font-normal text-brand italic">{titleAccent}</span>
+              <br />
+              {titleTrail}
             </h1>
             <p className="mt-6 max-w-xl text-base leading-relaxed text-slate-soft md:text-lg">
               {body}
@@ -41,14 +47,14 @@ export default function AboutHero() {
             </div>
           </div>
 
-          {/* Laptop image */}
+          {/* Photo */}
           <div className="flex justify-center lg:justify-end">
             <Image
-              src="/images/about/About-home.png"
-              alt="Iraje team collaborating on enterprise security"
-              width={904}
-              height={776}
-              className="h-auto w-full max-w-185"
+              src="/images/home/home-certification.webp"
+              alt="Security professionals reviewing certification training on screen"
+              width={432}
+              height={287}
+              className="h-auto w-full max-w-160 rounded-[28px] object-cover"
               priority
             />
           </div>

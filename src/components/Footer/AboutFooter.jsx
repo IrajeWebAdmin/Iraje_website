@@ -5,7 +5,7 @@ import footerLinks from "@/data/footerLinks";
 
 export default function HomeFooter() {
   return (
-    <footer className="bg-[#0451CC] text-white">
+    <footer className="bg-[#3D4159] text-white">
       <div className="mx-auto max-w-7xl px-6 py-16">
         
         <div className="grid gap-12 lg:grid-cols-[2fr_1fr_1fr_1fr]">
@@ -20,7 +20,7 @@ export default function HomeFooter() {
             />
 
             <p className="mt-6 max-w-xs text-sm leading-relaxed text-white/70">
-             One platform to secure<br />every identity.
+             One platform to secure  every identity.
             </p>
           </div>
 

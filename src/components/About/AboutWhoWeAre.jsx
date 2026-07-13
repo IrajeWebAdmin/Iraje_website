@@ -12,13 +12,13 @@ export default function AboutWhoWeAre() {
   const { eyebrow, heading, body, cards, timeline } = about.whoWeAre;
 
   return (
-    <section id="who-we-are" className="bg-white py-24">
+    <section id="who-we-are" className="bg-white py-5">
       <div className="container-global relative">
         {/* ===========================
             TOP BLUE SECTION
         ============================ */}
         <div className="rounded-[5rem] bg-brand px-8 pt-16 pb-20 text-white md:px-16 md:pt-20 md:pb-24">
-          <div className="max-w-2xl">
+          <div>
             <p className="epm-eyebrow epm-eyebrow-normal text-white/75">
               {eyebrow}
             </p>

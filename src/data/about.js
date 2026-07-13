@@ -24,9 +24,10 @@ const about = {
     eyebrow: "About Us",
     heading: "Who we are",
     body: [
-      "Iraje is a privileged-access security company. For over two decades we've focused on a single hard problem — giving enterprises real control over their most powerful accounts, across data centre, cloud and endpoint.",
-      "Our platform was founded on real customer problems, not theory. It grew from one product into a complete privileged-security suite — agentless, Zero Trust and audit-ready by design.",
-      "We're engineers and security practitioners first, and our customers stay with us because the platform simply works.",
+      "Iraje is a privileged access security company. We help enterprises control, monitor and govern access to their most sensitive systems — the servers, databases, network devices and applications that run the business.",
+      "Privileged accounts are the most powerful — and most targeted — credentials in any organisation. A single compromised admin account can lead to a catastrophic breach. Iraje was founded on a simple conviction: securing privileged access shouldn't require ripping apart your infrastructure or slowing your teams down.",
+      "That conviction shaped our agentless architecture — security that deploys fast, scales cleanly and stays out of the way. Today our portfolio spans Iraje PAM (privileged access management), Iraje EPM (endpoint privilege management) and the upcoming Iraje IAM — backed by the Iraje Academy, where we train the next generation of defenders.",
+      "We're engineers and security practitioners first. We measure success by one thing: whether our customers can sleep at night knowing their keys are safe.",
     ],
     image: "/images/about/about-team.png", // TODO: drop the team/laptop photo here
     cards: [
@@ -78,8 +79,8 @@ const about = {
     industries: [
       { title: "Banking & Financial Services", body: "Securing privileged access across leading private, public-sector and cooperative banks." },
       { title: "Healthcare", body: "Protecting patient data and clinical systems while satisfying HIPAA and privacy regulations." },
-      { title: "Manufacturing", body: "Governing privileged access across plants, IT systems and distribution sites." },
-      { title: "Government & PSU", body: "Auditable, controlled access across sensitive public-sector infrastructure." },
+      { title: "Manufacturing", body: "Eliminating shared admin credentials across plants, OT systems and distributed sites." },
+      { title: "Government & PSU", body: "Hardened, auditable access control for sovereign and public-sector infrastructure." },
       { title: "IT / ITeS", body: "Managing third-party and vendor access to host systems and platforms during rollouts." },
       { title: "Telecom", body: "Privileged access control across sprawling, always-on network operations." },
     ],
@@ -135,7 +136,7 @@ const about = {
       "Security is a responsibility, not a checkbox. The way we work reflects the way we build — with rigour, humility and a deep respect for the people who trust us.",
     items: [
       { title: "Security First", body: "Every decision is made with the customer's security posture in mind — starting with our own." },
-      { title: "Customer Obsession", body: "We earn trust one deployment at a time — never a contract, a logo or 'good enough'." },
+      { title: "Customer Success", body: "We earn trust one deployment at a time — never a contract, a logo or 'good enough'." },
       { title: "Integrity & Trust", body: "We handle the keys to the kingdom, so we act with humility and honesty, always." },
       { title: "Innovation", body: "First-of-their-kind capabilities, shipped on a steady, customer-led cadence." },
       { title: "Simplicity", body: "Powerful security that's invisible to everyone but the people who need it." },

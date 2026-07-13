@@ -78,20 +78,20 @@ export default function EpmCompliance() {
               <tbody>
                 {table.rows.map((row, r) => (
                   <tr key={row[0]} className={r % 2 ? "bg-[#EBEDF3]" : "bg-white"}>
-                    <td className="border-r-[0.88px] border-[#7070703D] px-4 py-7 align-middle text-xs font-semibold text-black">
+                    <td className="border-r-[0.88px] border-[#7070703D] px-4 py-9 align-middle text-xs font-semibold text-black">
                       {r + 1}
                     </td>
                     {row.map((cell, c) => (
                       <td
                         key={c}
-                        className={`border-r-[0.88px] border-[#7070703D] px-4 py-7 align-middle ${
+                        className={`border-r-[0.88px] border-[#7070703D] px-4 py-9 align-middle ${
                           c === 0 ? "font-semibold text-black" : "font-medium text-black"
                         }`}
                       >
                         {cell}
                       </td>
                     ))}
-                    <td className="px-4 py-7 text-center align-middle">
+                    <td className="px-4 py-9 text-center align-middle">
                       <span className="inline-flex items-center rounded-full bg-[#E3E9FF] px-3 py-1 text-xs font-medium text-[#0451CC]">
                         Yes
                       </span>

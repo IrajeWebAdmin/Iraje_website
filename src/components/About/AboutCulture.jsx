@@ -1,21 +1,36 @@
 import {
   FiShield,
-  FiHeart,
-  FiCheckCircle,
-  FiZap,
-  FiFeather,
+  FiEye,
+  FiCheck,
+  FiSun,
+  FiArrowLeft,
   FiUsers,
 } from "react-icons/fi";
 import AboutSection from "./AboutSection";
 import about from "@/data/about";
 
-const VALUE_ICONS = [FiShield, FiHeart, FiCheckCircle, FiZap, FiFeather, FiUsers];
+// Positional to the culture.items order: Security First, Customer Success,
+// Integrity & Trust, Innovation, Simplicity, One Team.
+const VALUE_ICONS = [FiShield, FiEye, FiCheck, FiSun, FiArrowLeft, FiUsers];
 
 export default function AboutCulture() {
   const { eyebrow, heading, body, items, badges } = about.culture;
 
   return (
-    <AboutSection center eyebrow={eyebrow} heading={heading} intro={body}>
+   <AboutSection paddingClassName="py-15">
+         {/* Section header — global epm-* classes, matching the other sections. */}
+         <div className="mx-auto max-w-6xl text-center">
+           <span className="epm-eyebrow epm-eyebrow-normal font-semibold text-blue-600">
+             {eyebrow}
+           </span>
+           <h2 className="mx-auto mt-4 max-w-6xl epm-heading leading-[1.05] font-medium tracking-[-2px] text-black">
+             {heading}
+           </h2>
+           <p className="mx-auto mt-8 max-w-3xl epm-body leading-relaxed text-[#8E8E93]">
+             {body}
+           </p>
+         </div>
+
       {/* Value cards */}
       <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {items.map((item, i) => {
@@ -23,18 +38,17 @@ export default function AboutCulture() {
           return (
             <div
               key={item.title}
-              className="flex flex-col rounded-2xl border border-mist border-t-2 border-t-brand bg-white p-7 text-left"
+              className="relative flex flex-col overflow-hidden rounded-2xl border border-[#0C1E3A1A] bg-white p-7 text-left shadow-[0px_1px_2px_0px_#0C1E3A0D]"
             >
-              <span className="font-mono text-xs font-semibold text-slate-soft">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <span className="mt-3 flex h-11 w-11 items-center justify-center rounded-xl bg-[#E3E9FF] text-brand">
+              {/* Gradient top accent (blue → teal), clipped to the card radius */}
+              <span className="absolute inset-x-0 top-0 h-0.75 bg-linear-to-r from-brand to-[#22C7B8]" />
+              <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#E3E9FF] text-brand">
                 <Icon className="h-5 w-5" />
               </span>
               <h3 className="mt-4 font-display text-lg font-semibold text-ink">
                 {item.title}
               </h3>
-              <p className="mt-2 text-sm leading-relaxed text-slate-soft">
+              <p className="mt-2 text-sm leading-relaxed text-[#8E8E93]">
                 {item.body}
               </p>
             </div>
@@ -47,10 +61,12 @@ export default function AboutCulture() {
         {badges.map((b) => (
           <span
             key={b.label}
-            className="inline-flex items-center gap-2 rounded-full border border-mist bg-white px-5 py-2.5 text-sm font-medium text-ink/80"
+            className="inline-flex items-center gap-2 rounded-full border border-[#0C1E3A1A] bg-white px-4 py-2.25 text-sm font-medium text-ink/80 shadow-[0px_1px_2px_0px_#0C1E3A0D]"
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={b.icon} alt="" className="h-5 w-5" />
+            <span className="flex h-6 w-6 items-center justify-center rounded-md bg-[#EEF3FF]">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={b.icon} alt="" className="h-4 w-4" />
+            </span>
             {b.label}
           </span>
         ))}

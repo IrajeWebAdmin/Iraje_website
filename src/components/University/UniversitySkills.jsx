@@ -1,15 +1,18 @@
 import university from "@/data/university";
 
 export default function UniversitySkills() {
-  const { eyebrow, heading, left, quote, right, stats } = university.skills;
+  const { eyebrow, heading, left, quote, right, stats, source } =
+    university.skills;
 
   return (
-    <section className="bg-[#F7FAFF] py-20 md:py-24">
+    <section className="bg-[#F7FAFF] py-15">
       <div className="container-global">
-        {/* Heading — centered, sized to sit on one line like the design */}
-        <div className="mx-auto max-w-5xl text-center">
-          <p className="epm-eyebrow epm-eyebrow-normal text-brand">{eyebrow}</p>
-          <h2 className="mt-3 font-display text-3xl font-semibold leading-[1.15] text-ink md:text-[2.5rem] lg:whitespace-nowrap">
+        {/* Heading — global epm-* classes, centered and one line like the design */}
+        <div className="mx-auto max-w-6xl text-center">
+          <span className="epm-eyebrow epm-eyebrow-normal font-semibold text-blue-600">
+            {eyebrow}
+          </span>
+          <h2 className="mx-auto mt-4 max-w-6xl epm-heading leading-[1.05] font-medium tracking-[-2px] text-black lg:whitespace-nowrap">
             {heading}
           </h2>
         </div>
@@ -47,6 +50,13 @@ export default function UniversitySkills() {
             </div>
           ))}
         </div>
+
+        {/* Source attribution — centered under the stats, as in the design */}
+        {source && (
+          <p className="mt-8 text-center text-base font-medium text-brand">
+            {source}
+          </p>
+        )}
       </div>
     </section>
   );

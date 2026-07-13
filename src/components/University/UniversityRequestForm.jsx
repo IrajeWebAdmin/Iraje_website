@@ -106,11 +106,13 @@ export default function UniversityRequestForm() {
         <div className="grid gap-12 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1fr)]">
           {/* Info panel */}
           <div>
-            <p className="epm-eyebrow epm-eyebrow-normal text-brand">{eyebrow}</p>
-            <h2 className="mt-3 font-display text-3xl font-semibold text-ink md:text-[2.5rem]">
+            <span className="epm-eyebrow epm-eyebrow-normal font-semibold text-blue-600">
+              {eyebrow}
+            </span>
+            <h2 className="mt-4 epm-heading leading-[1.05] font-medium tracking-[-2px] text-black">
               {heading}
             </h2>
-            <p className="mt-5 max-w-md text-base leading-relaxed text-[#5b6c84]">
+            <p className="mt-6 max-w-md epm-body leading-relaxed text-[#5b6c84]">
               {body}
             </p>
 
@@ -119,9 +121,7 @@ export default function UniversityRequestForm() {
                 const Icon = CONTACT_ICONS[item.icon] ?? FiMail;
                 return (
                   <li key={item.text} className="flex items-center gap-3 text-ink">
-                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#E6EDFF] text-brand">
-                      <Icon className="h-4 w-4" />
-                    </span>
+                    <Icon className="h-5 w-5 shrink-0 text-brand" />
                     <span className="text-sm">{item.text}</span>
                   </li>
                 );
@@ -151,7 +151,7 @@ export default function UniversityRequestForm() {
             <form
               onSubmit={handleSubmit}
               noValidate
-              className="rounded-2xl border border-ink/10 bg-white p-6 shadow-[0_8px_30px_-12px_rgba(12,30,58,0.18)] md:p-8"
+              className="rounded-2xl border border-ink/10 bg-white p-6 shadow-[0px_16px_40px_-24px_#0C1E3A47,0px_1px_2px_0px_#0C1E3A0D] md:p-8"
             >
               <div className="grid gap-5 sm:grid-cols-2">
                 <Field label="Full name" required error={errors.fname}>
@@ -199,7 +199,7 @@ export default function UniversityRequestForm() {
                 </Field>
               </div>
 
-              <div className="mt-5 grid gap-5 sm:grid-cols-3">
+              <div className="mt-5 grid gap-5 sm:grid-cols-2">
                 <Field label="I am a" required error={errors.audience}>
                   <Select
                     value={values.audience}
@@ -218,7 +218,10 @@ export default function UniversityRequestForm() {
                     invalid={errors.course}
                   />
                 </Field>
-                <Field label="Delivery format">
+              </div>
+
+              <div className="mt-5">
+                <Field label="Preferred delivery format">
                   <Select
                     value={values.format}
                     onChange={update("format")}
@@ -302,7 +305,7 @@ function Select({ value, onChange, placeholder, options, invalid }) {
 
 function inputClass(error) {
   return [
-    "w-full rounded-xl border bg-white px-4 py-3 text-ink outline-none transition",
+    "w-full rounded-xl border bg-[#F4F6FB] px-4 py-3 text-ink outline-none transition",
     "placeholder:text-slate-soft/70",
     "focus:border-brand focus:ring-2 focus:ring-brand/20",
     error ? "border-red-400" : "border-mist",
