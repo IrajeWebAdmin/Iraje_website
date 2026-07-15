@@ -41,7 +41,7 @@ export default function CertEnroll() {
     certification.enroll;
 
   return (
-    <section id="enroll" className="bg-[#f4f8ff] py-20 md:py-28">
+    <section id="enroll" className="bg-[#fff] py-15">
       <div className="container-global">
         <div className="grid gap-12 lg:grid-cols-[1fr_1.2fr]">
           {/* Pitch */}
@@ -52,8 +52,8 @@ export default function CertEnroll() {
             </h2>
             <p className="epm-body mt-5 max-w-md leading-relaxed text-slate-soft">{intro}</p>
 
-            <div className="mt-8 max-w-md rounded-2xl border border-mist bg-white p-5">
-              <p className="text-sm leading-relaxed text-slate-soft">
+            <div className="mt-8 max-w-md rounded-2xl border border-mist bg-[#E8F5FC] p-5">
+              <p className="text-sm leading-relaxed text-black">
                 <span className="font-semibold text-ink">What happens next? </span>
                 {note.replace("What happens next? ", "")}
               </p>

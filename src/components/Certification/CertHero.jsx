@@ -20,7 +20,7 @@ export default function CertHero() {
               {eyebrow}
             </p>
             <span className="mt-3 block h-px w-12 bg-brand" />
-            <h1 className="mt-5 font-display text-4xl leading-[1.15] font-bold tracking-tight text-ink md:text-[55px]">
+            <h1 className="mt-5 font-display text-4xl leading-[1.15] font-semibold tracking-tight text-ink md:text-[55px]">
               {titleLead}{" "}
               <span className="font-normal text-brand italic">{titleAccent}</span>
               <br />

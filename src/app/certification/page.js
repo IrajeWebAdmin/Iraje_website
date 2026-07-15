@@ -17,8 +17,8 @@ export default function CertificationPage() {
       <CertDashboard />
       <CertExamEngine />
       <CertCertificate />
-      <CertRoadmap />
       <CertVerify />
+      <CertRoadmap />
       <CertEnroll />
     </>
   );

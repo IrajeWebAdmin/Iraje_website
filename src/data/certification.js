@@ -121,7 +121,7 @@ const certification = {
   howItWorks: {
     eyebrow: "How It Works",
     heading: "From registration to certificate",
-    intro:
+    body:
       "A simple, governed journey — register, get approved, learn at your pace, pass the exam, and earn a verifiable certificate.",
     steps: [
       {
@@ -145,8 +145,8 @@ const certification = {
 
   // ---- Student Dashboard ------------------------------------------------
   dashboard: {
-    eyebrow: "Learn at your own pace",
-    heading: "Student Dashboard",
+    eyebrow: "Student Dashboard",
+    heading: "Learn at your own pace",
     intro:
       "Every learner gets a personal dashboard to track courses, progress and exam eligibility — with structured modules combining video, PDFs, presentations and knowledge checks.",
     features: [
