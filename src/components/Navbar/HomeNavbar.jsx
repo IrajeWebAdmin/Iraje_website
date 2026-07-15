@@ -34,7 +34,7 @@ export default function Navbar() {
             priority
           />
         </Link>
-
+{/* ashdsghj */}
 
         {/* Center Menu */}
         <ul className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-12 lg:flex">
