@@ -3,7 +3,7 @@ import industries from "@/data/industries";
 export default function IndustryBanner() {
   return (
     <section className="overflow-hidden bg-[#0451CC] py-6">
-      <div className="mx-auto flex max-w-7xl flex-col items-center gap-4 px-6 lg:flex-row lg:gap-10">
+      <div className="container-global flex flex-col items-center gap-4 lg:flex-row lg:gap-10">
         {/* Left Text (static) */}
         <p className="shrink-0 text-lg font-medium text-white/70">
           Trusted across regulated industries

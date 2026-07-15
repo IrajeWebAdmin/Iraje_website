@@ -65,8 +65,12 @@
 
 /* Section intro / body copy — responsive size → base (1rem) on desktop,
    fluidly scaling down through tablet/mobile. */
-.epm-body {
+/* .epm-body {
   font-size: clamp(0.875rem, 0.75rem + 0.33vw, 1rem);
+} */
+
+.epm-body {
+  font-size: clamp(1.125rem, 1rem + 0.33vw, 1.25rem);
 }
 
 /* Opt-out of the uppercase eyebrow treatment — renders the label in its

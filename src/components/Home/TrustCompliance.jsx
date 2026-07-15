@@ -21,7 +21,7 @@ export default function TrustCompliance() {
             Security you can verify
           </h2>
 
-          <p className="mx-auto mt-8 max-w-4xl epm-body font-medium leading-relaxed text-[#8E8E93]">
+          <p className="mx-auto mt-8 max-w-4xl epm-body leading-relaxed text-[#8E8E93]">
             Iraje security solutions are built to meet the most commonly referenced regulations and frameworks globally. Iraje security solutions emphatically meet compliance requirements and provide mapping to these standards.
           </p>
 

@@ -29,7 +29,7 @@ export default function WhyIraje() {
             Your Trusted Partner in Identity Security.
           </h2>
 
-          <p className="mx-auto mt-8 max-w-4xl epm-body font-medium leading-relaxed text-[#8E8E93]">
+          <p className="mx-auto mt-8 max-w-4xl epm-body leading-relaxed text-[#8E8E93]">
             Designed for enterprises. Aligned with global standards. Trusted for
             Mission-Critical Security.
           </p>
