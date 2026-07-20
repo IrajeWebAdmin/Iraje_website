@@ -52,32 +52,32 @@ const epm = {
     strip: [
   {
     name: "Manage",
-    label: "LEAST PRIVILEGE",
+    label: "Least Privilege",
     icon: "/icons/manage-least-privilege.svg",
   },
   {
     name: "Monitor",
-    label: "FULL VISIBILITY",
+    label: "Full Visibility",
     icon: "/icons/monitor-full-visibility.svg",
   },
   {
     name: "Control",
-    label: "GOVERNANCE",
+    label: "Governance",
     icon: "/icons/control-governance.svg",
   },
   {
     name: "Discover",
-    label: "EVERY ENDPOINT",
+    label: "Every Endpoint",
     icon: "/icons/discover-every-endpoint.svg",
   },
   {
     name: "Comply",
-    label: "AUDIT READY",
+    label: "Audit Ready",
     icon: "/icons/comply-audit-ready.svg",
   },
   {
     name: "Secure",
-    label: "TAMPER PROOF",
+    label: "Tamper Proof",
     icon: "/icons/secure-tamper-proof.svg",
   },
 ]
@@ -88,7 +88,7 @@ const epm = {
     eyebrow: "The Threat",
     heading: "Endpoints are Ground Zero for Cyberattacks",
     body: "Endpoints are the primary entry point for most cyberattacks — and modern ransomware almost always begins there before spreading across the enterprise. That's why endpoint security is now a central pillar of enterprise cybersecurity — and why preventing privilege misuse at the endpoint matters more than ever.",
-    subheading: "Why endpoints are exposed",
+    subheading: "Why endpoints are exposed?",
     points: [
       "Users interact directly with emails and websites every day",
       "Credentials are stored on the endpoint itself",
@@ -140,22 +140,40 @@ steps: [
       "Most enterprise endpoints already run a deep security stack. But almost every layer is built to detect and respond.",
       "Very few are built to prevent.",
     ],
-    layers: [
-      { name: "LAPS", role: "Local admin password rotation" },
-      { name: "DLP", role: "Prevent data leakage" },
-      { name: "Encryption", role: "Data Protection" },
-      { name: "Iraje EPM", role: "Prevent Privilege Misuse", highlight: true },
-      { name: "Application Control", role: "Application Control/Allowing" },
-      { name: "NGAV", role: "Signatureless threat detection" },
-      { name: "EDR", role: "Detect malware, ransomware, lateral movement" },
-      { name: "UEBA", role: "Detect abnormal user behaviour" },
-      { name: "Threat hunting", role: "Identify Suspicious Activities"  },
-      { name: "Vulnerability Assessment", role: "Detect missing patches" },
-      { name: "XDR", role: "Unified investigation and response" },
-      { name: "SOAR", role: "Automated playbooks and incident response" },
-      { name: "Patch Management", role: "Fix vulnerabilities" },
-      { name: "Endpoint Isolation", role: "Quarantine compromised machines" },
-      { name: "Automated Remediation", role: "Kill malicious processes" },
+    // Security-stack layers grouped into three columns, each headed by the
+    // action it performs. Only the Prevent column contains the one preventive
+    // layer (Iraje EPM); Prevent is emphasised as the critical gap the stack misses.
+    columns: [
+      {
+        header: "Prevent",
+        layers: [
+          { name: "LAPS", role: "Local admin password rotation" },
+          { name: "DLP", role: "Prevent data leakage" },
+          { name: "Encryption", role: "Data Protection" },
+          { name: "Iraje EPM", role: "Prevent Privilege Misuse", highlight: true },
+          { name: "Application Control", role: "Application Control/Allowing" },
+        ],
+      },
+      {
+        header: "Detect",
+        layers: [
+          { name: "NGAV", role: "Signatureless threat detection" },
+          { name: "EDR", role: "Detect malware, ransomware, lateral movement" },
+          { name: "UEBA", role: "Detect abnormal user behaviour" },
+          { name: "Threat hunting", role: "Identify Suspicious Activities" },
+          { name: "Vulnerability Assessment", role: "Detect missing patches" },
+        ],
+      },
+      {
+        header: "Respond",
+        layers: [
+          { name: "XDR", role: "Unified investigation and response" },
+          { name: "SOAR", role: "Automated playbooks and incident response" },
+          { name: "Patch Management", role: "Fix vulnerabilities" },
+          { name: "Endpoint Isolation", role: "Quarantine compromised machines" },
+          { name: "Automated Remediation", role: "Kill malicious processes" },
+        ],
+      },
     ],
     preventive: {
       name: "Iraje EPM — the preventive layer",
@@ -378,34 +396,42 @@ steps: [
     body: "By enforcing least privilege — giving users, applications and processes only the minimum access they need — EPM removes the conditions attackers depend on.",
     items: [
       {
+        icon: "lock",
         title: "Removes standing admin rights",
         body: "Strips permanent local admin privileges while users still complete authorized tasks.",
       },
       {
+        icon: "clock",
         title: "Just-in-Time elevation",
         body: "Monitors endpoint processes, files and memory for suspicious activity, then reacts.",
       },
       {
+        icon: "file",
         title: "Controls application elevation",
         body: "Lets specific apps run elevated without ever making the user a local admin.",
       },
       {
+        icon: "escalation",
         title: "Stops malware escalation",
         body: "Blocks the unauthorized privilege elevation malware needs to disable AV and encrypt files.",
       },
       {
+        icon: "check",
         title: "Application control & allowlisting",
         body: "Trusted-application policies block unknown executables, scripts and shadow IT tools.",
       },
       {
+        icon: "shield",
         title: "Reduces ransomware risk",
         body: "Ransomware relies on privileged access — EPM removes rights and blocks elevation attempts.",
       },
       {
+        icon: "eye",
         title: "Visibility & auditability",
         body: "Records who requested elevation, which apps ran elevated, when, and what was done.",
       },
       {
+        icon: "check",
         title: "Improves compliance posture",
         body: "Helps meet PCI-DSS, ISO 27001, NIST, CIS Benchmarks, RBI and CERT-In requirements.",
       },
@@ -508,26 +534,31 @@ steps: [
     items: [
       {
         num: "01",
+        icon: "/icons/local-admin-credentials.svg",
         title: "Rotating local admin credentials every hour",
         body: "Eliminates the risk of credential misuse by automatically rotating local admin passwords every single hour — no static passwords, no shared secrets.",
       },
       {
         num: "02",
+        icon: "/icons/JIT-elevation.svg",
         title: "JIT elevation of privileges with session recordings",
         body: "Grant Just-in-Time access only when it's needed, and record every elevated session for complete accountability and audit readiness.",
       },
       {
         num: "03",
+        icon: "/icons/AI-enabled.svg",
         title: "AI-enabled transcribed logs that integrate with SIEM",
         body: "AI-enabled transcription of session activities creates intelligent, searchable logs that integrate seamlessly with your SIEM.",
       },
       {
         num: "04",
+        icon: "/icons/Watermarking.svg",
         title: "Watermarking of elevated sessions",
         body: "Every elevated session is watermarked with user details, timestamp and device information — deterring misuse and ensuring full traceability.",
       },
       {
         num: "05",
+        icon: "/icons/Multilingual.svg",
         title: "Multilingual — available in 20+ global languages",
         body: "A truly global solution supporting 20+ languages, empowering organizations to secure endpoints across diverse regions and workforces.",
       },
@@ -541,13 +572,13 @@ steps: [
     body: "Iraje EPM maps directly to global standards and Indian regulatory requirements on endpoint security — with audit evidence built in.",
     standardsTitle: "Global standards",
     standards: [
-      { name: "ISO 27001", sub: "Information security" },
-      { name: "SOC 2", sub: "Trust services" },
-      { name: "PCI-DSS", sub: "Payment card data" },
-      { name: "SOX", sub: "Financial controls" },
-      { name: "HIPAA", sub: "Healthcare data" },
-      { name: "EU GDPR", sub: "Data privacy" },
-      { name: "NIST", sub: "Cybersecurity" },
+      { name: "ISO 27001", sub: "Information security", icon: "check" },
+      { name: "SOC 2", sub: "Trust services", icon: "shield" },
+      { name: "PCI-DSS", sub: "Payment card data", icon: "card" },
+      { name: "SOX", sub: "Financial controls", icon: "file" },
+      { name: "HIPAA", sub: "Healthcare data", icon: "health" },
+      { name: "EU GDPR", sub: "Data privacy", icon: "globe" },
+      { name: "NIST", sub: "Cybersecurity", icon: "chart" },
     ],
     table: {
       title: "Compliance Mapping — Global",

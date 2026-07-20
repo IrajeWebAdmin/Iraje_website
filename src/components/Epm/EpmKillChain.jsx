@@ -54,7 +54,7 @@ export default function EpmKillChain() {
                     {step.label}
                   </span>
                   {blocked && (
-                    <span className="px-3 py-1 font-mono text-[10px] font-semibold tracking-[0.12em] whitespace-nowrap text-[#0451CC] ">
+                    <span className="px-3 py-1 font-mono text-[13px] font-medium  whitespace-nowrap text-[#0451CC] ">
                       ✕ {blockedLabel}
                     </span>
                   )}

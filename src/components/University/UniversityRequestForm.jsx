@@ -1,13 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { FiArrowRight, FiMail, FiClock, FiLayers } from "react-icons/fi";
+import { FiArrowRight, FiMail, FiPhone, FiMapPin } from "react-icons/fi";
 import university from "@/data/university";
 
 const { eyebrow, heading, body, contact, audiences, courses, deliveryFormats } =
   university.request;
 
-const CONTACT_ICONS = { mail: FiMail, clock: FiClock, layers: FiLayers };
+const CONTACT_ICONS = { mail: FiMail, phone: FiPhone, map: FiMapPin };
 
 const EMPTY = {
   fname: "",
@@ -151,9 +151,9 @@ export default function UniversityRequestForm() {
             <form
               onSubmit={handleSubmit}
               noValidate
-              className="rounded-2xl border border-ink/10 bg-white p-6 shadow-[0px_16px_40px_-24px_#0C1E3A47,0px_1px_2px_0px_#0C1E3A0D] md:p-8"
+              className="rounded-2xl border border-ink/10 bg-white p-8 shadow-[0px_16px_40px_-24px_#0C1E3A47,0px_1px_2px_0px_#0C1E3A0D] md:p-10"
             >
-              <div className="grid gap-5 sm:grid-cols-2">
+              <div className="grid gap-6 sm:grid-cols-2">
                 <Field label="Full name" required error={errors.fname}>
                   <input
                     type="text"
@@ -176,7 +176,7 @@ export default function UniversityRequestForm() {
                 </Field>
               </div>
 
-              <div className="mt-5 grid gap-5 sm:grid-cols-2">
+              <div className="mt-6 grid gap-6 sm:grid-cols-2">
                 <Field label="Organisation">
                   <input
                     type="text"
@@ -199,7 +199,7 @@ export default function UniversityRequestForm() {
                 </Field>
               </div>
 
-              <div className="mt-5 grid gap-5 sm:grid-cols-2">
+              <div className="mt-6 grid gap-6 sm:grid-cols-2">
                 <Field label="I am a" required error={errors.audience}>
                   <Select
                     value={values.audience}
@@ -220,7 +220,7 @@ export default function UniversityRequestForm() {
                 </Field>
               </div>
 
-              <div className="mt-5">
+              <div className="mt-6">
                 <Field label="Preferred delivery format">
                   <Select
                     value={values.format}
@@ -231,12 +231,12 @@ export default function UniversityRequestForm() {
                 </Field>
               </div>
 
-              <div className="mt-5">
+              <div className="mt-6">
                 <Field label="Anything else we should know?">
                   <textarea
                     value={values.msg}
                     onChange={update("msg")}
-                    rows={4}
+                    rows={5}
                     placeholder="Team size, timelines, specific goals…"
                     className={`${inputClass()} resize-y`}
                   />
@@ -252,7 +252,7 @@ export default function UniversityRequestForm() {
               <button
                 type="submit"
                 disabled={submitting}
-                className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-brand px-7 py-3.5 text-sm font-semibold text-white transition hover:bg-brand/90 disabled:cursor-not-allowed disabled:opacity-60"
+                className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full bg-brand px-7 py-4 text-sm font-semibold text-white transition hover:bg-brand/90 disabled:cursor-not-allowed disabled:opacity-60"
               >
                 {submitting ? "Sending…" : "Submit training request"}
                 {!submitting && <FiArrowRight className="h-4 w-4" />}
@@ -305,7 +305,7 @@ function Select({ value, onChange, placeholder, options, invalid }) {
 
 function inputClass(error) {
   return [
-    "w-full rounded-xl border bg-[#F4F6FB] px-4 py-3 text-ink outline-none transition",
+    "w-full rounded-xl border bg-[#F4F6FB] px-4 py-3.5 text-ink outline-none transition",
     "placeholder:text-slate-soft/70",
     "focus:border-brand focus:ring-2 focus:ring-brand/20",
     error ? "border-red-400" : "border-mist",

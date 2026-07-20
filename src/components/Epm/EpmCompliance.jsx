@@ -1,6 +1,25 @@
 import EpmSection from "./EpmSection";
-import { BsShieldCheck } from "react-icons/bs";
+import {
+  FiCheckCircle,
+  FiShield,
+  FiCreditCard,
+  FiFile,
+  FiGlobe,
+} from "react-icons/fi";
+import { BsGraphUp } from "react-icons/bs";
+import { LuStethoscope } from "react-icons/lu";
 import epm from "@/data/epm";
+
+// Per-standard icons, keyed by the `icon` field on each standards data item.
+const ICONS = {
+  check: FiCheckCircle,
+  shield: FiShield,
+  card: FiCreditCard,
+  file: FiFile,
+  health: LuStethoscope,
+  globe: FiGlobe,
+  chart: BsGraphUp,
+};
 
 export default function EpmCompliance() {
   const {
@@ -35,20 +54,23 @@ export default function EpmCompliance() {
         {standardsTitle}
       </h3>
       <div className="mt-6 flex flex-wrap justify-center gap-4">
-        {standards.map((std) => (
-          <div
-            key={std.name}
-            className="flex h-[145.17px] w-[165.46px] flex-col items-center justify-center rounded-[20.29px] border border-mist bg-white px-4 text-center"
-          >
-            <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#E4EAFB] text-brand">
-              <BsShieldCheck className="h-5 w-5" stroke="currentColor" strokeWidth={0.5} />
-            </span>
-            <p className="mt-3 font-display text-sm font-semibold text-ink">
-              {std.name}
-            </p>
-            <p className="mt-1 text-xs text-slate-soft">{std.sub}</p>
-          </div>
-        ))}
+        {standards.map((std) => {
+          const Icon = ICONS[std.icon];
+          return (
+            <div
+              key={std.name}
+              className="flex h-[145.17px] w-[165.46px] flex-col items-center justify-center rounded-[20.29px] border border-mist bg-white px-4 text-center"
+            >
+              <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#E4EAFB] text-brand">
+                {Icon && <Icon className="h-5 w-5" />}
+              </span>
+              <p className="mt-3 font-display text-sm font-semibold text-ink">
+                {std.name}
+              </p>
+              <p className="mt-1 text-xs text-slate-soft">{std.sub}</p>
+            </div>
+          );
+        })}
       </div>
 
       {/* Compliance mapping table */}
@@ -78,7 +100,7 @@ export default function EpmCompliance() {
               <tbody>
                 {table.rows.map((row, r) => (
                   <tr key={row[0]} className={r % 2 ? "bg-[#EBEDF3]" : "bg-white"}>
-                    <td className="border-r-[0.88px] border-[#7070703D] px-4 py-9 align-middle text-xs font-semibold text-black">
+                    <td className="border-r-[0.88px] border-[#7070703D] px-8 py-9 align-middle text-xs font-semibold text-black">
                       {r + 1}
                     </td>
                     {row.map((cell, c) => (

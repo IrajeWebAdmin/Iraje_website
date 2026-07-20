@@ -33,7 +33,7 @@ export default function UniversityMasterCourse() {
             </span>
             {headAfter}
           </h2>
-          <p className="mx-auto mt-6 max-w-4xl epm-body leading-relaxed text-[#5b6c84]">
+          <p className="mx-auto mt-6 max-w-5xl epm-body leading-relaxed text-[#5b6c84]">
             {body}
           </p>
         </div>
@@ -46,7 +46,9 @@ export default function UniversityMasterCourse() {
               className="overflow-hidden rounded-[1.125rem] border border-ink/10 bg-white shadow-[0px_4px_14.4px_0px_#00000017]"
             >
               <header className="border-b border-ink/10 px-7 pt-7 pb-5">
-                <p className="epm-eyebrow text-azure text-[11.5px]">{part.label}</p>
+                <p className="text-[11.5px] font-semibold uppercase tracking-[0.2em] text-azure">
+                  {part.label}
+                </p>
                 <h3 className="mt-3 font-display text-xl font-semibold tracking-tight text-ink">
                   {part.title}
                 </h3>

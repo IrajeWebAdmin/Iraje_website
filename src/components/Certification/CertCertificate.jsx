@@ -86,10 +86,13 @@ export default function CertCertificate() {
         <h2 className="mx-auto mt-4 max-w-6xl epm-heading leading-[1.05] font-medium tracking-[-2px] text-black">
           {heading}
         </h2>
-        <p className="mx-auto mt-6 max-w-3xl epm-body leading-relaxed text-slate-soft">
-          {intro}
-        </p>
       </div>
+
+      {/* Intro pulled out of the max-w-6xl header so it can sit on one line on
+          wide screens (xl+); wraps normally below that. */}
+      <p className="mx-auto mt-6 max-w-7xl text-center epm-body leading-relaxed text-[#8E8E93] xl:whitespace-nowrap">
+        {intro}
+      </p>
 
       <div className="mt-14 grid items-center gap-12 lg:grid-cols-2">
         {/* Certificate preview — replicates the sample credential design */}

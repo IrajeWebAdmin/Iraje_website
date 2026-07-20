@@ -21,7 +21,7 @@ export default function CertExamEngine() {
         <h2 className="mx-auto mt-4 max-w-6xl epm-heading leading-[1.05] font-medium tracking-[-2px] text-black">
           {heading}
         </h2>
-        <p className="mx-auto mt-6 max-w-3xl epm-body leading-relaxed text-[#8E8E93]">
+        <p className="mx-auto mt-6 max-w-6xl epm-body leading-relaxed text-[#8E8E93]">
           {intro}
         </p>
       </div>

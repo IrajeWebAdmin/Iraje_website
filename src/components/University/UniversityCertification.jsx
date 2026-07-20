@@ -13,12 +13,16 @@ export default function UniversityCertification() {
       <div className="container-global">
         {/* Heading */}
         <div className="max-w-3xl">
-          <p className="epm-eyebrow epm-eyebrow-normal text-brand">{eyebrow}</p>
-          <h2 className="mx-auto mt-4 max-w-6xl epm-heading leading-[1.05] font-medium tracking-[-2px] text-black ">
+          <p className="epm-eyebrow epm-eyebrow-normal font-semibold text-brand">{eyebrow}</p>
+          <h2 className="mx-auto mt-4 max-w-6xl epm-heading leading-[1.05] font-medium tracking-[-2px] text-black">
             {heading}
           </h2>
-          <p className="mx-auto mt-6 max-w-4xl epm-body leading-relaxed text-[#5b6c84]">{body}</p>
         </div>
+
+        {/* Body sits outside the max-w-3xl header block so it stretches wide. */}
+        <p className="mt-6 max-w-7xl epm-body leading-relaxed text-[#5b6c84]">
+          {body}
+        </p>
 
         {/* Tab rail */}
         <div className="mt-8 flex flex-wrap gap-3">
@@ -30,9 +34,11 @@ export default function UniversityCertification() {
               aria-pressed={openIndex === index}
               className={[
                 "rounded-full border px-4 py-2 text-sm font-medium transition",
-                openIndex === index
-                  ? "border-brand bg-brand text-white"
-                  : "border-mist text-ink hover:border-brand/40 hover:bg-[#F6F8FD]",
+                track.upcoming
+                  ? "border-[#C4D6FF] bg-[#EAF1FF] text-[#0451CC]"
+                  : openIndex === index
+                    ? "border-brand bg-brand text-white"
+                    : "border-mist text-[#5B6C84] hover:border-brand/40 hover:bg-[#F6F8FD]",
               ].join(" ")}
             >
               {track.pill}
@@ -44,12 +50,12 @@ export default function UniversityCertification() {
         <div className="mt-8 space-y-4">
           {tracks.map((track, index) => {
             const open = openIndex === index;
-            // Solid code-pill colour: blue for PAM, teal for EPM, grey when upcoming.
+            // Solid code-pill colour: navy for PAM, brand blue for EPM, grey when upcoming (IAM).
             const pillColor = track.upcoming
-              ? "bg-[#8C97AB] text-white"
+              ? "bg-[#93A0B4] text-white"
               : track.code.startsWith("EPM")
-                ? "bg-[#29A8D8] text-white"
-                : "bg-[#0451CC] text-white";
+                ? "bg-[#0451CC] text-white"
+                : "bg-[#142E63] text-white";
             return (
               <div
                 key={track.code}
@@ -66,7 +72,7 @@ export default function UniversityCertification() {
                   className="flex w-full items-center gap-4 px-6 py-5 text-left transition hover:bg-[#F7FAFF]"
                 >
                   <span
-                    className={`shrink-0 rounded-md px-2.5 py-1 text-xs font-semibold tracking-wide ${pillColor}`}
+                    className={`shrink-0 rounded-md px-2.5 py-1 text-xs font-medium tracking-wide ${pillColor}`}
                   >
                     {track.code}
                   </span>
@@ -100,7 +106,7 @@ export default function UniversityCertification() {
                         {track.modules.map((module, mi) => (
                           <li
                             key={module}
-                            className="flex break-inside-avoid items-start gap-3 border-b border-dashed border-ink/10 py-2.5"
+                            className="flex break-inside-avoid items-start gap-3 py-2.5"
                           >
                             <span className="mt-px shrink-0 font-display text-xs font-bold text-brand">
                               {String(mi + 1).padStart(2, "0")}

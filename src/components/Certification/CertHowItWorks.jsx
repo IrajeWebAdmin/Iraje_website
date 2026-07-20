@@ -33,12 +33,12 @@ export default function CertHowItWorks() {
         <h2 className="mx-auto mt-4 max-w-6xl epm-heading leading-[1.05] font-medium tracking-[-2px] text-black">
           {heading}
         </h2>
-        <p className="mx-auto mt-6 max-w-3xl epm-body leading-relaxed text-[#8E8E93]">
+        <p className="mx-auto mt-6 max-w-3xl epm-body leading-relaxed text-[#8E8E93] ">
           {intro}
         </p>
       </div>
 
-      <div className="mt-14 grid gap-6 md:grid-cols-3">
+      <div className="mt-14 grid gap-8 md:grid-cols-3">
         {steps.map((step) => (
           <div
             key={step.num}
@@ -50,7 +50,7 @@ export default function CertHowItWorks() {
             <h3 className="mt-4 font-display text-lg font-semibold text-ink">
               {step.title}
             </h3>
-            <p className="mt-3 text-sm leading-relaxed text-slate-soft">
+            <p className="mt-3 text-base leading-relaxed text-[#8E8E93]">
               {step.body}
             </p>
           </div>

@@ -20,23 +20,27 @@ export default function PamChallenge() {
         </p>
       </div>
 
-      <div className="mt-12 grid justify-items-center gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {/* Cards fill their columns so the grid spans the full container-global
+          width and the gap stays exactly gap-6 at every size. Capping the card
+          width instead would turn the leftover column space into extra,
+          viewport-dependent gap. */}
+      <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {problems.map((problem) => (
           <div
             key={problem.tag}
-            className="flex h-[382px] w-full max-w-[320px] flex-col rounded-3xl border border-mist bg-white p-7 text-left shadow-[0px_3.05px_6.09px_-0.76px_#00000014]"
+            className="flex min-h-107.5 w-full flex-col rounded-3xl border border-mist bg-white p-7 text-left shadow-[0px_3.05px_6.09px_-0.76px_#00000014]"
           >
             {/* Figma: alert glyph (~32px) centered inside a ~49x44 rounded badge */}
             <span className="mb-5 flex h-11 w-[49px] shrink-0 items-center justify-center rounded-xl bg-[#E00000]/10">
               <Image src={problem.icon} alt="" width={32} height={32} />
             </span>
-            <span className="text-base font-normal tracking-[0.14em] text-[#E00000] uppercase">
+            <span className="text-xl font-normal  text-[#E00000] uppercase">
               {problem.tag}
             </span>
-            <h3 className="mt-4 font-display text-xl font-medium text-ink">
+            <h3 className="mt-4 font-display text-2xl font-medium text-ink">
               {problem.title}
             </h3>
-            <p className="mt-3 text-sm leading-relaxed text-[#8E8E93] ">
+            <p className="mt-3 text-lg leading-relaxed text-[#8E8E93] ">
               {problem.body}
             </p>
           </div>

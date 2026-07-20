@@ -93,10 +93,13 @@ export default function EpmComparison() {
           <h2 className="mx-auto mt-4 max-w-6xl epm-heading font-medium leading-[1.1] tracking-tight text-black">
             {vs.heading}
           </h2>
-          <p className="mx-auto mt-6 max-w-4xl epm-body leading-relaxed text-slate-soft">
-            {vs.body}
-          </p>
         </div>
+
+        {/* Body sits in its own wider wrapper (outside the max-w-4xl intro block)
+            so it wraps onto two lines rather than three. */}
+        <p className="mx-auto mt-6 max-w-5xl text-center epm-body leading-relaxed text-[#8E8E93]">
+          {vs.body}
+        </p>
 
         {/* Three cards */}
         <div className="mt-12 grid gap-6 md:grid-cols-3">

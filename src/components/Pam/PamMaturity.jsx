@@ -21,7 +21,7 @@ export default function PamMaturity() {
         <h2 className="mt-4 epm-heading leading-[1.05] font-medium tracking-[-2px] text-black md:whitespace-nowrap">
           {heading}
         </h2>
-        <p className="mx-auto mt-8 max-w-3xl epm-body leading-relaxed text-slate-soft">
+        <p className="mx-auto mt-8 max-w-6xl epm-body leading-relaxed text-[#8E8E93]">
           {body}
         </p>
       </div>
@@ -65,7 +65,7 @@ export default function PamMaturity() {
           <span key={part}>
             <span style={{ color: "#707070" }}>{part.trim()}</span>
             {index < parts.length - 1 && (
-              <span className="mx-2 text-brand">→</span>
+              <span className="mx-2 font-extrabold text-brand">→</span>
             )}
           </span>
         ))}

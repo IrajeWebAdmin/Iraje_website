@@ -22,7 +22,7 @@ export default function PamArchitecture() {
           <h2 className="mt-4 epm-heading leading-[1.05] font-medium tracking-[-2px] text-black">
             {heading}
           </h2>
-          <p className="mt-6 epm-body leading-relaxed text-slate-soft">
+          <p className="mt-6 epm-body leading-relaxed text-[#8E8E93]">
             {body}
           </p>
 
@@ -37,7 +37,7 @@ export default function PamArchitecture() {
                   <h3 className="font-display text-base font-semibold text-ink">
                     {server.name}
                   </h3>
-                  <p className="mt-1 text-sm leading-relaxed text-slate-soft">
+                  <p className="mt-1 text-sm leading-relaxed text-[#8E8E93]">
                     {server.body}
                   </p>
                 </div>
@@ -45,10 +45,12 @@ export default function PamArchitecture() {
             ))}
           </div>
 
-          {/* Real Zero Trust note */}
-          <div className="mt-8 rounded-2xl bg-[#EAF1FF] px-6 py-5">
-            <p className="text-sm leading-relaxed text-slate-soft">
-              <span className="font-semibold text-ink">{noteLabel}</span>
+          {/* Real Zero Trust note — 1px border compositing the Figma stroke's two
+              flat layers (grey 6% over brand-blue 13%) into one solid colour, so
+              it still follows the rounded corners (border-image would not). */}
+          <div className="mt-8 rounded-2xl border border-[rgba(40,91,174,0.18)] bg-[#EAF1FF] px-6 py-5">
+            <p className="text-sm leading-relaxed text-[#8E8E93]">
+              <span className="font-medium text-ink">{noteLabel}</span>
               {noteBody}
             </p>
           </div>

@@ -107,7 +107,7 @@ export default function ResourceCard({
 
       {/* Content Area */}
       <div className="flex flex-1 flex-col px-8 pt-12 pb-8">
-        <p className="epm-body leading-relaxed text-gray-500">
+        <p className="text-[clamp(0.875rem,0.75rem+0.33vw,1rem)] leading-relaxed text-gray-500">
           {withBrandHighlight(description)}
         </p>
 

@@ -28,7 +28,7 @@ export default function UniversityIntro() {
     <section className="bg-white py-10">
       <div className="container-global">
         {/* Intro copy */}
-        <div className="mx-auto max-w-5xl text-center">
+        <div className="mx-auto max-w-7xl text-center">
           <h2 className="mx-auto mt-4 max-w-6xl epm-heading leading-[1.05] font-medium tracking-[-2px] text-black ">
             {heading}
           </h2>
@@ -50,16 +50,18 @@ export default function UniversityIntro() {
               <h3 className="mt-4 font-display text-[1.75rem] font-semibold leading-tight">
                 {card.title}
               </h3>
-              <p className="mt-3 text-[15px] leading-7 text-white/90">
+              <p className="mt-3 mb-8 text-[15px] leading-7 text-white/90">
                 {card.body[0]}
                 <span className={index === 0 ? "text-[#FFCE0C]" : "text-[#FFCE0C]"}>
                   {card.body[1]}
                 </span>
                 {card.body[2]}
               </p>
+              {/* mt-auto pins the CTA to the card's bottom so both cards' CTAs
+                  align on the same line despite differing body lengths. */}
               <Link
                 href={card.cta.href}
-                className="mt-8 inline-flex w-fit items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-medium text-ink transition hover:bg-white/90"
+                className="mt-auto inline-flex w-fit items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-medium text-ink transition hover:bg-white/90"
               >
                 {card.cta.label} <span aria-hidden>→</span>
               </Link>

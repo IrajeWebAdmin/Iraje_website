@@ -1,6 +1,5 @@
  import Image from "next/image";
 import Link from "next/link";
-
 import footerLinks from "@/data/footerLinks";
 
 export default function HomeFooter() {
@@ -19,14 +18,14 @@ export default function HomeFooter() {
               height={40}
             />
 
-            <p className="mt-6 max-w-xs text-sm leading-relaxed text-white/70">
+            <p className="mt-3 max-w-xs text-base leading-relaxed text-white">
              One platform to secure<br />every identity.
             </p>
           </div>
 
           {/* Platform */}
           <div>
-            <h3 className="mb-5 text-xs font-semibold uppercase tracking-[3px] text-white/50">
+            <h3 className="mb-5 text-xs font-semibold uppercase tracking-[3px] text-white">
               Platform
             </h3>
 
@@ -35,7 +34,7 @@ export default function HomeFooter() {
                 <li key={item.name}>
                   <Link
                     href={item.href}
-                    className="text-sm text-white/80 transition hover:text-white"
+                    className="text-sm text-white transition hover:text-white"
                   >
                     {item.name}
                   </Link>
@@ -46,7 +45,7 @@ export default function HomeFooter() {
 
           {/* Learn */}
           <div>
-            <h3 className="mb-5 text-xs font-semibold uppercase tracking-[3px] text-white/50">
+            <h3 className="mb-5 text-xs font-semibold uppercase tracking-[3px] text-white">
               Learn
             </h3>
 
@@ -55,7 +54,7 @@ export default function HomeFooter() {
                 <li key={item.name}>
                   <Link
                     href={item.href}
-                    className="text-sm text-white/80 transition hover:text-white"
+                    className="text-sm text-white transition hover:text-white"
                   >
                     {item.name}
                   </Link>
@@ -66,7 +65,7 @@ export default function HomeFooter() {
 
           {/* Company */}
           <div>
-            <h3 className="mb-5 text-xs font-semibold uppercase tracking-[3px] text-white/50">
+            <h3 className="mb-5 text-xs font-semibold uppercase tracking-[3px] text-white">
               Company
             </h3>
 
@@ -75,7 +74,7 @@ export default function HomeFooter() {
                 <li key={item.name}>
                   <Link
                     href={item.href}
-                    className="text-sm text-white/80 transition hover:text-white"
+                    className="text-sm text-white transition hover:text-white"
                   >
                     {item.name}
                   </Link>
@@ -87,7 +86,7 @@ export default function HomeFooter() {
         </div>
 
         {/* Divider */}
-        <div className="my-10 h-px bg-white/10" />
+        <div className="my-10 h-px bg-white" />
 
         {/* Bottom Footer */}
         <div className="flex flex-col gap-4 text-xs text-white/40 md:flex-row md:justify-between">

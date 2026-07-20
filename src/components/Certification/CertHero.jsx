@@ -26,7 +26,7 @@ export default function CertHero() {
               <br />
               {titleTrail}
             </h1>
-            <p className="mt-6 max-w-xl text-base leading-relaxed text-slate-soft md:text-lg">
+            <p className="mt-6 max-w-2xl text-base leading-relaxed text-[#8E8E93] md:text-lg">
               {body}
             </p>
             <div className="mt-10 flex flex-wrap gap-4">

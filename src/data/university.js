@@ -284,8 +284,8 @@ const university = {
       "Tell us who you are and what you'd like to learn. Our academy team will follow up with available schedules, formats and enrolment details.",
     contact: [
       { icon: "mail", text: "university@iraje.com" },
-      { icon: "clock", text: "Response within 1–2 business days" },
-      { icon: "layers", text: "Online · Classroom · Masterclass · Onsite" },
+      { icon: "phone", text: "Response within 1–2 business days" },
+      { icon: "map", text: "Online · Classroom · Masterclass · Onsite" },
     ],
     audiences: ["Customer", "Partner", "Individual / Professional", "Student"],
     courses: [
@@ -297,6 +297,44 @@ const university = {
       "Iraje IAM 101 — Fundamentals (Upcoming)",
     ],
     deliveryFormats: ["Online", "Classroom", "Masterclass", "Onsite"],
+  },
+
+  // ---- Footer -----------------------------------------------------------
+  footer: {
+    brandLead: "Iraje",
+  
+    description:
+    "One platform to secure  every identity.",
+    columns: [
+      {
+        title: "Training",
+        links: [
+          { name: "CyberTantra", href: "#master-course" },
+          { name: "PAM", href: "/products/pam" },
+          { name: "EPM", href: "/products/epm" },
+          { name: "IAM (Coming Soon)", href: "#certification" },
+        ],
+      },
+      {
+        title: "Programs",
+        links: [
+          { name: "For Customers", href: "#formats" },
+          { name: "For Partners", href: "#formats" },
+          { name: "Masterclasses", href: "#formats" },
+          { name: "Request Training", href: "#request" },
+        ],
+      },
+      {
+        title: "Iraje",
+        links: [
+          { name: "Iraje Home", href: "/" },
+          { name: "PAM Solution", href: "/products/pam" },
+          { name: "Contact Us", href: "/contact" },
+        ],
+      },
+    ],
+    copyright: "© Iraje Software. All rights reserved.",
+  
   },
 };
 

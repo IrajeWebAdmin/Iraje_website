@@ -15,8 +15,7 @@ const resources = [
     title: "Partner Program",
     description:
       "Register deals, protect your pipeline and track your sales funnel in the Iraje Partner Portal.",
-    buttonText: "Coming Soon",
-    comingSoon: true,
+    buttonText: "Explore Partner Program",
     image: "/images/home/home-patner-program.webp",
     link: "/partners",
   },

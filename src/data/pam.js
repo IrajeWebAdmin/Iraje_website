@@ -110,41 +110,49 @@ const pam = {
     benefits: [
       {
         title: "Reduced cyber risk",
+        icon: "shield",
         body:
           "Cuts credential theft, ransomware spread, unauthorized access and insider abuse.",
       },
       {
         title: "Stops lateral movement",
+        icon: "lateral",
         body:
           "Limits credential exposure, shared accounts and persistent privileges.",
       },
       {
         title: "Visibility & control",
+        icon: "eye",
         body:
           "Centralised view of all privileged accounts, users and active sessions.",
       },
       {
         title: "Secure vendor access",
+        icon: "globe",
         body:
           "Time-bound, monitored, approval-gated sessions with instant termination.",
       },
       {
         title: "Audit readiness",
+        icon: "check",
         body:
           "Access logs, session recordings, rotation reports and approval history on tap.",
       },
       {
         title: "Zero Trust enablement",
+        icon: "clock",
         body:
           "Never trust, always verify, least privilege and continuous monitoring.",
       },
       {
         title: "Operational efficiency",
+        icon: "zap",
         body:
           "Automates password resets, provisioning, approvals and credential rotation.",
       },
       {
         title: "Hybrid & cloud cover",
+        icon: "cloud",
         body:
           "Secures datacentres, cloud, SaaS, DevOps, Kubernetes and containers alike.",
       },
@@ -496,16 +504,16 @@ const pam = {
     body:
       "Iraje PAM maps directly to regulatory requirements on privileged access and complies with leading global security standards.",
     standards: [
-      { name: "ISO 27001", sub: "Information security" },
-      { name: "EU GDPR", sub: "Data privacy" },
-      { name: "PCI-DSS", sub: "Payment card data" },
-      { name: "SOX", sub: "Financial controls" },
-      { name: "HIPAA", sub: "Healthcare data" },
-      { name: "NIST 800-63B", sub: "Digital identity" },
-      { name: "BASEL III", sub: "Banking risk" },
-      { name: "MAS", sub: "Singapore" },
-      { name: "NESA", sub: "NESA" },
-      { name: "DPDP Act", sub: "India 2023" },
+      { name: "ISO 27001", sub: "Information security", icon: "check" },
+      { name: "EU GDPR", sub: "Data privacy", icon: "globe" },
+      { name: "PCI-DSS", sub: "Payment card data", icon: "card" },
+      { name: "SOX", sub: "Financial controls", icon: "file" },
+      { name: "HIPAA", sub: "Healthcare data", icon: "health" },
+      { name: "NIST 800-63B", sub: "Digital identity", icon: "shield" },
+      { name: "BASEL III", sub: "Banking risk", icon: "home" },
+      { name: "MAS", sub: "Singapore", icon: "clock" },
+      { name: "NESA", sub: "NESA", icon: "shield" },
+      { name: "DPDP Act", sub: "India 2023", icon: "check" },
     ],
     indianTitle: "Mapped to Indian regulators",
     indianBody:

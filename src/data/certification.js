@@ -121,7 +121,7 @@ const certification = {
   howItWorks: {
     eyebrow: "How It Works",
     heading: "From registration to certificate",
-    body:
+    intro:
       "A simple, governed journey — register, get approved, learn at your pace, pass the exam, and earn a verifiable certificate.",
     steps: [
       {
@@ -277,8 +277,8 @@ const certification = {
 
   // ---- Enroll / Registration -------------------------------------------
   enroll: {
-    eyebrow: "Register for certification",
-    heading: "Enroll",
+    eyebrow: "Enroll",
+    heading: "Register for certification",
     intro:
       "Tell us about yourself and select the certifications you'd like to pursue. Your request goes to our team for approval.",
     detailStep: {

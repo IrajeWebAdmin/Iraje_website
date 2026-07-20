@@ -71,7 +71,7 @@ export default function WhyIraje() {
                   {item.title}
                 </h3>
 
-                <p className="epm-body leading-relaxed text-gray-500">
+                <p className="text-[clamp(0.875rem,0.75rem+0.33vw,1rem)] leading-relaxed text-gray-500">
                   {item.description}
                 </p>
               </motion.div>

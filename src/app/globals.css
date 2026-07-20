@@ -51,7 +51,8 @@
    tablet/mobile so it never overflows on smaller screens. */
 .epm-eyebrow {
   font-family: var(--font-poppins), "Poppins", sans-serif;
-  font-size: clamp(0.875rem, 0.625rem + 0.65vw, 1.125rem);
+  /* font-size: clamp(0.875rem, 0.625rem + 0.65vw, 1.125rem); */
+    font-size: clamp(1.125rem, 0.875rem + 0.7vw, 1.375rem);
   /* font-weight: 500; */
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -71,7 +72,9 @@
 
 .epm-body {
   font-size: clamp(1.125rem, 1rem + 0.33vw, 1.25rem);
+   /* max-width: 1100px !important; */
 }
+
 
 /* Opt-out of the uppercase eyebrow treatment — renders the label in its
    original (Title) case. Defined after .epm-eyebrow so it wins on source order. */
@@ -99,6 +102,40 @@
 .animate-marquee {
   animation: marquee 40s linear infinite;
   will-change: transform;
+}
+
+/* ===========================================================================
+   EPM stack — highlighted "Iraje EPM" layer glow.
+   A slow, breathing brand-blue glow that draws the eye to the one preventive
+   layer in the security stack. Gated behind prefers-reduced-motion so the card
+   simply rests at a soft static glow for users who opt out of motion.
+   =========================================================================== */
+@keyframes epm-glow {
+  0%,
+  100% {
+    box-shadow:
+      0 10px 20px rgba(4, 81, 204, 0.25),
+      0 0 0 0 rgba(4, 81, 204, 0);
+  }
+  50% {
+    box-shadow:
+      0 14px 32px rgba(4, 81, 204, 0.45),
+      0 0 26px 4px rgba(4, 81, 204, 0.35);
+  }
+}
+
+.epm-glow {
+  animation: epm-glow 4.5s ease-in-out infinite;
+  will-change: box-shadow;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .epm-glow {
+    animation: none;
+    box-shadow:
+      0 12px 26px rgba(4, 81, 204, 0.35),
+      0 0 20px 2px rgba(4, 81, 204, 0.25);
+  }
 }
 
 /* Soft fade at both edges so items appear/disappear instead of hard-clipping. */

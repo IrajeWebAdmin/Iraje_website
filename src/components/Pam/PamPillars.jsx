@@ -1,6 +1,13 @@
+import Image from "next/image";
 import PamSection from "./PamSection";
-import { FiLock } from "react-icons/fi";
 import pam from "@/data/pam";
+import epm from "@/data/epm";
+
+// Reuse the CapabilityStrip icons — the PAM pillars share the same six
+// capability names (Manage, Monitor, …), so key the strip's SVGs by name.
+const STRIP_ICONS = Object.fromEntries(
+  epm.hero.strip.map((s) => [s.name, s.icon]),
+);
 
 export default function PamPillars() {
   const { eyebrow, heading, body, items } = pam.pillars;
@@ -21,14 +28,25 @@ export default function PamPillars() {
       </div>
 
       <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {items.map((pillar) => (
+        {items.map((pillar) => {
+          const icon = STRIP_ICONS[pillar.name];
+          return (
           <div
             key={pillar.name}
             className="flex flex-col rounded-3xl border border-mist bg-white p-7 text-left"
           >
             <div className="flex items-center gap-3">
-              <span className="flex h-[41px] w-[41px] shrink-0 items-center justify-center rounded-xl bg-brand text-white">
-                <FiLock className="h-5 w-5" />
+              <span className="flex h-[41px] w-[41px] shrink-0 items-center justify-center rounded-xl bg-brand">
+                {icon && (
+                  <Image
+                    src={icon}
+                    alt=""
+                    width={20}
+                    height={20}
+                    // brightness-0 invert renders the brand-blue SVG solid white
+                    className="h-5 w-5 brightness-0 invert"
+                  />
+                )}
               </span>
               <h3 className="font-display text-2xl font-medium text-ink">
                 {pillar.name}
@@ -55,7 +73,8 @@ export default function PamPillars() {
               })}
             </div>
           </div>
-        ))}
+          );
+        })}
       </div>
     </PamSection>
   );

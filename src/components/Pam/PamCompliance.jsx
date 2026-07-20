@@ -1,7 +1,28 @@
 import Image from "next/image";
-import { BsShieldCheck } from "react-icons/bs";
+import {
+  FiCheckCircle,
+  FiGlobe,
+  FiCreditCard,
+  FiFile,
+  FiShield,
+  FiHome,
+  FiClock,
+} from "react-icons/fi";
+import { LuStethoscope } from "react-icons/lu";
 import PamSection from "./PamSection";
 import pam from "@/data/pam";
+
+// Per-standard icons, keyed by the `icon` field on each standards data item.
+const ICONS = {
+  check: FiCheckCircle,
+  globe: FiGlobe,
+  card: FiCreditCard,
+  file: FiFile,
+  health: LuStethoscope,
+  shield: FiShield,
+  home: FiHome,
+  clock: FiClock,
+};
 
 export default function PamCompliance() {
   const {
@@ -34,24 +55,23 @@ export default function PamCompliance() {
 
       {/* Global standards */}
       <div className="mx-auto mt-12 flex max-w-[1240px] flex-wrap justify-center gap-4">
-        {standards.map((std) => (
-          <div
-            key={std.name}
-            className="flex h-[203.46px] w-[231.9px] flex-col items-center justify-center rounded-[28.44px] border border-mist bg-white px-4 text-center"
-          >
-            <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#E4EAFB] text-brand">
-              <BsShieldCheck
-                className="h-6 w-6"
-                stroke="currentColor"
-                strokeWidth={0.5}
-              />
-            </span>
-            <p className="mt-4 font-display text-base font-semibold text-ink">
-              {std.name}
-            </p>
-            <p className="mt-1 text-sm text-slate-soft">{std.sub}</p>
-          </div>
-        ))}
+        {standards.map((std) => {
+          const Icon = ICONS[std.icon];
+          return (
+            <div
+              key={std.name}
+              className="flex h-[203.46px] w-[231.9px] flex-col items-center justify-center rounded-[28.44px] border border-mist bg-white px-4 text-center"
+            >
+              <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#E4EAFB] text-brand">
+                {Icon && <Icon className="h-6 w-6" />}
+              </span>
+              <p className="mt-4 font-display text-base font-semibold text-ink">
+                {std.name}
+              </p>
+              <p className="mt-1 text-sm text-slate-soft">{std.sub}</p>
+            </div>
+          );
+        })}
       </div>
 
       {/* Indian regulators + DPDP mapping */}

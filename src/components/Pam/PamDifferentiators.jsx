@@ -32,7 +32,7 @@ export default function PamDifferentiators() {
         <h2 className="mx-auto mt-4 max-w-6xl epm-heading leading-[1.05] font-medium tracking-[-2px] text-black">
           {heading}
         </h2>
-        <p className="mx-auto mt-8 max-w-3xl epm-body leading-relaxed text-[#8E8E93]">
+        <p className="mt-8 epm-body leading-relaxed text-[#8E8E93] lg:whitespace-nowrap">
           {body}
         </p>
       </div>
@@ -51,7 +51,7 @@ export default function PamDifferentiators() {
             <h3 className="mt-1 font-display text-lg font-semibold text-ink">
               {item.title}
             </h3>
-            <p className="mt-2 text-sm leading-relaxed text-slate-soft">
+            <p className="mt-2 text-sm leading-relaxed text-[#8E8E93]"> 
               {item.body}
             </p>
           </div>

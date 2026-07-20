@@ -1,9 +1,9 @@
 import Link from "next/link";
-import { FiLock, FiServer, FiCloud, FiHome } from "react-icons/fi";
+import { FiLock, FiDatabase, FiCloud, FiHome } from "react-icons/fi";
 import pam from "@/data/pam";
 
 // Icon per feature row, in the card's listed order (matches the Figma design).
-const PILL_ICONS = [FiLock, FiServer, FiCloud, FiHome];
+const PILL_ICONS = [FiLock, FiDatabase, FiCloud, FiHome];
 
 export default function PamHero() {
   const { eyebrow, subtitle, ctas, card } = pam.hero;

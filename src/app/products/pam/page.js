@@ -18,7 +18,7 @@ export default function PamPage() {
   return (
     <>
       <PamHero />
-      <CapabilityStrip/>
+      <CapabilityStrip offsetClassName="-mt-16" />
       <PamIntro />
       <PamChallenge />
       <PamSolution />

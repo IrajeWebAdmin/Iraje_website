@@ -28,15 +28,15 @@ export default function UniversityFormats() {
           </p>
         </div>
 
-        {/* Program columns */}
-        <div className="mx-auto mt-12 grid max-w-5xl gap-6 md:grid-cols-2">
+        {/* Program columns — span the full container-global width. */}
+        <div className="mt-12 grid gap-10 md:grid-cols-2">
           {groups.map((group) => (
             <article
               key={group.title}
-              className="flex flex-col rounded-2xl border border-ink/10 bg-white p-8 shadow-[0px_1px_2px_0px_#0C1E3A0D]"
+              className="flex min-h-140 flex-col rounded-2xl border border-ink/10 bg-white p-8 shadow-[0px_1px_2px_0px_#0C1E3A0D]"
             >
-              <p className=" text-azure text-sm uppercase ">{group.label}</p>
-              <h3 className="mt-3 font-display text-xl font-semibold text-ink">
+              <p className=" text-azure text-base uppercase ">{group.label}</p>
+              <h3 className="mt-3 font-display text-2xl font-semibold text-ink">
                 {group.title}
               </h3>
 
@@ -48,12 +48,12 @@ export default function UniversityFormats() {
                       key={item.title}
                       className="flex items-start gap-4 border-b border-ink/10 py-4 first:pt-0 last:border-b-0 last:pb-0"
                     >
-                      <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-[#E6EDFF] text-brand">
-                        <Icon className="h-4 w-4" />
+                      <span className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#E6EDFF] text-brand">
+                        <Icon className="h-6 w-6" />
                       </span>
                       <span>
-                        <span className="block font-medium text-ink">{item.title}</span>
-                        <span className="mt-0.5 block text-[13px] leading-6 text-[#5b6c84]">
+                        <span className="block  text-xl font-semibold text-ink">{item.title}</span>
+                        <span className="mt-0.5 block text-[15px] leading-6 text-[#5b6c84]">
                           {item.desc}
                         </span>
                       </span>
@@ -63,7 +63,7 @@ export default function UniversityFormats() {
               </ul>
 
               {group.note && (
-                <p className="mt-auto border-t border-ink/10 pt-6 text-[13px] leading-6 text-[#5b6c84]">
+                <p className="mt-8 border-t border-ink/10 pt-6 text-[15px] leading-6 text-[#5b6c84]">
                   {group.note}
                 </p>
               )}

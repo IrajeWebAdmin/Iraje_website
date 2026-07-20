@@ -47,10 +47,10 @@ export default function CertEnroll() {
           {/* Pitch */}
           <div className="lg:pt-6">
             <p className="epm-eyebrow epm-eyebrow-normal font-semibold text-brand">{eyebrow}</p>
-            <h2 className="epm-heading mt-4 font-display leading-[1.12] font-semibold">
+            <h2 className="epm-heading mt-4 font-display leading-[1.12] font-medium">
               {heading}
             </h2>
-            <p className="epm-body mt-5 max-w-md leading-relaxed text-slate-soft">{intro}</p>
+            <p className="epm-body mt-5 max-w-xl leading-relaxed text-[#8E8E93]">{intro}</p>
 
             <div className="mt-8 max-w-md rounded-2xl border border-mist bg-[#E8F5FC] p-5">
               <p className="text-sm leading-relaxed text-black">

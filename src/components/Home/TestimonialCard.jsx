@@ -39,7 +39,7 @@ export default function TestimonialCard({
       </div>
 
       {/* Review */}
-      <p className="epm-body mt-6 leading-relaxed text-gray-500 group-hover:text-gray-200 ">
+      <p className=" text-[clamp(0.875rem,0.75rem+0.33vw,1rem)] mt-6 leading-relaxed text-gray-500 group-hover:text-gray-200 ">
         {review}
       </p>
     </div>

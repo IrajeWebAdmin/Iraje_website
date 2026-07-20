@@ -28,7 +28,7 @@ export default function PamComparison() {
         <h2 className="mx-auto mt-4 max-w-6xl epm-heading leading-[1.05] font-medium tracking-[-2px] text-black">
           {heading}
         </h2>
-        <p className="mx-auto mt-8 max-w-3xl epm-body leading-relaxed text-slate-soft">
+        <p className="mx-auto mt-8 max-w-3xl epm-body leading-relaxed text-[#8E8E93] lg:whitespace-nowrap">
           {body}
         </p>
       </div>
@@ -41,8 +41,8 @@ export default function PamComparison() {
                 {columns.map((col, c) => (
                   <th
                     key={col}
-                    className={`px-6 py-6 align-middle text-[15px] ${
-                      c === 0 ? "font-semibold" : "font-medium"
+                    className={`px-6 py-6 align-middle text-[20px] ${
+                      c === 0 ? "font-medium" : "font-medium"
                     } ${
                       c === columns.length - 1
                         ? "bg-brand text-white"
@@ -63,7 +63,7 @@ export default function PamComparison() {
                     <td
                       key={c}
                       className={`px-6 py-4 align-top leading-snug text-black ${
-                        c === 0 ? "font-semibold" : "font-medium"
+                        c === 0 ? "font-medium" : "font-normal"
                       } ${c === row.length - 1 ? "bg-[#DFEBFF]" : "bg-[#F4F8FF]"}`}
                     >
                       {c !== 0 && c !== row.length - 1

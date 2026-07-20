@@ -9,9 +9,9 @@ export default function CertVerify() {
 
   return (
     <CertSection id="verify" tone="light">
-      <div className="rounded-[28px] bg-[linear-gradient(180deg,#0451CC_0%,#022966_100%)] p-10 md:p-14">
+      <div className="rounded-[55px] bg-[linear-gradient(180deg,#0451CC_0%,#022966_100%)] p-10 md:p-14">
         {/* Header — global epm-* classes, recoloured for the dark card */}
-        <span className="epm-eyebrow epm-eyebrow-normal font-semibold text-white/70">
+        <span className="epm-eyebrow epm-eyebrow-normal font-medium text-white/70">
           {eyebrow}
         </span>
         <h2 className="mt-4 epm-heading leading-[1.05] font-medium tracking-[-2px] text-white">

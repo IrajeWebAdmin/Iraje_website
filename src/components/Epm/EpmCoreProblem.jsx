@@ -1,6 +1,25 @@
 import { FiAlertTriangle, FiCheck } from "react-icons/fi";
 import epm from "@/data/epm";
 
+// Keyhole-in-circle mark for the "local admin rights" tile — a ring enclosing a
+// keyhole (access / privileges). Inlined because react-icons has no clean
+// keyhole-in-circle glyph. Colour comes from the parent via `currentColor`.
+function KeyholeIcon({ className }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      className={className}
+      aria-hidden="true"
+    >
+      <circle cx="12" cy="12" r="8.5" strokeWidth="2" />
+      <circle cx="12" cy="10.6" r="1.5" fill="currentColor" stroke="none" />
+      <path d="M12 12v3.1" strokeWidth="1.6" strokeLinecap="round" />
+    </svg>
+  );
+}
+
 function ProblemCard({ tile, title, items }) {
   return (
     <div className="rounded-2xl border-[0.76px] border-[#00000017] bg-white p-8 shadow-[0px_3.05px_6.09px_-0.76px_#00000014]">
@@ -43,15 +62,22 @@ export default function EpmCoreProblem() {
           <h2 className="mt-4 font-display epm-heading leading-[1.1] font-medium text-ink">
             {`"${heading}"`}
           </h2>
-          <p className="mx-auto mt-6 max-w-3xl epm-body leading-relaxed text-[#8E8E93]">
-            {body}
-          </p>
         </div>
+
+        {/* Body sits in its own wider wrapper (outside the max-w-4xl header block)
+            so it wraps onto two lines rather than three. */}
+        <p className="mx-auto mt-6 max-w-5xl text-center epm-body leading-relaxed text-[#8E8E93]">
+          {body}
+        </p>
 
         {/* Reasons + risks */}
         <div className="mt-14 grid gap-6 md:grid-cols-2">
           <ProblemCard
-            tile={<span className="block h-12 w-12 rounded-xl bg-[#BBD0F1]" />}
+            tile={
+              <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#BBD0F1]">
+                <KeyholeIcon className="h-6 w-6 text-brand" />
+              </span>
+            }
             title={reasonsTitle}
             items={reasons}
           />

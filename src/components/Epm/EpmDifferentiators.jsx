@@ -1,5 +1,5 @@
+import Image from "next/image";
 import EpmSection from "./EpmSection";
-import { FiShield } from "react-icons/fi";
 import epm from "@/data/epm";
 
 export default function EpmDifferentiators() {
@@ -30,8 +30,9 @@ export default function EpmDifferentiators() {
                 {item.num}
               </span>
 
-              <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#0451CC] text-white">
-                <FiShield className="h-6 w-6" />
+              {/* Icon tile — the source SVGs are already white, so no filter. */}
+              <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#0451CC]">
+                <Image src={item.icon} alt="" width={26} height={26} />
               </span>
             </div>
 
