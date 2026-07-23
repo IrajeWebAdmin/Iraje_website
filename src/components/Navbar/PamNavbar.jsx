@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
 import pam from "@/data/pam";
+import ProductsDropdown from "./ProductsDropdown";
 
 export default function PamNavbar() {
   const [open, setOpen] = useState(false);
@@ -29,12 +30,16 @@ export default function PamNavbar() {
             <ul className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-12 lg:flex">
             {links.map((link) => (
               <li key={link.name}>
-                <Link
-                  href={link.href}
-                  className="relative font-medium text-black transition-all duration-300 after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-0 after:bg-black after:transition-all after:duration-300 hover:after:w-full"
-                >
-                  {link.name}
-                </Link>
+                {link.name === "Products" ? (
+                  <ProductsDropdown />
+                ) : (
+                  <Link
+                    href={link.href}
+                    className="relative font-medium text-black transition-all duration-300 after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-0 after:bg-black after:transition-all after:duration-300 hover:after:w-full"
+                  >
+                    {link.name}
+                  </Link>
+                )}
               </li>
             ))}
           </ul>

@@ -10,7 +10,7 @@ export default function TestimonialCard({
   review,
 }) {
   return (
-   <div className="group min-h-[460px] rounded-[32px] border border-gray-200 bg-white p-10 text-center shadow-sm transition-all duration-300 hover:bg-[#373B55] hover:text-white hover:shadow-xl hover:-translate-y-2">
+   <div className="group flex h-full min-h-[460px] flex-col rounded-[32px] border border-gray-200 bg-white p-10 text-center shadow-sm transition-all duration-300 hover:bg-[#373B55] hover:text-white hover:shadow-xl hover:-translate-y-2">
       {/* Stars */}
       <div className="flex justify-center gap-2">
         {[...Array(rating)].map((_, index) => (
@@ -22,7 +22,7 @@ export default function TestimonialCard({
       </div>
 
       {/* Name */}
-      <h3 className="mt-6 epm-heading font-semibold">
+      <h3 className="mt-6 text-lg font-semibold">
         {name}
       </h3>
 

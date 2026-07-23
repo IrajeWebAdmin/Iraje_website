@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { HiMenu, HiX } from "react-icons/hi";
 import Image from "next/image";
+import ProductsDropdown from "./ProductsDropdown";
 
 const navLinks = [
   { name: "Home", href: "/" },
@@ -40,12 +41,16 @@ export default function Navbar() {
         <ul className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-12 lg:flex">
           {navLinks.map((link) => (
             <li key={link.name}>
-              <Link
-                href={link.href}
-                className="relative font-medium text-black transition-all duration-300 after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-0 after:bg-black after:transition-all after:duration-300 hover:after:w-full"
-              >
-                {link.name}
-              </Link>
+              {link.name === "Products" ? (
+                <ProductsDropdown />
+              ) : (
+                <Link
+                  href={link.href}
+                  className="relative font-medium text-black transition-all duration-300 after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-0 after:bg-black after:transition-all after:duration-300 hover:after:w-full"
+                >
+                  {link.name}
+                </Link>
+              )}
             </li>
           ))}
         </ul>

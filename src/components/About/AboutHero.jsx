@@ -8,8 +8,8 @@ export default function AboutHero() {
 
   return (
     <section className="bg-white">
-      <div className="container-global pt-32 pb-20 md:pt-40 md:pb-28">
-        <div className="grid items-center gap-12 lg:grid-cols-2">
+      <div className="container-global pt-24 pb-12 md:pt-28 md:pb-16">
+        <div className="grid items-center gap-12 lg:grid-cols-[1fr_1.25fr]">
           {/* Copy */}
           <div>
             <p className="epm-eyebrow epm-eyebrow-normal flex items-center gap-3 font-semibold text-brand">
@@ -48,7 +48,7 @@ export default function AboutHero() {
               alt="Iraje team collaborating on enterprise security"
               width={904}
               height={776}
-              className="h-auto w-full max-w-185"
+              className="h-auto w-full max-w-226"
               priority
             />
           </div>

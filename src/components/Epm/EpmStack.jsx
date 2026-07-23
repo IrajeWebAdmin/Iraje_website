@@ -80,7 +80,7 @@ export default function EpmStack() {
 
       {/* Why detection alone isn't enough + the BASIC → ADVANCED maturity matrix */}
       <div
-        className={`mt-20 ${matrix ? "grid gap-12 lg:grid-cols-[1fr_700px] lg:items-center" : ""}`}
+        className={`mt-20 ${matrix ? "grid gap-12 lg:grid-cols-[1fr_600px] lg:items-center" : ""}`}
       >
         {/* Left: explanation */}
         <div className="text-left">
@@ -99,20 +99,36 @@ export default function EpmStack() {
 
         {/* Right: maturity matrix (only when matrix data is provided) */}
         {matrix && (
-        <div className="w-full rounded-[38px] border border-[#E8ECF4] bg-white px-10 py-10 shadow-[0_12px_40px_rgba(2,41,102,0.07)] md:p-8 lg:flex lg:min-h-[560px] lg:flex-col lg:items-center lg:justify-center">
-          {/* Panel block — centred in the card. The Y-axis label is positioned
-              absolutely to the panel's left so it never pushes the blue panel
-              off-centre: the panel itself sits at the card's horizontal centre. */}
-          <div className="relative mx-auto w-fit">
-            {/* Y axis label (reads bottom → top) — vertically centred against the
-                blue panel (top-0 + h-[300px] matches the panel height), floating
-                just left of it. */}
-            <span className="absolute top-0 -left-12 flex h-75 items-center rotate-180 text-xs font-semibold tracking-wide text-ink [writing-mode:vertical-rl]">
+        <div className="mx-auto flex w-full flex-col items-center justify-center rounded-[38px] border border-[#E8ECF4] bg-white p-6 shadow-[0_12px_40px_rgba(2,41,102,0.07)]">
+          {/* Invisible mirror of the axis captions rendered below the panel. It
+              reserves the same height above, so the gap between the white card
+              and the blue panel is equal top and bottom — no magic numbers. */}
+          <div aria-hidden="true" className="invisible flex flex-col">
+            <p className="mt-4 text-center text-[13px] font-bold tracking-wide">
+              {matrix.axisX}
+            </p>
+            <p className="mt-1.5 text-center text-xs font-medium">
+              {matrix.caption}
+            </p>
+          </div>
+
+          {/* Row: Y-axis label + panel + a mirrored spacer. The spacer matches the
+              label's width, so the blue panel sits dead-centre in the white card
+              while the label stays vertically centred beside it. */}
+          <div className="flex items-center justify-center">
+            {/* Y axis label (reads bottom → top), centred against the panel. */}
+            <span className="flex h-82.5 w-12 shrink-0 items-center justify-center rotate-180 text-xs font-semibold tracking-wide text-ink [writing-mode:vertical-rl]">
               {matrix.axisY}
             </span>
 
             {/* Light-blue quadrant panel */}
-            <div className="relative flex h-[300px] w-[390px] flex-col rounded-[38px] bg-[#F4F8FF] px-5 py-5">
+            <div className="relative flex h-82.5 w-107.5 shrink-0 flex-col rounded-[38px] bg-[#F4F8FF] px-5 py-5">
+              {/* Vertical dashed divider — spans the panel's full height (not just
+                  the quadrant grid) so the cross reaches the top and bottom edges.
+                  The panel's padding is symmetric, so left-1/2 still lines up with
+                  the grid's centre column. */}
+              <span className="pointer-events-none absolute inset-y-0 left-1/2 -translate-x-1/2 border-l border-dashed border-slate-300" />
+
               {/* column headers — one centred over each column */}
               <div className="grid grid-cols-2 text-center">
                 {matrix.columns.map((c) => (
@@ -129,10 +145,10 @@ export default function EpmStack() {
                   full quadrant area and meet exactly at the centre, splitting the
                   panel cleanly into four connected quadrants. */}
               <div className="relative mt-6 grid flex-1 grid-cols-2 grid-rows-2">
-                {/* vertical dashed divider — full height, dead centre */}
-                <span className="pointer-events-none absolute inset-y-0 left-1/2 -translate-x-1/2 border-l border-dashed border-slate-300" />
-                {/* horizontal dashed divider — full width, dead centre */}
-                <span className="pointer-events-none absolute inset-x-0 top-1/2 -translate-y-1/2 border-t border-dashed border-slate-300" />
+                {/* Horizontal dashed divider — sits at the quadrant grid's centre
+                    but extends past the panel's px-5 padding (-left-5/-right-5) so
+                    it meets both side edges and joins the vertical line. */}
+                <span className="pointer-events-none absolute -left-5 -right-5 top-1/2 -translate-y-1/2 border-t border-dashed border-slate-300" />
                 {matrix.cells.map((cell, i) => (
                   <div
                     key={i}
@@ -155,14 +171,17 @@ export default function EpmStack() {
               </div>
             </div>
 
-            {/* X axis + caption — centred under the panel */}
-            <p className="mt-4 text-center text-[13px] font-bold tracking-wide text-ink">
-              {matrix.axisX}
-            </p>
-            <p className="mt-1.5 text-center text-xs font-medium text-brand">
-              {matrix.caption}
-            </p>
+            {/* Mirrors the axis label's width so the panel stays dead-centre. */}
+            <span aria-hidden="true" className="w-12 shrink-0" />
           </div>
+
+          {/* X axis + caption — centred under the panel */}
+          <p className="mt-4 text-center text-[13px] font-bold tracking-wide text-ink">
+            {matrix.axisX}
+          </p>
+          <p className="mt-1.5 text-center text-xs font-medium text-brand">
+            {matrix.caption}
+          </p>
         </div>
         )}
       </div>

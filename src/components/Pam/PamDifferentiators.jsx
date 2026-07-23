@@ -1,5 +1,27 @@
 import PamSection from "./PamSection";
+import {
+  FiLayers,
+  FiFileText,
+  FiAlertOctagon,
+  FiSearch,
+  FiAlertTriangle,
+  FiTrendingUp,
+  FiShield,
+  FiClock,
+} from "react-icons/fi";
 import pam from "@/data/pam";
+
+// Per-card icons, keyed by the `icon` field on each differentiator item.
+const ICONS = {
+  layers: FiLayers,
+  watermark: FiFileText,
+  bypass: FiAlertOctagon,
+  search: FiSearch,
+  unauthorized: FiAlertTriangle,
+  analytics: FiTrendingUp,
+  shield: FiShield,
+  risk: FiClock,
+};
 
 // Bold the highlighted phrases within the note (listed in the data) without
 // altering the copy.
@@ -38,24 +60,29 @@ export default function PamDifferentiators() {
       </div>
 
       <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        {items.map((item) => (
+        {items.map((item) => {
+          const Icon = ICONS[item.icon];
+          return (
           <div
             key={item.title}
             className="flex flex-col rounded-3xl border border-mist bg-white p-6 text-left"
           >
-            {/* Empty icon placeholder (matches the Figma design) */}
-            <span className="h-11 w-11 rounded-xl bg-[#E4EAFB]" />
+            {/* Icon tile — brand-blue glyph on a light-blue square */}
+            <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#E4EAFB] text-brand">
+              {Icon && <Icon className="h-5 w-5" />}
+            </span>
             <span className="mt-5 text-xs font-semibold text-[#0451CC]">
               {item.badge}
             </span>
             <h3 className="mt-1 font-display text-lg font-semibold text-ink">
               {item.title}
             </h3>
-            <p className="mt-2 text-sm leading-relaxed text-[#8E8E93]"> 
+            <p className="mt-2 text-sm leading-relaxed text-[#8E8E93]">
               {item.body}
             </p>
           </div>
-        ))}
+          );
+        })}
       </div>
 
       <p className="mx-auto mt-12 max-w-5xl text-center text-sm leading-relaxed text-slate-soft md:text-base">

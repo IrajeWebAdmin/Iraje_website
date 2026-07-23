@@ -161,6 +161,41 @@ const about = {
       { label: "Become a Partner", href: "/partners", primary: false },
     ],
   },
+
+  // ---- Footer -----------------------------------------------------------
+  footer: {
+    description:
+      " One platform to secure every identity.",
+    columns: [
+      {
+        title: "Company",
+        links: [
+          { name: "About Us", href: "/about" },
+          { name: "Customers", href: "/customers" },
+          { name: "Partners", href: "/partners" },
+          { name: "Culture & Values", href: "/about#culture" },
+        ],
+      },
+      {
+        title: "Explore",
+        links: [
+          { name: "Iraje University", href: "/university" },
+          { name: "Resources", href: "/resources" },
+          { name: "Academy & Certification", href: "/certification" },
+        ],
+      },
+      {
+        title: "Iraje",
+        links: [
+          { name: "Iraje Home", href: "/" },
+          { name: "PAM Solution", href: "/products/pam" },
+          { name: "Contact Us", href: "/contact" },
+        ],
+      },
+    ],
+    copyright: "© 2026 Iraje Software. All rights reserved.",
+    note: "Identity is the new perimeter.",
+  },
 };
 
 export default about;

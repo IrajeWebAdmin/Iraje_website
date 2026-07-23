@@ -1,101 +1,62 @@
- import Image from "next/image";
+import Image from "next/image";
 import Link from "next/link";
 
-import footerLinks from "@/data/footerLinks";
+import about from "@/data/about";
 
-export default function HomeFooter() {
+export default function AboutFooter() {
+  const { description, columns, copyright, note } = about.footer;
+
   return (
-    <footer className="bg-[#3D4159] text-white">
-      <div className="mx-auto max-w-7xl px-6 py-16">
-        
+    <footer className="bg-[#F4F7FD] text-ink">
+      <div className="container-global py-16">
         <div className="grid gap-12 lg:grid-cols-[2fr_1fr_1fr_1fr]">
-
-          {/* Logo Section */}
+          {/* Brand */}
           <div>
             <Image
-              src="/icons/company-logo-footer.svg"
+              src="/icons/company-logo-footerb.svg"
               alt="Iraje Identity Security Logo"
               width={140}
               height={40}
             />
 
-            <p className="mt-6 max-w-xs text-sm leading-relaxed text-white/70">
-             One platform to secure  every identity.
+            <p className="mt-3 max-w-xs text-base leading-relaxed text-black">
+                       One platform to secure<br />every identity.
+                      </p>
+          </div>
+
+          {/* Link columns */}
+          {columns.map((col) => (
+            <div key={col.title}>
+              <h3 className="text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
+                {col.title}
+              </h3>
+              <ul className="mt-5 space-y-3.5">
+                {col.links.map((link) => (
+                  <li key={link.name}>
+                    <Link
+                      href={link.href}
+                      className="text-[15px] text-[#3A4A63] transition hover:text-brand"
+                    >
+                      {link.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+
+        {/* Bottom bar */}
+        <div className="mt-14 border-t border-ink/10 pt-6">
+          <div className="flex flex-col gap-3 text-[13px] text-[#8A97AD] md:flex-row md:items-center md:justify-between">
+            <p>{copyright}</p>
+            {/* Explicit monospace stack: the theme collapses font-mono to Poppins,
+                but this line reads as monospace in the design. */}
+            <p className="tracking-wide [font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace]">
+              {note}
             </p>
           </div>
-
-          {/* Platform */}
-          <div>
-            <h3 className="mb-5 text-xs font-semibold uppercase tracking-[3px] text-white/50">
-              Platform
-            </h3>
-
-            <ul className="space-y-3">
-              {footerLinks.platform.map((item) => (
-                <li key={item.name}>
-                  <Link
-                    href={item.href}
-                    className="text-sm text-white/80 transition hover:text-white"
-                  >
-                    {item.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Learn */}
-          <div>
-            <h3 className="mb-5 text-xs font-semibold uppercase tracking-[3px] text-white/50">
-              Learn
-            </h3>
-
-            <ul className="space-y-3">
-              {footerLinks.learn.map((item) => (
-                <li key={item.name}>
-                  <Link
-                    href={item.href}
-                    className="text-sm text-white/80 transition hover:text-white"
-                  >
-                    {item.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Company */}
-          <div>
-            <h3 className="mb-5 text-xs font-semibold uppercase tracking-[3px] text-white/50">
-              Company
-            </h3>
-
-            <ul className="space-y-3">
-              {footerLinks.company.map((item) => (
-                <li key={item.name}>
-                  <Link
-                    href={item.href}
-                    className="text-sm text-white/80 transition hover:text-white"
-                  >
-                    {item.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
         </div>
-
-        {/* Divider */}
-        <div className="my-10 h-px bg-white/10" />
-
-        {/* Bottom Footer */}
-        <div className="flex flex-col gap-4 text-xs text-white/40 md:flex-row md:justify-between">
-          <p>© Iraje Software. All rights reserved.</p>
-
-         
-        </div>
-
       </div>
     </footer>
   );

@@ -313,48 +313,56 @@ const pam = {
     items: [
       {
         badge: "Out of the box",
+        icon: "layers",
         title: "Integration of assets",
         body:
           "The only PAM that integrates every IT asset out of the box — no connectors, adaptors or APIs required.",
       },
       {
         badge: "First PAM",
+        icon: "watermark",
         title: "Dynamic Watermarking",
         body:
           "The first PAM to apply a dynamic watermark on every session accessed through it — for data leak prevention and ownership.",
       },
       {
         badge: "First PAM",
+        icon: "bypass",
         title: "PAM Bypass Alerts",
         body:
           "The first PAM to raise bypass alerts on Windows, Unix, Linux, AIX & Sun Solaris servers when access skips PAM.",
       },
       {
         badge: "First PAM",
+        icon: "search",
         title: "Command Search in Videos",
         body:
           "The first PAM to let auditors search for specific commands within session video recordings — for faster forensics.",
       },
       {
         badge: "First PAM",
+        icon: "unauthorized",
         title: "Unauthorized Access Alerts",
         body:
           "The first PAM to alert on unauthorized access to Windows servers using critical remote protocols.",
       },
       {
         badge: "Beyond EUBA",
+        icon: "analytics",
         title: "Advanced Analytics",
         body:
           "Goes beyond end-user behaviour analytics to deliver End User, Device, Security and Trend analytics.",
       },
       {
         badge: "Real Zero Trust",
+        icon: "shield",
         title: "Real Zero Trust PAM",
         body:
           "The first real Zero Trust PAM — even the super admin cannot delete logs, recordings or tamper with the password vault.",
       },
       {
         badge: "First of its kind",
+        icon: "risk",
         title: "Dynamic Risk Score Card",
         body:
           "A first-of-its-kind risk score card that enables focused, prioritised monitoring of privileged users.",
@@ -566,26 +574,31 @@ const pam = {
       "Iraje Software specialises in the privileged identity & access governance space — with a flagship solution built on real customer problems.",
     items: [
       {
+        icon: "shield",
         title: "Regulatory Compliance",
         body:
           "Controls mapped to RBI, SEBI, IRDAI, CERT-In and global standards — out of the box.",
       },
       {
+        icon: "support",
         title: "Better Support",
         body:
           "Direct access to the team that builds the product — fast, hands-on and accountable.",
       },
       {
+        icon: "innovation",
         title: "Continuous Innovation",
         body:
           "First-of-their-kind capabilities shipped on a steady, customer-led cadence.",
       },
       {
+        icon: "architecture",
         title: "Scalable & Secure Architecture",
         body:
           "Active-Active, failsafe and Zero Trust by design — from a single site to the enterprise.",
       },
       {
+        icon: "roadmap",
         title: "Solution Roadmap",
         body:
           "A clear, published roadmap that takes you from Initial to Controlled & Zero Trust.",
@@ -595,10 +608,11 @@ const pam = {
 
   // ---- CTA / Contact ----------------------------------------------------
   contact: {
+    eyebrow: "Get in touch",
     heading: "Still thinking about which PAM to choose?",
     body:
       "Let's show you how Iraje PAM manages, monitors and controls privileged access — and gets adopted and enforced across your enterprise.",
-    cta: { label: "Get in touch", href: "/contact" },
+    cta: { label: "Request a Demo", href: "/contact" },
     email: "contact@iraje.com",
     website: "www.iraje.com",
   },

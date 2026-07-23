@@ -1,48 +1,53 @@
 import Link from "next/link";
-import { FiArrowRight, FiMail, FiGlobe } from "react-icons/fi";
+import { FiGlobe, FiMail } from "react-icons/fi";
 import pam from "@/data/pam";
 
 export default function PamContact() {
-  const { heading, body, cta, email, website } = pam.contact;
+  const { eyebrow, heading, body, email, website, cta } = pam.contact;
 
   return (
-    <section className="relative overflow-hidden bg-navy py-20 text-white md:py-28">
-      {/* Brand gradient wash — from Figma closing band */}
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(120deg,#022966_0%,#1d5bff_100%)] opacity-90" />
+    <section className="bg-[radial-gradient(120%_150%_at_80%_10%,#1D3AA6_0%,#0A1733_60%)] py-15 text-white">
+      <div className="container-global text-center">
+        <p className="epm-eyebrow epm-eyebrow-normal font-semibold text-white/70">
+          {eyebrow}
+        </p>
 
-      <div className="container-global relative text-center">
-        <h2 className="mx-auto max-w-3xl font-display text-3xl leading-[1.12] font-semibold md:text-5xl">
+        <h2 className="mx-auto mt-4 max-w-3xl epm-heading font-medium leading-[1.1] tracking-tight text-white">
           {heading}
         </h2>
-        <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-white/75 md:text-lg">
+
+        <p className="mx-auto mt-6 max-w-2xl epm-body leading-relaxed text-white/80">
           {body}
         </p>
 
-        <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
-          <Link
-            href={cta.href}
-            className="group inline-flex items-center gap-2 rounded-full bg-white px-8 py-4 text-sm font-semibold text-navy transition hover:bg-mist"
-          >
-            {cta.label}
-            <FiArrowRight className="transition group-hover:translate-x-0.5" />
-          </Link>
-        </div>
-
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm text-white/80">
+        {/* Contact pills */}
+        <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
           <a
             href={`mailto:${email}`}
-            className="inline-flex items-center gap-2 transition hover:text-white"
+            className="inline-flex items-center gap-2 rounded-full bg-white/10 px-5 py-3 text-sm font-medium text-white transition hover:bg-white/20"
           >
             <FiMail className="h-4 w-4" />
             {email}
           </a>
           <a
             href={`https://${website}`}
-            className="inline-flex items-center gap-2 transition hover:text-white"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-full bg-white/10 px-5 py-3 text-sm font-medium text-white transition hover:bg-white/20"
           >
             <FiGlobe className="h-4 w-4" />
             {website}
           </a>
+        </div>
+
+        {/* Primary CTA */}
+        <div className="mt-8">
+          <Link
+            href={cta.href}
+            className="inline-flex items-center justify-center rounded-full bg-white px-8 py-3.5 text-sm font-semibold text-ink transition hover:bg-white/90"
+          >
+            {cta.label}
+          </Link>
         </div>
       </div>
     </section>

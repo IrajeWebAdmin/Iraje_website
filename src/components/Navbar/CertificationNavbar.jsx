@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { HiMenu, HiX } from "react-icons/hi";
 import Image from "next/image";
+import ProductsDropdown from "./ProductsDropdown";
 
 const navLinks = [
   { name: "Home", href: "/" },
@@ -37,16 +38,20 @@ export default function CertificationNavbar() {
           <ul className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-12 lg:flex">
             {navLinks.map((link) => (
               <li key={link.name}>
-                <Link
-                  href={link.href}
-                  className={`relative font-medium transition-all duration-300 after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:bg-brand after:transition-all after:duration-300 hover:after:w-full ${
-                    link.name === "Certification"
-                      ? "text-brand after:w-full"
-                      : "text-black after:w-0"
-                  }`}
-                >
-                  {link.name}
-                </Link>
+                {link.name === "Products" ? (
+                  <ProductsDropdown linkClassName="relative font-medium text-black transition-all duration-300 after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-0 after:bg-brand after:transition-all after:duration-300 hover:after:w-full" />
+                ) : (
+                  <Link
+                    href={link.href}
+                    className={`relative font-medium transition-all duration-300 after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:bg-brand after:transition-all after:duration-300 hover:after:w-full ${
+                      link.name === "Certification"
+                        ? "text-brand after:w-full"
+                        : "text-black after:w-0"
+                    }`}
+                  >
+                    {link.name}
+                  </Link>
+                )}
               </li>
             ))}
           </ul>

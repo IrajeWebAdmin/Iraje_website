@@ -1,6 +1,16 @@
 import PamSection from "./PamSection";
-import { BsShieldCheck } from "react-icons/bs";
+import { BsShieldCheck, BsLightbulb } from "react-icons/bs";
+import { FiHeadphones, FiGrid, FiFlag } from "react-icons/fi";
 import pam from "@/data/pam";
+
+// Per-card icons, keyed by the `icon` field on each whyIraje item.
+const ICONS = {
+  shield: BsShieldCheck,
+  support: FiHeadphones,
+  innovation: BsLightbulb,
+  architecture: FiGrid,
+  roadmap: FiFlag,
+};
 
 export default function PamWhyIraje() {
   const { eyebrow, heading, body, items } = pam.whyIraje;
@@ -21,23 +31,22 @@ export default function PamWhyIraje() {
       </div>
 
       <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
-        {items.map((item) => (
-          <div
-            key={item.title}
-            className="flex flex-col items-center rounded-3xl border border-mist bg-white p-7 text-center"
-          >
-            <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#E4EAFB] text-brand">
-              <BsShieldCheck
-                className="h-6 w-6"
-                stroke="currentColor"
-                strokeWidth={0.5}
-              />
-            </span>
-            <h3 className="mt-5 font-display text-base font-semibold text-ink">
-              {item.title}
-            </h3>
-          </div>
-        ))}
+        {items.map((item) => {
+          const Icon = ICONS[item.icon] ?? BsShieldCheck;
+          return (
+            <div
+              key={item.title}
+              className="flex flex-col items-center rounded-3xl border border-mist bg-white p-7 text-center"
+            >
+              <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#E4EAFB] text-brand">
+                <Icon className="h-6 w-6" />
+              </span>
+              <h3 className="mt-5 font-display text-base font-semibold text-ink">
+                {item.title}
+              </h3>
+            </div>
+          );
+        })}
       </div>
     </PamSection>
   );

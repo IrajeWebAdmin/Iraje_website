@@ -2,8 +2,40 @@
 
 import useEmblaCarousel from "embla-carousel-react";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import {
+  FaLandmark,
+  FaDollarSign,
+  FaHandHoldingMedical,
+  FaBriefcaseMedical,
+  FaLaptopCode,
+  FaPlane,
+  FaFlask,
+  FaCapsules,
+  FaIndustry,
+  FaFilm,
+  FaStore,
+  FaShieldAlt,
+  FaEllipsisH,
+} from "react-icons/fa";
 import PamSection from "./PamSection";
 import pam from "@/data/pam";
+
+// White glyph shown inside each industry's blue circle, keyed by industry name.
+const INDUSTRY_ICONS = {
+  Banks: FaLandmark,
+  "Financial Services": FaDollarSign,
+  Insurance: FaHandHoldingMedical,
+  Healthcare: FaBriefcaseMedical,
+  "IT / ITES": FaLaptopCode,
+  "Hospitality & Travel": FaPlane,
+  Chemical: FaFlask,
+  Pharmaceuticals: FaCapsules,
+  Manufacturing: FaIndustry,
+  Media: FaFilm,
+  Retail: FaStore,
+  Defence: FaShieldAlt,
+  Others: FaEllipsisH,
+};
 
 export default function PamIndustries() {
   const { eyebrow, heading, body, items } = pam.industries;
@@ -41,20 +73,25 @@ export default function PamIndustries() {
         {/* Carousel */}
         <div className="overflow-hidden" ref={emblaRef}>
           <div className="flex">
-            {items.map((industry) => (
-              <div
-                key={industry}
-                className="min-w-[16.66%] flex-shrink-0 px-4"
-              >
-                <div className="flex flex-col items-center">
-                  <div className="h-32 w-32 rounded-full bg-[#0451CC]" />
+            {items.map((industry) => {
+              const Icon = INDUSTRY_ICONS[industry];
+              return (
+                <div
+                  key={industry}
+                  className="min-w-[16.66%] flex-shrink-0 px-4"
+                >
+                  <div className="flex flex-col items-center">
+                    <div className="flex h-32 w-32 items-center justify-center rounded-full bg-[#0451CC] text-white">
+                      {Icon && <Icon className="h-12 w-12" />}
+                    </div>
 
-                  <h3 className="mt-6 text-center text-lg font-semibold">
-                    {industry}
-                  </h3>
+                    <h3 className="mt-6 text-center text-lg font-semibold">
+                      {industry}
+                    </h3>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
 
