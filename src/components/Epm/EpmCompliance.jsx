@@ -114,7 +114,7 @@ export default function EpmCompliance() {
                       </td>
                     ))}
                     <td className="px-4 py-9 text-center align-middle">
-                      <span className="inline-flex items-center rounded-full bg-[#E3E9FF] px-3 py-1 text-xs font-medium text-[#0451CC]">
+                      <span className="inline-flex items-center rounded-full bg-[#2464cc] px-3 py-1 text-xs font-medium text-white">
                         Yes
                       </span>
                     </td>

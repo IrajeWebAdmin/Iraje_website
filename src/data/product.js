@@ -4,7 +4,7 @@ const products = [
     shortName: "Iraje PAM",
     title: "Privileged Access Manager",
     description:
-      "Agentless control over every privileged session — vaulting, SSO, discovery and a hardened Zero Trust OS.",
+      "Agentless control over every privileged session —SSO, vaulting, discovery and a hardened Zero Trust OS.",
     icon: "/icons/pam-icon.svg",
     link: "/products/pam",
   },

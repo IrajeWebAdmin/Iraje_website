@@ -37,7 +37,7 @@ export default function EpmKillChain() {
             <Fragment key={step.label}>
               <div
                 className={`relative flex h-20 w-20 shrink-0 items-center justify-center rounded-full transition md:h-[104px] md:w-[104px] ${
-                  blocked ? "bg-[#BBD0F1]" : "bg-[#F8E9E7]"
+                  blocked ? "bg-[#E3E9FF]" : "bg-[#F8E9E7]"
                 }`}
               >
                 <Image
@@ -54,7 +54,7 @@ export default function EpmKillChain() {
                     {step.label}
                   </span>
                   {blocked && (
-                    <span className="px-3 py-1 font-mono text-[13px] font-medium  whitespace-nowrap text-[#0451CC] ">
+                    <span className="epm-blink px-3 py-1 font-mono text-[13px] font-medium  whitespace-nowrap text-[#0451CC] ">
                       ✕ {blockedLabel}
                     </span>
                   )}

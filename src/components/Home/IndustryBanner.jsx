@@ -2,7 +2,7 @@ import industries from "@/data/industries";
 
 export default function IndustryBanner() {
   return (
-    <section className="overflow-hidden bg-[#0451CC] py-6">
+    <section className="marquee-pause-on-hover overflow-hidden bg-[#0451CC] py-6">
       <div className="container-global flex flex-col items-center gap-4 lg:flex-row lg:gap-10">
         {/* Left Text (static) */}
         <p className="shrink-0 text-lg font-medium text-white/70">
@@ -11,7 +11,7 @@ export default function IndustryBanner() {
 
         {/* Sliding industries (infinite marquee) */}
         <div className="marquee-mask relative w-full min-w-0 overflow-hidden lg:flex-1">
-          <div className="flex w-max animate-marquee items-center hover:[animation-play-state:paused]">
+          <div className="flex w-max animate-marquee items-center">
             {/* Two identical copies so the -50% translate loops seamlessly.
                 The second copy is aria-hidden to avoid duplicate announcements. */}
             {[...industries, ...industries].map((industry, i) => (

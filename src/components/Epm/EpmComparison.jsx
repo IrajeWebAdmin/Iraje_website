@@ -28,7 +28,10 @@ function CellContent({ cell }) {
   );
 }
 
-function Table({ columns, rows, highlightCol = 1 }) {
+// `dividerCol` draws a hairline rule down the LEFT edge of that column, used to
+// separate two otherwise identically-styled columns (EDR | XDR).
+function Table({ columns, rows, highlightCol = 1, dividerCol }) {
+  const divider = "border-l-[0.88px] border-l-[#7070703D]";
   return (
     <div className="mt-8 overflow-x-auto rounded-[38px] border border-[#E3E8F4] shadow-[0px_12.78px_31.94px_-19.16px_#0C1E3A47,0px_0.8px_1.6px_0px_#0C1E3A0D]">
       <table className="w-full min-w-[760px] border-collapse  text-left text-sm">
@@ -43,7 +46,7 @@ function Table({ columns, rows, highlightCol = 1 }) {
                     : c === 0
                       ? "bg-[#E3E9FF] text-ink"
                       : "bg-[#EBEDF3] text-ink"
-                }`}
+                } ${c === dividerCol ? divider : ""}`}
               >
                 {col}
               </th>
@@ -58,7 +61,9 @@ function Table({ columns, rows, highlightCol = 1 }) {
                   key={c}
                   className={`px-6 py-4 align-top leading-snug text-black ${
                     c === 0 ? "font-medium" : "font-normal"
-                  } ${c === highlightCol ? "bg-[#DFEBFF]" : "bg-[#F4F8FF]"}`}
+                  } ${c === highlightCol ? "bg-[#DFEBFF]" : "bg-[#F4F8FF]"} ${
+                    c === dividerCol ? divider : ""
+                  }`}
                 >
                   <CellContent cell={cell} />
                 </td>
@@ -146,10 +151,13 @@ export default function EpmComparison() {
           <p className="text-center epm-body font-semibold tracking-wide text-brand">
             {comparison.eyebrow}
           </p>
+          {/* columns: 0 Capability | 1 Iraje EPM | 2 EDR | 3 XDR — rule on 3
+              separates the EDR and XDR columns. */}
           <Table
             columns={comparison.columns}
             rows={comparison.rows}
             highlightCol={1}
+            dividerCol={3}
           />
         </div>
 

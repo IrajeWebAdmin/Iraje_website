@@ -13,7 +13,7 @@ const industries = [
   "Manufacturing",
   "Engineering",
   "Energy & Utilities",
-  "ITeS — IT services",
+  "IT / ITeS",
   "Retail & E-commerce",
   "Logistics & Transportation",
   "Media & Entertainment",

@@ -18,7 +18,7 @@ export default function PamHero() {
               {eyebrow}
             </p>
             <h1 className="mt-5 max-w-[640px] text-4xl leading-[1.1] font-semibold md:text-6xl">
-              Manage, monitor & control every{" "}
+              Manage, Monitor & Control every{" "}
               <span className="text-[#FFCE0C]">privileged access</span> in your
               enterprise.
             </h1>

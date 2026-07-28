@@ -23,9 +23,9 @@ export default function EpmArchitecture() {
           </p>
         </div>
 
-        <div className="mt-14 grid items-center gap-16 lg:grid-cols-[1.15fr_0.85fr]">
+        <div className="mt-14 grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]">
           {/* Left: architecture diagram */}
-          <div className="overflow-hidden rounded-[32px] bg-white p-8 shadow-sm">
+          <div className="overflow-hidden rounded-[32px] bg-white shadow-sm">
             <Image
               src="/images/epm/Solution-architecture.jpg"
               alt="EPM Architecture"
@@ -35,7 +35,7 @@ export default function EpmArchitecture() {
             />
           </div>
 
-          {/* Right: numbered node list */}
+          {/* Right: numbered node list — vertically centred against the card */}
           <div className="space-y-8">
             {nodes.map((node, i) => (
               <div key={node.name} className="flex gap-5">

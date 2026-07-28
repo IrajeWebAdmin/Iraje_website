@@ -51,7 +51,7 @@ export default function AboutWhoWeAre() {
         ============================ */}
         <div className="relative z-20 bg-blue">
           <div className="mx-8 md:mx-10">
-            <div className="grid gap-8 rounded-[5rem] bg-brand md:grid-cols-[1fr_1.45fr_1fr]">
+            <div className="grid gap-8 md:grid-cols-3 rounded-[5rem] bg-brand ">
               {cards.map((card) => {
                 const Icon = ICONS[card.title] ?? FiAward;
 

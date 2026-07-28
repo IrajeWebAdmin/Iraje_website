@@ -40,7 +40,7 @@ export default function EpmThreat() {
           <div className="mt-10 space-y-6">
             {points.map((point) => (
               <div key={point} className="flex items-center gap-6">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#B7C8E8]">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#E3E9FF]">
                   <FaCheck className="h-4 w-4 text-[#0451CC]" />
                 </div>
 

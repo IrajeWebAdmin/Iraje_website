@@ -22,7 +22,7 @@ const pam = {
   hero: {
     eyebrow: "Privileged Access Manager",
     title:
-      "Manage, monitor & control every privileged access in your enterprise.",
+      "Manage, Monitor & Control every privileged access in your enterprise.",
     subtitle:
       "Iraje Privileged Access Manager is a complete PIM/PAM solution that secures the most powerful accounts in your infrastructure across on-premise, cloud and hybrid environments.",
     ctas: [
@@ -32,12 +32,46 @@ const pam = {
     card: {
       eyebrow: "Built for the crown jewels",
       pills: [
-        "Seamless integration of assets without any connectors",
+        "Seamless integration of assets without connectors",
         "Real time PAM Bypass alerts on servers",
         "Dynamic watermarking",
         "Advanced Analytics - beyond EUBA",
       ],
     },
+    // Capability strip under the hero. Same six capabilities as EPM (icons are
+    // shared, keyed by `name`), but PAM discovers devices rather than endpoints.
+    strip: [
+      {
+        name: "Manage",
+        label: "Least Privilege",
+        icon: "/icons/manage-least-privilege.svg",
+      },
+      {
+        name: "Monitor",
+        label: "Full Visibility",
+        icon: "/icons/monitor-full-visibility.svg",
+      },
+      {
+        name: "Control",
+        label: "Governance",
+        icon: "/icons/control-governance.svg",
+      },
+      {
+        name: "Discover",
+        label: "Every Device",
+        icon: "/icons/discover-every-endpoint.svg",
+      },
+      {
+        name: "Comply",
+        label: "Audit Ready",
+        icon: "/icons/comply-audit-ready.svg",
+      },
+      {
+        name: "Secure",
+        label: "Tamper Proof",
+        icon: "/icons/secure-tamper-proof.svg",
+      },
+    ],
   },
 
   // ---- Introduction: What is PIM / PAM? ---------------------------------
@@ -47,6 +81,34 @@ const pam = {
     body: [
       "Privileged Identity Management (PIM) and Privileged Access Management (PAM) are security practices used to manage and protect privileged users, their identities, and their access to critical systems and sensitive resources. They help organizations ensure that only authorized users can perform high-level administrative tasks while reducing the risk of unauthorized access",
        "PIM/PAM combines Identity Management, which verifies users through technologies such as Active Directory (AD) and Multi-Factor Authentication (MFA), Access Management, which controls who can access specific resources and when using role-based and time-based permissions, and Privileged User Management, which governs administrator and superuser accounts through centralized controls like Single Sign-On (SSO). Together, these capabilities strengthen security, improve compliance, and provide better control over privileged access.",
+    ],
+
+    // One-line summary under the heading.
+    tagline:
+      "The concept of managing identities and accesses of privileged users is popularly called PIM or PAM",
+
+    // Diagram on the left of the intro row; each point below lines up with the
+    // matching band (A / B / C) in the artwork.
+    diagram: {
+      src: "/images/pam/Pam&Pim.png",
+      alt: "PIM / PAM — identity and access governance of privileged users, split into identity management (A), access management (B) and privileged users (C)",
+    },
+    points: [
+      {
+        letter: "A",
+        body:
+          "Who is coming in and who is coming out, is part of identity management using AD auth + MFA",
+      },
+      {
+        letter: "B",
+        body:
+          "Who has to access what and when is part of access management using Role Based Access Control + Time Based Access Control",
+      },
+      {
+        letter: "C",
+        body:
+          "The superusers whose identity and access is governed with Single Sign On access to all devices",
+      },
     ],
 
     listTitle: "Privileged accounts include",
@@ -66,7 +128,7 @@ const pam = {
   // ---- The challenge ----------------------------------------------------
   challenge: {
     eyebrow: "The Challenge",
-    heading: "Why privileged access keeps CISOs awake at night",
+    heading: "Why privileged access keeps CISOs awake at night?",
     body:
       "Most major cyberattacks involve compromised privileged credentials. Traditional controls simply weren't built for this threat.",
     problems: [
@@ -87,7 +149,7 @@ const pam = {
       {
         icon: "/icons/problem.svg",
         tag: "PROBLEM 03",
-        title: "Insider threats need control",
+        title: "Insider is new outsider",
         body:
           "Not every threat is external. Disgruntled employees, negligent admins, contractors and third-party vendors all carry risk.",
       },
@@ -164,7 +226,7 @@ const pam = {
     eyebrow: "Key capabilities",
     heading: "Six pillars of the Iraje Privileged Access Manager",
     body:
-      "A complete solution to manage, monitor, control, discover, comply and secure privileged accounts.",
+      "A complete solution to Manage, Monitor, Control, Discover, Comply and Secure privileged accounts.",
     items: [
       {
         name: "Manage",
@@ -301,7 +363,7 @@ const pam = {
       },
     ],
     note:
-      "Real Zero Trust: the architecture ensures even the super admin has no admin access to the PAM solution and cannot delete its logs or recordings.",
+      "Real Zero Trust: The architecture ensures even the super admin has no admin access to the PAM solution and cannot delete its logs or recordings.",
   },
 
   // ---- Key differentiators ----------------------------------------------
@@ -385,7 +447,7 @@ const pam = {
     heading: "How Iraje PAM compares",
     body:
       "A side-by-side look at where Iraje PAM goes further than a typical competitor's PAM solution.",
-    columns: ["Key feature", "Typical competitor PAM", "EDR / XDR"],
+    columns: ["Key feature", "Typical competitor PAM", "Iraje PAM"],
     rows: [
       [
         "Integration of assets",
@@ -475,7 +537,7 @@ const pam = {
       },
       {
         level: "LEVEL 3",
-        name: "Define",
+        name: "Defined",
         features: [
           "Integrate all critical assets",
           "Enforce password rotation across DB & network",
@@ -507,7 +569,7 @@ const pam = {
 
   // ---- Compliance & regulation ------------------------------------------
   compliance: {
-    eyebrow: "Compliance & regulation",
+    eyebrow: "Compliance & Regulation",
     heading: "Built to satisfy regulators & standards",
     body:
       "Iraje PAM maps directly to regulatory requirements on privileged access and complies with leading global security standards.",
@@ -568,10 +630,10 @@ const pam = {
 
   // ---- Why Iraje --------------------------------------------------------
   whyIraje: {
-    eyebrow: "Why Iraje",
+    eyebrow: "Why Iraje?",
     heading: "An over two-decade pedigree in enterprise security",
     body:
-      "Iraje Software specialises in the privileged identity & access governance space — with a flagship solution built on real customer problems.",
+      "Iraje Software specializes in identity security solutions — with a focus on real customer problems.",
     items: [
       {
         icon: "shield",
@@ -611,7 +673,7 @@ const pam = {
     eyebrow: "Get in touch",
     heading: "Still thinking about which PAM to choose?",
     body:
-      "Let's show you how Iraje PAM manages, monitors and controls privileged access — and gets adopted and enforced across your enterprise.",
+      "Let's show you how Iraje PAM Manages, Monitors and Controls privileged access — and gets adopted and enforced across your enterprise.",
     cta: { label: "Request a Demo", href: "/contact" },
     email: "contact@iraje.com",
     website: "www.iraje.com",

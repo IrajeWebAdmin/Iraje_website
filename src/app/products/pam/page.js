@@ -12,13 +12,14 @@ import PamIndustries from "@/components/Pam/PamIndustries";
 import PamWhyIraje from "@/components/Pam/PamWhyIraje";
 import PamContact from "@/components/Pam/PamContact";
 import CapabilityStrip from "@/components/Epm/CapabilityStrip";
+import pam from "@/data/pam";
 
 
 export default function PamPage() {
   return (
     <>
       <PamHero />
-      <CapabilityStrip offsetClassName="-mt-16" />
+      <CapabilityStrip offsetClassName="-mt-16" items={pam.hero.strip} />
       <PamIntro />
       <PamChallenge />
       <PamSolution />

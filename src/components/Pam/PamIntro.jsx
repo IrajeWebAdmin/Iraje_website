@@ -1,54 +1,46 @@
+import Image from "next/image";
 import pam from "@/data/pam";
 
 export default function PamIntro() {
-  const { eyebrow, heading, body, listTitle, accounts, note } = pam.intro;
+  const { eyebrow, heading, tagline, diagram, points } = pam.intro;
 
   return (
-    <section className="text-ink bg-white py-15 md:py-15">
+    <section className="bg-white py-15 text-ink">
       <div className="container-global">
-        <div className="grid gap-12 lg:grid-cols-2 lg:items-start">
-          {/* Left: typography only (no card) */}
-          <div>
-            <p className="epm-eyebrow epm-eyebrow-normal font-semibold text-blue-600">
-              {eyebrow}
-            </p>
-            <h2 className="mt-4 epm-heading leading-[1.05] font-medium tracking-[-2px] text-black">
-              {heading}
-            </h2>
-            <div className="mt-6 space-y-4">
-              {body.map((para) => (
-                <p
-                  key={para}
-                  className="text-[#707070] text-base leading-relaxed md:text-base"
-                >
-                  {para}
-                </p>
-              ))}
-            </div>
-          </div>
+        {/* Centred header */}
+        <div className="mx-auto max-w-5xl text-center">
+          <span className="epm-eyebrow epm-eyebrow-normal font-semibold text-blue-600">
+            {eyebrow}
+          </span>
+          <h2 className="mt-4 epm-heading leading-[1.05] font-medium tracking-[-2px] text-black">
+            {heading}
+          </h2>
+          <p className="mx-auto mt-6 max-w-4xl epm-body leading-relaxed text-[#8E8E93] lg:text-nowrap">
+            {tagline}
+          </p>
+        </div>
 
-          {/* Right: square white card (619 x 424) with account pills */}
-          <div className="lg:justify-self-end">
-            <div className="border-mist w-full max-w-[619px] rounded-3xl border bg-white p-8 shadow-[0_10px_40px_rgba(12,30,58,0.07)] md:p-10 lg:h-[424px]">
-              <h3 className="text-brand text-2xl font-medium tracking-[0.02em]">
-                {listTitle}
-              </h3>
+        {/* Diagram left, one explanation per band on the right */}
+        <div className="mt-12 grid gap-10 lg:grid-cols-[1.05fr_1fr] lg:items-center lg:gap-16">
+          <Image
+            src={diagram.src}
+            alt={diagram.alt}
+            width={658}
+            height={370}
+            className="h-auto w-full"
+          />
 
-              <div className="mt-6 flex flex-wrap gap-3">
-                {accounts.map((account) => (
-                  <span
-                    key={account}
-                    className="text-[#707070] flex items-center gap-2.5 rounded-xl bg-[#F5F7FE] px-4 py-2.5 text-sm font-normal"
-                  >
-                    <span className="bg-brand h-2 w-2 shrink-0 rounded-full" />
-                    {account}
-                  </span>
-                ))}
-                <p className="text-slate-soft mt-6 w-full max-w-[619px] text-sm leading-relaxed">
-                  {note}
-                </p>
-              </div>
-            </div>
+          {/* Three equal rows so each paragraph sits level with its band (A/B/C)
+              in the diagram, which is evenly divided the same way. */}
+          <div className="grid gap-8 lg:h-full lg:grid-rows-3 lg:gap-0">
+            {points.map((point) => (
+              <p
+                key={point.letter}
+                className="flex items-center text-lg leading-relaxed text-[#707070]"
+              >
+                {point.body}
+              </p>
+            ))}
           </div>
         </div>
       </div>

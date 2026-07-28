@@ -150,8 +150,9 @@ steps: [
           { name: "LAPS", role: "Local admin password rotation" },
           { name: "DLP", role: "Prevent data leakage" },
           { name: "Encryption", role: "Data Protection" },
-          { name: "Iraje EPM", role: "Prevent Privilege Misuse", highlight: true },
           { name: "Application Control", role: "Application Control/Allowing" },
+          { name: "Iraje EPM", role: "Prevent Privilege Misuse", highlight: true },
+        
         ],
       },
       {
@@ -205,7 +206,7 @@ steps: [
 
   // ---- Prevention vs detection (3 cards) --------------------------------
   vs: {
-    eyebrow: "EPM vs EDR / XDR",
+    eyebrow: "EPM vs EDR/XDR",
     heading: "Prevention and detection solve different problems",
     body: "EDR and XDR are built to detect and respond once an attacker is active. EPM is built to make sure the attack never escalates in the first place. The strongest endpoint security uses both.",
     cards: [
@@ -391,7 +392,7 @@ steps: [
 
   // ---- Eight ways EPM works ---------------------------------------------
   eightWays: {
-    eyebrow: "How EPM Works",
+    eyebrow: "How EPM Works?",
     heading: "Eight ways EPM secures every endpoint",
     body: "By enforcing least privilege — giving users, applications and processes only the minimum access they need — EPM removes the conditions attackers depend on.",
     items: [
@@ -567,7 +568,7 @@ steps: [
 
   // ---- Compliance & regulation ------------------------------------------
   compliance: {
-    eyebrow: "Compliance & regulation",
+    eyebrow: "Compliance & Regulation",
     heading: "Mapped to endpoint-security regulation, worldwide",
     body: "Iraje EPM maps directly to global standards and Indian regulatory requirements on endpoint security — with audit evidence built in.",
     standardsTitle: "Global standards",

@@ -1,4 +1,4 @@
-import { FiLink } from "react-icons/fi";
+import { BiHide } from "react-icons/bi";
 
 // Full-screen "Coming Soon" placeholder shown for routes that aren't built yet
 // (wired to the global app/not-found.js). Navy gradient backdrop + a blurred,
@@ -8,7 +8,7 @@ export default function ComingSoon() {
     <section className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[radial-gradient(90%_70%_at_50%_12%,#15398a_0%,#0c2a66_38%,#07183a_72%,#030d20_100%)] px-6 py-20">
       <div className="flex flex-col items-center px-10 py-14 text-center">
         {/* Faded watermark icon */}
-        <FiLink className="mb-2 h-14 w-14 text-white/[0.08]" aria-hidden="true" />
+        <BiHide className="mb-2 h-14 w-14 text-white/[0.08]" aria-hidden="true" />
 
         <p className="font-serif text-4xl font-medium text-white sm:text-5xl">
           Coming

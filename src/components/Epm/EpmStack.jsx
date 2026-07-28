@@ -152,14 +152,14 @@ export default function EpmStack() {
                 {matrix.cells.map((cell, i) => (
                   <div
                     key={i}
-                    className="flex flex-col items-center justify-center px-3 text-center text-[13px] leading-relaxed text-slate-500"
+                    className="group flex flex-col items-center justify-center px-3 text-center text-[13px] leading-relaxed text-slate-500"
                   >
                     {cell.lines.map((line, idx) => (
                       <p
                         key={line}
                         className={
                           cell.highlight && idx === 0
-                            ? "font-semibold text-brand"
+                            ? "font-semibold text-brand transition-all duration-300 group-hover:text-navy group-hover:[text-shadow:0_0_14px_rgba(4,81,204,0.45)]"
                             : ""
                         }
                       >

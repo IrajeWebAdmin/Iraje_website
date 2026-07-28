@@ -23,21 +23,13 @@ export default function CTASection() {
             case studies to learn more.
           </p>
 
-          {/* Buttons */}
-          <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+          {/* Button */}
+          <div className="mt-10 flex items-center justify-center">
             {/* Book Demo */}
             <Link
               href="/contact"
               className="min-w-[180px] rounded-xl bg-white px-8 py-3 font-medium text-black transition-all duration-300 hover:scale-105 hover:shadow-lg ">
               Book a Demo
-            </Link>
-
-            {/* Resources */}
-            <Link
-              href="/resources"
-              className="min-w-[180px] rounded-xl border border-white bg-transparent  px-8 py-3 font-medium text-white transition-all duration-300 hover:bg-white hover:text-black hover:scale-105 hover:shadow-lg"
-            >
-              Browse Resources
             </Link>
           </div>
         </div>

@@ -5,8 +5,10 @@ import epm from "@/data/epm";
 
 // `offsetClassName` controls how far the strip is pulled up into the hero above
 // it, so each page can tune the overlap (PAM sits lower than EPM).
-export default function CapabilityStrip ({ offsetClassName = "-mt-24" }){
-    const {  strip } = epm.hero;
+// `items` lets a page swap in its own capability copy (PAM discovers devices,
+// EPM discovers endpoints); it defaults to the EPM strip.
+export default function CapabilityStrip ({ offsetClassName = "-mt-24", items }){
+    const strip = items ?? epm.hero.strip;
 
     return(
 
@@ -26,7 +28,7 @@ export default function CapabilityStrip ({ offsetClassName = "-mt-24" }){
                   className="mb-5 transition-transform duration-300 ease-out group-hover:scale-125"
                 />
 
-                <h3 className="text-[22px] font-semibold text-[#0451CC]">
+                <h3 className="text-[22px] font-semibold text-[#0451CC] transition-transform duration-300 ease-out group-hover:scale-110">
                   {item.name}
                 </h3>
 

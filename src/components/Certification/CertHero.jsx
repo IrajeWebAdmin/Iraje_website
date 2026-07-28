@@ -11,7 +11,7 @@ export default function CertHero() {
     certification.hero;
 
   return (
-    <section className="relative overflow-hidden bg-linear-to-b from-[#f4f8ff] to-white">
+    <section className="relative overflow-hidden bg-linear-to-b from-[#fff] to-white">
       <div className="container-global pt-32 pb-20 md:pt-40 md:pb-28">
         <div className="grid items-center gap-12 lg:grid-cols-2">
           {/* Copy */}
