@@ -11,8 +11,9 @@ const epm = {
       { name: "Products", href: "/products" },
       { name: "University", href: "/university" },
       { name: "Certification", href: "/certification" },
-      { name: "Partners", href: "/partners" },
-      { name: "Customers", href: "/customers" },
+      // No partners page yet — rendered as plain, unclickable text.
+      // { name: "Partners", disabled: true },
+      // { name: "Customers", href: "/customers" },
       { name: "About", href: "/about" },
     ],
     cta: { label: "Request a Demo", href: "/contact" },
@@ -643,7 +644,8 @@ steps: [
         links: [
           { name: "PAM", href: "/products/pam" },
           { name: "EPM", href: "/products/epm" },
-          { name: "IAM (soon)", href: "/products/iam" },
+          // No IAM page yet — rendered as plain, unclickable text.
+          { name: "IAM", disabled: true },
         ],
       },
       {
@@ -657,7 +659,8 @@ steps: [
       {
         title: "Company",
         links: [
-          { name: "Partners", href: "/partners" },
+          // No partners page yet — rendered as plain, unclickable text.
+          { name: "Partners", disabled: true },
           { name: "About", href: "/about" },
           { name: "Contact Us", href: "/contact" },
         ],

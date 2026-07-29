@@ -41,7 +41,7 @@ const about = {
       },
       {
         title: "Our Values",
-        body: "Text Here Text Here Text HereText Here Text Here Text HereText Here Text HerevText Herevvv .",
+        body: "Customer focus, ownership, one team — innovation that pushes boundaries, a product that's simple and secure, services that land first time right, and respect and support in every interaction.",
       },
     ],
     timeline: [
@@ -125,7 +125,8 @@ const about = {
       "Co-marketing, leads and joint go-to-market",
       "Roadmap inputs and a route to your markets",
     ],
-    cta: { label: "Become a partner", href: "/partners" },
+    // No partners page yet — rendered as an inert button.
+    cta: { label: "Become a partner", disabled: true },
   },
 
   // ---- Culture & Values -------------------------------------------------
@@ -158,7 +159,8 @@ const about = {
       "Whether you're protecting your enterprise, building a partner practice, or joining our team — we'd love to talk.",
     ctas: [
       { label: "Contact Iraje", href: "/contact", primary: true },
-      { label: "Become a Partner", href: "/partners", primary: false },
+      // No partners page yet — rendered as an inert button.
+      { label: "Become a Partner", disabled: true, primary: false },
     ],
   },
 
@@ -172,7 +174,8 @@ const about = {
         links: [
           { name: "About Us", href: "/about" },
           { name: "Customers", href: "/customers" },
-          { name: "Partners", href: "/partners" },
+          // No partners page yet — rendered as plain, unclickable text.
+          { name: "Partners", disabled: true },
           { name: "Culture & Values", href: "/about#culture" },
         ],
       },

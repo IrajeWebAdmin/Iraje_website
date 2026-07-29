@@ -17,7 +17,9 @@ const resources = [
       "Register deals, protect your pipeline and track your sales funnel in the Iraje Partner Portal.",
     buttonText: "Explore Partner Program",
     image: "/images/home/home-patner-program.webp",
-    link: "/partners",
+    // No partners page yet — the card renders its inert state instead of a
+    // link. Restore `link: "/partners"` and drop this flag once it exists.
+    comingSoon: true,
   },
 
   {
@@ -27,7 +29,9 @@ const resources = [
       "Join webinars, workshops and training sessions to stay updated on security trends.",
     buttonText: "Explore More",
     image: "/images/home/home-events.webp",
-    link: "/events",
+    // No events page yet — the card renders its inert state instead of a link.
+    // Restore `link: "/events"` and drop this flag once the page exists.
+    comingSoon: true,
   },
 
   {

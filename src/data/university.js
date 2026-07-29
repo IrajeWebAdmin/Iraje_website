@@ -312,7 +312,8 @@ const university = {
           { name: "CyberTantra", href: "#master-course" },
           { name: "PAM", href: "/products/pam" },
           { name: "EPM", href: "/products/epm" },
-          { name: "IAM (Coming Soon)", href: "#certification" },
+          // No IAM page yet — rendered as plain, unclickable text.
+          { name: "IAM", disabled: true },
         ],
       },
       {

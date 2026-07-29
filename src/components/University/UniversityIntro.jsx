@@ -8,7 +8,10 @@ function renderBody(text) {
   const escaped = BOLD_TERMS.map((t) =>
     t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"),
   );
+  // Bind the last two words with a non-breaking space so the paragraph can
+  // never end on a one-word orphan line ("…complementary / domains.").
   return text
+    .replace(/\s+(\S+)$/, "\u00A0$1")
     .split(new RegExp(`(${escaped.join("|")})`))
     .map((part, i) =>
       BOLD_TERMS.includes(part) ? (
@@ -27,8 +30,9 @@ export default function UniversityIntro() {
   return (
     <section className="bg-white py-10">
       <div className="container-global">
-        {/* Intro copy */}
-        <div className="mx-auto max-w-7xl text-center">
+        {/* Intro copy — spans the same width as the cards below (no narrower
+            max-width) so the body settles into three lines on desktop. */}
+        <div className="text-center">
           <h2 className="mx-auto mt-4 max-w-6xl epm-heading leading-[1.05] font-medium tracking-[-2px] text-black ">
             {heading}
           </h2>

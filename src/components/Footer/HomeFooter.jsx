@@ -32,12 +32,21 @@ export default function HomeFooter() {
             <ul className="space-y-3">
               {footerLinks.platform.map((item) => (
                 <li key={item.name}>
-                  <Link
-                    href={item.href}
-                    className="text-sm text-white transition hover:text-white"
-                  >
-                    {item.name}
-                  </Link>
+                  {item.disabled ? (
+                    <span
+                      aria-disabled="true"
+                      className="cursor-not-allowed text-sm text-white/50 select-none"
+                    >
+                      {item.name}
+                    </span>
+                  ) : (
+                    <Link
+                      href={item.href}
+                      className="text-sm text-white transition hover:text-white"
+                    >
+                      {item.name}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>
@@ -52,12 +61,21 @@ export default function HomeFooter() {
             <ul className="space-y-3">
               {footerLinks.learn.map((item) => (
                 <li key={item.name}>
-                  <Link
-                    href={item.href}
-                    className="text-sm text-white transition hover:text-white"
-                  >
-                    {item.name}
-                  </Link>
+                  {item.disabled ? (
+                    <span
+                      aria-disabled="true"
+                      className="cursor-not-allowed text-sm text-white/50 select-none"
+                    >
+                      {item.name}
+                    </span>
+                  ) : (
+                    <Link
+                      href={item.href}
+                      className="text-sm text-white transition hover:text-white"
+                    >
+                      {item.name}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>
@@ -72,12 +90,21 @@ export default function HomeFooter() {
             <ul className="space-y-3">
               {footerLinks.company.map((item) => (
                 <li key={item.name}>
-                  <Link
-                    href={item.href}
-                    className="text-sm text-white transition hover:text-white"
-                  >
-                    {item.name}
-                  </Link>
+                  {item.disabled ? (
+                    <span
+                      aria-disabled="true"
+                      className="cursor-not-allowed text-sm text-white/50 select-none"
+                    >
+                      {item.name}
+                    </span>
+                  ) : (
+                    <Link
+                      href={item.href}
+                      className="text-sm text-white transition hover:text-white"
+                    >
+                      {item.name}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>

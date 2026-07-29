@@ -67,7 +67,7 @@ export default function EpmCompliance() {
               <p className="mt-3 font-display text-sm font-semibold text-ink">
                 {std.name}
               </p>
-              <p className="mt-1 text-xs text-slate-soft">{std.sub}</p>
+              <p className="mt-1 text-xs text-[#8E8E93]">{std.sub}</p>
             </div>
           );
         })}
@@ -83,11 +83,11 @@ export default function EpmCompliance() {
             <table className="w-full border-collapse font-display text-left text-sm">
               <thead>
                 <tr className="bg-[#0451CC] text-white">
-                  <th className="border-r-[0.88px] border-[#7070703D] h-25.25 px-4 text-xs font-semibold" />
+                  <th className="border-r-[0.88px] border-[#7070703D] h-20.25 px-4 text-xs font-semibold" />
                   {table.columns.map((col) => (
                     <th
                       key={col}
-                      className="border-r-[0.88px] border-[#7070703D] h-25.25 px-4 text-xs font-semibold whitespace-pre-line"
+                      className="border-r-[0.88px] border-[#7070703D] h-20.25 px-4 text-xs font-semibold whitespace-pre-line"
                     >
                       {col}
                     </th>

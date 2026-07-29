@@ -50,12 +50,21 @@ export default function UniversityFooter() {
               <ul className="mt-5 space-y-3.5">
                 {col.links.map((link) => (
                   <li key={link.name}>
-                    <Link
-                      href={link.href}
-                      className="text-[15px] text-[#3A4A63] transition hover:text-brand"
-                    >
-                      {link.name}
-                    </Link>
+                    {link.disabled ? (
+                      <span
+                        aria-disabled="true"
+                        className="cursor-not-allowed text-[15px] text-[#9AA6BC] select-none"
+                      >
+                        {link.name}
+                      </span>
+                    ) : (
+                      <Link
+                        href={link.href}
+                        className="text-[15px] text-[#3A4A63] transition hover:text-brand"
+                      >
+                        {link.name}
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>

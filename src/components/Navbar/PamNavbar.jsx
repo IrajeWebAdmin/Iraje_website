@@ -32,6 +32,13 @@ export default function PamNavbar() {
               <li key={link.name}>
                 {link.name === "Products" ? (
                   <ProductsDropdown />
+                ) : link.disabled ? (
+                  <span
+                    aria-disabled="true"
+                    className="cursor-not-allowed font-medium text-black/40 select-none"
+                  >
+                    {link.name}
+                  </span>
                 ) : (
                   <Link
                     href={link.href}
@@ -64,13 +71,22 @@ export default function PamNavbar() {
           <ul className="container-global flex flex-col gap-1 py-4">
             {links.map((link) => (
               <li key={link.name}>
-                <Link
-                  href={link.href}
-                  onClick={() => setOpen(false)}
-                  className="block py-2 text-sm font-medium text-white/85 hover:text-white"
-                >
-                  {link.name}
-                </Link>
+                {link.disabled ? (
+                  <span
+                    aria-disabled="true"
+                    className="block cursor-not-allowed py-2 text-sm font-medium text-white/40 select-none"
+                  >
+                    {link.name}
+                  </span>
+                ) : (
+                  <Link
+                    href={link.href}
+                    onClick={() => setOpen(false)}
+                    className="block py-2 text-sm font-medium text-white/85 hover:text-white"
+                  >
+                    {link.name}
+                  </Link>
+                )}
               </li>
             ))}
             <li className="pt-2">

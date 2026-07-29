@@ -112,11 +112,14 @@ export default function ResourceCard({
         </p>
 
         {comingSoon ? (
+          // Reads exactly like the live cards — same label, same brand blue.
+          // It is a <span>, so there is no href to follow.
           <span
             aria-disabled="true"
-            className="mt-auto inline-flex cursor-not-allowed items-center gap-2 font-semibold text-gray-400 select-none"
+            className="mt-auto inline-flex cursor-default items-center gap-2 font-semibold text-[#1456D9] select-none"
           >
             {buttonText}
+            <span>→</span>
           </span>
         ) : (
           <Link

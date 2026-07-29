@@ -68,13 +68,23 @@ export default function AboutPartners() {
             </li>
           ))}
         </ul>
-        <Link
-          href={cta.href}
-          className="mt-8 inline-flex items-center gap-2 rounded-full bg-brand px-7 py-3.5 text-sm font-semibold text-white transition hover:bg-brand/90"
-        >
-          {cta.label}
-          <FiArrowRight className="h-4 w-4" />
-        </Link>
+        {cta.disabled ? (
+          <span
+            aria-disabled="true"
+            className="mt-8 inline-flex cursor-not-allowed items-center gap-2 rounded-full bg-brand/40 px-7 py-3.5 text-sm font-semibold text-white select-none"
+          >
+            {cta.label}
+            <FiArrowRight className="h-4 w-4" />
+          </span>
+        ) : (
+          <Link
+            href={cta.href}
+            className="mt-8 inline-flex items-center gap-2 rounded-full bg-brand px-7 py-3.5 text-sm font-semibold text-white transition hover:bg-brand/90"
+          >
+            {cta.label}
+            <FiArrowRight className="h-4 w-4" />
+          </Link>
+        )}
       </div>
     </AboutSection>
   );

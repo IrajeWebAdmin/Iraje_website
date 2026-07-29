@@ -70,7 +70,7 @@ export default function AboutWhoWeAre() {
                       </h3>
                     </div>
 
-                    <p className="mt-5 text-[15px] leading-7 text-slate-soft">
+                    <p className="mt-5 text-[15px] leading-7  text-[#8E8E93]">
                       {card.body}
                     </p>
                   </div>

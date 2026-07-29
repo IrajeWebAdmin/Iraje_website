@@ -11,8 +11,9 @@ const navLinks = [
   { name: "Products", href: "/products" },
   { name: "University", href: "/university" },
   { name: "Certification", href: "/certification" },
-  { name: "Partners", href: "/partners" },
-  { name: "Customers", href: "/customers" },
+  // No partners page yet — rendered as plain, unclickable text.
+  // { name: "Partners", disabled: true },
+  // { name: "Customers", href: "/customers" },
   { name: "About", href: "/about" },
 ];
 
@@ -43,6 +44,13 @@ export default function Navbar() {
             <li key={link.name}>
               {link.name === "Products" ? (
                 <ProductsDropdown />
+              ) : link.disabled ? (
+                <span
+                  aria-disabled="true"
+                  className="cursor-not-allowed font-medium text-black/40 select-none"
+                >
+                  {link.name}
+                </span>
               ) : (
                 <Link
                   href={link.href}

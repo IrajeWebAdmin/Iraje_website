@@ -11,8 +11,9 @@ const navLinks = [
   { name: "Products", href: "/products" },
   { name: "University", href: "/university" },
   { name: "Certification", href: "/certification" },
-  { name: "Partners", href: "/partners" },
-  { name: "Customers", href: "/customers" },
+  // No partners page yet — rendered as plain, unclickable text.
+  // { name: "Partners", disabled: true },
+  // { name: "Customers", href: "/customers" },
   { name: "About", href: "/about" },
 ];
 
@@ -40,6 +41,13 @@ export default function CertificationNavbar() {
               <li key={link.name}>
                 {link.name === "Products" ? (
                   <ProductsDropdown linkClassName="relative font-medium text-black transition-all duration-300 after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-0 after:bg-brand after:transition-all after:duration-300 hover:after:w-full" />
+                ) : link.disabled ? (
+                  <span
+                    aria-disabled="true"
+                    className="cursor-not-allowed font-medium text-black/40 select-none"
+                  >
+                    {link.name}
+                  </span>
                 ) : (
                   <Link
                     href={link.href}
@@ -71,15 +79,24 @@ export default function CertificationNavbar() {
           <ul className="flex flex-col gap-1 border-t border-mist pb-4 lg:hidden">
             {navLinks.map((link) => (
               <li key={link.name}>
-                <Link
-                  href={link.href}
-                  onClick={() => setMobileMenu(false)}
-                  className={`block px-2 py-2.5 font-medium ${
-                    link.name === "Certification" ? "text-brand" : "text-black"
-                  }`}
-                >
-                  {link.name}
-                </Link>
+                {link.disabled ? (
+                  <span
+                    aria-disabled="true"
+                    className="block cursor-not-allowed px-2 py-2.5 font-medium text-black/40 select-none"
+                  >
+                    {link.name}
+                  </span>
+                ) : (
+                  <Link
+                    href={link.href}
+                    onClick={() => setMobileMenu(false)}
+                    className={`block px-2 py-2.5 font-medium ${
+                      link.name === "Certification" ? "text-brand" : "text-black"
+                    }`}
+                  >
+                    {link.name}
+                  </Link>
+                )}
               </li>
             ))}
           </ul>

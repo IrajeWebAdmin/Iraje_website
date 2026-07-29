@@ -2,9 +2,18 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
+import useEmblaCarousel from "embla-carousel-react";
+import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import compliance from "@/data/compliance";
 
 export default function TrustCompliance() {
+  // Same carousel setup as PamIndustries, so both sections scroll identically.
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    loop: true,
+    align: "start",
+    slidesToScroll: 3,
+  });
+
   return (
     <section className="bg-[#BDD1FE29] py-15">
       {/* <div className="mx-auto max-w-7xl px-6"> */}
@@ -27,49 +36,72 @@ export default function TrustCompliance() {
 
         </div>
 
-        {/* Compliance Grid */}
-        <div className="mt-24 grid grid-cols-2 gap-10 md:grid-cols-3 lg:grid-cols-6">
+        {/* Compliance Carousel */}
+        <div className="relative mt-24">
 
-          {compliance.map((item) => (
-            <motion.div
-              key={item.id}
-              whileHover={{
-                y: -10,
-                scale: 1.05,
-              }}
-              transition={{
-                duration: 0.3,
-              }}
-              className="flex flex-col items-center text-center"
-            >
+          {/* Left Arrow */}
+          <button
+            onClick={() => emblaApi?.scrollPrev()}
+            aria-label="Previous standards"
+            className="absolute -left-6 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white p-3 shadow-lg"
+          >
+            <FiChevronLeft size={24} />
+          </button>
 
-              {/* Icon Circle */}
-              <div className="flex h-34 w-34 items-center justify-center rounded-full bg-[#0451CC] shadow-lg">
-                <Image
-                  src={item.icon}
-                  alt={item.title}
-                  width={84}
-                  height={84}
-                />
-              </div>
+          <div className="overflow-hidden" ref={emblaRef}>
+            {/* Slide widths mirror the breakpoints the grid used before
+                (2 / 3 / 6 across) so the mobile layout is unchanged. */}
+            <div className="flex">
+              {compliance.map((item) => (
+                <div
+                  key={item.id}
+                  className="min-w-[50%] flex-shrink-0 px-4 py-3 md:min-w-[33.333%] lg:min-w-[16.666%]"
+                >
+                  <motion.div
+                    whileHover={{
+                      y: -10,
+                      scale: 1.05,
+                    }}
+                    transition={{
+                      duration: 0.3,
+                    }}
+                    className="flex flex-col items-center text-center"
+                  >
 
+                    {/* Icon Circle */}
+                    <div className="flex h-34 w-34 items-center justify-center rounded-full bg-[#0451CC] shadow-lg">
+                      <Image
+                        src={item.icon}
+                        alt={item.title}
+                        width={84}
+                        height={84}
+                      />
+                    </div>
 
-              
-              
-              
+                    {/* Title */}
+                    <h3 className="mt-6 text-[clamp(1.25rem,1.05rem_+_0.8vw,1.5rem)] font-semibold text-black">
+                      {item.title}
+                    </h3>
 
-              {/* Title */}
-              <h3 className="mt-6 text-[clamp(1.25rem,1.05rem_+_0.8vw,1.5rem)] font-semibold text-black">
-                {item.title}
-              </h3>
+                    {/* Subtitle */}
+                    <p className="mt-2 text-sm text-gray-400">
+                      {item.subtitle}
+                    </p>
 
-              {/* Subtitle */}
-              <p className="mt-2 text-sm text-gray-400">
-                {item.subtitle}
-              </p>
+                  </motion.div>
+                </div>
+              ))}
+            </div>
+          </div>
 
-            </motion.div>
-          ))}
+          {/* Right Arrow */}
+          <button
+            onClick={() => emblaApi?.scrollNext()}
+            aria-label="Next standards"
+            className="absolute -right-6 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white p-3 shadow-lg"
+          >
+            <FiChevronRight size={24} />
+          </button>
 
         </div>
 

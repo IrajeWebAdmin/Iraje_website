@@ -8,7 +8,9 @@ import { FiLock, FiMonitor, FiUser, FiChevronDown } from "react-icons/fi";
 const PRODUCTS = [
   { name: "Privileged Access Manager", href: "/products/pam", Icon: FiLock },
   { name: "Endpoint Privilege Manager", href: "/products/epm", Icon: FiMonitor },
-  { name: "Identity & Access Manager", href: "/products/iam", Icon: FiUser },
+  // No IAM page yet — listed without an href so there is nothing to navigate
+  // to. Give it `href: "/products/iam"` and drop `disabled` once it exists.
+  { name: "Identity & Access Manager", disabled: true, Icon: FiUser },
 ];
 
 // Shared "Products" nav item: a click-toggled dropdown that links to each
@@ -62,18 +64,30 @@ export default function ProductsDropdown({
           role="menu"
           className="absolute left-0 top-full z-50 mt-4 w-[340px] rounded-2xl border border-[#E8ECF4] bg-white p-2 shadow-[0px_20px_50px_-24px_rgba(12,30,58,0.35)]"
         >
-          {PRODUCTS.map(({ name, href, Icon }) => (
-            <Link
-              key={name}
-              href={href}
-              role="menuitem"
-              onClick={() => setOpen(false)}
-              className="flex items-center gap-3 rounded-xl px-4 py-3.5 text-[15px] font-medium text-ink transition hover:bg-[#F4F8FF]"
-            >
-              <Icon className="h-5 w-5 shrink-0 text-brand" />
-              {name}
-            </Link>
-          ))}
+          {PRODUCTS.map(({ name, href, Icon, disabled }) =>
+            disabled ? (
+              <span
+                key={name}
+                role="menuitem"
+                aria-disabled="true"
+                className="flex cursor-not-allowed items-center gap-3 rounded-xl px-4 py-3.5 text-[15px] font-medium text-ink/40 select-none"
+              >
+                <Icon className="h-5 w-5 shrink-0 text-brand/40" />
+                {name}
+              </span>
+            ) : (
+              <Link
+                key={name}
+                href={href}
+                role="menuitem"
+                onClick={() => setOpen(false)}
+                className="flex items-center gap-3 rounded-xl px-4 py-3.5 text-[15px] font-medium text-ink transition hover:bg-[#F4F8FF]"
+              >
+                <Icon className="h-5 w-5 shrink-0 text-brand" />
+                {name}
+              </Link>
+            ),
+          )}
         </div>
       )}
     </div>

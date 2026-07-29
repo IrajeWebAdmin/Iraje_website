@@ -27,15 +27,11 @@ export default function EpmContactCta() {
             <FiMail className="h-4 w-4" />
             {email}
           </a>
-          <a
-            href={`https://${website}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-full bg-white/10 px-5 py-3 text-sm font-medium text-white transition hover:bg-white/20"
-          >
+          {/* Display-only — the site address is shown, not linked. */}
+          <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-5 py-3 text-sm font-medium text-white">
             <FiGlobe className="h-4 w-4" />
             {website}
-          </a>
+          </span>
         </div>
 
         {/* Primary CTA */}

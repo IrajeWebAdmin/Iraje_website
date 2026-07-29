@@ -87,11 +87,13 @@ export default function ProductCard({
       </motion.p>
 
       {comingSoon ? (
+        // Reads exactly like the live cards — same label, same brand blue. It
+        // is a <span>, so there is no href and no full-card click overlay.
         <span
           aria-disabled="true"
-          className="mt-6 inline-flex cursor-not-allowed items-center text-xl font-medium text-gray-400 select-none"
+          className="mt-6 inline-flex cursor-default items-center text-xl font-medium text-[#0451CC] select-none"
         >
-          Explore {shortName} (Coming Soon)
+          Explore {shortName} →
         </span>
       ) : (
         <Link

@@ -38,10 +38,14 @@ export default function TestimonialCard({
         />
       </div>
 
-      {/* Review */}
-      <p className=" text-[clamp(0.875rem,0.75rem+0.33vw,1rem)] mt-6 leading-relaxed text-gray-500 group-hover:text-gray-200 ">
-        {review}
-      </p>
+      {/* Review — quotes run to several paragraphs, so they are left-aligned
+          (centred multi-line body copy is hard to read) while the header above
+          stays centred. */}
+      <div className=" text-[clamp(0.875rem,0.75rem+0.33vw,1rem)] mt-6 space-y-4 text-left leading-relaxed text-gray-500 group-hover:text-gray-200 ">
+        {review.map((paragraph, index) => (
+          <p key={index}>{paragraph}</p>
+        ))}
+      </div>
     </div>
   );
 }

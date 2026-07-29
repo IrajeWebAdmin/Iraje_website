@@ -15,19 +15,33 @@ export default function AboutCta() {
           {body}
         </p>
         <div className="mt-9 flex flex-wrap justify-center gap-4">
-          {ctas.map((cta) => (
-            <Link
-              key={cta.label}
-              href={cta.href}
-              className={
-                cta.primary
-                  ? "rounded-4xl bg-white px-7 py-3.5 text-sm font-medium text-black transition hover:bg-white/90"
-                  : "rounded-4xl border border-white/40 px-7 py-3.5 text-sm font-medium text-white transition hover:bg-white/10"
-              }
-            >
-              {cta.label}
-            </Link>
-          ))}
+          {ctas.map((cta) =>
+            cta.disabled ? (
+              <span
+                key={cta.label}
+                aria-disabled="true"
+                className={
+                  cta.primary
+                    ? "cursor-not-allowed rounded-4xl bg-white/50 px-7 py-3.5 text-sm font-medium text-black/50 select-none"
+                    : "cursor-not-allowed rounded-4xl border border-white/20 px-7 py-3.5 text-sm font-medium text-white/50 select-none"
+                }
+              >
+                {cta.label}
+              </span>
+            ) : (
+              <Link
+                key={cta.label}
+                href={cta.href}
+                className={
+                  cta.primary
+                    ? "rounded-4xl bg-white px-7 py-3.5 text-sm font-medium text-black transition hover:bg-white/90"
+                    : "rounded-4xl border border-white/40 px-7 py-3.5 text-sm font-medium text-white transition hover:bg-white/10"
+                }
+              >
+                {cta.label}
+              </Link>
+            ),
+          )}
         </div>
       </div>
     </section>
