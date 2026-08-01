@@ -38,8 +38,9 @@ export default function Navbar() {
         </Link>
 {/* ashdsghj */}
 
-        {/* Center Menu */}
-        <ul className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-12 lg:flex">
+        {/* Center Menu — spacing tightens as the viewport narrows so the full
+            nav stays on one line instead of collapsing to a hamburger. */}
+        <ul className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-3 text-sm sm:flex md:gap-6 md:text-base lg:gap-12">
           {navLinks.map((link) => (
             <li key={link.name}>
               {link.name === "Products" ? (
@@ -63,15 +64,43 @@ export default function Navbar() {
           ))}
         </ul>
 
-        {/* Mobile Menu Button */}
+        {/* Phone-only toggle: below 640px the logo and five links cannot share
+            one line, so the menu drops into the panel below. */}
         <button
           aria-label="Toggle Menu"
-          className="text-3xl text-black lg:hidden"
+          aria-expanded={mobileMenu}
+          className="ml-auto text-3xl text-black sm:hidden"
           onClick={() => setMobileMenu(!mobileMenu)}
         >
           {mobileMenu ? <HiX /> : <HiMenu />}
         </button>
       </nav>
+
+      {/* Phone menu */}
+      {mobileMenu && (
+        <ul className="flex flex-col gap-1 border-t border-mist pb-4 sm:hidden">
+          {navLinks.map((link) => (
+            <li key={link.name}>
+              {link.disabled ? (
+                <span
+                  aria-disabled="true"
+                  className="block cursor-not-allowed px-2 py-2.5 font-medium text-black/40 select-none"
+                >
+                  {link.name}
+                </span>
+              ) : (
+                <Link
+                  href={link.href}
+                  onClick={() => setMobileMenu(false)}
+                  className="block px-2 py-2.5 font-medium text-black"
+                >
+                  {link.name}
+                </Link>
+              )}
+            </li>
+          ))}
+        </ul>
+      )}
       </div>
     </header>
   );

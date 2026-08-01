@@ -294,11 +294,69 @@ const certification = {
     },
     backgroundStep: {
       label: "Professional background",
+      // Every dropdown ends with "Other" so nobody is forced into a bucket
+      // that doesn't describe them.
       fields: [
-        { label: "Years of Experience", required: false, placeholder: "Select…", type: "select" },
-        { label: "Technology Domain", required: false, placeholder: "Select…", type: "select" },
-        { label: "Existing Customer?", required: false, placeholder: "No", type: "select" },
-        { label: "Existing Partner?", required: false, placeholder: "No", type: "select" },
+        {
+          label: "Years of Experience",
+          required: false,
+          placeholder: "Select…",
+          type: "select",
+          options: [
+            "0–1 years",
+            "1–3 years",
+            "3–5 years",
+            "5–8 years",
+            "8–12 years",
+            "12+ years",
+            "Other",
+          ],
+        },
+        {
+          label: "Technology Domain",
+          required: false,
+          placeholder: "Select…",
+          type: "select",
+          options: [
+            "Privileged Access Management (PAM)",
+            "Endpoint Security / EPM",
+            "Identity & Access Management (IAM)",
+            "Network & Infrastructure Security",
+            "Cloud Security",
+            "IT Audit, Risk & Compliance",
+            "Other",
+          ],
+        },
+        {
+          label: "Existing Customer?",
+          required: false,
+          placeholder: "Select…",
+          type: "select",
+          options: [
+            "No",
+            "Yes — using PAM",
+            "Yes — using EPM",
+            "Yes — using both",
+            "In evaluation / PoC",
+            "Former customer",
+            "Other",
+          ],
+        },
+        {
+          label: "Existing Partner?",
+          required: false,
+          placeholder: "Select…",
+          type: "select",
+          options: [
+            "No",
+            "Yes — Reseller",
+            "Yes — Distributor",
+            "Yes — System Integrator",
+            "Yes — MSSP / Managed Services",
+            "In discussion",
+            "Other",
+          ],
+        },
       ],
     },
     certStep: {
@@ -351,8 +409,8 @@ const certification = {
         ],
       },
     ],
-    copyright: "© 2026 Iraje Software. All rights reserved.",
-    tag: "Iraje University · Learn. Certify. Verify.",
+    copyright: "© Iraje Software. All rights reserved.",
+   
   },
 };
 

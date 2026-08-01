@@ -3,6 +3,9 @@
 import { useState } from "react";
 import { FiArrowRight, FiMail, FiPhone, FiMapPin } from "react-icons/fi";
 import university from "@/data/university";
+import HoneypotField from "@/components/HoneypotField";
+import { HONEYPOT_FIELD } from "@/lib/honeypot";
+import { validateEmail, validatePhone } from "@/lib/validation";
 
 const { eyebrow, heading, body, contact, audiences, courses, deliveryFormats } =
   university.request;
@@ -18,6 +21,7 @@ const EMPTY = {
   course: "",
   format: "",
   msg: "",
+  [HONEYPOT_FIELD]: "",
 };
 
 export default function UniversityRequestForm() {
@@ -33,7 +37,17 @@ export default function UniversityRequestForm() {
   function validate() {
     const next = {};
     if (!values.fname.trim()) next.fname = "Your name is required.";
+
     if (!values.email.trim()) next.email = "A work email is required.";
+    else {
+      const emailError = validateEmail(values.email);
+      if (emailError) next.email = emailError;
+    }
+
+    // Phone is optional on this form, but must be valid when one is given.
+    const phoneError = validatePhone(values.phone, { required: false });
+    if (phoneError) next.phone = phoneError;
+
     if (!values.audience) next.audience = "Please tell us who you are.";
     if (!values.course) next.course = "Please choose a course.";
     return next;
@@ -70,8 +84,11 @@ export default function UniversityRequestForm() {
         body: JSON.stringify({
           name: values.fname,
           email: values.email,
-          contactNo: values.phone.trim() || "Not provided",
+          // Left empty when not given — "Not provided" is not a phone number
+          // and no longer passes validation.
+          contactNo: values.phone.trim(),
           message,
+          [HONEYPOT_FIELD]: values[HONEYPOT_FIELD],
         }),
       });
       const data = await res.json().catch(() => ({}));
@@ -153,6 +170,11 @@ export default function UniversityRequestForm() {
               noValidate
               className="rounded-2xl border border-ink/10 bg-white p-8 shadow-[0px_16px_40px_-24px_#0C1E3A47,0px_1px_2px_0px_#0C1E3A0D] md:p-10"
             >
+              <HoneypotField
+                value={values[HONEYPOT_FIELD]}
+                onChange={update(HONEYPOT_FIELD)}
+              />
+
               <div className="grid gap-6 sm:grid-cols-2">
                 <Field label="Full name" required error={errors.fname}>
                   <input

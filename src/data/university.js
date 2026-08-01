@@ -313,15 +313,15 @@ const university = {
           { name: "PAM", href: "/products/pam" },
           { name: "EPM", href: "/products/epm" },
           // No IAM page yet — rendered as plain, unclickable text.
-          { name: "IAM", disabled: true },
+          // { name: "IAM", disabled: true },
         ],
       },
       {
         title: "Programs",
         links: [
           { name: "For Customers", href: "#formats" },
-          { name: "For Partners", href: "#formats" },
-          { name: "Masterclasses", href: "#formats" },
+          // { name: "For Partners", href: "#formats" },
+          // { name: "Masterclasses", href: "#formats" },
           { name: "Request Training", href: "#request" },
         ],
       },

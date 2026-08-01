@@ -35,8 +35,9 @@ export default function CertificationNavbar() {
             />
           </Link>
 
-          {/* Center Menu */}
-          <ul className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-12 lg:flex">
+          {/* Center Menu — spacing tightens as the viewport narrows so the full
+              nav stays on one line instead of collapsing to a hamburger. */}
+          <ul className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-3 text-sm sm:flex md:gap-6 md:text-base lg:gap-12">
             {navLinks.map((link) => (
               <li key={link.name}>
                 {link.name === "Products" ? (
@@ -67,7 +68,7 @@ export default function CertificationNavbar() {
           {/* Mobile Menu Button */}
           <button
             aria-label="Toggle Menu"
-            className="ml-auto text-3xl text-black lg:hidden"
+            className="ml-auto text-3xl text-black sm:hidden"
             onClick={() => setMobileMenu(!mobileMenu)}
           >
             {mobileMenu ? <HiX /> : <HiMenu />}
@@ -76,7 +77,7 @@ export default function CertificationNavbar() {
 
         {/* Mobile menu */}
         {mobileMenu && (
-          <ul className="flex flex-col gap-1 border-t border-mist pb-4 lg:hidden">
+          <ul className="flex flex-col gap-1 border-t border-mist pb-4 sm:hidden">
             {navLinks.map((link) => (
               <li key={link.name}>
                 {link.disabled ? (

@@ -4,11 +4,20 @@ import { useState } from "react";
 import { FiMapPin, FiMail, FiPhone } from "react-icons/fi";
 import { FaLinkedinIn, FaYoutube } from "react-icons/fa";
 import contact from "@/data/contact";
+import HoneypotField from "@/components/HoneypotField";
+import { HONEYPOT_FIELD } from "@/lib/honeypot";
+import { validateEmail, validatePhone } from "@/lib/validation";
 
 const INFO_ICONS = { location: FiMapPin, email: FiMail, contact: FiPhone };
 const SOCIAL_ICONS = { linkedin: FaLinkedinIn, youtube: FaYoutube };
 
-const EMPTY = { name: "", contactNo: "", email: "", message: "" };
+const EMPTY = {
+  name: "",
+  contactNo: "",
+  email: "",
+  message: "",
+  [HONEYPOT_FIELD]: "",
+};
 
 // Two-panel contact card: blue info panel (left) + message form (right).
 // The form posts to the existing /api/contact endpoint.
@@ -23,8 +32,28 @@ export default function ContactCard() {
     return (e) => setValues((v) => ({ ...v, [field]: e.target.value }));
   }
 
+  // Email and phone are checked here so a typo is caught before a round trip.
+  // The API re-checks with the same validators — this is convenience, not trust.
+  function validate() {
+    const next = {};
+    const emailError = validateEmail(values.email);
+    if (emailError) next.email = emailError;
+    const phoneError = validatePhone(values.contactNo);
+    if (phoneError) next.contactNo = phoneError;
+    return next;
+  }
+
   async function handleSubmit(e) {
     e.preventDefault();
+
+    const clientErrors = validate();
+    if (Object.keys(clientErrors).length > 0) {
+      setErrors(clientErrors);
+      setServerError("Please fix the highlighted fields.");
+      setStatus("error");
+      return;
+    }
+
     setStatus("submitting");
     setErrors({});
     setServerError("");
@@ -125,6 +154,11 @@ export default function ContactCard() {
           </div>
         ) : (
           <form onSubmit={handleSubmit} noValidate className="mt-8 space-y-5">
+            <HoneypotField
+              value={values[HONEYPOT_FIELD]}
+              onChange={update(HONEYPOT_FIELD)}
+            />
+
             <Field label="Name" error={errors.name}>
               <input
                 type="text"

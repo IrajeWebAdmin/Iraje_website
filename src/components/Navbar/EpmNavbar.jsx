@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { FiMenu, FiX } from "react-icons/fi";
 import epm from "@/data/epm";
 import Image from "next/image";
 import ProductsDropdown from "./ProductsDropdown";
@@ -25,8 +26,9 @@ export default function EpmNavbar() {
             />
           </Link>
 
-          {/* Center links */}
-          <ul className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-12 lg:flex">
+          {/* Center links — spacing tightens as the viewport narrows so the full
+              nav stays on one line instead of collapsing to a hamburger. */}
+          <ul className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-3 text-sm sm:flex md:gap-6 md:text-base lg:gap-12">
             {links.map((link) => (
               <li key={link.name}>
                 {link.name === "Products" ? (
@@ -49,12 +51,24 @@ export default function EpmNavbar() {
               </li>
             ))}
           </ul>
+
+          {/* Phone-only toggle: below 640px the logo and links cannot share one
+              line, so the menu drops into the panel below. */}
+          <button
+            type="button"
+            aria-label="Toggle menu"
+            aria-expanded={open}
+            onClick={() => setOpen((v) => !v)}
+            className="ml-auto text-black sm:hidden"
+          >
+            {open ? <FiX className="h-6 w-6" /> : <FiMenu className="h-6 w-6" />}
+          </button>
         </nav>
       </div>
 
       {/* Mobile menu */}
       {open && (
-        <div className="bg-navy/95 border-t border-white/10 backdrop-blur-lg lg:hidden">
+        <div className="bg-navy/95 border-t border-white/10 backdrop-blur-lg sm:hidden">
           <ul className="epm-container flex flex-col gap-1 py-4">
             {links.map((link) => (
               <li key={link.name}>

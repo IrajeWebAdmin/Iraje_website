@@ -2,8 +2,17 @@
 
 import { useState } from "react";
 import { FiArrowRight } from "react-icons/fi";
+import HoneypotField from "@/components/HoneypotField";
+import { HONEYPOT_FIELD } from "@/lib/honeypot";
+import { validateEmail, validatePhone } from "@/lib/validation";
 
-const EMPTY = { name: "", contactNo: "", email: "", message: "" };
+const EMPTY = {
+  name: "",
+  contactNo: "",
+  email: "",
+  message: "",
+  [HONEYPOT_FIELD]: "",
+};
 
 export default function ContactForm() {
   const [values, setValues] = useState(EMPTY);
@@ -15,8 +24,28 @@ export default function ContactForm() {
     return (e) => setValues((v) => ({ ...v, [field]: e.target.value }));
   }
 
+  // Email and phone are checked here so a typo is caught before a round trip.
+  // The API re-checks with the same validators — this is convenience, not trust.
+  function validate() {
+    const next = {};
+    const emailError = validateEmail(values.email);
+    if (emailError) next.email = emailError;
+    const phoneError = validatePhone(values.contactNo);
+    if (phoneError) next.contactNo = phoneError;
+    return next;
+  }
+
   async function handleSubmit(e) {
     e.preventDefault();
+
+    const clientErrors = validate();
+    if (Object.keys(clientErrors).length > 0) {
+      setErrors(clientErrors);
+      setServerError("Please fix the highlighted fields.");
+      setStatus("error");
+      return;
+    }
+
     setStatus("submitting");
     setErrors({});
     setServerError("");
@@ -68,6 +97,11 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} noValidate className="space-y-5">
+      <HoneypotField
+        value={values[HONEYPOT_FIELD]}
+        onChange={update(HONEYPOT_FIELD)}
+      />
+
       <Field label="Name" error={errors.name}>
         <input
           type="text"

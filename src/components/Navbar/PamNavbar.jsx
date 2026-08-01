@@ -26,8 +26,9 @@ export default function PamNavbar() {
             />
           </Link>
 
-          {/* Center links */}
-            <ul className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-12 lg:flex">
+          {/* Center links — spacing tightens as the viewport narrows so the full
+              nav stays on one line instead of collapsing to a hamburger. */}
+            <ul className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-3 text-sm sm:flex md:gap-6 md:text-base lg:gap-12">
             {links.map((link) => (
               <li key={link.name}>
                 {link.name === "Products" ? (
@@ -58,7 +59,7 @@ export default function PamNavbar() {
             type="button"
             aria-label="Toggle menu"
             onClick={() => setOpen((v) => !v)}
-            className="text-white lg:hidden"
+            className="ml-auto text-black sm:hidden"
           >
             {open ? <FiX className="h-6 w-6" /> : <FiMenu className="h-6 w-6" />}
           </button>
@@ -67,7 +68,7 @@ export default function PamNavbar() {
 
       {/* Mobile menu */}
       {open && (
-        <div className="border-t border-white/10 bg-[#0451CC]/95 backdrop-blur-lg lg:hidden">
+        <div className="border-t border-white/10 bg-[#0451CC]/95 backdrop-blur-lg sm:hidden">
           <ul className="container-global flex flex-col gap-1 py-4">
             {links.map((link) => (
               <li key={link.name}>

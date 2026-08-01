@@ -22,6 +22,11 @@ function Field({ field }) {
           <option value="" disabled>
             {field.placeholder}
           </option>
+          {field.options?.map((opt) => (
+            <option key={opt} value={opt} className="text-ink">
+              {opt}
+            </option>
+          ))}
         </select>
       ) : (
         <input type={field.type || "text"} placeholder={field.placeholder} className={cls} />

@@ -173,9 +173,9 @@ const about = {
         title: "Company",
         links: [
           { name: "About Us", href: "/about" },
-          { name: "Customers", href: "/customers" },
+          // { name: "Customers", href: "/customers" },
           // No partners page yet — rendered as plain, unclickable text.
-          { name: "Partners", disabled: true },
+          // { name: "Partners", disabled: true },
           { name: "Culture & Values", href: "/about#culture" },
         ],
       },
@@ -183,7 +183,7 @@ const about = {
         title: "Explore",
         links: [
           { name: "Iraje University", href: "/university" },
-          { name: "Resources", href: "/resources" },
+          // { name: "Resources", href: "/resources" },
           { name: "Academy & Certification", href: "/certification" },
         ],
       },
@@ -196,8 +196,8 @@ const about = {
         ],
       },
     ],
-    copyright: "© 2026 Iraje Software. All rights reserved.",
-    note: "Identity is the new perimeter.",
+    copyright: "© Iraje Software. All rights reserved.",
+    
   },
 };
 

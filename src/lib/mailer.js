@@ -26,6 +26,12 @@ function getTransporter() {
   return transporter;
 }
 
+// Optional fields (currently just the phone number) arrive as null when the
+// enquirer left them blank — show a dash rather than the string "null".
+function shown(value) {
+  return value === null || value === undefined || value === "" ? "—" : value;
+}
+
 // Minimal HTML escaping so user input can't break the notification markup.
 function escapeHtml(value) {
   return String(value)
@@ -61,7 +67,7 @@ export async function sendContactNotification({
       ``,
       `Name:    ${name}`,
       `Email:   ${email}`,
-      `Phone:   ${contactNo}`,
+      `Phone:   ${shown(contactNo)}`,
       ``,
       `Message:`,
       message,
@@ -73,7 +79,7 @@ export async function sendContactNotification({
       <table cellpadding="6" style="border-collapse:collapse;font-family:sans-serif">
         <tr><td><strong>Name</strong></td><td>${escapeHtml(name)}</td></tr>
         <tr><td><strong>Email</strong></td><td>${escapeHtml(email)}</td></tr>
-        <tr><td><strong>Phone</strong></td><td>${escapeHtml(contactNo)}</td></tr>
+        <tr><td><strong>Phone</strong></td><td>${escapeHtml(shown(contactNo))}</td></tr>
       </table>
       <p style="font-family:sans-serif"><strong>Message</strong></p>
       <p style="white-space:pre-wrap;font-family:sans-serif">${escapeHtml(message)}</p>
