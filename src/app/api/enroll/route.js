@@ -133,9 +133,32 @@ export async function POST(request) {
       },
     });
   } catch (err) {
+    // Full error (stack, code frame, query) goes to the server log.
     console.error("[enroll] failed to save submission:", err);
+
+    // Prisma prefixes its message with the whole invocation and a code frame,
+    // which in a bundled build is mangled module names plus an absolute server
+    // path. The last line is the part that says what actually went wrong.
+    const cause = String(err?.message ?? "")
+      .trim()
+      .split("\n")
+      .map((line) => line.trim())
+      .filter(Boolean)
+      .pop();
+
     return NextResponse.json(
-      { ok: false, error: "Could not submit your request. Please try again." },
+      {
+        ok: false,
+        error: "Could not submit your request. Please try again.",
+        // Returned deliberately so a failed save can be diagnosed from the
+        // response itself, not just the server log. `code` is Prisma's error
+        // code (P2000 = value too long, P2002 = unique clash, and so on).
+        // NOTE: this exposes database detail to anyone who can POST here —
+        // wrap both lines in `process.env.NODE_ENV !== "production" && …`
+        // before going live if that is not wanted.
+        detail: cause,
+        code: err?.code,
+      },
       { status: 500, headers: rateLimitHeaders(limit) },
     );
   }
