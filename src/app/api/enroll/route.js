@@ -149,7 +149,7 @@ export async function POST(request) {
     return NextResponse.json(
       {
         ok: false,
-        error: "Could not submit your request. Please try again.",
+        error: `Could not submit your request. Please try again. ${err}`,
         // Returned deliberately so a failed save can be diagnosed from the
         // response itself, not just the server log. `code` is Prisma's error
         // code (P2000 = value too long, P2002 = unique clash, and so on).
@@ -157,7 +157,7 @@ export async function POST(request) {
         // etail to anyone who can POST here —
         // wrap both lines in `process.env.NODE_ENV !== "production" && …`
         // before going live if that is not wanted.
-        detail: err,
+        detail: cause,
         code: err?.code,
       },
       { status: 500, headers: rateLimitHeaders(limit) },
