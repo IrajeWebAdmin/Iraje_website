@@ -153,10 +153,11 @@ export async function POST(request) {
         // Returned deliberately so a failed save can be diagnosed from the
         // response itself, not just the server log. `code` is Prisma's error
         // code (P2000 = value too long, P2002 = unique clash, and so on).
-        // NOTE: this exposes database detail to anyone who can POST here —
+        // NOTE: this exposes database d
+        // etail to anyone who can POST here —
         // wrap both lines in `process.env.NODE_ENV !== "production" && …`
         // before going live if that is not wanted.
-        detail: cause,
+        detail: err,
         code: err?.code,
       },
       { status: 500, headers: rateLimitHeaders(limit) },
