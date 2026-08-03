@@ -46,21 +46,35 @@ function escapeHtml(value) {
  * Throws if sending fails — the caller decides how to handle it (the API route
  * treats email as best-effort so a mail outage never loses a saved lead).
  */
-export async function sendContactNotification({
+export async function sendContactNotification(contact) {
+  return getTransporter().sendMail({
+    ...recipients(),
+    replyTo: contact.email, // reply straight to the enquirer
+    ...buildContactEmail(contact),
+  });
+}
+
+/** Shared envelope: both notifications go to the same team inbox. */
+function recipients() {
+  return {
+    from: process.env.CONTACT_FROM || process.env.SMTP_USER,
+    to: process.env.CONTACT_TO || process.env.SMTP_USER,
+  };
+}
+
+/**
+ * Build the contact notification body. Split out from the send so the exact
+ * subject/text/html can be rendered and checked without an SMTP server.
+ */
+export function buildContactEmail({
   id,
   name,
   contactNo,
   email,
   message,
+  submittedAt = new Date().toISOString(),
 }) {
-  const to = process.env.CONTACT_TO || process.env.SMTP_USER;
-  const from = process.env.CONTACT_FROM || process.env.SMTP_USER;
-  const submittedAt = new Date().toISOString();
-
-  return getTransporter().sendMail({
-    from,
-    to,
-    replyTo: email, // reply straight to the enquirer
+  return {
     subject: `New contact enquiry from ${name}`,
     text: [
       `New Contact Us submission (#${id})`,
@@ -86,5 +100,86 @@ export async function sendContactNotification({
       <hr />
       <p style="color:#888;font-family:sans-serif">Submitted ${submittedAt}</p>
     `,
+  };
+}
+
+/**
+ * Notify the team about a new certification enrolment request.
+ *
+ * Deliberately built to the same shape as sendContactNotification above — same
+ * recipient, same heading/table/rule/footer layout — so both land in the
+ * contact inbox looking like one family of messages. Only the rows differ.
+ */
+export async function sendEnrollmentNotification(enrollment) {
+  return getTransporter().sendMail({
+    ...recipients(),
+    replyTo: enrollment.email, // reply straight to the applicant
+    ...buildEnrollmentEmail(enrollment),
   });
+}
+
+/**
+ * Build the enrolment notification body — same split as buildContactEmail, so
+ * both layouts can be rendered side by side and checked without sending.
+ */
+export function buildEnrollmentEmail({
+  id,
+  name,
+  email,
+  mobile,
+  organization,
+  designation,
+  country,
+  experience,
+  domain,
+  existingCustomer,
+  existingPartner,
+  certifications,
+  submittedAt = new Date().toISOString(),
+}) {
+  // Same label/value pairs drive the plain-text and HTML bodies, so the two
+  // can't drift apart as fields are added.
+  const rows = [
+    ["Name", name],
+    ["Email", email],
+    ["Mobile", mobile],
+    ["Organization", organization],
+    ["Designation", designation],
+    ["Country", country],
+    ["Years of experience", experience],
+    ["Technology domain", domain],
+    ["Existing customer", existingCustomer],
+    ["Existing partner", existingPartner],
+  ];
+
+  const pad = Math.max(...rows.map(([label]) => label.length)) + 2;
+
+  return {
+    subject: `New certification enrolment from ${name}`,
+    text: [
+      `New Certification enrolment (#${id})`,
+      ``,
+      ...rows.map(([label, value]) => `${(label + ":").padEnd(pad)}${shown(value)}`),
+      ``,
+      `Certifications requested:`,
+      certifications,
+      ``,
+      `Submitted: ${submittedAt}`,
+    ].join("\n"),
+    html: `
+      <h2 style="font-family:sans-serif">New Certification enrolment (#${id})</h2>
+      <table cellpadding="6" style="border-collapse:collapse;font-family:sans-serif">
+        ${rows
+          .map(
+            ([label, value]) =>
+              `<tr><td><strong>${label}</strong></td><td>${escapeHtml(shown(value))}</td></tr>`,
+          )
+          .join("\n        ")}
+      </table>
+      <p style="font-family:sans-serif"><strong>Certifications requested</strong></p>
+      <p style="white-space:pre-wrap;font-family:sans-serif">${escapeHtml(certifications)}</p>
+      <hr />
+      <p style="color:#888;font-family:sans-serif">Submitted ${submittedAt}</p>
+    `,
+  };
 }

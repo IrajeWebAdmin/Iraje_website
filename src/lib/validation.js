@@ -93,3 +93,76 @@ export function validatePhone(raw, { required = true } = {}) {
   }
   return null;
 }
+
+// A mobile number is always longer than the shortest valid landline, so the
+// "Mobile Number" field can be stricter than the general contact field above.
+const MIN_MOBILE_DIGITS = 10;
+
+/**
+ * Stricter than validatePhone: for a field explicitly asking for a MOBILE.
+ * Rejects numbers too short to be one, and the repeated-digit filler people
+ * type to get past a required field (9999999999).
+ */
+export function validateMobile(raw, { required = true } = {}) {
+  const value = String(raw ?? "").trim();
+
+  if (!value) return required ? "Mobile number is required." : null;
+
+  const normalized = normalizePhone(value);
+  if (!normalized) {
+    return "Enter a valid mobile number, with country code if international (e.g. +91 98765 43210).";
+  }
+
+  const digits = normalized.replace(/\D/g, "");
+  if (digits.length < MIN_MOBILE_DIGITS) {
+    return "That number is too short for a mobile — include the country code (e.g. +91).";
+  }
+  if (/^(\d)\1+$/.test(digits)) {
+    return "Enter a real mobile number.";
+  }
+  return null;
+}
+
+// Mailboxes anyone can open for free — a personal address, not a company one.
+const CONSUMER_EMAIL_DOMAINS = new Set([
+  "gmail.com", "googlemail.com",
+  "yahoo.com", "yahoo.co.in", "yahoo.co.uk", "yahoo.in", "ymail.com", "rocketmail.com",
+  "hotmail.com", "hotmail.co.uk", "hotmail.co.in",
+  "outlook.com", "outlook.in", "live.com", "live.co.uk", "msn.com",
+  "aol.com", "icloud.com", "me.com", "mac.com",
+  "proton.me", "protonmail.com", "pm.me",
+  "gmx.com", "gmx.net", "mail.com", "inbox.com",
+  "yandex.com", "yandex.ru",
+  "rediffmail.com", "sify.com", "indiatimes.com",
+]);
+
+// Throwaway inbox services — valid today, gone in ten minutes.
+const DISPOSABLE_EMAIL_DOMAINS = new Set([
+  "mailinator.com", "guerrillamail.com", "sharklasers.com",
+  "10minutemail.com", "tempmail.com", "temp-mail.org", "yopmail.com",
+  "throwawaymail.com", "trashmail.com", "getnada.com", "dispostable.com",
+  "maildrop.cc", "fakeinbox.com", "mailnesia.com", "spam4.me",
+]);
+
+/**
+ * For fields asking for a WORK address. Applies the normal format rules first,
+ * then rejects free consumer mailboxes and disposable inboxes.
+ *
+ * Domain-list based on purpose: it cannot know whether `acme.com` is a real
+ * company, only that `gmail.com` definitely isn't one. That is the right
+ * trade-off here — no false rejections of genuine company domains.
+ */
+export function validateBusinessEmail(raw) {
+  const formatError = validateEmail(raw);
+  if (formatError) return formatError;
+
+  const domain = String(raw).trim().toLowerCase().split("@").pop();
+
+  if (DISPOSABLE_EMAIL_DOMAINS.has(domain)) {
+    return "Disposable email addresses aren't accepted — please use your work email.";
+  }
+  if (CONSUMER_EMAIL_DOMAINS.has(domain)) {
+    return "Please use your work email address, not a personal one.";
+  }
+  return null;
+}

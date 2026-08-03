@@ -28,3 +28,35 @@ model Contact {
 
   @@map("contact_message")
 }
+
+/// A certification enrolment request from the Certification page form.
+/// Unlike Contact (which mirrors a pre-existing table), this table is created
+/// by Prisma, so the columns the form marks required are NOT NULL here.
+/// `status` mirrors Contact's, for triage: new -> approved -> enrolled.
+model Enrollment {
+  id           Int     @id @default(autoincrement())
+  name         String  @db.VarChar(120)
+  email        String  @db.VarChar(255)
+  mobile       String  @map("mobile_no") @db.VarChar(20)
+  organization String  @db.VarChar(150)
+  designation  String? @db.VarChar(120)
+  country      String  @db.VarChar(100)
+
+  // Professional background — every one of these is optional on the form.
+  experience       String? @map("years_experience") @db.VarChar(40)
+  domain           String? @map("technology_domain") @db.VarChar(120)
+  existingCustomer String? @map("existing_customer") @db.VarChar(60)
+  existingPartner  String? @map("existing_partner") @db.VarChar(60)
+
+  /// Selected certification codes, comma-separated (e.g. "PAM 101, EPM 201").
+  /// A join table would be the textbook shape, but these six codes are fixed
+  /// copy in the data layer, never queried individually — a scalar keeps the
+  /// lead readable in one row.
+  certifications String @db.VarChar(255)
+
+  status    String    @default("new") @db.VarChar(20)
+  createdAt DateTime? @default(now()) @map("created_at") @db.Timestamp(0)
+
+  @@index([email])
+  @@map("certification_enrollment")
+}

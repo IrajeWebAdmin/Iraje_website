@@ -5,7 +5,7 @@ import { FiArrowRight, FiMail, FiPhone, FiMapPin } from "react-icons/fi";
 import university from "@/data/university";
 import HoneypotField from "@/components/HoneypotField";
 import { HONEYPOT_FIELD } from "@/lib/honeypot";
-import { validateEmail, validatePhone } from "@/lib/validation";
+import { validateBusinessEmail, validateMobile } from "@/lib/validation";
 
 const { eyebrow, heading, body, contact, audiences, courses, deliveryFormats } =
   university.request;
@@ -38,14 +38,16 @@ export default function UniversityRequestForm() {
     const next = {};
     if (!values.fname.trim()) next.fname = "Your name is required.";
 
+    // The field asks for a WORK email, so a personal or throwaway address is
+    // rejected the same way the certification enrolment form does it.
     if (!values.email.trim()) next.email = "A work email is required.";
     else {
-      const emailError = validateEmail(values.email);
+      const emailError = validateBusinessEmail(values.email);
       if (emailError) next.email = emailError;
     }
 
     // Phone is optional on this form, but must be valid when one is given.
-    const phoneError = validatePhone(values.phone, { required: false });
+    const phoneError = validateMobile(values.phone, { required: false });
     if (phoneError) next.phone = phoneError;
 
     if (!values.audience) next.audience = "Please tell us who you are.";
@@ -82,6 +84,9 @@ export default function UniversityRequestForm() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          // Tells the API to apply the work-email / mobile rules this form
+          // enforces in the browser, rather than the looser Contact Us ones.
+          source: "university",
           name: values.fname,
           email: values.email,
           // Left empty when not given — "Not provided" is not a phone number

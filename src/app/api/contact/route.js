@@ -3,7 +3,13 @@ import { prisma } from "@/lib/prisma";
 import { sendContactNotification } from "@/lib/mailer";
 import { createRateLimiter, clientIp } from "@/lib/rateLimit";
 import { isHoneypotTripped } from "@/lib/honeypot";
-import { validateEmail, validatePhone, normalizePhone } from "@/lib/validation";
+import {
+  validateEmail,
+  validatePhone,
+  validateBusinessEmail,
+  validateMobile,
+  normalizePhone,
+} from "@/lib/validation";
 
 // 15 submissions per IP per hour. Generous for a real visitor — and for an
 // office where everyone shares one public IP — but low enough that scripted
@@ -72,12 +78,21 @@ export async function POST(request) {
   if (!name) errors.name = "Name is required.";
   else if (name.length > 120) errors.name = "Name is too long.";
 
+  // Three forms share this endpoint. The University training request asks for
+  // a WORK email and a mobile, so it is held to the stricter rules; the two
+  // Contact Us forms are general enquiries where a personal address is fine.
+  const fromUniversity = String(body.source ?? "") === "university";
+
   // Optional here, format-checked when present: the two Contact Us forms mark
   // the number required in the browser, but the University form does not.
-  const contactNoError = validatePhone(contactNo, { required: false });
+  const contactNoError = fromUniversity
+    ? validateMobile(contactNo, { required: false })
+    : validatePhone(contactNo, { required: false });
   if (contactNoError) errors.contactNo = contactNoError;
 
-  const emailError = validateEmail(email);
+  const emailError = fromUniversity
+    ? validateBusinessEmail(email)
+    : validateEmail(email);
   if (emailError) errors.email = emailError;
 
   if (!message) errors.message = "Message is required.";

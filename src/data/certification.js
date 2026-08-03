@@ -283,13 +283,15 @@ const certification = {
       "Tell us about yourself and select the certifications you'd like to pursue. Your request goes to our team for approval.",
     detailStep: {
       label: "Step 1 · Your details",
+      // `name` is the key the field is submitted under — it must match the
+      // columns the /api/enroll route expects.
       fields: [
-        { label: "Full Name", required: true, placeholder: "John Smith" },
-        { label: "Business Email", required: true, placeholder: "john@company.com", type: "email" },
-        { label: "Mobile Number", required: true, placeholder: "+91 ..." },
-        { label: "Organization", required: true, placeholder: "Company name" },
-        { label: "Designation", required: false, placeholder: "e.g. Security Engineer" },
-        { label: "Country", required: true, placeholder: "India" },
+        { name: "name", label: "Full Name", required: true, placeholder: "John Smith" },
+        { name: "email", label: "Business Email", required: true, placeholder: "john@company.com", type: "email" },
+        { name: "mobile", label: "Mobile Number", required: true, placeholder: "+91 ..." },
+        { name: "organization", label: "Organization", required: true, placeholder: "Company name" },
+        { name: "designation", label: "Designation", required: false, placeholder: "e.g. Security Engineer" },
+        { name: "country", label: "Country", required: true, placeholder: "India" },
       ],
     },
     backgroundStep: {
@@ -298,6 +300,7 @@ const certification = {
       // that doesn't describe them.
       fields: [
         {
+          name: "experience",
           label: "Years of Experience",
           required: false,
           placeholder: "Select…",
@@ -313,6 +316,7 @@ const certification = {
           ],
         },
         {
+          name: "domain",
           label: "Technology Domain",
           required: false,
           placeholder: "Select…",
@@ -328,6 +332,7 @@ const certification = {
           ],
         },
         {
+          name: "existingCustomer",
           label: "Existing Customer?",
           required: false,
           placeholder: "Select…",
@@ -338,11 +343,11 @@ const certification = {
             "Yes — using EPM",
             "Yes — using both",
             "In evaluation / PoC",
-            "Former customer",
             "Other",
           ],
         },
         {
+          name: "existingPartner",
           label: "Existing Partner?",
           required: false,
           placeholder: "Select…",
