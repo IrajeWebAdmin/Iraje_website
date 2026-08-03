@@ -176,6 +176,56 @@
   will-change: opacity;
 }
 
+/* ===========================================================================
+   Card hover — shared lift used by every card on the product pages.
+   Kept here rather than repeated per component so all the sections stay in
+   step and the whole effect can be tuned in one place. Follows the existing
+   house style (see CertTracks / TestimonialCard): a small rise plus a
+   brand-tinted shadow cast from below.
+
+   NOTE: this file is unlayered, so these rules outrank Tailwind's utilities.
+   Only the hovered state sets border-color, so a card's resting border
+   (border-mist, border-[#7070703D], …) is left untouched.
+   =========================================================================== */
+.card-hover {
+  transition:
+    transform 300ms ease,
+    box-shadow 300ms ease,
+    border-color 300ms ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-6px);
+  border-color: rgba(4, 81, 204, 0.45);
+  box-shadow: 0 20px 40px -20px rgba(4, 81, 204, 0.45);
+}
+
+/* Same motion for cards sitting on the dark navy band, where a blue shadow
+   would be invisible — the depth has to come from black plus a brighter edge. */
+.card-hover-dark {
+  transition:
+    transform 300ms ease,
+    box-shadow 300ms ease,
+    border-color 300ms ease;
+}
+
+.card-hover-dark:hover {
+  transform: translateY(-6px);
+  border-color: rgba(114, 156, 246, 0.55);
+  box-shadow:
+    0 24px 48px -20px rgba(0, 0, 0, 0.7),
+    0 0 24px -6px rgba(114, 156, 246, 0.35);
+}
+
+/* Respect a reduced-motion preference: keep the shadow and border cues, drop
+   the movement. */
+@media (prefers-reduced-motion: reduce) {
+  .card-hover:hover,
+  .card-hover-dark:hover {
+    transform: none;
+  }
+}
+
 /* Soft fade at both edges so items appear/disappear instead of hard-clipping. */
 .marquee-mask {
   -webkit-mask-image: linear-gradient(

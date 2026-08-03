@@ -59,7 +59,7 @@ export default function EpmCompliance() {
           return (
             <div
               key={std.name}
-              className="flex h-[145.17px] w-[165.46px] flex-col items-center justify-center rounded-[20.29px] border border-mist bg-white px-4 text-center"
+              className="card-hover flex h-[145.17px] w-[165.46px] flex-col items-center justify-center rounded-[20.29px] border border-mist bg-white px-4 text-center"
             >
               <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#E4EAFB] text-brand">
                 {Icon && <Icon className="h-5 w-5" />}
@@ -141,7 +141,7 @@ export default function EpmCompliance() {
         {indianRegulators.map((reg) => (
           <div
             key={reg.name}
-            className="flex items-center gap-3 rounded-2xl border border-mist bg-white px-6 py-5"
+            className="card-hover flex items-center gap-3 rounded-2xl border border-mist bg-white px-6 py-5"
           >
             <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-[#0451CC]" />
             <span className="font-display text-base font-semibold text-ink">

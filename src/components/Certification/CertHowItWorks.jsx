@@ -42,7 +42,7 @@ export default function CertHowItWorks() {
         {steps.map((step) => (
           <div
             key={step.num}
-            className="rounded-2xl border border-mist bg-white p-8 shadow-[0px_1px_2px_0px_#0C1E3A0D]"
+            className="card-hover rounded-2xl border border-mist bg-white p-8 shadow-[0px_1px_2px_0px_#0C1E3A0D]"
           >
             <span className="font-display text-4xl font-bold text-brand">
               {step.num}

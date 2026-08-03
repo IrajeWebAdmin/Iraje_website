@@ -60,7 +60,7 @@ export default function PamCompliance() {
           return (
             <div
               key={std.name}
-              className="flex h-[203.46px] w-[231.9px] flex-col items-center justify-center rounded-[28.44px] border border-mist bg-white px-4 text-center"
+              className="card-hover flex h-[203.46px] w-[231.9px] flex-col items-center justify-center rounded-[28.44px] border border-mist bg-white px-4 text-center"
             >
               <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#E4EAFB] text-brand">
                 {Icon && <Icon className="h-6 w-6" />}
@@ -87,7 +87,7 @@ export default function PamCompliance() {
             {indianRegulators.map((reg) => (
               <div
                 key={reg.name}
-                className="flex items-center gap-2.5 rounded-2xl border border-mist bg-white px-5 py-3"
+                className="card-hover flex items-center gap-2.5 rounded-2xl border border-mist bg-white px-5 py-3"
               >
                 <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-brand" />
                 <span className="font-display text-sm font-semibold text-ink">
@@ -99,7 +99,7 @@ export default function PamCompliance() {
           </div>
         </div>
 
-        <div className="rounded-3xl border border-mist bg-white p-8 text-left md:p-10">
+        <div className="card-hover rounded-3xl border border-mist bg-white p-8 text-left md:p-10">
           <h3 className="font-display text-xl font-semibold text-brand">
             {dpdpTitle}
           </h3>

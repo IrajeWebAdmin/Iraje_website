@@ -38,7 +38,7 @@ export default function PamWhyIraje() {
           return (
             <div
               key={item.title}
-              className="flex min-h-[203px] flex-col items-center justify-center rounded-[28px] border border-[#7070703D] bg-[#F4F8FF] p-6 text-center"
+              className="card-hover flex min-h-[203px] flex-col items-center justify-center rounded-[28px] border border-[#7070703D] bg-[#F4F8FF] p-6 text-center"
             >
               <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#E4EAFB] text-brand">
                 <Icon className="h-5 w-5" />

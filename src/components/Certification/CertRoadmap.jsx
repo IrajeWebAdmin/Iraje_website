@@ -30,7 +30,7 @@ export default function CertRoadmap() {
         {levels.map((lvl) => (
           <div
             key={lvl.level}
-            className="flex flex-col rounded-2xl border border-mist bg-white p-6 shadow-[0px_1px_2px_0px_#0C1E3A0D]"
+            className="card-hover flex flex-col rounded-2xl border border-mist bg-white p-6 shadow-[0px_1px_2px_0px_#0C1E3A0D]"
           >
             {/* Level + status */}
             <div className="flex items-center justify-between">

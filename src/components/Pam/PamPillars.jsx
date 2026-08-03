@@ -33,7 +33,7 @@ export default function PamPillars() {
           return (
           <div
             key={pillar.name}
-            className="flex flex-col rounded-3xl border border-mist bg-white p-7 text-left"
+            className="card-hover flex flex-col rounded-3xl border border-mist bg-white p-7 text-left"
           >
             <div className="flex items-center gap-3">
               <span className="flex h-[41px] w-[41px] shrink-0 items-center justify-center rounded-xl bg-brand">

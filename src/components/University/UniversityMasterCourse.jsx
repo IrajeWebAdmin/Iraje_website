@@ -22,7 +22,7 @@ export default function UniversityMasterCourse() {
     >
       <div className="container-global">
         {/* Banner */}
-        <div className="rounded-[1.375rem] border border-ink/16 bg-white px-6 py-12 text-center shadow-[0_4px_14px_0_rgba(0,0,0,0.09)] md:px-16">
+        <div className="card-hover rounded-[1.375rem] border border-ink/16 bg-white px-6 py-12 text-center shadow-[0_4px_14px_0_rgba(0,0,0,0.09)] md:px-16">
           <span className="epm-eyebrow epm-eyebrow-normal font-semibold text-blue-600">
             {eyebrow}
           </span>
@@ -43,7 +43,7 @@ export default function UniversityMasterCourse() {
           {parts.map((part, partIndex) => (
             <article
               key={part.label}
-              className="overflow-hidden rounded-[1.125rem] border border-ink/10 bg-white shadow-[0px_4px_14.4px_0px_#00000017]"
+              className="card-hover overflow-hidden rounded-[1.125rem] border border-ink/10 bg-white shadow-[0px_4px_14.4px_0px_#00000017]"
             >
               <header className="border-b border-ink/10 px-7 pt-7 pb-5">
                 <p className="text-[11.5px] font-semibold uppercase tracking-[0.2em] text-azure">

@@ -39,7 +39,7 @@ export default function AboutPartners() {
           return (
             <div
               key={t.title}
-              className="rounded-2xl border border-mist bg-white p-6 text-left shadow-[0px_1.04px_2.08px_0px_#0C1E3A0D]"
+              className="card-hover rounded-2xl border border-mist bg-white p-6 text-left shadow-[0px_1.04px_2.08px_0px_#0C1E3A0D]"
             >
               <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#E3E9FF] text-brand">
                 <Icon className="h-5 w-5" />
@@ -56,7 +56,7 @@ export default function AboutPartners() {
       </div>
 
       {/* Offers */}
-      <div className="mt-8 rounded-3xl border border-mist bg-white p-8 text-left md:p-10">
+      <div className="card-hover mt-8 rounded-3xl border border-mist bg-white p-8 text-left md:p-10">
         <h3 className="font-display text-xl font-semibold text-ink">
           {offersTitle}
         </h3>

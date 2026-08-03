@@ -23,7 +23,7 @@ export default function EpmDifferentiators() {
         {items.map((item) => (
           <div
             key={item.num}
-            className="flex min-h-[120px] items-center gap-6 rounded-[20px] border border-[#707070]/20 bg-white px-8 py-6"
+            className="card-hover flex min-h-[120px] items-center gap-6 rounded-[20px] border border-[#707070]/20 bg-white px-8 py-6"
           >
             <div className="flex shrink-0 items-center gap-4">
               {/* Fixed width + tabular figures so every row's number occupies the

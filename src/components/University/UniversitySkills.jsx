@@ -42,7 +42,7 @@ export default function UniversitySkills() {
           {stats.map((stat) => (
             <div
               key={stat.value}
-              className="relative flex h-[224.35px] w-[267.26px] max-w-full flex-col gap-[11.51px] overflow-hidden rounded-[18.41px] border-[1.15px] border-ink/10 bg-white px-[25.31px] py-[27.61px] shadow-[0_1px_2px_0_rgba(12,30,58,0.05)]"
+              className="card-hover relative flex h-[224.35px] w-[267.26px] max-w-full flex-col gap-[11.51px] overflow-hidden rounded-[18.41px] border-[1.15px] border-ink/10 bg-white px-[25.31px] py-[27.61px] shadow-[0_1px_2px_0_rgba(12,30,58,0.05)]"
             >
               <span className="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-azure to-[#0e9bd6]" />
               <p className="font-display text-5xl font-semibold text-azure">{stat.value}</p>

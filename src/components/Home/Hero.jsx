@@ -33,7 +33,7 @@ export default function Hero() {
             </h1>
 
             <p className="mb-8 epm-body leading-relaxed text-gray-200">
-              Iraje brings <br/>Privileged Access Management [PAM]<br/>Endpoint Privilege Management [EPM] and <br/>Identity & Access Management [IAM]<br/> together with Zero-Trust security architecture & compliance ready from day one. 
+              Iraje brings Privileged Access Management [PAM] Endpoint Privilege Management [EPM] and Identity & Access Management [IAM] together with Zero-Trust security architecture & compliance ready from day one. 
             </p>
 
             <Link

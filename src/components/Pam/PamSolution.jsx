@@ -47,7 +47,7 @@ export default function PamSolution() {
         {benefits.map((benefit) => {
           const Icon = ICONS[benefit.icon];
           return (
-            <div key={benefit.title} className="rounded-3xl border border-[#FFFFFF21] bg-[#0b1a39] p-7 text-left shadow-2xl">
+            <div key={benefit.title} className="card-hover-dark rounded-3xl border border-[#FFFFFF21] bg-[#0b1a39] p-7 text-left shadow-2xl">
               <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#E4EAFB] text-black">
                 {Icon && <Icon className="h-5 w-5" />}
               </span>

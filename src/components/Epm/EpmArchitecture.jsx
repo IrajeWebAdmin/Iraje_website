@@ -27,7 +27,7 @@ export default function EpmArchitecture() {
           {/* Left: architecture diagram */}
           <div className="overflow-hidden rounded-[32px] bg-white shadow-sm">
             <Image
-              src="/images/epm/Solution-architecture.jpg"
+              src="/images/epm/Solution-architecture.png"
               alt="EPM Architecture"
               width={900}
               height={700}

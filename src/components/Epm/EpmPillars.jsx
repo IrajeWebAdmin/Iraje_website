@@ -32,7 +32,7 @@ export default function EpmPillars() {
           return (
             <div
               key={pillar.name}
-              className="rounded-[20px] border border-black/10 bg-white p-7"
+              className="card-hover rounded-[20px] border border-black/10 bg-white p-7"
             >
               <div className="flex items-center gap-3">
                 <span className="flex h-[38px] w-[41px] shrink-0 items-center justify-center rounded-lg bg-[#0451CC]">

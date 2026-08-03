@@ -38,7 +38,7 @@ export default function AboutCulture() {
           return (
             <div
               key={item.title}
-              className="relative flex flex-col overflow-hidden rounded-2xl border border-[#0C1E3A1A] bg-white p-7 text-left shadow-[0px_1px_2px_0px_#0C1E3A0D]"
+              className="card-hover relative flex flex-col overflow-hidden rounded-2xl border border-[#0C1E3A1A] bg-white p-7 text-left shadow-[0px_1px_2px_0px_#0C1E3A0D]"
             >
               {/* Gradient top accent (blue → teal), clipped to the card radius */}
               <span className="absolute inset-x-0 top-0 h-0.75 bg-linear-to-r from-brand to-[#22C7B8]" />

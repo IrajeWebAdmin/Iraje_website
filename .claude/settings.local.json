@@ -4,7 +4,8 @@
       "mcp__plugin_figma_figma__get_metadata",
       "Bash(node -e ' *)",
       "Bash(npm run *)",
-      "Bash(cd \"c:/Users/user/Desktop/Iraje_Website/frontend\" && cp \"C:/Users/user/AppData/Local/Temp/claude/c--Users-user-Desktop-Iraje-Website-frontend/ef3f5771-9205-4747-94e2-08c93f02b0e3/scratchpad/next.config.mjs.orig\" next.config.mjs && cat next.config.mjs && echo \"=== git status ===\" && git status --porcelain)"
+      "Bash(cd \"c:/Users/user/Desktop/Iraje_Website/frontend\" && cp \"C:/Users/user/AppData/Local/Temp/claude/c--Users-user-Desktop-Iraje-Website-frontend/ef3f5771-9205-4747-94e2-08c93f02b0e3/scratchpad/next.config.mjs.orig\" next.config.mjs && cat next.config.mjs && echo \"=== git status ===\" && git status --porcelain)",
+      "Bash(git ls-tree *)"
     ],
     "additionalDirectories": [
       "c:\\Users\\user\\Desktop\\Iraje_Website\\frontend"

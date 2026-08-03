@@ -30,7 +30,7 @@ export default function PamMaturity() {
         {levels.map((level, index) => (
           <div
             key={level.level}
-            className="flex flex-col overflow-hidden rounded-3xl border border-mist bg-white text-left shadow-lg shadow-brand/5"
+            className="card-hover flex flex-col overflow-hidden rounded-3xl border border-mist bg-white text-left shadow-lg shadow-brand/5"
           >
             <div
               style={{

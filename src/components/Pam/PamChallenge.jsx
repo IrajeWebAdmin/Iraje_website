@@ -28,7 +28,7 @@ export default function PamChallenge() {
         {problems.map((problem) => (
           <div
             key={problem.tag}
-            className="flex min-h-107.5 w-full flex-col rounded-3xl border border-mist bg-white p-7 text-left shadow-[0px_3.05px_6.09px_-0.76px_#00000014]"
+            className="card-hover flex min-h-107.5 w-full flex-col rounded-3xl border border-mist bg-white p-7 text-left shadow-[0px_3.05px_6.09px_-0.76px_#00000014]"
           >
             {/* Figma: alert glyph (~32px) centered inside a ~49x44 rounded badge */}
             <span className="mb-5 flex h-11 w-[49px] shrink-0 items-center justify-center rounded-xl bg-[#E00000]/10">

@@ -32,7 +32,7 @@ export default function EpmThreat() {
 
         {/* White Box */}
 
-        <div className="mt-16 rounded-[28px] border border-[#E6E6E6] bg-white p-10 shadow-sm">
+        <div className="card-hover mt-16 rounded-[28px] border border-[#E6E6E6] bg-white p-10 shadow-sm">
           <h3 className="font-poppins text-3xl font-medium text-[#0451CC]">
             Why endpoints are exposed ?
           </h3>

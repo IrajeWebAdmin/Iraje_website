@@ -65,7 +65,7 @@ export default function PamDifferentiators() {
           return (
           <div
             key={item.title}
-            className="flex flex-col rounded-3xl border border-mist bg-white p-6 text-left"
+            className="card-hover flex flex-col rounded-3xl border border-mist bg-white p-6 text-left"
           >
             {/* Icon tile — brand-blue glyph on a light-blue square */}
             <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#E4EAFB] text-brand">

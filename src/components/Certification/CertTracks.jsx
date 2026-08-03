@@ -15,7 +15,7 @@ const TRACK_ICONS = {
 function LevelCard({ level }) {
   const admin = level.level === "Administrator";
   return (
-    <div className="flex min-h-160 flex-col rounded-[18px] border border-mist bg-white px-7 pt-7 pb-6.5 shadow-[0px_1px_2px_0px_#0C1E3A0D] transition hover:shadow-[0px_20px_40px_-24px_rgba(4,81,204,0.35)]">
+    <div className="card-hover flex min-h-160 flex-col rounded-[18px] border border-mist bg-white px-7 pt-7 pb-6.5 shadow-[0px_1px_2px_0px_#0C1E3A0D]">
       {/* Code pill + level */}
       <div className="flex items-center justify-between">
         <span

@@ -114,7 +114,9 @@ export default function EpmComparison() {
               <div
                 key={card.name}
                 className={`rounded-2xl p-7 shadow-[0px_12.78px_31.94px_-19.16px_#0C1E3A47,0px_0.8px_1.6px_0px_#0C1E3A0D] ${
-                  hl ? `${BRAND_GRADIENT} text-white` : "bg-[#E8EDFB] text-ink"
+                  hl
+                    ? `${BRAND_GRADIENT} card-hover-dark text-white`
+                    : "card-hover bg-[#E8EDFB] text-ink"
                 }`}
               >
                 <div className="flex items-center justify-between">

@@ -33,7 +33,7 @@ export default function UniversityFormats() {
           {groups.map((group) => (
             <article
               key={group.title}
-              className="flex min-h-140 flex-col rounded-2xl border border-ink/10 bg-white p-8 shadow-[0px_1px_2px_0px_#0C1E3A0D]"
+              className="card-hover flex min-h-140 flex-col rounded-2xl border border-ink/10 bg-white p-8 shadow-[0px_1px_2px_0px_#0C1E3A0D]"
             >
               <p className=" text-azure text-base uppercase ">{group.label}</p>
               <h3 className="mt-3 font-display text-2xl font-semibold text-ink">

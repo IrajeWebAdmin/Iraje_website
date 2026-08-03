@@ -51,7 +51,7 @@ export default function EpmEightWays() {
           return (
             <div
               key={item.title}
-              className="flex flex-col rounded-2xl bg-[#3774d8] p-6 shadow-[0px_12.78px_31.94px_-19.16px_#0C1E3A47,0px_0.8px_1.6px_0px_#0C1E3A0D]"
+              className="card-hover-dark flex flex-col rounded-2xl bg-[#3774d8] p-6 shadow-[0px_12.78px_31.94px_-19.16px_#0C1E3A47,0px_0.8px_1.6px_0px_#0C1E3A0D]"
             >
               {/* Icon tile — brand-blue glyph on a white rounded square */}
               <span className="flex h-14 w-14 items-center justify-center rounded-xl bg-white">

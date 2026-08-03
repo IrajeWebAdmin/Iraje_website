@@ -22,7 +22,7 @@ function KeyholeIcon({ className }) {
 
 function ProblemCard({ tile, title, items }) {
   return (
-    <div className="rounded-2xl border-[0.76px] border-[#00000017] bg-white p-8 shadow-[0px_3.05px_6.09px_-0.76px_#00000014]">
+    <div className="card-hover rounded-2xl border-[0.76px] border-[#00000017] bg-white p-8 shadow-[0px_3.05px_6.09px_-0.76px_#00000014]">
       {tile}
       <h3 className="mt-5 text-lg font-semibold text-brand">{title}</h3>
       <ul className="mt-5 space-y-3.5">
@@ -93,7 +93,7 @@ export default function EpmCoreProblem() {
         </div>
 
         {/* Banner */}
-        <div className="mt-6 rounded-2xl border border-[#E8ECF4] bg-white px-8 py-7 text-center shadow-[0_8px_30px_rgba(2,41,102,0.05)]">
+        <div className="card-hover mt-6 rounded-2xl border border-[#E8ECF4] bg-white px-8 py-7 text-center shadow-[0_8px_30px_rgba(2,41,102,0.05)]">
           <p className="font-display text-lg font-medium text-ink md:text-xl">
             {banner}
           </p>
