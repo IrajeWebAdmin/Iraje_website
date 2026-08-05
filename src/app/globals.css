@@ -27,6 +27,15 @@
   --font-mono: var(--font-poppins), "Poppins", system-ui, sans-serif;
 }
 
+/* Side gutter shared by both page-width wrappers below.
+   Fluid rather than a flat 24px: `max-width` only starts adding side margin
+   above 1600px, so on every screen narrower than that the gutter is the ONLY
+   thing holding content off the edges. It grows with the viewport —
+   24px on phones → ~38px at 768 → ~51px at 1024 → 80px from 1600px up. */
+:root {
+  --gutter: clamp(24px, 5vw, 80px); /* change this value */
+}
+
 /* Global layout container */
 .container-global {
   width: 100%;
@@ -34,8 +43,8 @@
   margin-left: auto;
   margin-right: auto;
 
-  padding-left: 24px; /* change this value */
-  padding-right: 24px; /* change this value */
+  padding-left: var(--gutter);
+  padding-right: var(--gutter);
 }
 
 /* EPM page width: the Figma frame content sits in a 1280px column */
@@ -43,7 +52,7 @@
   width: 100%;
   max-width: 1600px;
   margin-inline: auto;
-  padding-inline: 24px;
+  padding-inline: var(--gutter);
 }
 
 /* Eyebrow label used above every EPM section heading.
