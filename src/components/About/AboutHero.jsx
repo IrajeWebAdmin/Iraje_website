@@ -8,7 +8,7 @@ export default function AboutHero() {
 
   return (
     <section className="bg-white">
-      <div className="container-global pt-24 pb-12 md:pt-28 md:pb-16">
+      <div className="container-global py-15">
         <div className="grid items-center gap-12 lg:grid-cols-[1fr_1.55fr]">
           {/* Copy */}
           <div>
