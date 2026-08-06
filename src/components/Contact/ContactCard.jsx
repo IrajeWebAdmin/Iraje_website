@@ -121,6 +121,10 @@ export default function ContactCard() {
                 key={s.icon}
                 href={s.href}
                 aria-label={s.label}
+                // These leave the site, so they open in a new tab and drop the
+                // opener reference along the way.
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-brand transition hover:bg-white/90"
               >
                 <Icon className="h-4 w-4" />

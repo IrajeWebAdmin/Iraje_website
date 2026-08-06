@@ -15,15 +15,26 @@ export default function EpmHero() {
           (rendered as the next sibling) to straddle the hero/white boundary. */}
       <div className="epm-container relative pt-32 pb-14 md:pt-40 lg:pb-36">
         <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
-          {/* Copy */}
-          <div>
+          {/* Copy — @container so the h1 below can size itself from this
+              column's real width. Sizing it off the viewport does not work
+              here: at lg the column drops from the full container to ~52% of
+              it, so the same viewport means two very different column widths
+              either side of that breakpoint. */}
+          <div className="@container">
             <p className="epm-eyebrow epm-eyebrow-normal font-medium text-[#FFCE0C]">
               {eyebrow}
             </p>
             {/* <h1 className="mt-5 font-display text-4xl leading-[1.07] font-bold tracking-tight md:text-6xl">
               {title}
             </h1> */}
-            <h1 className="mt-5 max-w-[700px] text-4xl leading-[1.1] font-semibold md:text-7xl">
+            {/* The lines are hard-broken with <br>, so the type has to fit the
+                column or the breaks double up ("Your first line" / "of"). The
+                longest line, "defence, right at", is ~8.1em — at the old flat
+                md:text-7xl that is ~583px, wider than this column is anywhere
+                below ~1250px. 10.5cqw keeps it at ~85% of the column instead,
+                and min() caps it at the same 4.5rem it renders today, which it
+                reaches around 1500px. Under 768px the flat text-4xl stands. */}
+            <h1 className="mt-5 max-w-[700px] text-4xl leading-[1.1] font-semibold md:text-[min(4.5rem,10.5cqw)]">
               Your first line of
               <br />
               defence, right at

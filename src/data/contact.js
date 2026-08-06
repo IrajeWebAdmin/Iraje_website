@@ -1,5 +1,4 @@
-// Contact page content. Replace the placeholder "Text here Text Here" values
-// and the social `href`s with the real details.
+// Contact page content.
 const contact = {
   panel: {
     heading: "Always here to help you",
@@ -10,8 +9,16 @@ const contact = {
     ],
     followLabel: "Follow us on",
     socials: [
-      { icon: "linkedin", href: "#", label: "LinkedIn" },
-      { icon: "youtube", href: "#", label: "YouTube" },
+      {
+        icon: "linkedin",
+        href: "https://www.linkedin.com/company/iraje-software/",
+        label: "LinkedIn",
+      },
+      {
+        icon: "youtube",
+        href: "https://www.youtube.com/@IrajeSoftware",
+        label: "YouTube",
+      },
     ],
   },
   form: {

@@ -1,81 +1,92 @@
 // Standards & regulations shown in the home page "Trust & Compliance" grid.
+//
 // `subtitle` follows the same convention as the PAM and EPM compliance
 // sections (pam.js / epm.js → compliance.standards): a short noun phrase naming
 // the domain the standard governs, NOT a status. Reuse the exact wording used
 // there for a standard that already appears on those pages, so the same badge
 // never reads two different ways across the site.
+//
+// `icon` follows that convention too: it is a key into the ICONS map in the
+// rendering component, not a file path, and it uses the same vocabulary as
+// PamCompliance / EpmCompliance (check · shield · card · file · health ·
+// globe · chart · home · clock). Where a standard already appears on those
+// pages it carries the identical key, so SOX is the same glyph everywhere.
 const compliance = [
   {
     id: 1,
     title: "SOC 2",
     subtitle: "Trust services",
-    icon: "/icons/compliance.svg",
+    icon: "shield", // as on EPM
   },
   {
     id: 2,
     title: "ISO 27001",
     subtitle: "Information security",
-    icon: "/icons/compliance.svg",
+    icon: "check", // as on PAM + EPM
   },
   {
     id: 3,
     title: "GDPR",
     subtitle: "Data privacy",
-    icon: "/icons/compliance.svg",
+    icon: "globe", // as on PAM + EPM
   },
   {
     id: 4,
     title: "HIPAA",
     subtitle: "Healthcare data",
-    icon: "/icons/compliance.svg",
+    icon: "health", // as on PAM + EPM
   },
   {
     id: 5,
     title: "PCI-DSS",
     subtitle: "Payment card data",
-    icon: "/icons/compliance.svg",
+    icon: "card", // as on PAM + EPM
   },
   {
     id: 6,
     title: "DPDP Act",
     subtitle: "India 2023",
-    icon: "/icons/compliance.svg",
+    icon: "check", // as on PAM
   },
   {
     id: 7,
     title: "NIST CSF",
     subtitle: "Cybersecurity",
-    icon: "/icons/compliance.svg",
+    icon: "chart", // as on EPM
   },
+  // The three below are listed as Indian/industry regulators on the product
+  // pages, where that block renders without icons — so there is no existing
+  // glyph to inherit. Keys picked from the same vocabulary.
+
   {
     id: 8,
-    title: "SEBI CSCRF",
-    subtitle: "Securities",
-    icon: "/icons/compliance.svg",
+    title: "IRDAI",
+    subtitle: "Insurance",
+    icon: "shield",
   },
   {
     id: 9,
-    title: "IRDAI",
-    subtitle: "Insurance",
-    icon: "/icons/compliance.svg",
+    title: "SWIFT CSCF",
+    subtitle: "Financial messaging",
+    icon: "globe",
   },
   {
     id: 10,
-    title: "SWIFT CSCF",
-    subtitle: "Financial messaging",
-    icon: "/icons/compliance.svg",
-  },
-  {
-    id: 11,
     title: "SOX",
     subtitle: "Financial controls",
-    icon: "/icons/compliance.svg",
+    icon: "file", // as on PAM + EPM
+  },
+    {
+    id: 11,
+    title: "SEBI CSCRF",
+    subtitle: "Securities",
+    icon: "chart",
   },
   {
     id: 12,
     title: "BASEL III",
     subtitle: "Banking risk",
-    icon: "/icons/compliance.svg",
+    icon: "home", // as on PAM
   },
 
   // Additional Sample Data — the grid is lg:grid-cols-6, so add in multiples of
@@ -84,49 +95,49 @@ const compliance = [
   //   id: 13,
   //   title: "ISO 27701",
   //   subtitle: "Privacy management",
-  //   icon: "/icons/compliance.svg",
+  //   icon: "check",
   // },
   // {
   //   id: 14,
   //   title: "CCPA",
   //   subtitle: "California privacy",
-  //   icon: "/icons/compliance.svg",
+  //   icon: "globe",
   // },
   // {
   //   id: 15,
   //   title: "CIS Controls",
   //   subtitle: "Security benchmarks",
-  //   icon: "/icons/compliance.svg",
+  //   icon: "shield",
   // },
   // {
   //   id: 16,
   //   title: "FedRAMP",
   //   subtitle: "US federal cloud",
-  //   icon: "/icons/compliance.svg",
+  //   icon: "shield",
   // },
   // {
   //   id: 17,
   //   title: "COBIT",
   //   subtitle: "IT governance",
-  //   icon: "/icons/compliance.svg",
+  //   icon: "file",
   // },
   // {
   //   id: 18,
   //   title: "CSA CCM",
   //   subtitle: "Cloud controls",
-  //   icon: "/icons/compliance.svg",
+  //   icon: "check",
   // },
   // {
   //   id: 19,
   //   title: "ISO 22301",
   //   subtitle: "Business continuity",
-  //   icon: "/icons/compliance.svg",
+  //   icon: "clock",
   // },
   // {
   //   id: 20,
   //   title: "TISAX",
   //   subtitle: "Automotive security",
-  //   icon: "/icons/compliance.svg",
+  //   icon: "card",
   // },
 ];
 
