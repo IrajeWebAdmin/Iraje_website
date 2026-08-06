@@ -5,6 +5,7 @@ import { useState } from "react";
 import { HiMenu, HiX } from "react-icons/hi";
 import Image from "next/image";
 import ProductsDropdown from "./ProductsDropdown";
+import MobileProductsMenu from "./MobileProductsMenu";
 
 const navLinks = [
   { name: "Home", href: "/" },
@@ -21,7 +22,10 @@ export default function CertificationNavbar() {
   const [mobileMenu, setMobileMenu] = useState(false);
 
   return (
-    <header className="absolute top-0 left-0 z-50 w-full bg-white/90 backdrop-blur-lg">
+    // max-sm:bg-white — HomeNavbar's bar is fully opaque, this one is 90%, and
+    // on a phone the difference shows through the open menu. Matched below
+    // 640px only, so the desktop bar keeps its translucency.
+    <header className="absolute top-0 left-0 z-50 w-full bg-white/90 backdrop-blur-lg max-sm:bg-white">
       <div className="container-global">
         <nav className="relative flex items-center h-14">
           {/* Logo */}
@@ -80,7 +84,10 @@ export default function CertificationNavbar() {
           <ul className="flex flex-col gap-1 border-t border-mist pb-4 sm:hidden">
             {navLinks.map((link) => (
               <li key={link.name}>
-                {link.disabled ? (
+                {/* Products expands in place — its href has no page behind it. */}
+                {link.name === "Products" ? (
+                  <MobileProductsMenu onNavigate={() => setMobileMenu(false)} />
+                ) : link.disabled ? (
                   <span
                     aria-disabled="true"
                     className="block cursor-not-allowed px-2 py-2.5 font-medium text-black/40 select-none"

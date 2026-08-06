@@ -5,7 +5,10 @@ import Link from "next/link";
 import { FiLock, FiMonitor, FiUser, FiChevronDown } from "react-icons/fi";
 
 // Products shown in the navbar dropdown. Edit here to change the menu.
-const PRODUCTS = [
+// Exported so the phone menu (MobileProductsMenu) lists exactly the same set —
+// there is no /products index page, so both menus have to build themselves
+// from this list rather than linking to one.
+export const PRODUCTS = [
   { name: "Privileged Access Manager", href: "/products/pam", Icon: FiLock },
   { name: "Endpoint Privilege Manager", href: "/products/epm", Icon: FiMonitor },
   // No IAM page yet — listed without an href so there is nothing to navigate

@@ -5,6 +5,7 @@ import { useState } from "react";
 import { HiMenu, HiX } from "react-icons/hi";
 import Image from "next/image";
 import ProductsDropdown from "./ProductsDropdown";
+import MobileProductsMenu from "./MobileProductsMenu";
 
 const navLinks = [
   { name: "Home", href: "/" },
@@ -81,7 +82,10 @@ export default function Navbar() {
         <ul className="flex flex-col gap-1 border-t border-mist pb-4 sm:hidden">
           {navLinks.map((link) => (
             <li key={link.name}>
-              {link.disabled ? (
+              {/* Products expands in place — its href has no page behind it. */}
+              {link.name === "Products" ? (
+                <MobileProductsMenu onNavigate={() => setMobileMenu(false)} />
+              ) : link.disabled ? (
                 <span
                   aria-disabled="true"
                   className="block cursor-not-allowed px-2 py-2.5 font-medium text-black/40 select-none"

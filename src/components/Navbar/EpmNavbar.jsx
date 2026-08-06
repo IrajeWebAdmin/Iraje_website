@@ -2,14 +2,18 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { FiMenu, FiX } from "react-icons/fi";
+import { HiMenu, HiX } from "react-icons/hi";
 import epm from "@/data/epm";
 import Image from "next/image";
 import ProductsDropdown from "./ProductsDropdown";
+import MobileProductsMenu from "./MobileProductsMenu";
 
 export default function EpmNavbar() {
   const [open, setOpen] = useState(false);
-  const { links, cta } = epm.nav;
+  // `epm.nav.cta` ("Request a Demo") is intentionally not read: the button it
+  // fed was the last item of the phone menu and has been dropped. The data is
+  // left in place so the CTA can be restored without re-authoring the copy.
+  const { links } = epm.nav;
 
   return (
     <header className="absolute top-0 left-0 z-50 w-full bg-white backdrop-blur-lg">
@@ -56,26 +60,30 @@ export default function EpmNavbar() {
               line, so the menu drops into the panel below. */}
           <button
             type="button"
-            aria-label="Toggle menu"
+            aria-label="Toggle Menu"
             aria-expanded={open}
-            onClick={() => setOpen((v) => !v)}
-            className="ml-auto text-black sm:hidden"
+            className="ml-auto text-3xl text-black sm:hidden"
+            onClick={() => setOpen(!open)}
           >
-            {open ? <FiX className="h-6 w-6" /> : <FiMenu className="h-6 w-6" />}
+            {open ? <HiX /> : <HiMenu />}
           </button>
         </nav>
-      </div>
 
-      {/* Mobile menu */}
-      {open && (
-        <div className="bg-navy/95 border-t border-white/10 backdrop-blur-lg sm:hidden">
-          <ul className="epm-container flex flex-col gap-1 py-4">
+        {/* Phone menu — deliberately a copy of HomeNavbar's: white panel, black
+            links, same container, same hairline. The navy panel this used to
+            render was the only thing that made the mobile navbar look different
+            on this route. Keep the two in step when either changes. */}
+        {open && (
+          <ul className="flex flex-col gap-1 border-t border-mist pb-4 sm:hidden">
             {links.map((link) => (
               <li key={link.name}>
-                {link.disabled ? (
+                {/* Products expands in place — its href has no page behind it. */}
+                {link.name === "Products" ? (
+                  <MobileProductsMenu onNavigate={() => setOpen(false)} />
+                ) : link.disabled ? (
                   <span
                     aria-disabled="true"
-                    className="block cursor-not-allowed py-2 text-sm font-medium text-white/40 select-none"
+                    className="block cursor-not-allowed px-2 py-2.5 font-medium text-black/40 select-none"
                   >
                     {link.name}
                   </span>
@@ -83,25 +91,16 @@ export default function EpmNavbar() {
                   <Link
                     href={link.href}
                     onClick={() => setOpen(false)}
-                    className="block py-2 text-sm font-medium text-white/80 hover:text-white"
+                    className="block px-2 py-2.5 font-medium text-black"
                   >
                     {link.name}
                   </Link>
                 )}
               </li>
             ))}
-            <li className="pt-2">
-              <Link
-                href={cta.href}
-                onClick={() => setOpen(false)}
-                className="text-navy inline-block rounded-full bg-white px-5 py-2 text-sm font-semibold"
-              >
-                {cta.label}
-              </Link>
-            </li>
           </ul>
-        </div>
-      )}
+        )}
+      </div>
     </header>
   );
 }
