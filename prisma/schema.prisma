@@ -1,13 +1,10 @@
 // Prisma schema for the Iraje marketing site.
 // Docs: https://pris.ly/d/prisma-schema
-//
-// This model maps to the EXISTING `contact_message` table in the
-// `iraje_website` database. Column types/nullability mirror that table so
-// `npx prisma db push` only ADDS the new `status` column (used for tracking
-// submissions later) and never drops or rewrites existing data.
 
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
+  // Ensures compatibility with both your local development machine and Alpine Linux in Cloud Run
+  binaryTargets = ["native", "linux-musl-openssl-3.0.x"]
 }
 
 datasource db {
@@ -30,9 +27,6 @@ model Contact {
 }
 
 /// A certification enrolment request from the Certification page form.
-/// Unlike Contact (which mirrors a pre-existing table), this table is created
-/// by Prisma, so the columns the form marks required are NOT NULL here.
-/// `status` mirrors Contact's, for triage: new -> approved -> enrolled.
 model Enrollment {
   id           Int     @id @default(autoincrement())
   name         String  @db.VarChar(120)
@@ -49,9 +43,6 @@ model Enrollment {
   existingPartner  String? @map("existing_partner") @db.VarChar(60)
 
   /// Selected certification codes, comma-separated (e.g. "PAM 101, EPM 201").
-  /// A join table would be the textbook shape, but these six codes are fixed
-  /// copy in the data layer, never queried individually — a scalar keeps the
-  /// lead readable in one row.
   certifications String @db.VarChar(255)
 
   status    String    @default("new") @db.VarChar(20)
