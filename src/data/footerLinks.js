@@ -8,13 +8,10 @@ const footerLinks = {
       name: "EPM",
       href: "/products/epm",
     },
-    // IAM has no page yet. `disabled` makes the footers render it as plain
-    // text — no href, so there is nothing to click or navigate to. Give it an
-    // href and drop this flag once /products/iam exists.
-    // {
-    //   name: "IAM",
-    //   disabled: true,
-    // },
+    {
+      name: "IAM",
+      href: "/products/iam",
+    },
   ],
 
   learn: [

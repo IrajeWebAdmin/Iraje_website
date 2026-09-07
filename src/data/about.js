@@ -125,8 +125,9 @@ const about = {
       "Co-marketing, leads and joint go-to-market",
       "Roadmap inputs and a route to your markets",
     ],
-    // No partners page yet — rendered as an inert button.
-    cta: { label: "Become a partner", disabled: true },
+    // Routes to the contact form — partner enquiries come in through the
+    // same channel until a dedicated partners page exists.
+    cta: { label: "Become a partner", href: "/contact" },
   },
 
   // ---- Culture & Values -------------------------------------------------
@@ -159,8 +160,7 @@ const about = {
       "Whether you're protecting your enterprise, building a partner practice, or joining our team — we'd love to talk.",
     ctas: [
       { label: "Contact Iraje", href: "/contact", primary: true },
-      // No partners page yet — rendered as an inert button.
-      { label: "Become a Partner", disabled: true, primary: false },
+      { label: "Become a Partner", href: "/contact", primary: false },
     ],
   },
 

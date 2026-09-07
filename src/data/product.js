@@ -24,9 +24,7 @@ const products = [
     description:
       "Full lifecycle identity governance — provisioning, access reviews and certification across your enterprise.",
     icon: "/icons/iam-con.svg",
-    // No IAM page yet — the card renders its inert state instead of a link.
-    // Restore `link: "/products/iam"` and drop this flag once the page exists.
-    comingSoon: true,
+    link: "/products/iam",
   },
 ];
 

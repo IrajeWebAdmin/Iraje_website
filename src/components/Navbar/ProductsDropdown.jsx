@@ -11,9 +11,7 @@ import { FiLock, FiMonitor, FiUser, FiChevronDown } from "react-icons/fi";
 export const PRODUCTS = [
   { name: "Privileged Access Manager", href: "/products/pam", Icon: FiLock },
   { name: "Endpoint Privilege Manager", href: "/products/epm", Icon: FiMonitor },
-  // No IAM page yet — listed without an href so there is nothing to navigate
-  // to. Give it `href: "/products/iam"` and drop `disabled` once it exists.
-  // { name: "Identity & Access Manager", disabled: true, Icon: FiUser },
+  { name: "Identity & Access Manager", href: "/products/iam", Icon: FiUser },
 ];
 
 // Shared "Products" nav item: a click-toggled dropdown that links to each

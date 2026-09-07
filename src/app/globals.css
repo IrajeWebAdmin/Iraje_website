@@ -19,6 +19,18 @@
   --color-slate-soft: #93a0b4; /* azure/64 / Gull Gray — muted text       */
   --color-nepal: #8b99bf; /* azure/65 — muted on dark                */
 
+  /* IAM design system (extracted from Figma "Website" — IAM page, node 1595:4622).
+     Figma variable names are given alongside so the two stay traceable. */
+  --color-denim: #0a67b1; /* azure/37  — panel eyebrow (Denim)          */
+  --color-shuttle: #5a6b7b; /* azure/42  — panel body copy (Shuttle Gray) */
+  --color-botticelli: #d8e3ee; /* azure/89  — panel hairline (Botticelli)    */
+  --color-catskill: #f4f7fa; /* grey/97   — panel ground (Catskill White)  */
+  --color-regal: #00417c; /* azure/24  — diagram ink (Regal Blue)       */
+  --color-bigstone: #11202e; /* azure/12  — diagram labels (Big Stone)     */
+  --color-cobalt: #3774d8; /* capability card ground                     */
+  --color-periwinkle: #dde8ff; /* capability card body copy                  */
+  --color-gold: #ffce0c; /* hero accent — eyebrow + headline highlight */
+
   /* Single site-wide type family: Poppins (loaded by next/font in the root layout).
      All three tokens collapse to Poppins so `font-display`/`font-body`/`font-mono`
      utilities render the same family across the whole site. */
