@@ -10,7 +10,7 @@ export default function IamLifecycle() {
     <IamSection
       id="identity-lifecycle"
       tone="tint"
-      eyebrow={eyebrow}
+      eyebrow={eyebrow} 
       heading={heading}
       intro={body}
       center

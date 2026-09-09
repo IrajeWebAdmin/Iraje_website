@@ -23,7 +23,7 @@ function LevelCard({ level }) {
             admin ? "bg-[#0B1B3A]" : "bg-[#0451CC]"
           }`}
         >
-          {level.code}
+          {level.label}
         </span>
         <span className="text-base font-semibold text-brand">{level.level}</span>
       </div>
@@ -56,7 +56,7 @@ function LevelCard({ level }) {
       </div>
 
       <p className="mt-auto pt-5 text-base text-[#8E8E93]">
-        Prerequisite: <span className="font-semibold text-ink">{level.prerequisite}</span>
+        Prerequisite: <span className="font-semibold text-ink">{level.prerequisiteLabel}</span>
       </p>
 
       <a

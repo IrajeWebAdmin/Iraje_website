@@ -137,7 +137,8 @@ const university = {
       "Structured, hands-on certification tracks for Iraje's Identity & Access Management portfolio. Begin with the 101 fundamentals and progress to 201 advanced administration and operations. Tap any track to view its module outline.",
     tracks: [
       {
-        code: "PAM 101",
+        code: "PAM101",
+        label: "PAM 101",
         pill: "Iraje PAM 101",
         title: "Fundamentals of Privileged Identity & Access Management",
         summary:
@@ -157,7 +158,8 @@ const university = {
         ],
       },
       {
-        code: "PAM 201",
+        code: "PAM201",
+        label: "PAM 201",
         pill: "Iraje PAM 201",
         title: "Advanced Administration & Operations",
         summary:
@@ -182,7 +184,8 @@ const university = {
         ],
       },
       {
-        code: "EPM 101",
+        code: "EPM101",
+        label: "EPM 101",
         pill: "Iraje EPM 101",
         title: "Endpoint Privilege Management Fundamentals",
         summary:
@@ -206,7 +209,8 @@ const university = {
         ],
       },
       {
-        code: "EPM 201",
+        code: "EPM201",
+        label: "EPM 201",
         pill: "Iraje EPM 201",
         title: "Advanced Administration & Governance",
         summary:
@@ -234,7 +238,8 @@ const university = {
         ],
       },
       {
-        code: "IAM 101",
+        code: "IAM101",
+        label: "IAM 101",
         pill: "Iraje IAM 101 · Coming Soon",
         title: "Iraje IAM Fundamentals",
         summary:

@@ -74,7 +74,7 @@ export default function UniversityCertification() {
                   <span
                     className={`shrink-0 rounded-md px-2.5 py-1 text-xs font-medium tracking-wide ${pillColor}`}
                   >
-                    {track.code}
+                    {track.label}
                   </span>
 
                   <span className="min-w-0 flex-1">

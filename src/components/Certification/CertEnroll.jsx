@@ -250,7 +250,7 @@ export default function CertEnroll() {
                           className="h-4 w-4 shrink-0 accent-brand"
                         />
                         <span className="flex flex-col">
-                          <span className="text-sm font-semibold text-ink">{opt.code}</span>
+                          <span className="text-sm font-semibold text-ink">{opt.label}</span>
                           <span className="text-xs text-slate-soft">{opt.level}</span>
                         </span>
                       </label>
