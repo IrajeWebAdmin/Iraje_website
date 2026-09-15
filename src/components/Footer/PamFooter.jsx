@@ -5,7 +5,11 @@ import footerLinks from "@/data/footerLinks";
 
 export default function PamFooter() {
   return (
-    <footer className="bg-[#0D1C41] text-white">
+    <>
+      {/* White gap separating the page content (PamContact) from the footer. */}
+      <div className="h-3 bg-white" />
+
+      <footer className="bg-[#0D1C41] text-white">
       <div className="mx-auto max-w-7xl px-6 py-16">
         <div className="grid gap-12 lg:grid-cols-[2fr_1fr_1fr_1fr]">
           {/* Logo Section */}
@@ -118,6 +122,7 @@ export default function PamFooter() {
           <p>© Iraje Software. All rights reserved.</p>
         </div>
       </div>
-    </footer>
+      </footer>
+    </>
   );
 }

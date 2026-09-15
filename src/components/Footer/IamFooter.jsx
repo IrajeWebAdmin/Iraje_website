@@ -7,7 +7,11 @@ import footerLinks from "@/data/footerLinks";
 // so the three product pages close identically.
 export default function IamFooter() {
   return (
-    <footer className="bg-[#0D1C41] text-white">
+    <>
+      {/* White gap separating the page content (IamCta) from the footer. */}
+      <div className="h-3 bg-white" />
+
+      <footer className="bg-[#0D1C41] text-white">
       <div className="mx-auto max-w-7xl px-6 py-16">
         <div className="grid gap-12 lg:grid-cols-[2fr_1fr_1fr_1fr]">
           {/* Logo Section */}
@@ -122,6 +126,7 @@ export default function IamFooter() {
           <p>© Iraje Software. All rights reserved.</p>
         </div>
       </div>
-    </footer>
+      </footer>
+    </>
   );
 }
