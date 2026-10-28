@@ -9,6 +9,10 @@ import { validateBusinessEmail, validateMobile } from "@/lib/validation";
 const { detailStep, backgroundStep, certStep } = certification.enroll;
 const ALL_FIELDS = [...detailStep.fields, ...backgroundStep.fields];
 
+// Set to false to reopen enrollment. While true the whole form is disabled:
+// every input, select, checkbox and the submit button.
+const FORM_DISABLED = true;
+
 // Every field starts empty; `name` on each data field is the submitted key.
 const EMPTY = {
   ...Object.fromEntries(ALL_FIELDS.map((f) => [f.name, ""])),
@@ -112,6 +116,7 @@ export default function CertEnroll() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    if (FORM_DISABLED) return;
 
     const clientErrors = validate();
     if (Object.keys(clientErrors).length > 0) {
@@ -149,6 +154,13 @@ export default function CertEnroll() {
   }
 
   const submitting = status === "submitting";
+
+  // Submit stays disabled until every required field has a value and at least
+  // one certification is picked. Format checks (email, mobile) still run in
+  // validate() on submit.
+  const incomplete =
+    ALL_FIELDS.some((f) => f.required && !values[f.name].trim()) ||
+    (certStep.required && values.certifications.length === 0);
 
   return (
     <section id="enroll" className="bg-[#fff] py-15">
@@ -191,89 +203,95 @@ export default function CertEnroll() {
               </div>
             ) : (
               <form onSubmit={handleSubmit} noValidate>
-                <HoneypotField
-                  value={values[HONEYPOT_FIELD]}
-                  onChange={update(HONEYPOT_FIELD)}
-                />
-
-                {/* Step 1 — details */}
-                <StepLabel>{detailStep.label}</StepLabel>
-                <div className="mt-4 grid gap-4 sm:grid-cols-2">
-                  {detailStep.fields.map((f) => (
-                    <Field
-                      key={f.name}
-                      field={f}
-                      value={values[f.name]}
-                      onChange={update(f.name)}
-                      error={errors[f.name]}
-                    />
-                  ))}
-                </div>
-
-                <hr className="my-7 border-mist" />
-
-                {/* Professional background */}
-                <StepLabel>{backgroundStep.label}</StepLabel>
-                <div className="mt-4 grid gap-4 sm:grid-cols-2">
-                  {backgroundStep.fields.map((f) => (
-                    <Field
-                      key={f.name}
-                      field={f}
-                      value={values[f.name]}
-                      onChange={update(f.name)}
-                      error={errors[f.name]}
-                    />
-                  ))}
-                </div>
-
-                <hr className="my-7 border-mist" />
-
-                {/* Step 2 — choose certifications */}
-                <StepLabel>
-                  {certStep.label}
-                  {certStep.required && <span className="text-brand"> *</span>}
-                </StepLabel>
-                <div className="mt-4 grid gap-3 sm:grid-cols-2">
-                  {certStep.options.map((opt) => {
-                    const checked = values.certifications.includes(opt.code);
-                    return (
-                      <label
-                        key={opt.code}
-                        className={`flex cursor-pointer items-center gap-3 rounded-xl border bg-white px-4 py-3 transition hover:border-brand ${
-                          checked ? "border-brand" : "border-mist"
-                        }`}
-                      >
-                        <input
-                          type="checkbox"
-                          checked={checked}
-                          onChange={() => toggleCert(opt.code)}
-                          className="h-4 w-4 shrink-0 accent-brand"
-                        />
-                        <span className="flex flex-col">
-                          <span className="text-sm font-semibold text-ink">{opt.label}</span>
-                          <span className="text-xs text-slate-soft">{opt.level}</span>
-                        </span>
-                      </label>
-                    );
-                  })}
-                </div>
-                {errors.certifications && (
-                  <p className="mt-2 text-xs text-red-600">{errors.certifications}</p>
-                )}
-
-                {status === "error" && serverError && (
-                  <p className="mt-5 text-sm text-red-600" aria-live="polite">
-                    {serverError}
-                  </p>
-                )}
-
-                <button
-                  type="submit"
-                  disabled={submitting}
-                  className="mt-8 w-full rounded-full bg-brand px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-brand/90 disabled:cursor-not-allowed disabled:opacity-60"
+                {/* `disabled` on a fieldset disables every control inside it. */}
+                <fieldset
+                  disabled={FORM_DISABLED}
+                  className="min-w-0 disabled:cursor-not-allowed disabled:opacity-60"
                 >
-                  {submitting ? "Submitting…" : submit}
-                </button>
+                  <HoneypotField
+                    value={values[HONEYPOT_FIELD]}
+                    onChange={update(HONEYPOT_FIELD)}
+                  />
+
+                  {/* Step 1 — details */}
+                  <StepLabel>{detailStep.label}</StepLabel>
+                  <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                    {detailStep.fields.map((f) => (
+                      <Field
+                        key={f.name}
+                        field={f}
+                        value={values[f.name]}
+                        onChange={update(f.name)}
+                        error={errors[f.name]}
+                      />
+                    ))}
+                  </div>
+
+                  <hr className="my-7 border-mist" />
+
+                  {/* Professional background */}
+                  <StepLabel>{backgroundStep.label}</StepLabel>
+                  <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                    {backgroundStep.fields.map((f) => (
+                      <Field
+                        key={f.name}
+                        field={f}
+                        value={values[f.name]}
+                        onChange={update(f.name)}
+                        error={errors[f.name]}
+                      />
+                    ))}
+                  </div>
+
+                  <hr className="my-7 border-mist" />
+
+                  {/* Step 2 — choose certifications */}
+                  <StepLabel>
+                    {certStep.label}
+                    {certStep.required && <span className="text-brand"> *</span>}
+                  </StepLabel>
+                  <div className="mt-4 grid gap-3 sm:grid-cols-2">
+                    {certStep.options.map((opt) => {
+                      const checked = values.certifications.includes(opt.code);
+                      return (
+                        <label
+                          key={opt.code}
+                          className={`flex cursor-pointer items-center gap-3 rounded-xl border bg-white px-4 py-3 transition hover:border-brand ${
+                            checked ? "border-brand" : "border-mist"
+                          }`}
+                        >
+                          <input
+                            type="checkbox"
+                            checked={checked}
+                            onChange={() => toggleCert(opt.code)}
+                            className="h-4 w-4 shrink-0 accent-brand"
+                          />
+                          <span className="flex flex-col">
+                            <span className="text-sm font-semibold text-ink">{opt.label}</span>
+                            <span className="text-xs text-slate-soft">{opt.level}</span>
+                          </span>
+                        </label>
+                      );
+                    })}
+                  </div>
+                  {errors.certifications && (
+                    <p className="mt-2 text-xs text-red-600">{errors.certifications}</p>
+                  )}
+
+                  {status === "error" && serverError && (
+                    <p className="mt-5 text-sm text-red-600" aria-live="polite">
+                      {serverError}
+                    </p>
+                  )}
+
+                  <button
+                    type="submit"
+                    disabled={submitting || incomplete}
+                    className="mt-8 w-full rounded-full bg-brand px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-brand/90 disabled:cursor-not-allowed disabled:opacity-60"
+                  >
+                    {submitting ? "Submitting…" : submit}
+                  </button>
+                </fieldset>
               </form>
             )}
           </div>
