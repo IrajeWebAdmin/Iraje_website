@@ -2277,7 +2277,7 @@ export default async function CertificationDashboardPage() {
         )}
       </div>
     </section>
-  );
+  ); 
 }
 ```
 

@@ -48,6 +48,136 @@ model Enrollment {
   status    String    @default("new") @db.VarChar(20)
   createdAt DateTime? @default(now()) @map("created_at") @db.Timestamp(0)
 
+  // Filled in when an admin approves or rejects the request.
+  reviewedAt      DateTime? @map("reviewed_at") @db.DateTime(0)
+  reviewedById    Int?      @map("reviewed_by")
+  reviewedBy      User?     @relation("EnrollmentReviewer", fields: [reviewedById], references: [id], onDelete: SetNull)
+  rejectionReason String?   @map("rejection_reason") @db.VarChar(500)
+
+  /// The learner account this request was approved into (null until approved).
+  userId Int?  @map("user_id")
+  user   User? @relation("EnrollmentLearner", fields: [userId], references: [id], onDelete: SetNull)
+
   @@index([email])
+  @@index([status])
   @@map("certification_enrollment")
+}
+
+/// Anyone who can sign in: learners (role "student") and Iraje staff (role "admin").
+model User {
+  id           Int    @id @default(autoincrement())
+  /// The login ID. Always stored lower-case.
+  email        String @unique @db.VarChar(255)
+  name         String @db.VarChar(120)
+  /// bcrypt hash — the real password is never stored.
+  passwordHash String @map("password_hash") @db.VarChar(255)
+  role         String @default("student") @db.VarChar(20) // "student" | "admin"
+  status       String @default("active") @db.VarChar(20) // "active" | "suspended"
+
+  /// True while the account still has a temporary password.
+  mustChangePassword    Boolean   @default(true) @map("must_change_password")
+  tempPasswordExpiresAt DateTime? @map("temp_password_expires_at") @db.DateTime(0)
+
+  createdAt DateTime @default(now()) @map("created_at") @db.DateTime(0)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.DateTime(0)
+
+  sessions            Session[]
+  enrollments         Enrollment[] @relation("EnrollmentLearner")
+  reviewedEnrollments Enrollment[] @relation("EnrollmentReviewer")
+   certifications      UserCertification[]
+
+  @@map("users")
+}
+
+/// One row per signed-in browser. Deleting a row signs that browser out.
+model Session {
+  /// SHA-256 of the cookie value, so a database leak can't be replayed as a login.
+  id        String   @id @db.Char(64)
+  userId    Int      @map("user_id")
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime @map("expires_at") @db.DateTime(0)
+  createdAt DateTime @default(now()) @map("created_at") @db.DateTime(0)
+
+  @@index([userId])
+  @@map("sessions")
+}
+
+/// Which certification a learner is doing. One row per learner per
+/// certification — a second approved certification is simply a second row.
+model UserCertification {
+  id                Int       @id @default(autoincrement())
+  userId            Int       @map("user_id")
+  user              User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  /// Canonical code, the same as in Sanity: "PAM101", "EPM201" …
+  certificationCode String    @map("certification_code") @db.VarChar(10)
+  status            String    @default("in_progress") @db.VarChar(20) // "in_progress" | "passed"
+  startedAt         DateTime  @default(now()) @map("started_at") @db.DateTime(0)
+  completedAt       DateTime? @map("completed_at") @db.DateTime(0)
+
+  progress     ModuleProgress[]
+  examAttempts ExamAttempt[]
+  certificate  Certificate?
+
+  @@unique([userId, certificationCode])
+  @@index([certificationCode])
+  @@map("user_certifications")
+}
+
+/// One row per module a learner has opened: when they finished the PDF and
+/// when they passed its knowledge check.
+model ModuleProgress {
+  id                  Int               @id @default(autoincrement())
+  userCertificationId Int               @map("user_certification_id")
+  userCertification   UserCertification @relation(fields: [userCertificationId], references: [id], onDelete: Cascade)
+  /// The module's Sanity _id.
+  moduleId            String            @map("module_id") @db.VarChar(100)
+  readAt              DateTime?         @map("read_at") @db.DateTime(0)
+  checkPassedAt       DateTime?         @map("check_passed_at") @db.DateTime(0)
+
+  @@unique([userCertificationId, moduleId])
+  @@map("module_progress")
+}
+
+/// One sitting of the final exam.
+model ExamAttempt {
+  id                  Int               @id @default(autoincrement())
+  userCertificationId Int               @map("user_certification_id")
+  userCertification   UserCertification @relation(fields: [userCertificationId], references: [id], onDelete: Cascade)
+  examSet             Int               @map("exam_set")
+  /// The frozen paper: [{ id, options: [optionKey, …] }] in the order shown.
+  paper               Json
+  /// What the learner chose: { questionId: optionKey }.
+  answers             Json?
+  startedAt           DateTime          @default(now()) @map("started_at") @db.DateTime(0)
+  deadlineAt          DateTime          @map("deadline_at") @db.DateTime(0)
+  submittedAt         DateTime?         @map("submitted_at") @db.DateTime(0)
+  score               Int?
+  total               Int?
+  percentage          Int?
+  passed              Boolean?
+
+  certificate Certificate?
+
+  @@index([userCertificationId])
+  @@map("exam_attempts")
+}
+
+/// An issued certificate. `certificateNo` is what people type into Verify.
+model Certificate {
+  id                  Int               @id @default(autoincrement())
+  certificateNo       String            @unique @map("certificate_no") @db.VarChar(32)
+  userCertificationId Int               @unique @map("user_certification_id")
+  userCertification   UserCertification @relation(fields: [userCertificationId], references: [id], onDelete: Cascade)
+  examAttemptId       Int               @unique @map("exam_attempt_id")
+  examAttempt         ExamAttempt       @relation(fields: [examAttemptId], references: [id], onDelete: Cascade)
+  /// Copied at issue time, so the certificate never changes if a name is edited later.
+  holderName          String            @map("holder_name") @db.VarChar(120)
+  certificationCode   String            @map("certification_code") @db.VarChar(10)
+  certificationTitle  String            @map("certification_title") @db.VarChar(200)
+  scorePercentage     Int               @map("score_percentage")
+  issuedAt            DateTime          @default(now()) @map("issued_at") @db.DateTime(0)
+  expiresAt           DateTime          @map("expires_at") @db.DateTime(0)
+  status              String            @default("valid") @db.VarChar(20) // "valid" | "revoked"
+
+  @@map("certificates")
 }

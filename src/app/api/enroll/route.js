@@ -3,11 +3,14 @@ import { prisma } from "@/lib/prisma";
 import { sendEnrollmentNotification } from "@/lib/mailer";
 import { createRateLimiter, clientIp } from "@/lib/rateLimit";
 import { isHoneypotTripped } from "@/lib/honeypot";
+import { validateBusinessEmail } from "@/lib/validation";
 import {
-  validateBusinessEmail,
-  validateMobile,
-  normalizePhone,
-} from "@/lib/validation";
+  formatPersonName,
+  validatePersonName,
+  validateCountryName,
+  validateMobileForCountry,
+  toE164,
+} from "@/lib/enrollValidation";
 import certification from "@/data/certification";
 
 // Its own limiter, separate from /api/contact — enrolment abuse must not eat
@@ -33,6 +36,8 @@ function optional(value) {
   const v = String(value ?? "").trim();
   return v === "" ? null : v;
 }
+
+const CERT_OPTIONS = certification.enroll.certStep.options;
 
 // POST /api/enroll — save a certification enrolment, then notify the team.
 export async function POST(request) {
@@ -69,43 +74,49 @@ export async function POST(request) {
     );
   }
 
-  const name = String(body.name ?? "").trim();
+  // The name is stored in Pascal case ("John Smith") whatever was typed.
+  const name = formatPersonName(body.name);
   const email = String(body.email ?? "").trim();
   const mobile = String(body.mobile ?? "").trim();
+  const mobileCountry = String(body.mobileCountry ?? "")
+    .trim()
+    .toUpperCase();
   const organization = String(body.organization ?? "").trim();
   const country = String(body.country ?? "").trim();
 
-  // Keep only codes the form actually offers, de-duplicated, in the data's
-  // display order so the email always reads the same way.
+  // Keep only codes the form actually offers, in the data's display order.
   const requested = new Set(
     Array.isArray(body.certifications) ? body.certifications.map(String) : [],
   );
-  const certifications = certification.enroll.certStep.options
-    .map((o) => o.code)
-    .filter((code) => requested.has(code));
+  const certifications = CERT_OPTIONS.map((o) => o.code).filter((code) =>
+    requested.has(code),
+  );
 
   const errors = {};
-  if (!name) errors.name = "Full name is required.";
-  else if (name.length > 120) errors.name = "Full name is too long.";
+  const nameError = validatePersonName(name);
+  if (nameError) errors.name = nameError;
 
-  // The form asks for a business email and a mobile specifically, so both use
-  // the stricter validators rather than the general-purpose ones.
+  // The form asks for a business email, so the stricter validator applies.
   const emailError = validateBusinessEmail(email);
   if (emailError) errors.email = emailError;
 
-  const mobileError = validateMobile(mobile);
+  // Mobile is checked against the chosen country: its dialling code, the
+  // national number's shape where known, and the 15-digit E.164 ceiling.
+  const mobileError = validateMobileForCountry(mobile, mobileCountry);
   if (mobileError) errors.mobile = mobileError;
 
   if (!organization) errors.organization = "Organization is required.";
   else if (organization.length > 150)
     errors.organization = "Organization is too long.";
 
-  if (!country) errors.country = "Country is required.";
-  else if (country.length > 100) errors.country = "Country is too long.";
+  const countryError = validateCountryName(country);
+  if (countryError) errors.country = countryError;
 
-  if (certifications.length === 0) {
-    errors.certifications = "Select at least one certification.";
-  }
+  // One certification per request.
+  if (certifications.length === 0)
+    errors.certifications = "Select the certification you want to request.";
+  else if (certifications.length > 1)
+    errors.certifications = "Choose one certification per request.";
 
   if (Object.keys(errors).length > 0) {
     return NextResponse.json(
@@ -114,14 +125,33 @@ export async function POST(request) {
     );
   }
 
-  // 1) Persist the request first — this is the source of truth.
   let enrollment;
   try {
+    // One request at a time: while an earlier request from this address is
+    // still waiting for review, a new one is turned away rather than queued.
+    const pending = await prisma.enrollment.findFirst({
+      where: { email, status: "new" },
+      select: { certifications: true },
+    });
+    if (pending) {
+      const code = pending.certifications.trim();
+      const label = CERT_OPTIONS.find((o) => o.code === code)?.label ?? code;
+      return NextResponse.json(
+        {
+          ok: false,
+          error: `You already have a request for ${label} waiting for review. We'll email you once it has been reviewed — you can request another certification after that.`,
+          errors: { certifications: "One request at a time." },
+        },
+        { status: 409, headers: rateLimitHeaders(limit) },
+      );
+    }
+
+    // Persist the request first — this is the source of truth.
     enrollment = await prisma.enrollment.create({
       data: {
         name,
         email,
-        mobile: normalizePhone(mobile),
+        mobile: toE164(mobile, mobileCountry),
         organization,
         designation: optional(body.designation),
         country,
@@ -133,38 +163,17 @@ export async function POST(request) {
       },
     });
   } catch (err) {
-    // Full error (stack, code frame, query) goes to the server log.
+    // Full error (stack, code frame, query) goes to the server log only —
+    // never back to the browser, where it would reveal database details.
     console.error("[enroll] failed to save submission:", err);
 
-    // Prisma prefixes its message with the whole invocation and a code frame,
-    // which in a bundled build is mangled module names plus an absolute server
-    // path. The last line is the part that says what actually went wrong.
-    const cause = String(err?.message ?? "")
-      .trim()
-      .split("\n")
-      .map((line) => line.trim())
-      .filter(Boolean)
-      .pop();
-
     return NextResponse.json(
-      {
-        ok: false,
-        error: `Could not submit your request. Please try again. ${err}`,
-        // Returned deliberately so a failed save can be diagnosed from the
-        // response itself, not just the server log. `code` is Prisma's error
-        // code (P2000 = value too long, P2002 = unique clash, and so on).
-        // NOTE: this exposes database d
-        // etail to anyone who can POST here —
-        // wrap both lines in `process.env.NODE_ENV !== "production" && …`
-        // before going live if that is not wanted.
-        detail: cause,
-        code: err?.code,
-      },
+      { ok: false, error: "Could not submit your request. Please try again." },
       { status: 500, headers: rateLimitHeaders(limit) },
     );
   }
 
-  // 2) Email is best-effort — never lose a saved request because SMTP is down.
+  // Email is best-effort — never lose a saved request because SMTP is down.
   try {
     await sendEnrollmentNotification(enrollment);
   } catch (err) {

@@ -30,7 +30,7 @@ The replacement is **Microsoft Graph `sendMail`** with an app registration (clie
 | **Client secret *Value*** | Created in Step 2 | **Yes.** Share through a secure channel, never plain email |
 | **Client secret expiry date** | Created in Step 2 | No |
 
----
+----
 
 ## Step 1 — Register the app in Entra ID
 

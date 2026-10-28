@@ -27,8 +27,7 @@ const certification = {
   tracks: {
     eyebrow: "Certification Tracks",
     heading: "Six certifications, three tracks",
-    body:
-      "Each track offers an Associate (101) and Administrator (201) certification. Start with fundamentals, then advance to administration and governance.",
+    body: "Each track offers an Associate (101) and Administrator (201) certification. Start with fundamentals, then advance to administration and governance.",
     items: [
       {
         track: "Privileged Access Management",
@@ -40,7 +39,13 @@ const certification = {
             level: "Associate",
             title: "Certified Associate — PAM Fundamentals",
             role: "Foundations of privileged identity & access management.",
-            audience: ["Sales", "Pre-Sales", "Security Teams", "Customers", "Partners"],
+            audience: [
+              "Sales",
+              "Pre-Sales",
+              "Security Teams",
+              "Customers",
+              "Partners",
+            ],
             questions: "50",
             duration: "60m",
             pass: "70%",
@@ -53,7 +58,11 @@ const certification = {
             level: "Administrator",
             title: "Certified Administrator — PAM Administration & Governance",
             role: "Deploy, administer and govern Iraje PAM in production.",
-            audience: ["PAM Administrators", "Implementation Engineers", "SecOps Teams"],
+            audience: [
+              "PAM Administrators",
+              "Implementation Engineers",
+              "SecOps Teams",
+            ],
             questions: "75",
             duration: "90m",
             pass: "75%",
@@ -72,7 +81,11 @@ const certification = {
             level: "Associate",
             title: "Certified Associate — EPM Fundamentals",
             role: "Endpoint privilege management essentials and least privilege.",
-            audience: ["Endpoint Security Teams", "IT Teams", "Security Architects"],
+            audience: [
+              "Endpoint Security Teams",
+              "IT Teams",
+              "Security Architects",
+            ],
             questions: "50",
             duration: "60m",
             pass: "70%",
@@ -96,33 +109,25 @@ const certification = {
       },
       {
         track: "CyberTantra",
-        subtitle: "Identity security certifications",
+        subtitle: "Cybersecurity certification",
         levels: [
           {
-            code: "CT101",
-            label: "CT 101",
-            level: "Associate",
-            title: "Certified Associate — Identity Security Fundamentals",
-            role: "Core cybersecurity and identity security foundations.",
-            audience: ["Security Professionals", "IAM Teams", "Customers", "Partners"],
+            code: "CT100",
+            label: "CyberTantra",
+            level: "Professional",
+            title: "CyberTantra Cybersecurity Certification",
+            role: "Cybersecurity from the foundations through advanced practice.",
+            audience: [
+              "Security Professionals",
+              "IAM Teams",
+              "Customers",
+              "Partners",
+            ],
             questions: "50",
             duration: "60m",
             pass: "70%",
             prerequisite: null,
             prerequisiteLabel: "None",
-          },
-          {
-            code: "CT201",
-            label: "CT 201",
-            level: "Administrator",
-            title: "Certified Administrator — CyberTantra Administration & Governance",
-            role: "Advanced identity security administration and governance.",
-            audience: ["Product Administrators", "SecOps Teams"],
-            questions: "75",
-            duration: "90m",
-            pass: "75%",
-            prerequisite: "CT101",
-            prerequisiteLabel: "CyberTantra 101",
           },
         ],
       },
@@ -194,8 +199,7 @@ const certification = {
       ["Iraje PAM 201", "ADMIN", "75 MCQs", "90 minutes", "75%"],
       ["Iraje EPM 101", "ASSOCIATE", "50 MCQs", "60 minutes", "70%"],
       ["Iraje EPM 201", "ADMIN", "75 MCQs", "90 minutes", "75%"],
-      ["CyberTantra 101", "ASSOCIATE", "50 MCQs", "60 minutes", "70%"],
-      ["CyberTantra 201", "ADMIN", "75 MCQs", "90 minutes", "75%"],
+      ["CyberTantra", "PROFESSIONAL", "60 questions", "75 minutes", "70%"],
     ],
     banks: [
       { count: "500+", label: "PAM question bank" },
@@ -205,7 +209,7 @@ const certification = {
     notes: [
       "Randomised questions — no two tests alike",
       "Auto-graded with instant results",
-      "Retake available after 7 days if not passed",
+      "Retake available after 24 hours if not passed",
     ],
   },
 
@@ -252,13 +256,13 @@ const certification = {
       {
         level: "Level 01",
         title: "Associate",
-        items: ["PAM 101", "EPM 101", "CyberTantra 101"],
+        items: ["PAM 101", "EPM 101", "CyberTantra"],
         status: "Available",
       },
       {
         level: "Level 02",
         title: "Administrator",
-        items: ["PAM 201", "EPM 201", "CyberTantra 201"],
+        items: ["PAM 201", "EPM 201"],
         status: "Available",
       },
       {
@@ -292,18 +296,51 @@ const certification = {
     eyebrow: "Enroll",
     heading: "Register for certification",
     intro:
-      "Tell us about yourself and select the certifications you'd like to pursue. Your request goes to our team for approval.",
+      "Tell us about yourself and select the certification you'd like to pursue. Your request goes to our team for approval.",
     detailStep: {
       label: "Step 1 · Your details",
       // `name` is the key the field is submitted under — it must match the
       // columns the /api/enroll route expects.
       fields: [
-        { name: "name", label: "Full Name", required: true, placeholder: "John Smith" },
-        { name: "email", label: "Business Email", required: true, placeholder: "john@company.com", type: "email" },
-        { name: "mobile", label: "Mobile Number", required: true, placeholder: "+91 ..." },
-        { name: "organization", label: "Organization", required: true, placeholder: "Company name" },
-        { name: "designation", label: "Designation", required: false, placeholder: "e.g. Security Engineer" },
-        { name: "country", label: "Country", required: true, placeholder: "India" },
+        {
+          name: "name",
+          label: "Full Name",
+          required: true,
+          placeholder: "John Smith",
+        },
+        {
+          name: "email",
+          label: "Business Email",
+          required: true,
+          placeholder: "john@company.com",
+          type: "email",
+        },
+        {
+          name: "mobile",
+          label: "Mobile Number",
+          required: true,
+          placeholder: "98765 43210",
+          type: "tel",
+        },
+        {
+          name: "organization",
+          label: "Organization",
+          required: true,
+          placeholder: "Company name",
+        },
+        {
+          name: "designation",
+          label: "Designation",
+          required: false,
+          placeholder: "e.g. Security Engineer",
+        },
+        {
+          name: "country",
+          label: "Country",
+          required: true,
+          placeholder: "Select your country",
+          type: "country",
+        },
       ],
     },
     backgroundStep: {
@@ -377,15 +414,16 @@ const certification = {
       ],
     },
     certStep: {
-      label: "Step 2 · Choose certifications",
+      label: "Step 2 · Choose a certification",
       required: true,
+      // One certification per request; another can be requested once this one is reviewed.
+      hint: "One certification per request — you can request another once this one has been reviewed.",
       options: [
         { code: "PAM101", label: "PAM 101", level: "Associate" },
         { code: "PAM201", label: "PAM 201", level: "Administrator" },
         { code: "EPM101", label: "EPM 101", level: "Associate" },
         { code: "EPM201", label: "EPM 201", level: "Administrator" },
-        { code: "CT101", label: "CyberTantra 101", level: "Associate" },
-        { code: "CT201", label: "CyberTantra 201", level: "Administrator" },
+        { code: "CT100", label: "CyberTantra", level: "Professional" },
       ],
     },
     submit: "Submit registration request",
@@ -404,7 +442,7 @@ const certification = {
         links: [
           { name: "PAM 101 & 201", href: "#tracks" },
           { name: "EPM 101 & 201", href: "#tracks" },
-          { name: "CyberTantra 101 & 201", href: "#tracks" },
+          { name: "CyberTantra", href: "#tracks" },
           { name: "Roadmap", href: "#roadmap" },
         ],
       },
@@ -427,7 +465,6 @@ const certification = {
       },
     ],
     copyright: "© Iraje Software. All rights reserved.",
-   
   },
 };
 

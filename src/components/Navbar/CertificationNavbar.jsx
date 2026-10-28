@@ -16,6 +16,7 @@ const navLinks = [
   // { name: "Partners", disabled: true },
   // { name: "Customers", href: "/customers" },
   { name: "About", href: "/about" },
+  { name: "Login", href: "/certification/login" },
 ];
 
 export default function CertificationNavbar() {

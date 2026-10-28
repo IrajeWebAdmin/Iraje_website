@@ -13,6 +13,7 @@ const iam = {
       { name: "University", href: "/university" },
       { name: "Certification", href: "/certification" },
       { name: "About", href: "/about" },
+      { name: "Login", href: "/certification/login" },
     ],
     cta: { label: "Get in touch", href: "/contact" },
   },
