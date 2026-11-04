@@ -15,6 +15,7 @@ const epm = {
       // { name: "Partners", disabled: true },
       // { name: "Customers", href: "/customers" },
       { name: "About", href: "/about" },
+      { name: "Login", href: "/certification/login" },
     ],
     cta: { label: "Request a Demo", href: "/contact" },
   },

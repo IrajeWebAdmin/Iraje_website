@@ -3,8 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "predev": "node scripts/copy-pdf-worker.mjs",
     "dev": "next dev",
     "//": "Do not drop `prisma generate` from build: Vercel caches node_modules, so the client is NOT regenerated on deploy and new models come back undefined at runtime.",
+    "prebuild": "node scripts/copy-pdf-worker.mjs",
     "build": "prisma generate && next build",
     "start": "next start",
     "db:migrate": "prisma migrate deploy"
@@ -12,13 +14,18 @@
   "dependencies": {
     "@prisma/client": "^6.19.3",
     "@sanity/client": "^8.6.1",
+    "bcryptjs": "^3.0.3",
     "embla-carousel-react": "^8.6.0",
+    "exceljs": "^4.4.0",
     "framer-motion": "^12.40.0",
+    "google-auth-library": "^11.1.0",
     "next": "16.2.9",
-    "nodemailer": "^9.0.3",
+    "pdf-lib": "^1.17.1",
+    "pdfjs-dist": "^6.4.299",
     "react": "19.2.4",
     "react-dom": "19.2.4",
-    "react-icons": "^5.6.0"
+    "react-icons": "^5.6.0",
+    "recharts": "^3.10.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

@@ -15,6 +15,7 @@ const pam = {
       // { name: "Partners", disabled: true },
       // { name: "Customers", href: "/customers" },
       { name: "About", href: "/about" },
+      { name: "Login", href: "/certification/login" },
     ],
     cta: { label: "Get in touch", href: "/contact" },
   },
