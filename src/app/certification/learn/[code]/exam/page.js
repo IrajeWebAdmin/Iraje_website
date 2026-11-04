@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { FiArrowLeft, FiLock } from "react-icons/fi";
 import { prisma } from "@/lib/prisma";
 import { requireStudent } from "@/lib/dal";
+import PortalHeader from "@/components/Portal/PortalHeader";
 import { getSanityClient } from "@/lib/sanity/client";
 import { QUESTIONS_BY_ID_QUERY } from "@/lib/sanity/queries";
 import { loadLearnerCourse } from "@/lib/learner";
@@ -32,6 +33,12 @@ export default async function ExamPage({ params }) {
   if (!course?.outline) redirect("/certification/dashboard");
   const base = `/certification/learn/${course.code.toLowerCase()}`;
   const exam = course.cert.exam ?? {};
+  // The course outline lives on the module pages; the last one is the way
+  // back from the exam.
+  const steps = course.outline.steps;
+  const outlineHref = steps.length
+    ? `${base}/${steps[steps.length - 1]._id}`
+    : "/certification/dashboard";
 
   const loadAttempts = () =>
     prisma.examAttempt.findMany({
@@ -60,17 +67,19 @@ export default async function ExamPage({ params }) {
   let showHeader = true;
   let backLink = null;
   if (passed) {
+    // The result stands alone, as in the design: one centred card.
+    showOutline = false;
+    showHeader = false;
     body = (
       <ExamResult
         attempt={passed}
         certificate={passed.certificate}
         exam={exam}
-        firstName={user.name.trim().split(/\s+/)[0]}
-        email={user.email}
+        code={displayCertCode(course.code)}
+        title={passed.certificate?.certificationTitle ?? course.cert.title}
       />
     );
   } else if (open) {
-    showOutline = false;
     // Show the frozen paper in its saved order, with no answer key.
     const rows = await getSanityClient().fetch(QUESTIONS_BY_ID_QUERY, {
       ids: open.paper.map((q) => q.id),
@@ -87,13 +96,20 @@ export default async function ExamPage({ params }) {
           options: p.options.map((k) => options.get(k)).filter(Boolean),
         };
       });
-    body = (
+    // The paper takes over the page: its own top bar with the countdown and
+    // Submit replaces the portal header.
+    return (
       <ExamRunner
         attemptId={open.id}
         deadlineAt={open.deadlineAt.toISOString()}
         serverNow={new Date().toISOString()}
         questions={questions}
         submitAction={submitExam}
+        code={displayCertCode(course.code)}
+        label={course.cert.label}
+        courseTitle={course.cert.course?.title ?? course.cert.title}
+        exam={exam}
+        outlineHref={outlineHref}
       />
     );
   } else if (!course.outline.examUnlocked) {
@@ -125,7 +141,6 @@ export default async function ExamPage({ params }) {
   } else {
     const failedAt = attempts.find((a) => a.passed === false)?.submittedAt;
     const waitUntil = retakeAvailableAt(failedAt, RETAKE_WAIT_DAYS);
-    const steps = course.outline.steps;
     const shownCode = displayCertCode(course.code);
     // The instructions page stands alone, as in the design: a back link to
     // the course outline (the last module page shows it), then the
@@ -133,9 +148,7 @@ export default async function ExamPage({ params }) {
     showOutline = false;
     showHeader = false;
     backLink = {
-      href: steps.length
-        ? `${base}/${steps[steps.length - 1]._id}`
-        : "/certification/dashboard",
+      href: outlineHref,
       label: `${shownCode} outline`,
     };
     body = (
@@ -160,29 +173,30 @@ export default async function ExamPage({ params }) {
   }
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
-      {showHeader && <CourseHeader course={course} />}
-      {backLink && (
-        <Link
-          href={backLink.href}
-          className="text-shuttle hover:text-brand mb-5 inline-flex items-center gap-1.5 text-xs font-medium transition"
-        >
-          <FiArrowLeft className="h-3.5 w-3.5" />
-          {backLink.label}
-        </Link>
-      )}
-      {showOutline ? (
-        <div className="mt-6 flex flex-col gap-8 lg:grid lg:grid-cols-[300px_minmax(0,1fr)] lg:items-start lg:gap-6">
-          <div className="min-w-0">{body}</div>
-          <div className="lg:order-first">
-            <CourseOutline course={course} base={base} currentId="exam" />
+    <>
+      <PortalHeader user={user} />
+      <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
+        {showHeader && <CourseHeader course={course} />}
+        {backLink && (
+          <Link
+            href={backLink.href}
+            className="text-shuttle hover:text-brand mb-5 inline-flex items-center gap-1.5 text-xs font-medium transition"
+          >
+            <FiArrowLeft className="h-3.5 w-3.5" />
+            {backLink.label}
+          </Link>
+        )}
+        {showOutline ? (
+          <div className="mt-6 flex flex-col gap-8 lg:grid lg:grid-cols-[300px_minmax(0,1fr)] lg:items-start lg:gap-6">
+            <div className="min-w-0">{body}</div>
+            <div className="lg:order-first">
+              <CourseOutline course={course} base={base} currentId="exam" />
+            </div>
           </div>
-        </div>
-      ) : showHeader ? (
-        <div className="mx-auto mt-6 max-w-3xl">{body}</div>
-      ) : (
-        body
-      )}
-    </div>
+        ) : (
+          body
+        )}
+      </div>
+    </>
   );
 }

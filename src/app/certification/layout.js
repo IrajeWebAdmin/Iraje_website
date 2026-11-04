@@ -11,7 +11,8 @@ const PORTAL_PREFIXES = ["/certification/learn/"];
 // Chrome for the Certification page. Lives outside the (main) route group so
 // it supplies its own navbar/footer (the "Iraje University" identity) instead
 // of inheriting HomeNavbar/HomeFooter — mirrors products/epm and products/pam.
-// The sign-in page has no footer; portal pages have neither navbar nor footer.
+// The sign-in and password pages (change, forgot, reset) have no footer;
+// portal pages have neither navbar nor footer.
 export default function CertificationLayout({ children }) {
   return (
     <div className="text-ink bg-white antialiased">
@@ -20,7 +21,13 @@ export default function CertificationLayout({ children }) {
       </HideOnPaths>
       <main>{children}</main>
       <HideOnPaths
-        paths={["/certification/login", ...PORTAL_PATHS]}
+        paths={[
+          "/certification/login",
+          "/certification/change-password",
+          "/certification/forgot-password",
+          "/certification/reset-password",
+          ...PORTAL_PATHS,
+        ]}
         prefixes={PORTAL_PREFIXES}
       >
         <CertFooter />

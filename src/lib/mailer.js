@@ -6,38 +6,57 @@
 // Returns { sent: true } when Microsoft accepted the email, or { sent: false }
 // in console mode, so callers never claim an email went out when it didn't.
 
-async function sendMail({ to, subject, text, html, replyTo, attachments = [] }) {
+async function sendMail({
+  to,
+  subject,
+  text,
+  html,
+  replyTo,
+  attachments = [],
+}) {
   const transport =
     process.env.MAIL_TRANSPORT ||
     (process.env.NODE_ENV === "production" ? "graph" : "console");
 
   if (transport === "console") {
     console.info(
-      [`\n----- EMAIL (not sent: MAIL_TRANSPORT=console) -----`,
+      [
+        `\n----- EMAIL (not sent: MAIL_TRANSPORT=console) -----`,
         `To:       ${to}`,
         `Reply-To: ${replyTo ?? "—"}`,
         `Subject:  ${subject}`,
-        ...attachments.map((a) => `Attached: ${a.name} (${Math.round(a.bytes.length / 1024)} KB)`),
+        ...attachments.map(
+          (a) =>
+            `Attached: ${a.name} (${Math.round(a.bytes.length / 1024)} KB)`,
+        ),
         ``,
         text,
-        `----------------------------------------------------\n`].join("\n"),
+        `----------------------------------------------------\n`,
+      ].join("\n"),
     );
     return { sent: false };
   }
   if (transport !== "graph") {
-    throw new Error(`Unknown MAIL_TRANSPORT "${transport}" — use "graph" or "console".`);
+    throw new Error(
+      `Unknown MAIL_TRANSPORT "${transport}" — use "graph" or "console".`,
+    );
   }
 
   const from = process.env.MAIL_FROM;
   if (!from) throw new Error("MAIL_FROM is not set (e.g. inquiry@iraje.com).");
 
-  console.info(`[mail] Sending via Microsoft Graph — from ${from} to ${to}: "${subject}"`);
+  console.info(
+    `[mail] Sending via Microsoft Graph — from ${from} to ${to}: "${subject}"`,
+  );
   const token = await getGraphToken();
   const res = await fetch(
     `https://graph.microsoft.com/v1.0/users/${encodeURIComponent(from)}/sendMail`,
     {
       method: "POST",
-      headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
         message: {
           subject,
@@ -61,10 +80,16 @@ async function sendMail({ to, subject, text, html, replyTo, attachments = [] }) 
   // Graph answers 202 Accepted with an empty body when the mail is queued.
   if (res.status !== 202) {
     const detail = await res.text().catch(() => "");
-    console.error(`[mail] ✗ Microsoft refused to send (HTTP ${res.status}) — from ${from} to ${to}:\n${detail}`);
-    throw new Error(`Graph sendMail failed (${res.status}): ${detail.slice(0, 500)}`);
+    console.error(
+      `[mail] ✗ Microsoft refused to send (HTTP ${res.status}) — from ${from} to ${to}:\n${detail}`,
+    );
+    throw new Error(
+      `Graph sendMail failed (${res.status}): ${detail.slice(0, 500)}`,
+    );
   }
-  console.info(`[mail] ✓ Microsoft accepted the email (HTTP 202) — to ${to}. Check the inbox and ${from}'s Sent Items.`);
+  console.info(
+    `[mail] ✓ Microsoft accepted the email (HTTP 202) — to ${to}. Check the inbox and ${from}'s Sent Items.`,
+  );
   return { sent: true };
 }
 
@@ -120,7 +145,10 @@ async function getGraphToken() {
 
 /** Full link to a page on this site, for use inside emails. */
 function appUrl(path) {
-  return new URL(path, process.env.APP_URL || "http://localhost:3000").toString();
+  return new URL(
+    path,
+    process.env.APP_URL || "http://localhost:3000",
+  ).toString();
 }
 
 // Optional fields (currently just the phone number) arrive as null when the
@@ -259,7 +287,9 @@ export function buildEnrollmentEmail({
     text: [
       `New Certification enrolment (#${id})`,
       ``,
-      ...rows.map(([label, value]) => `${(label + ":").padEnd(pad)}${shown(value)}`),
+      ...rows.map(
+        ([label, value]) => `${(label + ":").padEnd(pad)}${shown(value)}`,
+      ),
       ``,
       `Certifications requested:`,
       certifications,
@@ -305,7 +335,10 @@ function formatEmailDate(date) {
 export async function sendApprovalEmail(details) {
   return sendMail({
     to: details.email,
-    ...buildApprovalEmail({ ...details, loginUrl: appUrl("/certification/login") }),
+    ...buildApprovalEmail({
+      ...details,
+      loginUrl: appUrl("/certification/login"),
+    }),
   });
 }
 
@@ -372,12 +405,30 @@ export function buildApprovalEmail({
   };
 }
 
-/** Tell an applicant their request was not approved. */
+/**
+ * Tell an applicant their request was not approved. `canReapply` (the box on
+ * the admin's reject page) adds a line inviting a fresh request.
+ */
 export async function sendRejectionEmail(enrollment) {
-  return sendMail({ to: enrollment.email, ...buildRejectionEmail(enrollment) });
+  return sendMail({
+    to: enrollment.email,
+    ...buildRejectionEmail({
+      ...enrollment,
+      enrollUrl: appUrl("/certification#enroll"),
+    }),
+  });
 }
 
-export function buildRejectionEmail({ name, certifications, rejectionReason }) {
+export function buildRejectionEmail({
+  name,
+  certifications,
+  rejectionReason,
+  canReapply = false,
+  enrollUrl = null,
+}) {
+  // The plain-text line ends with the bare link: a full stop after a URL is
+  // often swallowed into it by mail clients.
+  const reapplyText = `You are welcome to submit a new request once this has been addressed.${enrollUrl ? ` Submit it at ${enrollUrl}` : ""}`;
   return {
     subject: "Update on your Iraje certification request",
     text: [
@@ -385,6 +436,7 @@ export function buildRejectionEmail({ name, certifications, rejectionReason }) {
       ``,
       `Thank you for your interest in Iraje certification. Unfortunately, we are unable to approve your request for ${certifications} at this time.`,
       ...(rejectionReason ? [``, `Reason: ${rejectionReason}`] : []),
+      ...(canReapply ? [``, reapplyText] : []),
       ``,
       `If you have questions, write to contact@iraje.com.`,
       ``,
@@ -394,6 +446,11 @@ export function buildRejectionEmail({ name, certifications, rejectionReason }) {
       <p style="font-family:sans-serif">Hi ${escapeHtml(name)},</p>
       <p style="font-family:sans-serif">Thank you for your interest in Iraje certification. Unfortunately, we are unable to approve your request for <strong>${escapeHtml(certifications)}</strong> at this time.</p>
       ${rejectionReason ? `<p style="font-family:sans-serif;white-space:pre-wrap"><strong>Reason:</strong> ${escapeHtml(rejectionReason)}</p>` : ""}
+      ${
+        canReapply
+          ? `<p style="font-family:sans-serif">You are welcome to submit a new request once this has been addressed${enrollUrl ? ` at <a href="${escapeHtml(enrollUrl)}">${escapeHtml(enrollUrl)}</a>` : ""}.</p>`
+          : ""
+      }
       <p style="font-family:sans-serif">If you have questions, write to contact@iraje.com.</p>
       <hr />
       <p style="color:#888;font-family:sans-serif">— Iraje University</p>
@@ -411,7 +468,11 @@ export async function sendCertificateEmail({ to, certificate, pdf }) {
       dashboardUrl: appUrl("/certification/dashboard"),
     }),
     attachments: [
-      { name: `${certificate.certificateNo}.pdf`, contentType: "application/pdf", bytes: pdf },
+      {
+        name: `${certificate.certificateNo}.pdf`,
+        contentType: "application/pdf",
+        bytes: pdf,
+      },
     ],
   });
 }
@@ -454,6 +515,50 @@ export function buildCertificateEmail({
       <p style="font-family:sans-serif">${button(verifyUrl, "Verify a certificate")}</p>
       <hr />
       <p style="color:#888;font-family:sans-serif">— Iraje University</p>
+    `,
+  };
+}
+
+/** Email a "forgot password" link. `token` comes from issueResetToken(). */
+export async function sendPasswordResetEmail({ email, name, token, minutes }) {
+  return sendMail({
+    to: email,
+    ...buildPasswordResetEmail({
+      name,
+      resetUrl: appUrl(
+        `/certification/reset-password?token=${encodeURIComponent(token)}`,
+      ),
+      minutes,
+    }),
+  });
+}
+
+export function buildPasswordResetEmail({ name, resetUrl, minutes }) {
+  return {
+    subject: "Reset your Iraje University password",
+    text: [
+      `Hi ${name},`,
+      ``,
+      `Someone asked to reset the password for your Iraje University account.`,
+      `If that was you, open this link to choose a new password:`,
+      ``,
+      resetUrl,
+      ``,
+      `The link works for ${minutes} minutes and only once.`,
+      `If you didn't ask for this, you can ignore this email — your password has not changed.`,
+      ``,
+      `Questions? Write to contact@iraje.com.`,
+      ``,
+      `— Iraje University`,
+    ].join("\n"),
+    html: `
+      <p style="font-family:sans-serif">Hi ${escapeHtml(name)},</p>
+      <p style="font-family:sans-serif">Someone asked to reset the password for your Iraje University account. If that was you, choose a new password here:</p>
+      <p style="font-family:sans-serif">${button(resetUrl, "Choose a new password")}</p>
+      <p style="font-family:sans-serif;font-size:13px;color:#555">Or copy this link into your browser:<br /><a href="${escapeHtml(resetUrl)}">${escapeHtml(resetUrl)}</a></p>
+      <p style="font-family:sans-serif">The link works for <strong>${minutes} minutes</strong> and only once. If you didn't ask for this, you can ignore this email — your password has not changed.</p>
+      <hr />
+      <p style="color:#888;font-family:sans-serif">Questions? Write to contact@iraje.com. — Iraje University</p>
     `,
   };
 }

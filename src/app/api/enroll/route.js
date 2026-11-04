@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { organizationKey } from "@/lib/organizations";
+import { normalizeCertCode } from "@/lib/certCodes";
 import { sendEnrollmentNotification } from "@/lib/mailer";
 import { createRateLimiter, clientIp } from "@/lib/rateLimit";
 import { isHoneypotTripped } from "@/lib/honeypot";
@@ -160,6 +162,10 @@ export async function POST(request) {
         existingCustomer: optional(body.existingCustomer),
         existingPartner: optional(body.existingPartner),
         certifications: certifications.join(", "),
+        // Report columns: the canonical code and the cleaned organisation
+        // name, so the admin reports can filter and group in the database.
+        certificationCode: normalizeCertCode(certifications[0]) ?? null,
+        organizationKey: organizationKey(organization),
       },
     });
   } catch (err) {

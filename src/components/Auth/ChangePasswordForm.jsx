@@ -1,45 +1,125 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useState } from "react";
+import { FiLock } from "react-icons/fi";
 import { changePassword } from "@/app/actions/auth";
 import PasswordInput from "./PasswordInput";
+import AuthCard from "./AuthCard";
+import {
+  INPUT,
+  MIN_LENGTH,
+  RuleList,
+  StrengthMeter,
+  SubmitButton,
+} from "./PasswordRules";
 
-const FIELDS = [
-  { name: "currentPassword", label: "Current (or temporary) password", autoComplete: "current-password" },
-  { name: "newPassword", label: "New password (at least 10 characters)", autoComplete: "new-password" },
-  { name: "confirmPassword", label: "Type the new password again", autoComplete: "new-password" },
-];
-
-// Used by /admin/change-password and /certification/change-password.
+// The "Set your password" card (Figma): lock badge, italic title, the current
+// and new passwords with show/hide, a strength meter, a live checklist of the
+// rules, and a Save button that is grey until every rule is met. Used by
+// /certification/change-password (learners, usually their first sign-in with
+// a temporary password) and /admin/change-password.
 export default function ChangePasswordForm({ firstTime }) {
-  const [state, formAction, pending] = useActionState(changePassword, undefined);
+  const [state, formAction, pending] = useActionState(
+    changePassword,
+    undefined,
+  );
+  const [current, setCurrent] = useState("");
+  const [next, setNext] = useState("");
+  const [confirm, setConfirm] = useState("");
+
+  const rules = [
+    {
+      key: "length",
+      label: `At least ${MIN_LENGTH} characters`,
+      met: next.length >= MIN_LENGTH,
+    },
+    {
+      key: "match",
+      label: "Both new passwords match",
+      met: next.length > 0 && next === confirm,
+    },
+    {
+      key: "differs",
+      label: firstTime
+        ? "Different from your temporary password"
+        : "Different from your current password",
+      met: next.length > 0 && current.length > 0 && next !== current,
+    },
+  ];
+  const ready = rules.every((r) => r.met);
 
   return (
-    <div className="mx-auto w-full max-w-md rounded-2xl border border-mist bg-white p-8 shadow-sm">
-      <h1 className="text-2xl font-semibold text-ink">
-        {firstTime ? "Set your password" : "Change password"}
-      </h1>
-      {firstTime && (
-        <p className="mt-1 text-sm text-shuttle">
-          You signed in with a temporary password. Choose your own to continue.
-        </p>
-      )}
+    <AuthCard
+      icon={FiLock}
+      title={firstTime ? "Set your" : "Change your"}
+      accent="password"
+      intro={
+        firstTime
+          ? "You signed in with a temporary password. Choose your own to continue."
+          : "Choose a new password. Any other device you are signed in on will be signed out."
+      }
+    >
+      <form action={formAction} className="mt-6 space-y-5">
+        <div>
+          <label
+            htmlFor="currentPassword"
+            className="text-ink mb-1.5 block text-sm font-medium"
+          >
+            {firstTime ? "Current (or temporary) password" : "Current password"}
+          </label>
+          <PasswordInput
+            id="currentPassword"
+            name="currentPassword"
+            autoComplete="current-password"
+            required
+            value={current}
+            onChange={(e) => setCurrent(e.target.value)}
+            className={INPUT}
+          />
+        </div>
 
-      <form action={formAction} className="mt-6 space-y-4">
-        {FIELDS.map((f) => (
-          <div key={f.name}>
-            <label htmlFor={f.name} className="mb-1.5 block text-xs font-semibold text-ink">
-              {f.label}
-            </label>
-            <PasswordInput
-              id={f.name}
-              name={f.name}
-              autoComplete={f.autoComplete}
-              required
-              className="w-full rounded-xl border border-mist px-3.5 py-2.5 text-sm outline-none focus:border-brand focus:ring-2 focus:ring-brand/20"
-            />
-          </div>
-        ))}
+        <div>
+          <label
+            htmlFor="newPassword"
+            className="text-ink mb-1.5 block text-sm font-medium"
+          >
+            New password{" "}
+            <span className="text-shuttle font-normal">
+              (at least {MIN_LENGTH} characters)
+            </span>
+          </label>
+          <PasswordInput
+            id="newPassword"
+            name="newPassword"
+            autoComplete="new-password"
+            required
+            minLength={MIN_LENGTH}
+            value={next}
+            onChange={(e) => setNext(e.target.value)}
+            className={INPUT}
+          />
+          <StrengthMeter password={next} />
+        </div>
+
+        <div>
+          <label
+            htmlFor="confirmPassword"
+            className="text-ink mb-1.5 block text-sm font-medium"
+          >
+            Type the new password again
+          </label>
+          <PasswordInput
+            id="confirmPassword"
+            name="confirmPassword"
+            autoComplete="new-password"
+            required
+            value={confirm}
+            onChange={(e) => setConfirm(e.target.value)}
+            className={INPUT}
+          />
+        </div>
+
+        <RuleList rules={rules} />
 
         {state?.error && (
           <p role="alert" className="text-sm text-red-600">
@@ -47,14 +127,10 @@ export default function ChangePasswordForm({ firstTime }) {
           </p>
         )}
 
-        <button
-          type="submit"
-          disabled={pending}
-          className="w-full rounded-xl bg-brand px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-navy disabled:opacity-60"
-        >
-          {pending ? "Saving…" : "Save password"}
-        </button>
+        <SubmitButton ready={ready} pending={pending} pendingLabel="Saving…">
+          Save password
+        </SubmitButton>
       </form>
-    </div>
+    </AuthCard>
   );
 }

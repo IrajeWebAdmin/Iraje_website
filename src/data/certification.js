@@ -285,10 +285,10 @@ const certification = {
     eyebrow: "Verification Portal",
     heading: "Verify an Iraje certificate",
     intro:
-      "Employers and customers can confirm any Iraje certification instantly. Search by certificate number or candidate email.",
-    placeholder: "e.g. IRJ-PAM101-2026-000123",
+      "Employers and customers can confirm any Iraje certification instantly. Enter the certificate number printed on the certificate.",
+    placeholder: "e.g. IRJ-PAM101-7K2Q-9XM4",
     cta: "Verify",
-    hint: "Demo — try: IRJ-PAM101-2026-000123",
+    hint: "Certificate numbers look like IRJ-PAM101-XXXX-XXXX.",
   },
 
   // ---- Enroll / Registration -------------------------------------------

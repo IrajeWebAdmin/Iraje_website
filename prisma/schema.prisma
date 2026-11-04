@@ -43,7 +43,13 @@ model Enrollment {
   existingPartner  String? @map("existing_partner") @db.VarChar(60)
 
   /// Selected certification codes, comma-separated (e.g. "PAM 101, EPM 201").
-  certifications String @db.VarChar(255)
+  certifications    String  @db.VarChar(255)
+  /// The first requested code in canonical form ("PAM101"): what report
+  /// filters and GROUP BY use. Legacy rows with two codes keep the first here.
+  certificationCode String? @map("certification_code") @db.VarChar(10)
+  /// organizationKey(organization): lower-case, punctuation and legal suffixes
+  /// removed, so "Infosys" and "Infosys Ltd." group together in reports.
+  organizationKey   String  @default("") @map("organization_key") @db.VarChar(150)
 
   status    String    @default("new") @db.VarChar(20)
   createdAt DateTime? @default(now()) @map("created_at") @db.Timestamp(0)
@@ -60,6 +66,9 @@ model Enrollment {
 
   @@index([email])
   @@index([status])
+  @@index([createdAt])
+  @@index([organizationKey])
+  @@index([certificationCode])
   @@map("certification_enrollment")
 }
 
@@ -78,14 +87,20 @@ model User {
   mustChangePassword    Boolean   @default(true) @map("must_change_password")
   tempPasswordExpiresAt DateTime? @map("temp_password_expires_at") @db.DateTime(0)
 
+  /// When they last signed in, and how often. Sessions are deleted on logout,
+  /// so this is the only durable sign-in record. Null means never signed in.
+  lastLoginAt DateTime? @map("last_login_at") @db.DateTime(0)
+  loginCount  Int       @default(0) @map("login_count")
+
   createdAt DateTime @default(now()) @map("created_at") @db.DateTime(0)
   updatedAt DateTime @updatedAt @map("updated_at") @db.DateTime(0)
 
   sessions            Session[]
-  enrollments         Enrollment[] @relation("EnrollmentLearner")
-  reviewedEnrollments Enrollment[] @relation("EnrollmentReviewer")
-   certifications      UserCertification[]
+  enrollments         Enrollment[]        @relation("EnrollmentLearner")
+  reviewedEnrollments Enrollment[]        @relation("EnrollmentReviewer")
+  certifications      UserCertification[]
 
+  @@index([role, createdAt])
   @@map("users")
 }
 
@@ -120,6 +135,7 @@ model UserCertification {
 
   @@unique([userId, certificationCode])
   @@index([certificationCode])
+  @@index([startedAt])
   @@map("user_certifications")
 }
 
@@ -159,6 +175,8 @@ model ExamAttempt {
   certificate Certificate?
 
   @@index([userCertificationId])
+  @@index([startedAt])
+  @@index([submittedAt])
   @@map("exam_attempts")
 }
 
@@ -179,5 +197,8 @@ model Certificate {
   expiresAt           DateTime          @map("expires_at") @db.DateTime(0)
   status              String            @default("valid") @db.VarChar(20) // "valid" | "revoked"
 
+  @@index([issuedAt])
+  @@index([expiresAt])
+  @@index([certificationCode])
   @@map("certificates")
 }

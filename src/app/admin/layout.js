@@ -6,5 +6,18 @@ export const metadata = {
 };
 
 export default function AdminLayout({ children }) {
-  return <div className="min-h-screen bg-catskill text-ink antialiased">{children}</div>;
+  return (
+    <>
+      {/* The page ground is painted on <html> as well as the wrapper, so the
+          grey continues below the content however tall the window is. React
+          hoists this into <head>; it goes away with the admin shell. */}
+      <style
+        href="admin-ground"
+        precedence="default"
+      >{`html{background-color:#f4f7fa}`}</style>
+      <div className="bg-catskill text-ink min-h-screen antialiased">
+        {children}
+      </div>
+    </>
+  );
 }

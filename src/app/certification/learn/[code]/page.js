@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 import { requireStudent } from "@/lib/dal";
+import PortalHeader from "@/components/Portal/PortalHeader";
 import { loadLearnerCourse } from "@/lib/learner";
 import { continueHref } from "@/lib/dashboard";
 import CourseHeader from "@/components/Learn/CourseHeader";
@@ -22,16 +23,19 @@ export default async function CoursePage({ params }) {
   const target = continueHref(course.outline, base);
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
-      <CourseHeader course={course} />
-      {course.outline && target !== base ? (
-        <OpenCourse href={target} />
-      ) : (
-        // No modules in Sanity yet — nothing to open, so say so under the header.
-        <p className="border-mist text-shuttle mt-6 rounded-2xl border bg-white p-6 text-sm">
-          Course content is coming soon.
-        </p>
-      )}
-    </div>
+    <>
+      <PortalHeader user={user} />
+      <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
+        <CourseHeader course={course} />
+        {course.outline && target !== base ? (
+          <OpenCourse href={target} />
+        ) : (
+          // No modules in Sanity yet — nothing to open, so say so under the header.
+          <p className="border-mist text-shuttle mt-6 rounded-2xl border bg-white p-6 text-sm">
+            Course content is coming soon.
+          </p>
+        )}
+      </div>
+    </>
   );
 }

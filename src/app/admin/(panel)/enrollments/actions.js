@@ -1,6 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { requireAdmin } from "@/lib/dal";
 import { parseCertList } from "@/lib/certCodes";
@@ -52,10 +53,14 @@ export async function approveEnrollment(enrollmentId) {
         data: { status: "approved", reviewedAt: now, reviewedById: admin.id },
       });
       if (claimed.count === 0) {
-        throw new ReviewError("This request has already been decided. Refresh the page to see the result.");
+        throw new ReviewError(
+          "This request has already been decided. Refresh the page to see the result.",
+        );
       }
 
-      const enrollment = await tx.enrollment.findUniqueOrThrow({ where: { id: enrollmentId } });
+      const enrollment = await tx.enrollment.findUniqueOrThrow({
+        where: { id: enrollmentId },
+      });
       const email = enrollment.email.trim().toLowerCase();
 
       let user = await tx.user.findUnique({ where: { email } });
@@ -74,7 +79,9 @@ export async function approveEnrollment(enrollmentId) {
         });
         sentPassword = tempPassword;
       } else if (user.role !== "student") {
-        throw new ReviewError("This email address belongs to an admin account, so it can't be approved as a learner.");
+        throw new ReviewError(
+          "This email address belongs to an admin account, so it can't be approved as a learner.",
+        );
       } else if (user.mustChangePassword) {
         // Approved before but never signed in — their old temporary password
         // may be lost or expired, so issue a fresh one.
@@ -95,18 +102,28 @@ export async function approveEnrollment(enrollmentId) {
       // PAM101 and is now approved for EPM201, she gets a second row.
       for (const code of parseCertList(enrollment.certifications)) {
         await tx.userCertification.upsert({
-          where: { userId_certificationCode: { userId: user.id, certificationCode: code } },
+          where: {
+            userId_certificationCode: {
+              userId: user.id,
+              certificationCode: code,
+            },
+          },
           create: { userId: user.id, certificationCode: code },
           update: {},
         });
       }
 
-      return { enrollment, email, sentPassword };
+      // The account's name, not the one typed on this request: an existing
+      // account keeps the name it was created with.
+      return { enrollment, email, sentPassword, name: user.name };
     });
   } catch (err) {
     if (err instanceof ReviewError) return { error: err.message };
     console.error("[admin] approve failed:", err);
-    return { error: "Could not approve this request. Nothing was changed — please try again." };
+    return {
+      error:
+        "Could not approve this request. Nothing was changed — please try again.",
+    };
   }
 
   refresh(enrollmentId);
@@ -114,16 +131,21 @@ export async function approveEnrollment(enrollmentId) {
   // The approval is saved. Email is sent after, and a failure doesn't undo it.
   try {
     const mail = await sendApprovalEmail({
-      name: result.enrollment.name,
+      name: result.name,
       email: result.email,
       certifications: result.enrollment.certifications,
       tempPassword: result.sentPassword,
       expiresAt,
     });
-    return { message: `Approved. Login details ${delivery(mail, result.email)}.` };
+    return {
+      message: `Approved. Login details ${delivery(mail, result.email)}.`,
+    };
   } catch (err) {
     console.error("[admin] approval email failed:", err);
-    return { error: 'Approved, but the email could not be sent. Use "Resend login details" once email is working.' };
+    return {
+      error:
+        'Approved, but the email could not be sent. Use "Resend login details" once email is working.',
+    };
   }
 }
 
@@ -132,6 +154,7 @@ export async function rejectEnrollment(enrollmentId, _previousState, formData) {
   const admin = await requireAdmin();
 
   const reason = String(formData.get("reason") ?? "").trim();
+  const canReapply = formData.get("reapply") === "on";
   if (reason.length > 500) {
     return { error: "Please keep the reason under 500 characters." };
   }
@@ -148,9 +171,14 @@ export async function rejectEnrollment(enrollmentId, _previousState, formData) {
       },
     });
     if (claimed.count === 0) {
-      return { error: "This request has already been decided. Refresh the page to see the result." };
+      return {
+        error:
+          "This request has already been decided. Refresh the page to see the result.",
+      };
     }
-    enrollment = await prisma.enrollment.findUniqueOrThrow({ where: { id: enrollmentId } });
+    enrollment = await prisma.enrollment.findUniqueOrThrow({
+      where: { id: enrollmentId },
+    });
   } catch (err) {
     console.error("[admin] reject failed:", err);
     return { error: "Could not reject this request. Please try again." };
@@ -159,11 +187,21 @@ export async function rejectEnrollment(enrollmentId, _previousState, formData) {
   refresh(enrollmentId);
 
   try {
-    const mail = await sendRejectionEmail(enrollment);
-    return { message: `Rejected. The rejection email was ${delivery(mail, enrollment.email)}.` };
+    // An existing learner is addressed by their account name, as in every other email.
+    const account = await prisma.user.findUnique({
+      where: { email: enrollment.email.trim().toLowerCase() },
+      select: { name: true, role: true },
+    });
+    const name = account?.role === "student" ? account.name : enrollment.name;
+    const mail = await sendRejectionEmail({ ...enrollment, name, canReapply });
+    return {
+      message: `Rejected. The rejection email was ${delivery(mail, enrollment.email)}.`,
+    };
   } catch (err) {
     console.error("[admin] rejection email failed:", err);
-    return { error: "Rejected, but the email to the applicant could not be sent." };
+    return {
+      error: "Rejected, but the email to the applicant could not be sent.",
+    };
   }
 }
 
@@ -177,7 +215,9 @@ export async function resendCredentials(enrollmentId) {
       name: true,
       status: true,
       certifications: true,
-      user: { select: { id: true, email: true, mustChangePassword: true } },
+      user: {
+        select: { id: true, email: true, name: true, mustChangePassword: true },
+      },
     },
   });
 
@@ -195,7 +235,10 @@ export async function resendCredentials(enrollmentId) {
     await prisma.$transaction([
       prisma.user.update({
         where: { id: enrollment.user.id },
-        data: { passwordHash: await hashPassword(tempPassword), tempPasswordExpiresAt: expiresAt },
+        data: {
+          passwordHash: await hashPassword(tempPassword),
+          tempPasswordExpiresAt: expiresAt,
+        },
       }),
       prisma.session.deleteMany({ where: { userId: enrollment.user.id } }),
     ]);
@@ -204,17 +247,51 @@ export async function resendCredentials(enrollmentId) {
     return { error: "Could not create new login details. Please try again." };
   }
 
+  refresh(enrollmentId);
+
   try {
     const mail = await sendApprovalEmail({
-      name: enrollment.name,
+      name: enrollment.user.name,
       email: enrollment.user.email,
       certifications: enrollment.certifications,
       tempPassword,
       expiresAt,
     });
-    return { message: `New login details ${delivery(mail, enrollment.user.email)}.` };
+    return {
+      message: `Login details re-sent: ${delivery(mail, enrollment.user.email)}.`,
+    };
   } catch (err) {
     console.error("[admin] resend email failed:", err);
-    return { error: "The password was reset, but the email could not be sent. Try again once email is working." };
+    return {
+      error:
+        "The password was reset, but the email could not be sent. Try again once email is working.",
+    };
   }
+}
+
+// ---- The list page's inline buttons ----
+// A decided row leaves the "New" tab as soon as it is saved, so the outcome
+// travels back in the URL and the list shows it as a banner. redirect() works
+// by throwing, so it stays outside any try/catch.
+function listUrl(result) {
+  const params = new URLSearchParams({ status: "new" });
+  if (result?.error) params.set("error", result.error);
+  else if (result?.message) params.set("notice", result.message);
+  return `/admin/enrollments?${params}`;
+}
+
+/** Approve from the list: same as approveEnrollment, then back to the queue. */
+export async function approveFromList(enrollmentId) {
+  const result = await approveEnrollment(enrollmentId);
+  redirect(listUrl(result));
+}
+
+/**
+ * Reject from the reason page: same as rejectEnrollment, then back to the
+ * queue. A problem comes back as { error } for the form to show.
+ */
+export async function rejectFromPage(enrollmentId, _previousState, formData) {
+  const result = await rejectEnrollment(enrollmentId, undefined, formData);
+  if (result?.error) return result;
+  redirect(listUrl(result));
 }

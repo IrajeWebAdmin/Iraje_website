@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { redirect } from "next/navigation";
-import { FiAward } from "react-icons/fi";
 import LearnerLoginForm from "@/components/Auth/LearnerLoginForm";
 import { login } from "@/app/actions/auth";
 import { getCurrentUser, AREAS } from "@/lib/dal";
@@ -39,27 +38,17 @@ export default async function CertificationLoginPage() {
             <LearnerLoginForm action={login.bind(null, "student")} />
           </div>
 
-          {/* Photo + badge */}
-          <div className="relative hidden lg:block">
+          {/* Illustration: a laptop sign-in form behind a shield and padlock.
+              Shown at its natural width so it stays sharp. */}
+          <div className="hidden lg:flex lg:justify-center">
             <Image
-              src="/images/home/home-certification.webp"
-              alt="Security professionals reviewing certification training on screen"
-              width={432}
-              height={287}
-              className="h-auto w-full rounded-[28px] object-cover"
+              src="/images/university/login-secure-signin.webp"
+              alt="A laptop showing a sign-in form, protected by a shield and padlock"
+              width={464}
+              height={380}
+              className="h-auto w-full max-w-116 rounded-[28px]"
               priority
             />
-            <div className="absolute bottom-5 left-5 flex items-center gap-3 rounded-xl bg-white px-4 py-3 shadow-lg">
-              <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#E8EFFF] text-brand">
-                <FiAward className="h-4 w-4" />
-              </span>
-              <span>
-                <span className="block text-sm font-semibold text-ink">
-                  Six certifications, three tracks
-                </span>
-                <span className="block text-xs text-shuttle">PAM · EPM · CyberTantra</span>
-              </span>
-            </div>
           </div>
         </div>
       </div>
