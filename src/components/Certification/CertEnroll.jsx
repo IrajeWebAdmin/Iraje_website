@@ -20,7 +20,7 @@ const DEFAULT_DIAL_COUNTRY = "IN";
 
 // Set to false to reopen enrollment. While true the whole form is disabled:
 // every input, select, checkbox and the submit button.
-const FORM_DISABLED = true;
+const FORM_DISABLED = false;
 
 // Every field starts empty; `name` on each data field is the submitted key.
 // `mobileCountry` is the ISO code behind the dialling-code picker — the API
