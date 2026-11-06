@@ -12,6 +12,7 @@ const iam = {
       { name: "Products", href: "/products" },
       { name: "University", href: "/university" },
       { name: "Certification", href: "/certification" },
+      { name: "Events", href: "/events" },
       { name: "About", href: "/about" },
       { name: "Login", href: "/certification/login" },
     ],

@@ -14,6 +14,7 @@ const pam = {
       // No partners page yet — rendered as plain, unclickable text.
       // { name: "Partners", disabled: true },
       // { name: "Customers", href: "/customers" },
+      { name: "Events", href: "/events" },
       { name: "About", href: "/about" },
       { name: "Login", href: "/certification/login" },
     ],

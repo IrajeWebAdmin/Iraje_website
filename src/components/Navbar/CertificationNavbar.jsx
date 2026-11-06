@@ -15,6 +15,7 @@ const navLinks = [
   // No partners page yet — rendered as plain, unclickable text.
   // { name: "Partners", disabled: true },
   // { name: "Customers", href: "/customers" },
+  { name: "Events", href: "/events" },
   { name: "About", href: "/about" },
   { name: "Login", href: "/certification/login" },
 ];
@@ -42,7 +43,7 @@ export default function CertificationNavbar() {
 
           {/* Center Menu — spacing tightens as the viewport narrows so the full
               nav stays on one line instead of collapsing to a hamburger. */}
-          <ul className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-3 text-sm sm:flex md:gap-6 md:text-base lg:gap-12">
+          <ul className="absolute right-0 hidden items-center gap-2.5 text-[13px] sm:flex md:gap-4 md:text-sm lg:right-auto lg:left-1/2 lg:-translate-x-1/2 lg:gap-6 lg:text-base xl:gap-12">
             {navLinks.map((link) => (
               <li key={link.name}>
                 {link.name === "Products" ? (
