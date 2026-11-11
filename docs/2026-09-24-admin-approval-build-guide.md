@@ -51,7 +51,7 @@ Priya signs in at /certification/login → must set her own password → /certif
 | **Server Action** | A function that runs on the server but can be called straight from a form. A file that starts with `"use server"` is full of them. | `approveEnrollment()` runs when Sharayu clicks **Accept request**. |
 | **Hash** (bcrypt) | A one-way scramble. You can check a password against it, but you can't turn it back into the password. | The `users` table stores `$2b$12$Qe…`, never `Kx7m-Qp2r-Vt9w-Hn4j`. |
 | **Session** | "This browser is signed in as Priya." A random token lives in a cookie; its hash is stored in the `sessions` table. | Deleting Priya's session rows signs her out everywhere. |
-| **Cookie** | A small value the browser sends back with every request to our site. | `iraje_session=Vf3k…` |
+| **Cookie** | A small value the browser sends back with every request to our site. | `__session=Vf3k…` |
 | **Transaction** | Several database changes that happen **all together or not at all**. | Create account + mark approved — never one without the other. |
 | **Proxy** | A doorman that runs before pages load (Next.js 16 renamed "middleware" to "proxy"). | Visitors with no cookie are sent to the login page. |
 | **DAL** (Data Access Layer) | The one file that decides who is signed in and what role they have. | `requireAdmin()` in `src/lib/dal.js`. |
@@ -388,7 +388,7 @@ export function validateNewPassword(password, confirm) {
 ```js
 // Name of the login cookie. Kept in its own tiny file because src/proxy.js
 // needs it too, and the proxy must not import the database code in session.js.
-export const SESSION_COOKIE = "iraje_session";
+export const SESSION_COOKIE = "__session"; // Firebase Hosting forwards only this cookie name to Cloud Run
 ```
 
 ### `src/lib/session.js` — signing in and out
