@@ -42,6 +42,16 @@ COPY prisma ./prisma
 ENTRYPOINT ["./node_modules/.bin/prisma"]
 CMD ["migrate", "deploy"]
 
+# ---- prod-deps: production-only node_modules for the runner ----
+# Next's standalone file tracing misses files that serverExternalPackages
+# (exceljs, google-auth-library, pdfjs-dist) load indirectly — e.g. exceljs
+# failed at runtime on generator-function/require.mjs. Shipping the full
+# production node_modules guarantees every external package and all of its
+# dependencies are present. `npm prune` reuses the deps install (no network,
+# no lifecycle scripts re-run, native builds kept) and just drops devDeps.
+FROM deps AS prod-deps
+RUN npm prune --omit=dev
+
 # ---- builder: generate Prisma client and build Next.js ----
 FROM node:${NODE_VERSION} AS builder
 RUN apk add --no-cache openssl
@@ -66,6 +76,10 @@ ENV HOSTNAME=0.0.0.0
 
 RUN addgroup --system --gid 1001 nodejs \
   && adduser --system --uid 1001 nextjs
+
+# Full production node_modules FIRST; the standalone copy below then layers
+# Next's own traced files on top (COPY merges directories).
+COPY --from=prod-deps --chown=nextjs:nodejs /app/node_modules ./node_modules
 
 # Copy static assets and standalone application
 COPY --from=builder /app/public ./public
