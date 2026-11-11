@@ -32,11 +32,25 @@ substitutions:
   _DB_SECRET: iraje-database-url
   _SMTP_USER_SECRET: iraje-smtp-user
   _SMTP_PASS_SECRET: iraje-smtp-pass
+  _SANITY_READ_SECRET: iraje-sanity-read-token
+  _SANITY_WRITE_SECRET: iraje-sanity-write-token
+  _GRAPH_SECRET: iraje-graph-client-secret
 
   _SMTP_HOST: smtp.office365.com
   _CONTACT_TO: contact@iraje.com
   _CONTACT_FROM: inquiry@iraje.com
   _MAX_INSTANCES: "10"
+
+  # Sanity CMS (IDs are not secret; the tokens live in Secret Manager above)
+  _SANITY_PROJECT_ID: g6lrqpst
+  _SANITY_DATASET: production
+  _SANITY_API_VERSION: "2026-02-01"
+
+  # Email via Microsoft Graph (client secret lives in Secret Manager above)
+  _APP_URL: https://iraje.com
+  _MAIL_TRANSPORT: graph
+  _GRAPH_TENANT_ID: b25dba39-ac38-4cad-af91-6fea50b66d95
+  _GRAPH_CLIENT_ID: 9df50265-c007-4cad-9529-53578639645e
 
 steps:
   # 1. Serving image. Builds deps -> builder -> runner.
@@ -105,8 +119,8 @@ steps:
       - --region=${_REGION}
       - --service-account=${_RUNTIME_SA}
       - --set-cloudsql-instances=${_SQL_INSTANCE}
-      - --set-secrets=DATABASE_URL=${_DB_SECRET}:latest,SMTP_USER=${_SMTP_USER_SECRET}:latest,SMTP_PASS=${_SMTP_PASS_SECRET}:latest
-      - --set-env-vars=SMTP_HOST=${_SMTP_HOST},SMTP_PORT=587,SMTP_SECURE=false,CONTACT_TO=${_CONTACT_TO},CONTACT_FROM=${_CONTACT_FROM}
+      - --set-secrets=DATABASE_URL=${_DB_SECRET}:latest,SMTP_USER=${_SMTP_USER_SECRET}:latest,SMTP_PASS=${_SMTP_PASS_SECRET}:latest,SANITY_API_READ_TOKEN=${_SANITY_READ_SECRET}:latest,SANITY_API_WRITE_TOKEN=${_SANITY_WRITE_SECRET}:latest,GRAPH_CLIENT_SECRET=${_GRAPH_SECRET}:latest
+      - --set-env-vars=SMTP_HOST=${_SMTP_HOST},SMTP_PORT=587,SMTP_SECURE=false,CONTACT_TO=${_CONTACT_TO},CONTACT_FROM=${_CONTACT_FROM},SANITY_PROJECT_ID=${_SANITY_PROJECT_ID},SANITY_DATASET=${_SANITY_DATASET},SANITY_API_VERSION=${_SANITY_API_VERSION},APP_URL=${_APP_URL},MAIL_TRANSPORT=${_MAIL_TRANSPORT},MAIL_FROM=${_CONTACT_FROM},GRAPH_TENANT_ID=${_GRAPH_TENANT_ID},GRAPH_CLIENT_ID=${_GRAPH_CLIENT_ID}
       # 1Gi, not the 512Mi default: next/image writes its optimizer cache to the
       # in-memory filesystem, and 30 files in src/ use next/image.
       - --memory=1Gi
