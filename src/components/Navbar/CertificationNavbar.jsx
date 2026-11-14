@@ -43,8 +43,10 @@ export default function CertificationNavbar() {
 
           {/* Center Menu — spacing tightens as the viewport narrows so the full
               nav stays on one line instead of collapsing to a hamburger. */}
-          <ul className="absolute right-0 hidden items-center gap-2.5 text-[13px] sm:flex md:gap-4 md:text-sm lg:right-auto lg:left-1/2 lg:-translate-x-1/2 lg:gap-6 lg:text-base xl:gap-12">
-            {navLinks.map((link) => (
+          <ul className="absolute right-28 hidden items-center gap-2.5 text-[13px] sm:flex md:gap-4 md:text-sm lg:right-auto lg:left-1/2 lg:-translate-x-1/2 lg:gap-6 lg:text-base xl:gap-12">
+            {navLinks
+            .filter((l) => l.name !== "Login")
+            .map((link) => (
               <li key={link.name}>
                 {link.name === "Products" ? (
                   <ProductsDropdown linkClassName="relative font-medium text-black transition-all duration-300 after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-0 after:bg-brand after:transition-all after:duration-300 hover:after:w-full" />
@@ -70,6 +72,15 @@ export default function CertificationNavbar() {
               </li>
             ))}
           </ul>
+
+        {/* Login: blue pill on the right of the bar (desktop). On phones it
+            stays in the dropdown menu with the other links. */}
+        <Link
+          href="/certification/login"
+          className="bg-brand hover:bg-navy ml-auto hidden rounded-full px-9 py-2.5 text-xs font-medium text-white transition sm:inline-flex"
+        >
+          Login
+        </Link>
 
           {/* Mobile Menu Button */}
           <button

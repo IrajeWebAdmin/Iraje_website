@@ -45,8 +45,10 @@ export default function Navbar() {
 
         {/* Center Menu — spacing tightens as the viewport narrows so the full
             nav stays on one line instead of collapsing to a hamburger. */}
-        <ul className="absolute right-0 hidden items-center gap-2.5 text-[13px] sm:flex md:gap-4 md:text-sm lg:right-auto lg:left-1/2 lg:-translate-x-1/2 lg:gap-6 lg:text-base xl:gap-12">
-          {navLinks.map((link) => (
+        <ul className="absolute right-28 hidden items-center gap-2.5 text-[13px] sm:flex md:gap-4 md:text-sm lg:right-auto lg:left-1/2 lg:-translate-x-1/2 lg:gap-6 lg:text-base xl:gap-12">
+          {navLinks
+            .filter((l) => l.name !== "Login")
+            .map((link) => (
             <li key={link.name}>
               {link.name === "Products" ? (
                 <ProductsDropdown />
@@ -68,6 +70,15 @@ export default function Navbar() {
             </li>
           ))}
         </ul>
+
+        {/* Login: blue pill on the right of the bar (desktop). On phones it
+            stays in the dropdown menu with the other links. */}
+        <Link
+          href="/certification/login"
+          className="bg-brand hover:bg-navy ml-auto hidden rounded-full px-9 py-2.5 text-xs font-medium text-white transition sm:inline-flex"
+        >
+          Login
+        </Link>
 
         {/* Phone-only toggle: below 640px the logo and five links cannot share
             one line, so the menu drops into the panel below. */}

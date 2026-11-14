@@ -29,9 +29,7 @@ const resources = [
       "Join webinars, workshops and training sessions to stay updated on security trends.",
     buttonText: "Explore More",
     image: "/images/home/home-events.webp",
-    // No events page yet — the card renders its inert state instead of a link.
-    // Restore `link: "/events"` and drop this flag once the page exists.
-    comingSoon: true,
+    link: "/events",
   },
 
   {
