@@ -147,7 +147,7 @@ const about = {
     badges: [
       { label: "Engineering-led", icon: "/icons/Engineering-led.svg" },
       { label: "Always learning", icon: "/icons/Always-learning.svg" },
-      { label: "Ownership & impact", icon: "/icons/Ownershi- &-impact.svg" },
+      { label: "Ownership & impact", icon: "/icons/Ownership-impact.svg" },
       { label: "Customer-facing from day one", icon: "/icons/Customer-facing.svg" },
     ],
   },

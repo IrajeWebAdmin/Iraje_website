@@ -62,6 +62,11 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
+# Unique per build (cloudbuild.yaml passes $BUILD_ID); read by next.config.mjs
+# as deploymentId. Falls back to a timestamp there if not supplied.
+ARG DEPLOYMENT_VERSION
+ENV DEPLOYMENT_VERSION=${DEPLOYMENT_VERSION}
+
 # Execute build script (prisma generate && next build)
 RUN npm run build
 

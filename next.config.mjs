@@ -2,6 +2,10 @@
 const nextConfig = {
   /* config options here */
   output: 'standalone',
+  // One ID per build (Cloud Build passes $BUILD_ID via the Dockerfile). Lets
+  // Next.js spot a visitor whose page came from an older build and do a full
+  // reload instead of requesting JS chunks that no longer exist.
+  deploymentId: process.env.DEPLOYMENT_VERSION || `build-${Date.now()}`,
   allowedDevOrigins: ['*.trycloudflare.com'],
   experimental: {serverActions: {allowedOrigins: ['*.trycloudflare.com'],},},
   reactCompiler: true,

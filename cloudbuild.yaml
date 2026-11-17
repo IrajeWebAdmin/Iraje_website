@@ -52,6 +52,9 @@ substitutions:
   _GRAPH_TENANT_ID: b25dba39-ac38-4cad-af91-6fea50b66d95
   _GRAPH_CLIENT_ID: 9df50265-c007-4cad-9529-53578639645e
 
+  # Firebase Hosting sits in front of the Cloud Run service (see firebase.json).
+  _FIREBASE_PROJECT: iraje-web-prod-506114
+
 steps:
   # 1. Serving image. Builds deps -> builder -> runner.
   - id: build-app
@@ -60,6 +63,7 @@ steps:
       - build
       - --target=runner
       - --tag=${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/${_SERVICE}:$BUILD_ID
+      - --build-arg=DEPLOYMENT_VERSION=$BUILD_ID
       - .
 
   # 2. Migration image. All steps in one build share a Docker daemon, so this
@@ -128,6 +132,24 @@ steps:
       - --min-instances=0
       - --max-instances=${_MAX_INSTANCES}
       - --allow-unauthenticated
+
+  # 5. Publish a new Firebase Hosting release so its CDN drops pages cached
+  #    from the previous build. Firebase Hosting (in front of Cloud Run) only
+  #    clears its cache on a Hosting release, never on a Cloud Run deploy, so
+  #    without this step visitors can keep getting old pages whose JS chunks no
+  #    longer exist (ChunkLoadError -> "This page couldn't load").
+  #
+  #    Needs, once: the Cloud Build service account granted the
+  #    "Firebase Hosting Admin" role on ${_FIREBASE_PROJECT}.
+  #    allowFailure keeps the build green until that role is granted; the new
+  #    revision is already live at this point either way.
+  - id: release-hosting
+    name: node:22-alpine
+    entrypoint: sh
+    args:
+      - -c
+      - npx -y firebase-tools@latest deploy --only hosting --project ${_FIREBASE_PROJECT} --non-interactive --message "Cloud Build $BUILD_ID"
+    allowFailure: true
 
 options:
   logging: CLOUD_LOGGING_ONLY
