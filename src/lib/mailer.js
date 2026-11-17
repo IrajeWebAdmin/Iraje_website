@@ -520,26 +520,43 @@ export function buildCertificateEmail({
 }
 
 /** Email a "forgot password" link. `token` comes from issueResetToken(). */
-export async function sendPasswordResetEmail({ email, name, token, minutes }) {
+// Where each kind of account resets its password, and what the email calls it.
+const RESET_AREAS = {
+  student: { path: "/certification/reset-password", brand: "Iraje University" },
+  admin: { path: "/admin/reset-password", brand: "Iraje Admin" },
+};
+
+export async function sendPasswordResetEmail({
+  email,
+  name,
+  token,
+  minutes,
+  role = "student",
+}) {
+  const area = RESET_AREAS[role] ?? RESET_AREAS.student;
   return sendMail({
     to: email,
     ...buildPasswordResetEmail({
       name,
-      resetUrl: appUrl(
-        `/certification/reset-password?token=${encodeURIComponent(token)}`,
-      ),
+      resetUrl: appUrl(`${area.path}?token=${encodeURIComponent(token)}`),
       minutes,
+      brand: area.brand,
     }),
   });
 }
 
-export function buildPasswordResetEmail({ name, resetUrl, minutes }) {
+export function buildPasswordResetEmail({
+  name,
+  resetUrl,
+  minutes,
+  brand = "Iraje University",
+}) {
   return {
-    subject: "Reset your Iraje University password",
+    subject: `Reset your ${brand} password`,
     text: [
       `Hi ${name},`,
       ``,
-      `Someone asked to reset the password for your Iraje University account.`,
+      `Someone asked to reset the password for your ${brand} account.`,
       `If that was you, open this link to choose a new password:`,
       ``,
       resetUrl,
@@ -549,16 +566,16 @@ export function buildPasswordResetEmail({ name, resetUrl, minutes }) {
       ``,
       `Questions? Write to contact@iraje.com.`,
       ``,
-      `— Iraje University`,
+      `— ${brand}`,
     ].join("\n"),
     html: `
       <p style="font-family:sans-serif">Hi ${escapeHtml(name)},</p>
-      <p style="font-family:sans-serif">Someone asked to reset the password for your Iraje University account. If that was you, choose a new password here:</p>
+      <p style="font-family:sans-serif">Someone asked to reset the password for your ${escapeHtml(brand)} account. If that was you, choose a new password here:</p>
       <p style="font-family:sans-serif">${button(resetUrl, "Choose a new password")}</p>
       <p style="font-family:sans-serif;font-size:13px;color:#555">Or copy this link into your browser:<br /><a href="${escapeHtml(resetUrl)}">${escapeHtml(resetUrl)}</a></p>
       <p style="font-family:sans-serif">The link works for <strong>${minutes} minutes</strong> and only once. If you didn't ask for this, you can ignore this email — your password has not changed.</p>
       <hr />
-      <p style="color:#888;font-family:sans-serif">Questions? Write to contact@iraje.com. — Iraje University</p>
+      <p style="color:#888;font-family:sans-serif">Questions? Write to contact@iraje.com. — ${escapeHtml(brand)}</p>
     `,
   };
 }

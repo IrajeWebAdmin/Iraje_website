@@ -22,14 +22,19 @@ export default function IamHero() {
               through 13" laptop, where a second track would have squeezed the
               copy narrower than it is on tablet. */}
           <div>
-            <p className="text-base font-normal text-gold">{eyebrow}</p>
+            {/* Same eyebrow style as the PAM and EPM heroes. */}
+            <p className="epm-eyebrow epm-eyebrow-normal font-medium text-[#FFCE0C]">{eyebrow}</p>
 
-            <h1 className="mt-6 max-w-[660px] text-4xl leading-[1.08] font-semibold md:text-5xl lg:text-[48px]">
+            {/* Same type as the PAM hero title (36px → 60px). 590px wide so it
+                breaks as in the design: "One identity. Every / system. Full /
+                accountability." */}
+            <h1 className="mt-5 max-w-[590px] text-4xl leading-[1.1] font-semibold md:text-6xl">
               {titleLead}
               <span className="text-gold">{titleAccent}</span>
             </h1>
 
-            <p className="mt-8 max-w-[540px] text-base leading-relaxed text-white/56">
+            {/* Same as the PAM and EPM hero paragraph. */}
+            <p className="mt-6 max-w-xl text-base leading-relaxed text-white/70 md:text-lg">
               {subtitle}
             </p>
 

@@ -33,11 +33,16 @@ export function issueResetToken(user, now = Date.now()) {
 }
 
 /**
- * The learner a link token belongs to, or null when the token is malformed,
+ * The user a link token belongs to, or null when the token is malformed,
  * expired, already used (the password changed since) or for an account that
- * cannot reset this way (admins, suspended accounts).
+ * cannot reset this way (another role, suspended accounts). `role` is the
+ * area the link was opened in, so a learner's link never works on the admin
+ * reset page and vice versa.
  */
-export async function userForResetToken(token, now = Date.now()) {
+export async function userForResetToken(
+  token,
+  { role = "student", now = Date.now() } = {},
+) {
   const [idPart, expiresPart, signature] = String(token ?? "").split(".");
   const id = Number(idPart);
   const expiresAt = Number(expiresPart);
@@ -46,7 +51,7 @@ export async function userForResetToken(token, now = Date.now()) {
   if (!signature) return null;
 
   const user = await prisma.user.findUnique({ where: { id } });
-  if (!user || user.role !== "student" || user.status !== "active") return null;
+  if (!user || user.role !== role || user.status !== "active") return null;
 
   const expected = Buffer.from(sign(user, expiresAt));
   const given = Buffer.from(signature);

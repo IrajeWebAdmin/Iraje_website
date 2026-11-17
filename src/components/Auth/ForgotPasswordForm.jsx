@@ -3,29 +3,36 @@
 import { useActionState, useState } from "react";
 import Link from "next/link";
 import { FiArrowLeft, FiArrowRight, FiKey, FiMail } from "react-icons/fi";
-import { requestPasswordReset } from "@/app/actions/auth";
 import HoneypotField from "@/components/HoneypotField";
 import AuthCard from "./AuthCard";
 import { INPUT } from "./PasswordRules";
 
-const BACK = (
-  <Link
-    href="/certification/login"
-    className="text-shuttle hover:text-brand mt-6 inline-flex items-center gap-1.5 text-xs font-medium transition"
-  >
-    <FiArrowLeft className="h-3.5 w-3.5" aria-hidden="true" />
-    Back to sign in
-  </Link>
-);
+// /certification/forgot-password and /admin/forgot-password: ask for the
+// email, then show the "check your inbox" card. The server answers the same
+// way whether or not an account exists, so the page never says which emails
+// are registered.
+//   action      requestPasswordReset with the role already bound by the page
+//   minutes     how long the emailed link works
+//   loginHref   where "Back to sign in" goes
+//   accountName "learner" or "admin", used in the "check your inbox" text
+//   intro       the line under the title
+export default function ForgotPasswordForm({
+  action,
+  minutes,
+  loginHref = "/certification/login",
+  accountName = "learner",
+  intro = "Enter the email you registered with and we'll send you a link to set a new one.",
+}) {
+  const [state, formAction, pending] = useActionState(action, undefined);
 
-// /certification/forgot-password: ask for the email, then show the "check
-// your inbox" card. The server answers the same way whether or not an account
-// exists, so the page never says which emails are registered. `minutes` is
-// how long the emailed link works.
-export default function ForgotPasswordForm({ minutes }) {
-  const [state, formAction, pending] = useActionState(
-    requestPasswordReset,
-    undefined,
+  const back = (
+    <Link
+      href={loginHref}
+      className="text-shuttle hover:text-brand mt-6 inline-flex items-center gap-1.5 text-xs font-medium transition"
+    >
+      <FiArrowLeft className="h-3.5 w-3.5" aria-hidden="true" />
+      Back to sign in
+    </Link>
   );
   const [honeypot, setHoneypot] = useState("");
   // "Send it again" brings the form back without losing the typed email.
@@ -40,7 +47,7 @@ export default function ForgotPasswordForm({ minutes }) {
         accent="inbox"
         intro={
           <>
-            If there is a learner account for{" "}
+            If there is {accountName === "admin" ? "an" : "a"} {accountName} account for{" "}
             <strong className="text-ink font-semibold">{state.email}</strong>,
             we have emailed it a link to set a new password. The link works for{" "}
             {minutes} minutes.
@@ -58,7 +65,7 @@ export default function ForgotPasswordForm({ minutes }) {
           </button>
           .
         </p>
-        {BACK}
+        {back}
       </AuthCard>
     );
   }
@@ -68,7 +75,7 @@ export default function ForgotPasswordForm({ minutes }) {
       icon={FiKey}
       title="Forgot your"
       accent="password?"
-      intro="Enter the email you registered with and we'll send you a link to set a new one."
+      intro={intro}
     >
       <form action={formAction} className="mt-6 space-y-5">
         <HoneypotField
@@ -108,7 +115,7 @@ export default function ForgotPasswordForm({ minutes }) {
           {!pending && <FiArrowRight className="h-4 w-4" aria-hidden="true" />}
         </button>
       </form>
-      {BACK}
+      {back}
     </AuthCard>
   );
 }

@@ -153,8 +153,13 @@ const resetEmailLimiter = createRateLimiter({
   windowMs: 60 * 60 * 1000,
 });
 
-/** Step 1 of "forgot password": email a reset link if the address is a learner's. */
-export async function requestPasswordReset(_previousState, formData) {
+/**
+ * Step 1 of "forgot password": email a reset link if the address belongs to
+ * an active account of `role` ("student" or "admin", bound by the page), so
+ * the learner page only resets learners and the admin page only admins.
+ */
+export async function requestPasswordReset(role, _previousState, formData) {
+  if (!AREAS[role]) return { error: "Invalid request." };
   const email = String(formData.get("email") ?? "")
     .trim()
     .toLowerCase();
@@ -175,7 +180,7 @@ export async function requestPasswordReset(_previousState, formData) {
   }
 
   const user = await prisma.user.findUnique({ where: { email } });
-  const eligible = user && user.role === "student" && user.status === "active";
+  const eligible = user && user.role === role && user.status === "active";
   if (eligible && resetEmailLimiter.check(email).allowed) {
     const token = issueResetToken(user);
     // Sent after the reply has gone, so the reply takes the same time whether
@@ -187,6 +192,7 @@ export async function requestPasswordReset(_previousState, formData) {
           name: user.name,
           token,
           minutes: RESET_LINK_MINUTES,
+          role,
         });
       } catch (err) {
         console.error(`[auth] Password reset email to ${email} failed:`, err);
@@ -197,11 +203,13 @@ export async function requestPasswordReset(_previousState, formData) {
 }
 
 /**
- * Step 2: the page the emailed link opens. `token` is bound by that page.
- * Saves the new password, signs out every other browser and signs this one in.
+ * Step 2: the page the emailed link opens. `role` and `token` are bound by
+ * that page. Saves the new password, signs out every other browser and signs
+ * this one in.
  */
-export async function resetPassword(token, _previousState, formData) {
-  const user = await userForResetToken(token);
+export async function resetPassword(role, token, _previousState, formData) {
+  if (!AREAS[role]) return { error: "Invalid request." };
+  const user = await userForResetToken(token, { role });
   if (!user) {
     return {
       error: "This link has expired or was already used.",
@@ -227,5 +235,5 @@ export async function resetPassword(token, _previousState, formData) {
   });
   await prisma.session.deleteMany({ where: { userId: user.id } });
   await createSession(user);
-  redirect(AREAS.student.home);
+  redirect(AREAS[role].home);
 }

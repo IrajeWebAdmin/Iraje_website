@@ -14,11 +14,15 @@ export const AREAS = {
   admin: {
     login: "/admin/login",
     changePassword: "/admin/change-password",
+    forgotPassword: "/admin/forgot-password",
+    resetPassword: "/admin/reset-password",
     home: "/admin/enrollments",
   },
   student: {
     login: "/certification/login",
     changePassword: "/certification/change-password",
+    forgotPassword: "/certification/forgot-password",
+    resetPassword: "/certification/reset-password",
     home: "/certification/dashboard",
   },
 };

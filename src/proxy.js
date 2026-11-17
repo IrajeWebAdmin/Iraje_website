@@ -10,7 +10,15 @@ export function proxy(request) {
 
   const { pathname } = request.nextUrl;
 
-  if (pathname.startsWith("/admin") && pathname !== "/admin/login") {
+  // Admin pages anyone may open without a login cookie: signing in, and the
+  // two "forgot password" steps (the emailed link is opened signed out).
+  const publicAdminPages = [
+    "/admin/login",
+    "/admin/forgot-password",
+    "/admin/reset-password",
+  ];
+
+  if (pathname.startsWith("/admin") && !publicAdminPages.includes(pathname)) {
     return NextResponse.redirect(new URL("/admin/login", request.url));
   }
   if (

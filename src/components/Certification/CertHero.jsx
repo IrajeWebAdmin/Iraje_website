@@ -16,10 +16,10 @@ export default function CertHero() {
         <div className="grid items-center gap-12 lg:grid-cols-2">
           {/* Copy */}
           <div>
-            <p className="epm-eyebrow epm-eyebrow-normal font-semibold text-brand">
-              {eyebrow}
-            </p>
-            <span className="mt-3 block h-px w-12 bg-brand" />
+            {/* As in the design: small regular-weight label, with a short blue
+                line underneath that fades out to the right. */}
+            <p className="text-[15px] font-normal text-brand">{eyebrow}</p>
+            <span className="mt-2 block h-px w-7 bg-gradient-to-r from-brand to-brand/0" />
             <h1 className="mt-5 font-display text-4xl leading-[1.15] font-semibold tracking-tight text-ink md:text-[55px]">
               {titleLead}{" "}
               <span className="font-normal text-brand italic">{titleAccent}</span>

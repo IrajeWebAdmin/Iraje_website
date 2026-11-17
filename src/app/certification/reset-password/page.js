@@ -16,13 +16,13 @@ export const metadata = {
 export default async function ResetPasswordPage({ searchParams }) {
   const sp = await searchParams;
   const token = typeof sp.token === "string" ? sp.token : "";
-  const user = token ? await userForResetToken(token) : null;
+  const user = token ? await userForResetToken(token, { role: "student" }) : null;
 
   return (
     <section className="bg-catskill flex min-h-screen items-center justify-center px-4 pt-32 pb-20">
       {user ? (
         <ResetPasswordForm
-          action={resetPassword.bind(null, token)}
+          action={resetPassword.bind(null, "student", token)}
           email={user.email}
         />
       ) : (

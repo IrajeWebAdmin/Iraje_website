@@ -1,6 +1,7 @@
 "use client";
 
 import { useActionState } from "react";
+import Link from "next/link";
 import { FiArrowRight, FiLock } from "react-icons/fi";
 import PasswordInput from "./PasswordInput";
 
@@ -49,13 +50,13 @@ export default function AdminLoginForm({ action }) {
             <label htmlFor="password" className="text-ink text-sm font-medium">
               Password
             </label>
-            {/* No self-service reset: another admin issues a new temporary password. */}
-            <a
-              href="mailto:contact@iraje.com?subject=Iraje%20Admin%20password%20reset"
+            {/* Self-service reset by email, same as the learner login. */}
+            <Link
+              href="/admin/forgot-password"
               className="text-brand text-xs font-medium hover:underline"
             >
               Forgot password?
-            </a>
+            </Link>
           </div>
           <PasswordInput
             id="password"

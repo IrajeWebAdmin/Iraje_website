@@ -13,10 +13,15 @@ import {
   SubmitButton,
 } from "./PasswordRules";
 
-// /certification/reset-password, reached from the emailed link: choose a new
-// password, then land on the dashboard signed in. `action` is resetPassword
-// with the link's token already bound by the page; `email` is only shown.
-export default function ResetPasswordForm({ action, email }) {
+// /certification/reset-password and /admin/reset-password, reached from the
+// emailed link: choose a new password, then land signed in. `action` is
+// resetPassword with the role and the link's token already bound by the page;
+// `email` is only shown; `forgotHref` is where "Request a new link" goes.
+export default function ResetPasswordForm({
+  action,
+  email,
+  forgotHref = "/certification/forgot-password",
+}) {
   const [state, formAction, pending] = useActionState(action, undefined);
   const [next, setNext] = useState("");
   const [confirm, setConfirm] = useState("");
@@ -108,7 +113,7 @@ export default function ResetPasswordForm({ action, email }) {
               <>
                 {" "}
                 <Link
-                  href="/certification/forgot-password"
+                  href={forgotHref}
                   className="font-medium underline underline-offset-2"
                 >
                   Request a new link

@@ -16,13 +16,21 @@ export default async function CertificationLoginPage() {
   }
 
   return (
+    // Fits in one screen on desktop (no scrollbar): the section is exactly the
+    // window's height, the content is centred in it, and the illustration's
+    // height is capped to what is left below the navbar.
     <section className="bg-white">
-      <div className="container-global pt-32 pb-20 md:pt-36 md:pb-28">
-        <div className="grid items-center gap-12 lg:grid-cols-2">
+      <div className="container-global flex min-h-svh items-center pt-24 pb-10 lg:pt-20 lg:pb-6">
+        {/* The illustration column gets the larger share (1 : 1.25) so the image
+            can be wide; the form itself is narrow and doesn't need half. */}
+        <div className="grid w-full items-center gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.25fr)]">
           {/* Copy + form */}
           <div>
-            <p className="text-sm text-brand">Iraje University &amp; Certification Program</p>
-            <span className="mt-1.5 block h-px w-6 bg-brand" />
+            {/* Same eyebrow as the University page hero: fading line, then the label. */}
+            <p className="flex items-center gap-3 text-sm font-medium text-brand">
+              <span className="h-px w-8 bg-gradient-to-r from-azure to-azure/0" />
+              Iraje University &amp; Certification Program
+            </p>
             <h1 className="mt-5 font-display text-4xl leading-[1.15] font-semibold tracking-tight text-black md:text-[46px]">
               Welcome back.
               <br />
@@ -38,15 +46,19 @@ export default async function CertificationLoginPage() {
             <LearnerLoginForm action={login.bind(null, "student")} />
           </div>
 
-          {/* Illustration: a laptop sign-in form behind a shield and padlock.
-              Shown at its natural width so it stays sharp. */}
+          {/* Illustration: "Get certified. Prove your expertise." — a course
+              progress card, certificate, exam score and the 3 steps
+              (Register · Get approved · Learn & certify). */}
           <div className="hidden lg:flex lg:justify-center">
             <Image
-              src="/images/university/login-secure-signin.webp"
-              alt="A laptop showing a sign-in form, protected by a shield and padlock"
-              width={464}
-              height={380}
-              className="h-auto w-full max-w-116 rounded-[28px]"
+              src="/images/university/login-get-certified.png"
+              alt="Iraje University: course progress, a certificate of achievement and a passed final exam. Get certified in three steps: register, get approved, learn and certify."
+              width={669}
+              height={759}
+              // Width and height follow the image's shape; whichever limit is
+              // hit first (column width, 669px, or the space under the navbar)
+              // decides the size, so it never pushes the page into scrolling.
+              className="h-auto max-h-[calc(100svh-6.5rem)] w-auto max-w-full rounded-[20px]"
               priority
             />
           </div>
