@@ -397,7 +397,8 @@ export async function report(filters) {
   const tiles = [
     tile(
       "accounts",
-      "Active learner accounts",
+      // "Active learner accounts",
+      "Active learners",
       activeAccounts,
       "number",
       "all time",

@@ -17,7 +17,7 @@ export default function OverviewCards({ cards = [] }) {
               href={card.href}
               className="border-mist hover:border-brand group flex h-full flex-col rounded-2xl border bg-white px-5 py-4 transition"
             >
-              <p className="text-shuttle text-[11px] font-semibold tracking-wide uppercase">
+              <p className="text-shuttle text-xs font-semibold">
                 {card.title}
               </p>
               <p className="text-brand mt-2 text-3xl font-semibold">

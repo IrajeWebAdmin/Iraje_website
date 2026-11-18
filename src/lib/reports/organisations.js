@@ -401,7 +401,8 @@ export async function report(filters) {
     ),
     tile(
       "median",
-      "Median people per organisation",
+      "Median people",
+      // "Median people per organisation",
       median(all.map((o) => o.people)),
       "number",
     ),

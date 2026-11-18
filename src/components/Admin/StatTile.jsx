@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-// One headline number: the label as a small uppercase eyebrow, the value
+// One headline number: the label as a small eyebrow, the value
 // beneath it, then an optional hint line. `value` arrives already formatted
 // by the server ("1,284", "72%", "—"); this only lays it out. With `href` the
 // whole tile is a link into the matching report, inside the admin panel.
@@ -23,13 +23,27 @@ export default function StatTile({
   size = "md",
 }) {
   const small = size === "sm";
+  // Most values are short figures ("1,284", "72%"), but some are names
+  // ("Iraje Software (6)"). Step the size down as the text gets longer so a
+  // name sits in the tile at a readable size instead of wrapping in giant type.
+  const text = String(value ?? "—");
+  const valueSize = small
+    ? text.length > 14
+      ? "text-sm"
+      : "text-lg"
+    : text.length > 20
+      ? "text-base"
+      : text.length > 10
+        ? "text-lg"
+        : "text-2xl";
   const body = (
     <>
-      <p className="text-shuttle text-[11px] font-semibold tracking-wide uppercase">
+      <p className="text-shuttle text-sm font-semibold">
         {label}
       </p>
       <p
-        className={`font-semibold ${small ? "mt-1 text-lg" : "mt-2 text-2xl"} ${
+        title={text}
+        className={`leading-snug font-semibold break-words ${small ? "mt-1" : "mt-2"} ${valueSize} ${
           TONES[tone] ?? TONES.brand
         }`}
       >
