@@ -6,8 +6,17 @@ const nextConfig = {
   // Next.js spot a visitor whose page came from an older build and do a full
   // reload instead of requesting JS chunks that no longer exist.
   deploymentId: process.env.DEPLOYMENT_VERSION || `build-${Date.now()}`,
-  allowedDevOrigins: ['*.trycloudflare.com'],
-  experimental: {serverActions: {allowedOrigins: ['*.trycloudflare.com'],},},
+  // Tunnels for showing the dev server to others: Cloudflare quick tunnels and
+  // VS Code / GitHub port forwarding (dev tunnels). Only in development, so the
+  // live site never accepts form posts from a tunnel address.
+  allowedDevOrigins: ['*.trycloudflare.com', '*.devtunnels.ms'],
+  ...(process.env.NODE_ENV === 'development' && {
+    experimental: {
+      serverActions: {
+        allowedOrigins: ['*.trycloudflare.com', '*.devtunnels.ms'],
+      },
+    },
+  }),
   reactCompiler: true,
   // Loaded by Node at runtime instead of bundled: Google's sign-in library
   // reads its own files and environment at runtime (guide Stage 8a).

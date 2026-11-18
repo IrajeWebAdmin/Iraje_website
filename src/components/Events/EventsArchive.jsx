@@ -14,6 +14,15 @@ function preview(text, max = 110) {
   return text.slice(0, text.lastIndexOf(" ", max)).replace(/[,;:]$/, "");
 }
 
+// Turns an event date like "20 Jul 2024" or "16-18 Sep 2026" into a number
+// for sorting (a range sorts by its first day). Unreadable dates sort last.
+function dateValue(text) {
+  const m = /^(\d{1,2})(?:\s*-\s*\d{1,2})?\s+([A-Za-z]+)\s+(\d{4})/.exec(text.trim());
+  if (!m) return -Infinity;
+  const t = Date.parse(`${m[1]} ${m[2]} ${m[3]}`);
+  return Number.isNaN(t) ? -Infinity : t;
+}
+
 function Chevron({ direction }) {
   return (
     <svg viewBox="0 0 24 24" className="h-4 w-4 fill-none stroke-white stroke-[2.5]" aria-hidden>
@@ -107,16 +116,18 @@ function Lightbox({ images, index, title, onStep, onClose }) {
           <button
             type="button"
             onClick={() => onStep(-1)}
+            disabled={index === 0}
             aria-label="Previous photo"
-            className="absolute top-1/2 left-3 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-[#2b4ea8]/85 shadow-md transition hover:bg-[#2b4ea8] sm:left-6"
+            className="absolute top-1/2 left-3 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-azure shadow-md transition hover:bg-brand disabled:cursor-not-allowed disabled:bg-black/35 disabled:shadow-none disabled:hover:bg-black/35 sm:left-6"
           >
             <Chevron direction="left" />
           </button>
           <button
             type="button"
             onClick={() => onStep(1)}
+            disabled={index === count - 1}
             aria-label="Next photo"
-            className="absolute top-1/2 right-3 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-azure shadow-md transition hover:bg-brand sm:right-6"
+            className="absolute top-1/2 right-3 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-azure shadow-md transition hover:bg-brand disabled:cursor-not-allowed disabled:bg-black/35 disabled:shadow-none disabled:hover:bg-black/35 sm:right-6"
           >
             <Chevron direction="right" />
           </button>
@@ -133,7 +144,11 @@ function PhotoSlider({ images, title }) {
   const [index, setIndex] = useState(0);
   const [zoomed, setZoomed] = useState(false);
   const count = images.length;
-  const go = (step) => setIndex((i) => (i + step + count) % count);
+  // Stops at the first and last photo (no wrap-around); the ‹ › buttons are
+  // disabled at each end so it's clear there are no more photos that way.
+  const go = (step) => setIndex((i) => Math.min(count - 1, Math.max(0, i + step)));
+  const atStart = index === 0;
+  const atEnd = index === count - 1;
 
   return (
     <div className="relative aspect-[16/10] overflow-hidden bg-[linear-gradient(135deg,#13235c_0%,#1a3fa8_55%,#1f5cff_100%)]">
@@ -173,16 +188,18 @@ function PhotoSlider({ images, title }) {
           <button
             type="button"
             onClick={() => go(-1)}
+            disabled={atStart}
             aria-label="Previous photo"
-            className="absolute top-1/2 left-3 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-[#2b4ea8]/85 shadow-md transition hover:bg-[#2b4ea8]"
+            className="absolute top-1/2 left-3 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-azure shadow-md transition hover:bg-brand disabled:cursor-not-allowed disabled:bg-black/35 disabled:shadow-none disabled:hover:bg-black/35"
           >
             <Chevron direction="left" />
           </button>
           <button
             type="button"
             onClick={() => go(1)}
+            disabled={atEnd}
             aria-label="Next photo"
-            className="absolute top-1/2 right-3 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-azure shadow-md transition hover:bg-brand"
+            className="absolute top-1/2 right-3 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-azure shadow-md transition hover:bg-brand disabled:cursor-not-allowed disabled:bg-black/35 disabled:shadow-none disabled:hover:bg-black/35"
           >
             <Chevron direction="right" />
           </button>
@@ -244,7 +261,8 @@ export default function EventsArchive() {
   const [tab, setTab] = useState(defaultTab);
   const [openCards, setOpenCards] = useState(() => new Set());
 
-  const list = events.byTab[tab] ?? [];
+  // Latest event first, whatever order they're written in src/data/events.js.
+  const list = [...(events.byTab[tab] ?? [])].sort((a, b) => dateValue(b.date) - dateValue(a.date));
 
   function toggle(key) {
     setOpenCards((prev) => {
