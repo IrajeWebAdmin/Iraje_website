@@ -4,17 +4,20 @@ import { useState } from "react";
 import { FiMapPin, FiMail, FiPhone } from "react-icons/fi";
 import { FaLinkedinIn, FaYoutube } from "react-icons/fa";
 import contact from "@/data/contact";
+import { COUNTRIES } from "@/data/countries";
 import HoneypotField from "@/components/HoneypotField";
 import { HONEYPOT_FIELD } from "@/lib/honeypot";
 import { validateEmail, validatePhone } from "@/lib/validation";
 
-const INFO_ICONS = { location: FiMapPin, email: FiMail, contact: FiPhone };
+const INFO_ICONS = { email: FiMail, contact: FiPhone };
 const SOCIAL_ICONS = { linkedin: FaLinkedinIn, youtube: FaYoutube };
 
 const EMPTY = {
   name: "",
   contactNo: "",
   email: "",
+  country: "",
+  requirement: "",
   message: "",
   [HONEYPOT_FIELD]: "",
 };
@@ -32,14 +35,18 @@ export default function ContactCard() {
     return (e) => setValues((v) => ({ ...v, [field]: e.target.value }));
   }
 
-  // Email and phone are checked here so a typo is caught before a round trip.
-  // The API re-checks with the same validators — this is convenience, not trust.
+  // Checked here so a typo is caught before a round trip. The API re-checks
+  // with the same rules — this is convenience, not trust.
   function validate() {
     const next = {};
+    if (!values.name.trim()) next.name = "Name is required.";
     const emailError = validateEmail(values.email);
     if (emailError) next.email = emailError;
     const phoneError = validatePhone(values.contactNo);
     if (phoneError) next.contactNo = phoneError;
+    if (!values.country) next.country = "Please select a country.";
+    if (!values.requirement) next.requirement = "Please select a requirement.";
+    if (!values.message.trim()) next.message = "Message is required.";
     return next;
   }
 
@@ -84,14 +91,31 @@ export default function ContactCard() {
   const submitting = status === "submitting";
 
   return (
-    <div className="mx-auto grid max-w-6xl overflow-hidden rounded-[28px] bg-white shadow-[0px_20px_60px_-24px_rgba(4,41,102,0.35)] lg:grid-cols-2">
+    <div className="mx-auto grid max-w-6xl overflow-hidden rounded-[28px] bg-white shadow-[0px_20px_60px_-24px_rgba(4,41,102,0.35)] lg:grid-cols-[2fr_3fr]">
       {/* Left: info panel */}
-      <div className="bg-[linear-gradient(180deg,#0451CC_0%,#022966_100%)] p-10 text-white md:p-12">
+      <div className="flex flex-col bg-[linear-gradient(180deg,#0451CC_0%,#022966_100%)] p-10 text-white md:p-12">
         <h2 className="text-3xl font-bold leading-tight md:text-[2rem]">
           {panel.heading}
         </h2>
 
-        <div className="mt-10 space-y-7">
+        <p className="mt-8 text-base font-semibold">{panel.officesLabel}</p>
+
+        <ul className="mt-3 divide-y divide-white/20 border-y border-white/20">
+          {panel.offices.map((office) => (
+            <li key={office.label} className="flex items-center gap-4 py-4">
+              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white text-brand">
+                <FiMapPin className="h-5 w-5" />
+              </span>
+              <div className="min-w-0 flex-1">
+                <p className="font-semibold leading-tight">{office.label}</p>
+                <p className="mt-0.5 text-sm text-white/70">{office.text}</p>
+              </div>
+              <Flag code={office.flag} />
+            </li>
+          ))}
+        </ul>
+
+        <div className="mt-7 space-y-5">
           {panel.info.map((item) => {
             const Icon = INFO_ICONS[item.icon] ?? FiMail;
             return (
@@ -100,37 +124,40 @@ export default function ContactCard() {
                   <Icon className="h-5 w-5" />
                 </span>
                 <div>
-                  <p className="text-lg font-semibold leading-tight">
-                    {item.label}
-                  </p>
-                  <p className="mt-0.5 text-sm text-white/70">{item.text}</p>
+                  <p className="font-semibold leading-tight">{item.label}</p>
+                  <a
+                    href={item.href}
+                    className="mt-0.5 block text-sm text-white/70 transition hover:text-white"
+                  >
+                    {item.text}
+                  </a>
                 </div>
               </div>
             );
           })}
         </div>
 
-        <hr className="my-9 border-white/20" />
-
-        <p className="text-lg font-semibold">{panel.followLabel}</p>
-        <div className="mt-4 flex gap-3">
-          {panel.socials.map((s) => {
-            const Icon = SOCIAL_ICONS[s.icon] ?? FaLinkedinIn;
-            return (
-              <a
-                key={s.icon}
-                href={s.href}
-                aria-label={s.label}
-                // These leave the site, so they open in a new tab and drop the
-                // opener reference along the way.
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-brand transition hover:bg-white/90"
-              >
-                <Icon className="h-4 w-4" />
-              </a>
-            );
-          })}
+        <div className="mt-auto flex items-center gap-4 pt-10">
+          <p className="font-semibold">{panel.followLabel}</p>
+          <div className="flex gap-3">
+            {panel.socials.map((s) => {
+              const Icon = SOCIAL_ICONS[s.icon] ?? FaLinkedinIn;
+              return (
+                <a
+                  key={s.icon}
+                  href={s.href}
+                  aria-label={s.label}
+                  // These leave the site, so they open in a new tab and drop the
+                  // opener reference along the way.
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-brand transition hover:bg-white/90"
+                >
+                  <Icon className="h-4 w-4" />
+                </a>
+              );
+            })}
+          </div>
         </div>
       </div>
 
@@ -157,7 +184,11 @@ export default function ContactCard() {
             </button>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} noValidate className="mt-8 space-y-5">
+          <form
+            onSubmit={handleSubmit}
+            noValidate
+            className="mt-8 grid gap-5 sm:grid-cols-2"
+          >
             <HoneypotField
               value={values[HONEYPOT_FIELD]}
               onChange={update(HONEYPOT_FIELD)}
@@ -173,7 +204,7 @@ export default function ContactCard() {
               />
             </Field>
 
-            <Field label="Contact NO." error={errors.contactNo}>
+            <Field label="Contact No." error={errors.contactNo}>
               <input
                 type="tel"
                 value={values.contactNo}
@@ -183,7 +214,7 @@ export default function ContactCard() {
               />
             </Field>
 
-            <Field label="Email Address" error={errors.email}>
+            <Field label="Email ID" error={errors.email}>
               <input
                 type="email"
                 value={values.email}
@@ -193,7 +224,49 @@ export default function ContactCard() {
               />
             </Field>
 
-            <Field label="How can we help?" error={errors.message}>
+            <Field label="Country" error={errors.country}>
+              <select
+                value={values.country}
+                onChange={update("country")}
+                autoComplete="country-name"
+                className={selectClass(errors.country, values.country)}
+              >
+                <option value="">Select country</option>
+                {COUNTRIES.map((c) => (
+                  <option key={c.iso2} value={c.name}>
+                    {c.name}
+                  </option>
+                ))}
+              </select>
+            </Field>
+
+            <Field
+              label="Requirement"
+              error={errors.requirement}
+              className="sm:col-span-2"
+            >
+              <select
+                value={values.requirement}
+                onChange={update("requirement")}
+                className={selectClass(errors.requirement, values.requirement)}
+              >
+                {/* Placeholder: shown until a choice is made, never pickable. */}
+                <option value="" disabled hidden>
+                  Select requirement
+                </option>
+                {form.requirements.map((r) => (
+                  <option key={r} value={r}>
+                    {r}
+                  </option>
+                ))}
+              </select>
+            </Field>
+
+            <Field
+              label="How can we help you?"
+              error={errors.message}
+              className="sm:col-span-2"
+            >
               <textarea
                 value={values.message}
                 onChange={update("message")}
@@ -203,16 +276,19 @@ export default function ContactCard() {
             </Field>
 
             {status === "error" && serverError && (
-              <p className="text-sm text-red-600" aria-live="polite">
+              <p
+                className="text-sm text-red-600 sm:col-span-2"
+                aria-live="polite"
+              >
                 {serverError}
               </p>
             )}
 
-            <div className="pt-2 text-center">
+            <div className="sm:col-span-2">
               <button
                 type="submit"
                 disabled={submitting}
-                className="inline-flex items-center justify-center rounded-md bg-brand px-16 py-3 text-sm font-semibold text-white transition hover:bg-brand/90 disabled:cursor-not-allowed disabled:opacity-60"
+                className="inline-flex items-center justify-center rounded-md bg-brand px-10 py-3 text-sm font-semibold text-white transition hover:bg-brand/90 disabled:cursor-not-allowed disabled:opacity-60"
               >
                 {submitting ? "Sending…" : form.submitLabel}
               </button>
@@ -224,9 +300,9 @@ export default function ContactCard() {
   );
 }
 
-function Field({ label, error, children }) {
+function Field({ label, error, className = "", children }) {
   return (
-    <label className="block">
+    <label className={`block ${className}`}>
       <span className="mb-1.5 block text-sm font-medium text-ink">{label}</span>
       {children}
       {error && <span className="mt-1 block text-sm text-red-600">{error}</span>}
@@ -241,4 +317,78 @@ function inputClass(error) {
     "focus:border-brand focus:ring-2 focus:ring-brand/15",
     error ? "border-red-400" : "border-transparent",
   ].join(" ");
+}
+
+// Same look as the text inputs; the placeholder option is shown muted.
+function selectClass(error, value) {
+  return `${inputClass(error)} cursor-pointer ${value ? "" : "text-slate-500"}`;
+}
+
+// Small inline SVG flags — Windows does not render flag emoji, and these keep
+// the page free of extra image requests.
+function Flag({ code }) {
+  const common = {
+    className: "h-6 w-9 shrink-0 rounded-[3px] ring-1 ring-white/40",
+    viewBox: "0 0 36 24",
+    "aria-hidden": true,
+  };
+
+  if (code === "in") {
+    return (
+      <svg {...common}>
+        <rect width="36" height="8" fill="#FF9933" />
+        <rect y="8" width="36" height="8" fill="#FFFFFF" />
+        <rect y="16" width="36" height="8" fill="#138808" />
+        <circle
+          cx="18"
+          cy="12"
+          r="3"
+          fill="none"
+          stroke="#000080"
+          strokeWidth="0.8"
+        />
+        <circle cx="18" cy="12" r="0.8" fill="#000080" />
+      </svg>
+    );
+  }
+
+  if (code === "ae") {
+    return (
+      <svg {...common}>
+        <rect width="36" height="8" fill="#00732F" />
+        <rect y="8" width="36" height="8" fill="#FFFFFF" />
+        <rect y="16" width="36" height="8" fill="#000000" />
+        <rect width="10" height="24" fill="#FF0000" />
+      </svg>
+    );
+  }
+
+  // US: 13 stripes + canton with a simple star grid.
+  const stripeH = 24 / 13;
+  return (
+    <svg {...common}>
+      <rect width="36" height="24" fill="#FFFFFF" />
+      {Array.from({ length: 7 }, (_, i) => (
+        <rect
+          key={i}
+          y={i * 2 * stripeH}
+          width="36"
+          height={stripeH}
+          fill="#B22234"
+        />
+      ))}
+      <rect width="15" height={stripeH * 7} fill="#3C3B6E" />
+      {Array.from({ length: 4 }, (_, row) =>
+        Array.from({ length: 5 }, (_, col) => (
+          <circle
+            key={`${row}-${col}`}
+            cx={1.8 + col * 2.85}
+            cy={1.6 + row * 3}
+            r="0.55"
+            fill="#FFFFFF"
+          />
+        )),
+      )}
+    </svg>
+  );
 }

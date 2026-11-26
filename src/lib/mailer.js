@@ -195,9 +195,25 @@ export function buildContactEmail({
   name,
   contactNo,
   email,
+  country,
+  requirement,
   message,
   submittedAt = new Date().toISOString(),
 }) {
+  // Only the main Contact card collects these, so the rows appear only then.
+  const extraText = [
+    country && `Country: ${country}`,
+    requirement && `Requirement: ${requirement}`,
+  ].filter(Boolean);
+  const extraHtml = [
+    country &&
+      `<tr><td><strong>Country</strong></td><td>${escapeHtml(country)}</td></tr>`,
+    requirement &&
+      `<tr><td><strong>Requirement</strong></td><td>${escapeHtml(requirement)}</td></tr>`,
+  ]
+    .filter(Boolean)
+    .join("");
+
   return {
     subject: `New contact enquiry from ${name}`,
     text: [
@@ -206,6 +222,7 @@ export function buildContactEmail({
       `Name:    ${name}`,
       `Email:   ${email}`,
       `Phone:   ${shown(contactNo)}`,
+      ...extraText,
       ``,
       `Message:`,
       message,
@@ -218,6 +235,7 @@ export function buildContactEmail({
         <tr><td><strong>Name</strong></td><td>${escapeHtml(name)}</td></tr>
         <tr><td><strong>Email</strong></td><td>${escapeHtml(email)}</td></tr>
         <tr><td><strong>Phone</strong></td><td>${escapeHtml(shown(contactNo))}</td></tr>
+        ${extraHtml}
       </table>
       <p style="font-family:sans-serif"><strong>Message</strong></p>
       <p style="white-space:pre-wrap;font-family:sans-serif">${escapeHtml(message)}</p>

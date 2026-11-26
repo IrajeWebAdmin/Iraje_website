@@ -10,6 +10,8 @@ import {
   validateMobile,
   normalizePhone,
 } from "@/lib/validation";
+import { COUNTRY_BY_NAME } from "@/data/countries";
+import contactContent from "@/data/contact";
 
 // 15 submissions per IP per hour. Generous for a real visitor — and for an
 // office where everyone shares one public IP — but low enough that scripted
@@ -73,8 +75,15 @@ export async function POST(request) {
   const email = String(body.email ?? "").trim();
   const contactNo = String(body.contactNo ?? body.contact_no ?? "").trim();
   const message = String(body.message ?? "").trim();
+  // Only the main Contact card sends these; the other forms leave them blank.
+  const country = String(body.country ?? "").trim();
+  const requirement = String(body.requirement ?? "").trim();
 
   const errors = {};
+  if (country && !COUNTRY_BY_NAME.has(country))
+    errors.country = "Please select a country from the list.";
+  if (requirement && !contactContent.form.requirements.includes(requirement))
+    errors.requirement = "Please select a requirement from the list.";
   if (!name) errors.name = "Name is required.";
   else if (name.length > 120) errors.name = "Name is too long.";
 
@@ -106,6 +115,17 @@ export async function POST(request) {
     );
   }
 
+  // The contact_message table has no country/requirement columns, so they are
+  // stored as header lines at the top of the saved message. That keeps them
+  // visible wherever the message is read without a schema migration.
+  const header = [
+    country && `Country: ${country}`,
+    requirement && `Requirement: ${requirement}`,
+  ].filter(Boolean);
+  const storedMessage = header.length
+    ? `${header.join("\n")}\n\n${message}`
+    : message;
+
   // 1) Persist the lead first — this is the source of truth.
   let contact;
   try {
@@ -113,7 +133,12 @@ export async function POST(request) {
       // Store the number in normalized form ("+919876543210") rather than as
       // typed. It is consistent to search on, directly dialable, and can never
       // exceed the 20-char column the way free-form input could.
-      data: { name, contactNo: normalizePhone(contactNo), email, message },
+      data: {
+        name,
+        contactNo: normalizePhone(contactNo),
+        email,
+        message: storedMessage,
+      },
     });
   } catch (err) {
     console.error("[contact] failed to save submission:", err);
@@ -126,7 +151,8 @@ export async function POST(request) {
   // 2) Email is best-effort — never lose a saved lead because SMTP is down
   //    or not configured yet.
   try {
-    await sendContactNotification(contact);
+    // Pass the message as typed; country/requirement get their own rows.
+    await sendContactNotification({ ...contact, message, country, requirement });
   } catch (err) {
     console.error("[contact] email notification failed:", err);
   }

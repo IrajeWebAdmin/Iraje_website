@@ -2,10 +2,19 @@
 const contact = {
   panel: {
     heading: "Always here to help you",
+    officesLabel: "Our global offices",
+    offices: [
+      { flag: "us", label: "Global HQ", text: "CA, USA" },
+      { flag: "in", label: "Global Delivery Center", text: "Mumbai, India" },
+      { flag: "ae", label: "Global Distribution Center", text: "Dubai, UAE" },
+    ],
     info: [
-      { icon: "location", label: "Location", text: "Mumbai" },
-      { icon: "email", label: "Email", text: "contact@iraje.com" },
-      { icon: "contact", label: "Contact", text: "8879213453" },
+      {
+        icon: "email",
+        label: "Email",
+        text: "contact@iraje.com",
+        href: "mailto:contact@iraje.com",
+      },
     ],
     followLabel: "Follow us on",
     socials: [
@@ -22,8 +31,15 @@ const contact = {
     ],
   },
   form: {
-    heading: "Send us a Message",
-    submitLabel: "Submit",
+    heading: "Send us a message",
+    submitLabel: "Send message",
+    // Options for the "Requirement" dropdown. The API only accepts these.
+    requirements: [
+      "Privileged Access Manager",
+      "Endpoint Privilege Manager",
+      "Identity & Access Manager",
+      "Other",
+    ],
   },
 };
 
